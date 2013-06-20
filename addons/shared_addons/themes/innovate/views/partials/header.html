@@ -1,0 +1,26 @@
+<!-- Begin header -->
+<header>
+	<div id="logo" class="left">
+		<h1><a href="{{ url:site  }}" title="Home">{{ settings:site_name }}</a></h1>
+	</div>
+	
+	<div id="navigation" class="right">
+		<form id="search" class="right">
+			<a id="biz-personal" href="#" class="biz-section active">Personal</a> | <a id="biz-corporate" href="#" class="biz-section">Business</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" />
+			<input type="submit" value="go" />
+		</form>
+		<nav id="menu" class="clearfix">
+			<ul id="main-menu" class="left">
+				{{ navigation:links group="header" }}
+			</ul>
+			<div id="users" class="right">
+				<a href="#">Login</a>|<a href="#">Register</a>
+			</div>
+			<div class="clearfix"></div>
+		</nav>	
+	</div>
+	
+	<div class="clearfix"></div>
+</header>
+<!-- End header -->

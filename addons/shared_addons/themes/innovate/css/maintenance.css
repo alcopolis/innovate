@@ -1,0 +1,99 @@
+@import 'reset.css';
+@import 'typo.css';
+@import 'global.css';
+
+body {
+	color: #0F68A4;
+    font-family: "Titillium Web", Helvetica Neue,Helvetica,Tahoma,sans-serif;
+    font-size: 1em;
+	
+	background:#FFF;
+}
+
+.content-wrapper{
+	margin:0 auto;	
+}
+
+#maintenance {
+	width:1024px;
+	height:670px;
+	background:url(../img/themes/under-construction-page.jpg) no-repeat center center;	
+}
+
+#subscription{
+	width:400px;
+	position:relative;
+	top:400px; left:110px;
+}
+
+#subscription p{
+	color:#717173;
+/* 	text-shadow:1px 1px 0 rgba(0,0,0,.25)	 */
+}
+
+#subscribe-form{
+	margin:20px 0 2px 0;
+}
+
+#subscribe-form input#email{
+	border:1px solid #CCC;
+	background:#FFF;
+	width:260px;
+	padding:10px;
+	border-radius:5px;
+	color:#666;
+}
+
+#subscribe-form input.btn{
+	background:#007dc3;
+	color:#FFF;
+	border-radius:5px;
+	padding:10px;
+	cursor:pointer;
+	font-weight:bold;
+	
+	-webkit-appearance: none;
+	
+	border-left:1px solid rgba(255,255,255,.25);
+	border-top:1px solid rgba(255,255,255,.25);
+	border-right:1px solid rgba(0,0,0,.25);
+	border-bottom:1px solid rgba(0,0,0,.25);
+}
+
+#subscribe-form input.btn:hover{
+	background:#f6d32c;
+	color:#333;
+}
+
+#msg-ajax{
+	margin:0;
+	display:none;
+}
+
+#msg-ajax p{
+	font-size:.85em;
+	color:#0F68A4;
+}
+
+#msg-ajax p.error{
+	color:#0F68A4;
+}
+
+#msg-ajax span.emph{
+	color:#F00;
+	font-weight:bold;
+}
+
+p.acknowledge{
+	font-size:0.85em;
+}
+
+#copy{
+	width:100%;
+	font-family: "Helvetica Neue",Helvetica,Tahoma,sans-serif;
+	font-size:11px;
+	color:#717173;
+	position:fixed;
+	margin-left:110px;
+	bottom:20px;
+}
