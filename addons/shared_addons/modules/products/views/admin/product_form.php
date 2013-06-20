@@ -5,6 +5,7 @@
 	
 	<section class="item">
 		<div class="content">
+			
 			<?php echo form_open_multipart(); ?>
 			
 			<!-- Render Product list  -->
@@ -21,24 +22,44 @@
 						<fieldset>
 							<ul>
 								<li>
-									<label for="category">Category <span>*</span></label><br>
-									<div class="input small-side">
-										<?php echo form_dropdown('category', array(
-											'select' => '',
-											'retail' => 'Retail',
-											'corporate' => 'Corporate'
-										),'select') ?>
-									</div>
+									<table>
+										<tbody>
+											<tr>
+												<td style="width:20%;">
+													<label for="category">Category <span>*</span></label><br>
+													<div class="input small-side">
+														<?php echo form_dropdown('category', array(
+															'select' => '',
+															'retail' => 'Retail',
+															'corporate' => 'Corporate'
+														),'select') ?>
+													</div>
+												</td>
+												<td style="width:20%;">
+													<div for="product_is_featured"><?php echo form_checkbox('product_is_featured', 'on', FALSE); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
+												</td>
+												<td style="width:20%;">
+													<div for="product_poster">Product Poster Here</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+									
 									
 									<br/>
-									
+																		
 									<label for="product_name">Name <span>*</span></label>
-									<div class="input"><?php echo form_input('product_name', htmlspecialchars_decode($post->product_name), 'maxlength="100"') ?></div>
+									<div class="input"><?php echo form_input('product_name', htmlspecialchars_decode($data->product_data['product_name']), 'maxlength="100"') ?></div>
 									
 									<br/>
 									
 									<label for="product_slug">Slug <span>*</span></label>
-									<div class="input"><?php echo form_input('product_slug', $post->product_slug, 'maxlength="100" class="width-20"') ?></div>
+									<div class="input"><?php echo form_input('product_slug', $data->product_data['product_slug'], 'maxlength="100" class="width-20"') ?></div>
+									
+									<br/>
+									
+									<label for="product_tags">Tags - seperate words with ( , )</label>
+									<div class="input"><?php echo form_input('product_tags', $data->product_data['product_tags'], 'maxlength="100" class="width-20"') ?></div>
 								</li>
 						
 								<li class="editor">
@@ -51,9 +72,11 @@
 											'wysiwyg-advanced' => 'wysiwyg-advanced',
 										), $post->type) ?>
 									</div>
-					
+									
+									<br/>
+									
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'product_body', 'name' => 'product_body', 'rows' => 30, 'class' => $post->type)) ?>
+										<?php echo form_textarea(array('id' => 'product_body', 'value' => $data->product_data['product_body'], 'name' => 'product_body', 'rows' => 30, 'class' => $post->type)) ?>
 									</div>
 								</li>
 							</ul>

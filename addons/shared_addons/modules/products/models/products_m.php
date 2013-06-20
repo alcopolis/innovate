@@ -16,6 +16,7 @@ class Products_m extends MY_Model
 		$this->_table = 'inn_products_data';
 	}
 	
+	
 	public function get($slug){
 		$q = $this->db->get_where($this->_table, array('slug' => $slug));
 		
@@ -30,9 +31,18 @@ class Products_m extends MY_Model
 		return $q;
 	}
 	
-	public function update($primary_value = NULL, $data = NULL, $skip_validation = false){
-		return 'update method';
+	
+	
+	public function insert($id = NULL, $data = array(), $skip_validation = FALSE){
+		if($id){
+			return 'update method';
+		}else{
+			return 'insert method';
+		}
 	}
+	
+	
+	
 	
 	public function delete($id=NULL){
 		return 'delete method';
