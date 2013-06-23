@@ -10,6 +10,9 @@
  */
 class Products_m extends MY_Model
 {
+	
+	//Start Product Model
+	
 	public function __construct() {
 		parent::__construct();
 		
