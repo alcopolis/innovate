@@ -57,7 +57,7 @@ class Module_Products extends Module {
 				'prod_id' => array('type' => 'INT','constraint' => '11'),
 				'name' => array('type' => 'VARCHAR','constraint' => '100'),   
 				'price' => array('type' => 'VARCHAR','constraint' => '100'),
-				'desc' => array('type' => 'TEXT'),
+				'body' => array('type' => 'TEXT'),
 				'pack_item_info' => array('type' => 'TEXT')
 			)
 		));
@@ -66,7 +66,7 @@ class Module_Products extends Module {
 				'id' => array('type' => 'INT','constraint' => '11','auto_increment' => TRUE, 'primary' => TRUE),
 				'name' => array('type' => 'VARCHAR','constraint' => '100'),
 				'slug' =>  array('type' => 'VARCHAR','constraint' => '100'),   //
-				'desc' => array('type' => 'TEXT'),
+				'body' => array('type' => 'TEXT'),
 				'section' => array('type' => 'VARCHAR','constraint' => '10'),
 				'css' => array('type' => 'TEXT'),
 				'js' => array('type' => 'TEXT'),

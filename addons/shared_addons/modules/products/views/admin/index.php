@@ -34,12 +34,12 @@
 								<tr>
 									<?php
 										echo '<td class="align-center">' . form_checkbox('action_to[]', $row->id) . '</td>';
-										echo '<td>' . $row->name . '</td>';
-										echo '<td>' . $row->slug . '</td>';
-										echo '<td>' . $row->section . '</td>';
-										echo '<td>' . $row->desc . '</td>';
-										echo '<td>View Product Features</td>';
-										echo '<td>' . $row->tags . '</td>';
+										echo '<td><a href="admin/products/edit/' . $row->product_slug . '">' . $row->product_name . '</a></td>';
+										echo '<td>' . $row->product_slug . '</td>';
+										echo '<td>' . $row->product_section . '</td>';
+										echo '<td>' . $row->product_body . '</td>';
+										echo '<td>View Features</td>';
+										echo '<td>' . $row->product_tags . '</td>';
 										echo '<td>Edit &nbsp; Delete</td>';
 									?>
 								</tr>

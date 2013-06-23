@@ -58,6 +58,14 @@ class Admin extends Admin_Controller {
 		$this->data = new stdClass();
 		$this->data->section = $this->section;
 		
+// 		$this->data->product_data = array();
+// 		$this->data->package_data = array();
+		
+		// Set our validation rules
+		$rules = array_merge($this->product_rules, $this->package_rules);
+		//$rules = $this->product_rules;
+		$this->form_validation->set_rules($rules);
+		
 		$this->load->model('products_m');
 	}
 
@@ -76,30 +84,15 @@ class Admin extends Admin_Controller {
 	}
 
 	
-
-	
-	public function create($id = NULL)
-	{
+	public function create(){
+		
 		
 		$post = new stdClass;
-		
-		// Set our validation rules
-		$rules = array_merge($this->product_rules, $this->package_rules);
-		$this->form_validation->set_rules($rules);
-		
-		//Input preset
-		foreach ($rules as $key => $field)
-		{
-			$post->$field['field'] = set_value($field['field']);
-		}
-		
 		$post->type = 'wysiwyg-advanced';
 		
+		$this->data->form_action = 'create';
+		$this->data->page_title = 'New Product';
 		
-		
-		
-		//Switch action insert or method		
-
 		$this->data->product_data = array(
 				'product_name' => $this->input->post('product_name'),
 				'product_slug' => $this->input->post('product_slug'),
@@ -112,77 +105,65 @@ class Admin extends Admin_Controller {
 				'product_tags' => $this->input->post('product_tags')
 		);
 		
-		if ($this->form_validation->run())
-		{
-			if($id){
-				//update method
-				//$this->data->action_result = $this->products_m->insert(3, $this->data->product_data, FALSE);
-			}else{
-				//insert method
-				//$this->data->action_result = $this->products_m->insert(NULL, $this->data->product_data, FALSE);
-			}	
-			
-			//redirect('admin/products');
+		if ($this->form_validation->run()){
+			//$this->products_m->insert($this->data->product_data);
+			redirect('products/admin');
 		}else{
-			if($id){
-				$this->data->page_title = 'Edit Product';
-			}else{
-				$this->data->page_title = 'New Product';
+			//Somethings wrong, reload form
+			$this->template
+				->title($this->data->page_title)
+				->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+				->append_js('module::product_form.js')
+				->set('data', $this->data)
+				->set('post', $post)
+				->build('admin/product_form');
+		}
+	}
+	
+	
+	public function edit($slug)
+	{
+		
+		$this->data->form_action = 'edit';
+		$this->data->page_title = 'Edit Product';
+		
+		$post = new stdClass;
+		$post->type = 'wysiwyg-advanced';
+		
+		
+		if ($this->form_validation->run()){
+						
+			foreach($this->input->post() as $key=>$field){
+				if(strpos($key,'product') !== FALSE){
+					$this->data->product_data[$key] = $field;
+				}else if(strpos($key,'package') !== FALSE){
+					$this->data->package_data[$key] = $field;
+				}
+			}
+			
+			//var_dump($this->data->package_data);
+			
+			//$this->products_m->update($this->data->product_data);
+			//redirect('products/admin');
+		}else{
+			$post->exist = $this->products_m->get($slug);
+			
+			foreach($post->exist as $key=>$field){
+				if(strpos($key,'product') !== FALSE){
+					$this->data->product_data[$key] = $field;
+				}else if(strpos($key,'package') !== FALSE){
+					$this->data->package_data[$key] = $field;
+				}
 			}
 			
 			$this->template
-			->title($this->data->page_title)
-			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
-			->append_js('module::product_form.js')
-			->set('data', $this->data)
-			->set('post', $post)
-			->build('admin/product_form');
+				->title($this->data->page_title)
+				->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+				->append_js('module::product_form.js')
+				->set('data', $this->data)
+				->set('post', $post)
+				->build('admin/product_form');
 		}
-
-		
-		
-		
-		
-		
-		
-		
-		// Insert a new product entry.		
-		//Run validation
-// 		if ($this->form_validation->run())
-// 		{
-// 			$this->data->product_data = array(
-// 					'product_name' => $this->input->post('product_name'),
-// 					'product_slug' => $this->input->post('product_slug'),
-// 					'product_body' => $this->input->post('product_body'),
-// 					'product_section' => $this->input->post('product_section'),
-// 					'product_css' => $this->input->post('product_css'),
-// 					'product_js' => $this->input->post('product_js'),
-// 					'product_is_featured' => $this->input->post('product_is_featured'),
-// 					'product_poster' => $this->input->post('product_poster'),
-// 					'product_tags' => $this->input->post('product_tags')
-// 			);
-						
-// 			$this->data->page_title = 'New Product';
-			
-// 			$this->data->action_result = $this->products_m->insert(3,NULL,NULL);
-			
-			
-// 		}else{
-// 			$this->data->product_data = array(
-// 					'product_name' => '',
-// 					'product_slug' => '',
-// 					'product_body' => '',
-// 					'product_section' => '',
-// 					'product_css' => '',
-// 					'product_js' => '',
-// 					'product_is_featured' => '',
-// 					'product_poster' => '',
-// 					'product_tags' => ''
-// 			);
-			
-// 			$this->data->page_title = 'Add New Product';
-// 		}
-	
 	}
 	
 
