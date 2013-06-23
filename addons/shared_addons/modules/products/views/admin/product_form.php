@@ -5,8 +5,15 @@
 	
 	<section class="item">
 		<div class="content">
+			<?php var_dump($post->exist->packages->result()); ?>
 			
-			<?php echo form_open_multipart(); ?>
+			<?php 
+				if($data->form_action == 'create'){
+					echo form_open_multipart('admin/products/' . $data->form_action);
+				}else if($data->form_action == 'edit'){
+					echo form_open_multipart('admin/products/' . $data->form_action . '/' . $data->product_data['product_slug']);
+				} 
+			?>
 			
 			<!-- Render Product list  -->
 			<?php if(!empty($post)){ ?>	
@@ -18,6 +25,8 @@
 						<li><a href="#product-js-fields"><span>Script</span></a></li>
 					</ul>
 					
+					
+					<!-- Product content tab -->
 					<div class="form_inputs" id="product-content-fields">
 						<fieldset>
 							<ul>
@@ -32,7 +41,7 @@
 															'select' => '',
 															'retail' => 'Retail',
 															'corporate' => 'Corporate'
-														),'select') ?>
+														), ($data->product_data['product_section'] == NULL) ? 'select' : $data->product_data['product_section'] ) ?>
 													</div>
 												</td>
 												<td style="width:20%;">
@@ -83,17 +92,23 @@
 						</fieldset>
 					</div>
 					
+					
+					<!-- Product package tab -->
 					<div class="form_inputs" id="product-packages-fields">
+						<?php $this->load->view('admin/partials/package_list'); ?> 
+					</div>
+					
+<?php /*				<div class="form_inputs" id="product-packages-fields">
 						<fieldset>
 							<ul>
 								<li>
 									<label for="package_name">Package Name <span>*</span></label>
-									<div class="input"><?php echo form_input('package_name', htmlspecialchars_decode($post->package_name), 'maxlength="100"') ?></div>
+									<div class="input"><?php echo form_input('package_name', htmlspecialchars_decode($data->package_data['package_name']), 'maxlength="100"') ?></div>
 								</li>
 					
 								<li>
 									<label for="package_slug">Slug <span>*</span></label>
-									<div class="input"><?php echo form_input('package_slug', $post->package_slug, 'maxlength="100" class="width-20"') ?></div>
+									<div class="input"><?php echo form_input('package_slug', $data->package_data['package_slug'], 'maxlength="100" class="width-20"') ?></div>
 								</li>
 						
 								<li class="editor">
@@ -108,33 +123,37 @@
 									</div>
 					
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'packages_body', 'name' => 'packages_body', 'rows' => 30, 'class' => $post->type)) ?>
+										<?php echo form_textarea(array('id' => 'packages_body', 'value' => $data->package_data['package_body'], 'name' => 'packages_body', 'rows' => 30, 'class' => $post->type)) ?>
 									</div>
 								</li>
 							</ul>
 						</fieldset>
-					</div>
+					</div>	*/ ?>
 					
+					
+					<!-- Product CSS tab -->
 					<div class="form_inputs" id="product-css-fields">
 						<fieldset>
 							<ul>						
 								<li class="editor">
 									<label for="body">Custom CSS</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'product_css', 'name' => 'product_css', 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'product_css', 'name' => 'product_css', 'value' => $data->product_data['product_css'], 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>
 						</fieldset>
 					</div>
 					
+					
+					<!-- Product JS tab -->
 					<div class="form_inputs" id="product-js-fields">
 						<fieldset>
 							<ul>						
 								<li class="editor">
 									<label for="body">Custom Javascript</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'product_js', 'name' => 'product_js', 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'product_js', 'name' => 'product_js', 'value' => $data->product_data['product_js'], 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>
@@ -143,7 +162,10 @@
 				</div>
 			<?php } ?>	
 			<div class="buttons">
-				<?php echo form_submit('submit', 'Save'); ?>
+				<?php 
+						echo form_submit('submit', 'Save'); 
+						echo '<a href="admin/products" class="button" style="padding:5px 10px 4px 10px;">Cancel</a>';
+				?>
 			</div>
 			
 			
