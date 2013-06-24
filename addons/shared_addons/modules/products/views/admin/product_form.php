@@ -5,13 +5,13 @@
 	
 	<section class="item">
 		<div class="content">
-			<?php var_dump($post->exist->packages->result()); ?>
+			<?php var_dump($data->product->attribute); ?>
 			
 			<?php 
 				if($data->form_action == 'create'){
-					echo form_open_multipart('admin/products/' . $data->form_action);
+					echo form_open('admin/products/' . $data->form_action);
 				}else if($data->form_action == 'edit'){
-					echo form_open_multipart('admin/products/' . $data->form_action . '/' . $data->product_data['product_slug']);
+					echo form_open('admin/products/' . $data->form_action . '/' . $data->product->attribute['product_slug']);
 				} 
 			?>
 			
@@ -37,11 +37,11 @@
 												<td style="width:20%;">
 													<label for="category">Category <span>*</span></label><br>
 													<div class="input small-side">
-														<?php echo form_dropdown('category', array(
+														<?php echo form_dropdown('product_section', array(
 															'select' => '',
 															'retail' => 'Retail',
 															'corporate' => 'Corporate'
-														), ($data->product_data['product_section'] == NULL) ? 'select' : $data->product_data['product_section'] ) ?>
+														), ($data->product->attribute['product_section'] == NULL) ? 'select' : $data->product->attribute['product_section'] ) ?>
 													</div>
 												</td>
 												<td style="width:20%;">
@@ -58,17 +58,17 @@
 									<br/>
 																		
 									<label for="product_name">Name <span>*</span></label>
-									<div class="input"><?php echo form_input('product_name', htmlspecialchars_decode($data->product_data['product_name']), 'maxlength="100"') ?></div>
+									<div class="input"><?php echo form_input('product_name', htmlspecialchars_decode($data->product->attribute['product_name']), 'maxlength="100"') ?></div>
 									
 									<br/>
 									
 									<label for="product_slug">Slug <span>*</span></label>
-									<div class="input"><?php echo form_input('product_slug', $data->product_data['product_slug'], 'maxlength="100" class="width-20"') ?></div>
+									<div class="input"><?php echo form_input('product_slug', $data->product->attribute['product_slug'], 'maxlength="100" class="width-20"') ?></div>
 									
 									<br/>
 									
 									<label for="product_tags">Tags - seperate words with ( , )</label>
-									<div class="input"><?php echo form_input('product_tags', $data->product_data['product_tags'], 'maxlength="100" class="width-20"') ?></div>
+									<div class="input"><?php echo form_input('product_tags', $data->product->attribute['product_tags'], 'maxlength="100" class="width-20"') ?></div>
 								</li>
 						
 								<li class="editor">
@@ -85,7 +85,7 @@
 									<br/>
 									
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'product_body', 'value' => $data->product_data['product_body'], 'name' => 'product_body', 'rows' => 30, 'class' => $post->type)) ?>
+										<?php echo form_textarea(array('id' => 'product_body', 'value' => $data->product->attribute['product_body'], 'name' => 'product_body', 'rows' => 30, 'class' => $post->type)) ?>
 									</div>
 								</li>
 							</ul>
@@ -138,7 +138,7 @@
 								<li class="editor">
 									<label for="body">Custom CSS</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'product_css', 'name' => 'product_css', 'value' => $data->product_data['product_css'], 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'product_css', 'name' => 'product_css', 'value' => $data->product->attribute['product_css'], 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>
@@ -153,7 +153,7 @@
 								<li class="editor">
 									<label for="body">Custom Javascript</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'product_js', 'name' => 'product_js', 'value' => $data->product_data['product_js'], 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'product_js', 'name' => 'product_js', 'value' => $data->product->attribute['product_js'], 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>

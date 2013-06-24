@@ -41,14 +41,14 @@ class Products_m extends MY_Model
 		$product = new stdClass();
 		
 		//Get product record
-		$product->data = $this->db->get_where($this->_table, array('product_slug' => $slug))->row();
+		$product->attribute = $this->db->get_where($this->_table, array('product_slug' => $slug))->row_array();
 		
 		//Get product packages record
 		$this->db->select('*');
 		$this->db->from('inn_products_packages');
-		$this->db->where('package_prod_id', intval($product->data->id));
+		$this->db->where('package_prod_id', intval($product->attribute['product_id']));
 		
-		$product->packages = $this->db->get();
+		$product->packages = $this->db->get()->result_array();
 		
 // 		for($i=0; $i < $product->packages->num_rows(); $i++){
 // 			var_dump($product->packages->row($i));

@@ -130,32 +130,38 @@ class Admin extends Admin_Controller {
 		$post = new stdClass;
 		$post->type = 'wysiwyg-advanced';
 		
+		$post->product = $this->products_m->get($slug);
+		//filter input post sesuai dengan data yg ingin di compare untuk melihat apakah ada perubahan data
+		$temp;
+		$filter = array('product_id', 'product_name', 'product_section', 'product_slug', 'product_tags', 'product_body', 'product_css', 'product_js');
+			
+		for ($i=0; $i<count($filter); $i++){
+			$key = 'product_'.$filter[$i];
+			$temp[$key] = $post->product->attribute[$key];
+		}
 		
-		if ($this->form_validation->run()){
-						
-			foreach($this->input->post() as $key=>$field){
-				if(strpos($key,'product') !== FALSE){
-					$this->data->product_data[$key] = $field;
-				}else if(strpos($key,'package') !== FALSE){
-					$this->data->package_data[$key] = $field;
+		if ($this->form_validation->run()){			
+			if($this->is_changed($temp, $this->input->post(), $filter)){				
+				foreach($this->input->post() as $key=>$field){
+					if(strpos($key,'product') !== FALSE){
+						$this->data->product_data[$key] = $field;
+					}else if(strpos($key,'package') !== FALSE){
+						$this->data->package_data[$key] = $field;
+					}
 				}
 			}
-			
-			//var_dump($this->data->package_data);
-			
-			//$this->products_m->update($this->data->product_data);
-			//redirect('products/admin');
 		}else{
-			$post->exist = $this->products_m->get($slug);
+// 			foreach($post->product as $key=>$field){
+// 				if(strpos($key,'product') !== FALSE){
+// 					$this->data->product_data[$key] = $field;
+// 				}else if(strpos($key,'package') !== FALSE){
+// 					$this->data->package_data[$key] = $field;
+// 				}
+// 			}
 			
-			foreach($post->exist as $key=>$field){
-				if(strpos($key,'product') !== FALSE){
-					$this->data->product_data[$key] = $field;
-				}else if(strpos($key,'package') !== FALSE){
-					$this->data->package_data[$key] = $field;
-				}
-			}
-			
+			$this->data->product = $post->product;
+			//var_dump($this->data->product_data);
+	
 			$this->template
 				->title($this->data->page_title)
 				->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
@@ -163,6 +169,28 @@ class Admin extends Admin_Controller {
 				->set('data', $this->data)
 				->set('post', $post)
 				->build('admin/product_form');
+		}
+	}
+	
+	
+	function is_changed($array1 = NULL, $array2 = NULL, $filter){
+		if($array1 != NULL && $array2 != NULL){
+			
+// 			$result = array_diff($array1, $array2);
+			
+// 			var_dump($array1);
+// 			echo '<br/>';
+// 			var_dump($array2);
+			
+			if(count($result) > 0){
+				var_dump($result);
+				echo 'asdfasdf';
+				return TRUE;
+			}else{
+				var_dump($result);
+				echo 'lkjlkjlkjlk';
+				return FALSE;
+			}
 		}
 	}
 	

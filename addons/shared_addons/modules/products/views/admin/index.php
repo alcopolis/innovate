@@ -33,7 +33,7 @@
 							<?php foreach($data->query->result() as $row) { ?>
 								<tr>
 									<?php
-										echo '<td class="align-center">' . form_checkbox('action_to[]', $row->id) . '</td>';
+										echo '<td class="align-center">' . form_checkbox('action_to[]', $row->product_id) . '</td>';
 										echo '<td><a href="admin/products/edit/' . $row->product_slug . '">' . $row->product_name . '</a></td>';
 										echo '<td>' . $row->product_slug . '</td>';
 										echo '<td>' . $row->product_section . '</td>';
