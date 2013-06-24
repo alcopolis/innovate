@@ -21,23 +21,7 @@ class Products_m extends MY_Model
 	}
 	
 	
-	public function get($slug){
-// 		$this->db->select('inn_products_data.*');
-// 		$this->db->select('inn_products_packages.*');
-// 		$this->db->from('inn_products_data');
-// 		$this->db->join('inn_products_packages', 'inn_products_data.id = inn_products_packages.package_prod_id');
-// 		$this->db->where('product_slug', $slug);
-		
-// 		$q = $this->db->get();
-		
-// 		if($q->num_rows() > 0){
-// 			var_dump($q->row());
-// 			return $q->row();
-// 		}
-		
-
-		//$q = $this->db->get_where($this->_table, array('product_slug' => $slug));
-		
+	public function get($slug){		
 		$product = new stdClass();
 		
 		//Get product record
@@ -49,31 +33,30 @@ class Products_m extends MY_Model
 		$this->db->where('package_prod_id', intval($product->attribute['product_id']));
 		
 		$product->packages = $this->db->get()->result_array();
-		
-// 		for($i=0; $i < $product->packages->num_rows(); $i++){
-// 			var_dump($product->packages->row($i));
-// 		}
 
 		return $product;
 	}
 	
+	
 	public function get_all(){
 		$q = $this->db->get($this->_table);
-	
 		return $q;
 	}
 	
 	
 	
-	public function insert($id = NULL, $data = array(), $skip_validation = FALSE){
-		if($id){
-			return 'update method';
-		}else{
-			return 'insert method';
-		}
+	public function insert($data, $skip_validation = false){		
+		var_dump($data);
 	}
 	
-	
+	public function update($id, $data, $skip_validation = false){
+		foreach($data as $key=>$value){
+			echo $key . ' => ' . $value . '<br/>';
+		}
+		
+		$this->db->where('product_id', $id);
+		$this->db->update($this->_table, $data);
+	}
 	
 	
 	public function delete($id=NULL){

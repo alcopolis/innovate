@@ -26,4 +26,5 @@
 // $route['epg/view_shows(/:num)?']		= 'epg/view_shows/index$1';
 
 // back-end
-$route['products/admin/packages(/:any)?']		= 'packages$1';
+$route['products/admin/packages(/:any)?']		= 'admin_packages$1';
+$route['admin/products/packages(/:any)?']		= 'admin_packages$1';

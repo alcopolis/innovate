@@ -7,6 +7,7 @@
  */
 class Products extends Public_Controller
 {
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -15,13 +16,13 @@ class Products extends Public_Controller
 	}
 	
 	function view($slug){
-		
 		if($this->products_m->get($slug)){
-			$content =  $this->products_m->get($slug);
+			
+			$this->product =  $this->products_m->get($slug);
 			
 			$this->template
 			->title($this->module_details['name'])
-			->set('data', $content)
+			->set('product', $this->product)
 			->build('products');
 		}else{
 			//Redirect to Missing Page

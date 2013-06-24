@@ -1,6 +1,6 @@
 <?php
 
-class Packages extends Admin_Controller {
+class Admin_Packages extends Admin_Controller {
 	
 	protected $section = 'packages';
 	protected $data;
@@ -27,15 +27,21 @@ class Packages extends Admin_Controller {
 	 */
 	public function index()
 	{
-		
-		$this->template
-			->title($this->module_details['name'] . ' ' . $this->data->section)
-			->set('data', $this->data)
-			->build('admin/packages');
+// 		$this->template
+// 			->title($this->module_details['name'] . ' ' . $this->data->section)
+// 			->set('data', $this->data)
+// 			->build('admin/packages');
+
+		echo 'Packages Index';
 	}
 	
 	public function create()
 	{
 		echo 'Create New Packages';
+	}
+	
+	public function edit($slug)
+	{
+		echo 'Edit Packages';
 	}
 }

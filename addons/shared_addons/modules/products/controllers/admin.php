@@ -58,11 +58,9 @@ class Admin extends Admin_Controller {
 		$this->data = new stdClass();
 		$this->data->section = $this->section;
 		
-// 		$this->data->product_data = array();
-// 		$this->data->package_data = array();
-		
 		// Set our validation rules
 		$rules = array_merge($this->product_rules, $this->package_rules);
+		
 		//$rules = $this->product_rules;
 		$this->form_validation->set_rules($rules);
 		
@@ -93,21 +91,30 @@ class Admin extends Admin_Controller {
 		$this->data->form_action = 'create';
 		$this->data->page_title = 'New Product';
 		
-		$this->data->product_data = array(
-				'product_name' => $this->input->post('product_name'),
-				'product_slug' => $this->input->post('product_slug'),
-				'product_body' => $this->input->post('product_body'),
-				'product_section' => $this->input->post('product_section'),
-				'product_css' => $this->input->post('product_css'),
-				'product_js' => $this->input->post('product_js'),
-				'product_is_featured' => $this->input->post('product_is_featured'),
-				'product_poster' => $this->input->post('product_poster'),
-				'product_tags' => $this->input->post('product_tags')
-		);
+// 		
+
+		if($this->input->post() !== NULL){
+			foreach($this->input->post() as $key=>$field){
+				if(strpos($key,'product') !== FALSE){
+					$this->data->product->attribute[$key] = $field;
+				}else if(strpos($key,'package') !== FALSE){
+					$this->data->product->packages = $field;
+				}
+			}
+			
+			
+		}else{
+			$this->data->product->attribute = NULL;
+			$this->data->product->packages = NULL;
+		}
 		
 		if ($this->form_validation->run()){
-			//$this->products_m->insert($this->data->product_data);
-			redirect('products/admin');
+			//process form and redirect to products home
+			if($this->products_m->insert($this->data->product)){
+				redirect('admin/products');
+			}else{
+				echo 'Error db insert';
+			}
 		}else{
 			//Somethings wrong, reload form
 			$this->template
@@ -131,16 +138,22 @@ class Admin extends Admin_Controller {
 		$post->type = 'wysiwyg-advanced';
 		
 		$post->product = $this->products_m->get($slug);
+		
+		//Seting ID Produk
+		$prod_id = $post->product->attribute['product_id'];
+		
 		//filter input post sesuai dengan data yg ingin di compare untuk melihat apakah ada perubahan data
 		$temp;
-		$filter = array('product_id', 'product_name', 'product_section', 'product_slug', 'product_tags', 'product_body', 'product_css', 'product_js');
+		$filter = array('product_name', 'product_section', 'product_slug', 'product_tags', 'product_body', 'product_css', 'product_js');
 			
 		for ($i=0; $i<count($filter); $i++){
-			$key = 'product_'.$filter[$i];
+			$key = $filter[$i];
 			$temp[$key] = $post->product->attribute[$key];
 		}
 		
-		if ($this->form_validation->run()){			
+		//Validasi Data Form
+		if ($this->form_validation->run()){		
+			
 			if($this->is_changed($temp, $this->input->post(), $filter)){				
 				foreach($this->input->post() as $key=>$field){
 					if(strpos($key,'product') !== FALSE){
@@ -149,19 +162,21 @@ class Admin extends Admin_Controller {
 						$this->data->package_data[$key] = $field;
 					}
 				}
+				
+				//Setting update info & variables
+				//process form and redirect to products home
+				
+				if($this->products_m->update($prod_id, $this->data->product_data, FALSE)){
+					redirect('admin/products');
+				}else{
+					echo 'Error db update';
+				}
+			}else{
+				echo 'No changes';
 			}
 		}else{
-// 			foreach($post->product as $key=>$field){
-// 				if(strpos($key,'product') !== FALSE){
-// 					$this->data->product_data[$key] = $field;
-// 				}else if(strpos($key,'package') !== FALSE){
-// 					$this->data->package_data[$key] = $field;
-// 				}
-// 			}
-			
 			$this->data->product = $post->product;
-			//var_dump($this->data->product_data);
-	
+			
 			$this->template
 				->title($this->data->page_title)
 				->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
@@ -174,21 +189,21 @@ class Admin extends Admin_Controller {
 	
 	
 	function is_changed($array1 = NULL, $array2 = NULL, $filter){
-		if($array1 != NULL && $array2 != NULL){
+		
+		$result = FALSE;
+		$temp1; $temp2;
+		
+		if($array1 != NULL && $array2 != NULL){			
+			for ($i=0; $i<count($filter); $i++){				
+				$temp1[$filter[$i]] = $array1[$filter[$i]];
+				$temp2[$filter[$i]] = $array2[$filter[$i]];
+			}
 			
-// 			$result = array_diff($array1, $array2);
+			$result = array_diff($temp1, $temp2);
 			
-// 			var_dump($array1);
-// 			echo '<br/>';
-// 			var_dump($array2);
-			
-			if(count($result) > 0){
-				var_dump($result);
-				echo 'asdfasdf';
+			if(count($result)>0){
 				return TRUE;
 			}else{
-				var_dump($result);
-				echo 'lkjlkjlkjlk';
 				return FALSE;
 			}
 		}

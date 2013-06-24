@@ -4,9 +4,7 @@
 	</section>
 	
 	<section class="item">
-		<div class="content">
-			<?php var_dump($data->product->attribute); ?>
-			
+		<div class="content">			
 			<?php 
 				if($data->form_action == 'create'){
 					echo form_open('admin/products/' . $data->form_action);
@@ -95,7 +93,7 @@
 					
 					<!-- Product package tab -->
 					<div class="form_inputs" id="product-packages-fields">
-						<?php $this->load->view('admin/partials/package_list'); ?> 
+						<?php $this->load->view('admin/partials/package_list', $data->product->packages); ?> 
 					</div>
 					
 <?php /*				<div class="form_inputs" id="product-packages-fields">
