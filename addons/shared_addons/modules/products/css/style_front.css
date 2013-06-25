@@ -1,0 +1,23 @@
+/*Default Frontpage CSS for Products*/
+
+body.product{color:#515154;}
+body.product .content-wrapper { width: 96%; margin: 80px auto 40px auto; text-align:left;}
+
+/* Package Info Table */
+#package{
+	
+}
+
+table.package-list{
+	width:100%;
+	margin:40px 0;	
+}
+
+table .list-footer{
+	background:#EFEFEF;
+}
+
+table .list-footer{
+	background:#EFEFEF;
+}
+

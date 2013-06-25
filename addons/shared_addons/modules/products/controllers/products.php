@@ -22,6 +22,7 @@ class Products extends Public_Controller
 			
 			$this->template
 			->title($this->module_details['name'])
+			->append_css('module::style_front.css')
 			->set('product', $this->product)
 			->build('products');
 		}else{

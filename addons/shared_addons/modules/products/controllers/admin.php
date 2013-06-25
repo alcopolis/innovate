@@ -14,6 +14,7 @@ class Admin extends Admin_Controller {
 	 */
 	protected $section = 'products';
 	protected $data;
+	protected $post;
 	
 	
 	/** @var array The validation rules */
@@ -85,7 +86,7 @@ class Admin extends Admin_Controller {
 	public function create(){
 		
 		
-		$post = new stdClass;
+		$post = new stdClass();
 		$post->type = 'wysiwyg-advanced';
 		
 		$this->data->form_action = 'create';
@@ -101,11 +102,6 @@ class Admin extends Admin_Controller {
 					$this->data->product->packages = $field;
 				}
 			}
-			
-			
-		}else{
-			$this->data->product->attribute = NULL;
-			$this->data->product->packages = NULL;
 		}
 		
 		if ($this->form_validation->run()){
@@ -134,7 +130,7 @@ class Admin extends Admin_Controller {
 		$this->data->form_action = 'edit';
 		$this->data->page_title = 'Edit Product';
 		
-		$post = new stdClass;
+		$post = new stdClass();
 		$post->type = 'wysiwyg-advanced';
 		
 		$post->product = $this->products_m->get($slug);

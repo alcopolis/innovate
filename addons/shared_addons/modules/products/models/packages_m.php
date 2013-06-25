@@ -14,27 +14,32 @@ class Packages_m extends MY_Model
 		parent::__construct();
 		
 		$this->_table = 'inn_products_packages';
+		$field_table = 'inn_products_package_field';
 	}
 	
-	public function get($slug){
-		$q = $this->db->get_where($this->_table, array('slug' => $slug));
+// 	public function get_packages($slug){
 		
-		if($q->num_rows() > 0){
-			return $q->row();
-		}
-	}
+// 	}
 	
-	public function get_all(){
-		$q = $this->db->get($this->_table);
+// 	public function get($slug){
+// 		$q = $this->db->get_where($this->_table, array('slug' => $slug));
+		
+// 		if($q->num_rows() > 0){
+// 			return $q->row();
+// 		}
+// 	}
 	
-		return $q;
-	}
+// 	public function get_all(){
+// 		$q = $this->db->get($this->_table);
 	
-	public function update($primary_value = NULL, $data = NULL, $skip_validation = false){
-		return 'update method';
-	}
+// 		return $q;
+// 	}
 	
-	public function delete($id=NULL){
-		return 'delete method';
-	}
+// 	public function update($primary_value = NULL, $data = NULL, $skip_validation = false){
+// 		return 'update method';
+// 	}
+	
+// 	public function delete($id=NULL){
+// 		return 'delete method';
+// 	}
 }

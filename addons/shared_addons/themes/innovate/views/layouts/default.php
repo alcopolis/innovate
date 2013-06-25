@@ -7,7 +7,7 @@
 		{{ theme:partial name="metadata" }}
 	<?php } ?>
 </head>
-<body id="top">
+<body id="top" class="<?php if(!empty($data->body_class)){echo $data->body_class;} ?>">
 	<?php if ( ! $this->settings->frontend_enabled && (empty($this->current_user) or $this->current_user->group != 'admin')){ ?>
 	 	{{ theme:partial name="site_down" }}
 	<?php }else{ ?>
@@ -19,7 +19,7 @@
 				{{ theme:partial name="header" }}
 			</div>
 									
-			<div class="contentWrapper scroll">
+			<div class="content-wrapper scroll">
 				<div>{{ asset:image file="theme::tes-content.jpg" alt="Tes content" }}</div>
 				<div>
 					<h1>Lorem ipsum</h1>

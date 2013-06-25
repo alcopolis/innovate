@@ -4,6 +4,7 @@ class Admin_Packages extends Admin_Controller {
 	
 	protected $section = 'packages';
 	protected $data;
+	protected $post;
 	
 	/**
 	 * Constructor method
@@ -27,17 +28,30 @@ class Admin_Packages extends Admin_Controller {
 	 */
 	public function index()
 	{
-// 		$this->template
-// 			->title($this->module_details['name'] . ' ' . $this->data->section)
-// 			->set('data', $this->data)
-// 			->build('admin/packages');
+		$this->template
+			->title($this->module_details['name'] . ' ' . $this->data->section)
+			->set('data', $this->data)
+			->build('admin/packages');
 
-		echo 'Packages Index';
+		//echo 'Packages Index';
 	}
 	
 	public function create()
 	{
-		echo 'Create New Packages';
+		
+		$post = new stdClass();
+		$post->type = 'wysiwyg-advanced';
+		
+		$this->data->form_action = 'create';
+		$this->data->page_title = 'New Package';
+		
+		$this->template
+			->title($this->data->page_title)
+			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+			->append_js('module::product_form.js')
+			->set('data', $this->data)
+			->set('post', $post)
+			->build('admin/package_form');
 	}
 	
 	public function edit($slug)

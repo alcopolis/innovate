@@ -5,36 +5,38 @@
 	{{ products:js value="<?php echo $product->attribute['product_slug']; ?>" }}
 	{{ products:css value="<?php echo $product->attribute['product_slug']; ?>" }}
 </head>
-<body id="top" class="page-product <?php echo $product->attribute['product_slug']; ?>">
+<body id="top" class="product product-<?php echo $product->attribute['product_slug']; ?>">
 
 	<!-- Begin pageWrapper -->
 	<div id="pageWrapper">
 		{{ integration:analytics }}
 		
 		<!-- Begin Header Content -->
-		<div class="partialWrapper">				
-				{{ theme:partial name="header" }}
-			</div>
+		<div class="partial-wrapper">				
+			{{ theme:partial name="header" }}
+		</div>
 		<!-- End Header Content -->
 
 		<!-- Begin contentWrapper -->
-		<div class="contentWrapper">
-			<?php
-				
-			?>
-		
+		<div class="content-wrapper">		
 			<h1><?php echo $product->attribute['product_name']; ?></h1>
-			<p><?php echo $product->attribute['product_name'] ?></p>
-			<p><?php echo $product->attribute['product_body'] . ' <br/> ' . $product->attribute['product_tags']; ?></p>
+			
+			<div id="product"><?php echo $product->attribute['product_body'] ?></p>
+			
+			<div id="product-tags"><?php $product->attribute['product_tags']; ?></div>
 			
 			<?php if($product->packages != NULL) { ?>
-				<div id="package-list">		
-					<table>
-						<thead>
+				<div id="package">		
+					<table class="package-list">
+						<thead class="list-header">
 							<th>Package</th>
 							<th>Price</th>
 							<th>Description</th>
 						</thead>
+						
+						<tfoot class="list-footer">
+							<td colspan="3">Info tambahan</td>
+						</tfoot>
 						
 						<tbody>
 							<?php foreach($product->packages as $row) { ?>
@@ -54,7 +56,8 @@
 		<!-- End contentWrapper -->
 		
 		<!-- Begin Footer Content -->
-		<div class="partialWrapper">				
+		<div class="partial-wrapper">			
+			{{ products:render slug="<?php echo $product->attribute['product_slug']; ?>" }}	
 			{{ theme:partial name="footer" }}
 		</div>
 		<!-- End Footer Content -->

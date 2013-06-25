@@ -3,7 +3,6 @@
 				
 		// editor switcher
 		$('select[name^=type]').live('change', function () {
-			console.log('change');
 			
 			var chunk = $(this).closest('li.editor');
 			var textarea = $('textarea', chunk);
@@ -21,6 +20,11 @@
 			pyro.init_ckeditor();
 		});
 
+		$('#new-field').click(function(e){
+			e.preventDefault();
+			$('#custom-field').append('<p><input type="text" name="" value="Field Name" /> &nbsp; <input type="text" name="" value="Field Value" /></p>');
+		});
 		
 	})
 })(jQuery);
+

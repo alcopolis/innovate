@@ -7,7 +7,9 @@
 		<div class="content">
 		
 			<!-- Render Package list  -->
-			<?php if(!empty($data->query)){ ?>	
+			<?php if(!empty($data->query)){ ?>
+				<div id="filter">ITEM FILTER</div>	
+	
 				<div id="product-list">
 					<table>
 						<thead>

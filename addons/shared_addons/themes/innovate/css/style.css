@@ -10,13 +10,13 @@
 
 /* Wrappers */
 #pageWrapper { width: 75%; margin: 0 auto; }
-.partialWrapper { width: 98%; height: 80px; margin: 0 1%;}
-.contentWrapper { width: 96%; margin: 20px auto; text-align:center;}
-.contentWrapper.scroll {overflow:hidden}
-.contentWrapper img{height:100%;}
+.partial-wrapper { width: 98%; height: 80px; margin: 0 1%;}
+body .content-wrapper { width: 96%; margin: 20px auto; text-align:center;}
+.content-wrapper.scroll {overflow:hidden}
+.content-wrapper img{height:100%;}
 
 /* Header */
-.partialWrapper header {padding-top:20px;}
+.partial-wrapper header {padding-top:20px;}
 
 /* Logo */
 header #logo{width:160px; height:50px; float:left;}
@@ -24,12 +24,14 @@ header #logo h1 {width:160px; height:50px; background:url(../img/themes/innovate
 header #logo h1 a{display:block; text-indent:-9999px;}
 
 /* -------------------------------Navigation-------------------------- */
-.partialWrapper header #navigation{}
+.partial-wrapper header #navigation{}
 
 /* Main Menu */
 header #navigation #menu{margin-top:30px}
 header #navigation #menu ul {margin-right:10px;}
 header #navigation #menu ul li{display:inline; margin:0 10px}
+header #navigation #menu ul#main-menu li.current{border-bottom:2px solid #007DC3;}
+header #navigation #menu ul#main-menu li.current a{color:#007DC3;}
 
 /* Personal/Business Section */
 a.biz-section{height:20px; color:#C6C6C6; font-size:14px; margin-top:0; font-weight:bold;}
@@ -49,7 +51,7 @@ footer .footer-menu ul li{margin:0px; padding:0;}
 footer .footer-menu ul li a{color:#717174}
 footer .footer-menu ul li a:hover{color:#007cc3}
 
-#ack {clear:both;background:#007cc3;border-radius:20px;height:20px;}
+#ack {clear:both;background:#007cc3;border-radius:5px;height:20px;}
 #ack p{font-family: Helvetica Neue, Helvetica, Tahoma, sans-serif;font-size: 11px; color:#FFF; margin:2px 0 0 20px;}
 #ack ul {margin:-5px 20px 0 0; padding:0; height:20px;}
 #ack ul li{margin:0 0 0 10px; padding:0;}

@@ -94,40 +94,7 @@
 					<!-- Product package tab -->
 					<div class="form_inputs" id="product-packages-fields">
 						<?php $this->load->view('admin/partials/package_list', $data->product->packages); ?> 
-					</div>
-					
-<?php /*				<div class="form_inputs" id="product-packages-fields">
-						<fieldset>
-							<ul>
-								<li>
-									<label for="package_name">Package Name <span>*</span></label>
-									<div class="input"><?php echo form_input('package_name', htmlspecialchars_decode($data->package_data['package_name']), 'maxlength="100"') ?></div>
-								</li>
-					
-								<li>
-									<label for="package_slug">Slug <span>*</span></label>
-									<div class="input"><?php echo form_input('package_slug', $data->package_data['package_slug'], 'maxlength="100" class="width-20"') ?></div>
-								</li>
-						
-								<li class="editor">
-									<label for="body">Content <span>*</span></label><br>
-									<div class="input small-side">
-										<?php echo form_dropdown('type', array(
-											'html' => 'html',
-											'markdown' => 'markdown',
-											'wysiwyg-simple' => 'wysiwyg-simple',
-											'wysiwyg-advanced' => 'wysiwyg-advanced',
-										), $post->type) ?>
-									</div>
-					
-									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'packages_body', 'value' => $data->package_data['package_body'], 'name' => 'packages_body', 'rows' => 30, 'class' => $post->type)) ?>
-									</div>
-								</li>
-							</ul>
-						</fieldset>
-					</div>	*/ ?>
-					
+					</div>					
 					
 					<!-- Product CSS tab -->
 					<div class="form_inputs" id="product-css-fields">

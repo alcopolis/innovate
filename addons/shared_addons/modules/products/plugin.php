@@ -23,6 +23,22 @@ class Plugin_Products extends Plugin
 	public function _self_doc()
 	{
 		$info = array(
+				'render' => array(
+						'description' => array(
+								'en' => 'Return selected product information with its attributes',
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
+						'attributes' => array(
+								'slug' => array(
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+						),
+				),
 				'js' => array(
 						'description' => array(// a single sentence to explain the purpose of this method
 								'en' => 'Return custom JS',
@@ -65,6 +81,12 @@ class Plugin_Products extends Plugin
 		$this->load->model('products_m');
 	}
 	
+	public function render()
+	{
+		$raw = $this->products_m->render($this->attribute('slug'));
+		return $raw;
+	}
+	
 	public function js()
 	{	
 		$prod = $this->products_m->get($this->attribute('value'));		
@@ -77,9 +99,7 @@ class Plugin_Products extends Plugin
 	{
 		$prod = $this->products_m->get($this->attribute('value'));
 		$css = $prod->attribute['product_css'];
-		
-		//var_dump($css);
-	
+			
 		return '<style type="text/css">' . $css . '</style>';
 	}
 }

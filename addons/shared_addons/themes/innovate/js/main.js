@@ -25,9 +25,9 @@ function setLayout(){
 		$('#pageWrapper').css('width','1024px');
 	}
 	
-	$('.contentWrapper.scroll').css({'height':scrollH + 'px', 'width':'100%'});
+	$('.content-wrapper.scroll').css({'height':scrollH + 'px', 'width':'100%'});
 	
-	setScroller($('.contentWrapper.scroll'), scrollH);
+	setScroller($('.content-wrapper.scroll'), scrollH);
 }
 
 function setScroller(elm, h){
@@ -52,8 +52,8 @@ function setScroller(elm, h){
             scrollAmount:h
 		},
 		callbacks:{
-			onScrollStart:function(){ $('.contentWrapper.scroll').css({'border-top':'1px solid #EEE', 'border-bottom':'1px solid #EEE'})},
-			onScroll:function(){ $('.contentWrapper.scroll').css('border', 'none') },
+			onScrollStart:function(){ $('.content-wrapper.scroll').css({'border-top':'1px solid #EEE', 'border-bottom':'1px solid #EEE'})},
+			onScroll:function(){ $('.content-wrapper.scroll').css('border', 'none') },
 		}
 	});
 	
