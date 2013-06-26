@@ -22,10 +22,10 @@
 				<?php foreach($data->product->packages as $row) { ?>
 					<tr>
 						<?php
-							echo '<td class="align-center">' . form_checkbox('action_to[]', $row['package_id']) . '</td>';
-							echo '<td><a href="admin/products/packages/edit/' . $row['package_slug'] . '">' . $row['package_name'] . '</a></td>';
-							echo '<td>' . number_format($row['package_price'], 0, ',', '.') . '</td>';
-							echo '<td>' . $row['package_body'] . '</td>';
+							echo '<td class="align-center">' . form_checkbox('action_to[]', $row->package_id) . '</td>';
+							echo '<td><a href="admin/products/packages/edit/' . $row->package_slug . '">' . $row->package_name . '</a></td>';
+							echo '<td>' . number_format($row->package_price, 0, ',', '.') . '</td>';
+							echo '<td>' . $row->package_body . '</td>';
 							echo '<td>Edit &nbsp; Delete</td>';
 						?>
 					</tr>

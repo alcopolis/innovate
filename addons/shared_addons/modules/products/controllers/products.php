@@ -16,10 +16,9 @@ class Products extends Public_Controller
 	}
 	
 	function view($slug){
-		if($this->products_m->get($slug)){
-			
-			$this->product =  $this->products_m->get($slug);
-			
+		$this->product =  $this->products_m->get($slug);
+		
+		if($this->product != NULL){
 			$this->template
 			->title($this->module_details['name'])
 			->append_css('module::style_front.css')

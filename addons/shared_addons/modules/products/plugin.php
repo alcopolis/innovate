@@ -23,7 +23,7 @@ class Plugin_Products extends Plugin
 	public function _self_doc()
 	{
 		$info = array(
-				'render' => array(
+				'chunk' => array(
 						'description' => array(
 								'en' => 'Return selected product information with its attributes',
 						),
@@ -31,8 +31,20 @@ class Plugin_Products extends Plugin
 						'double' => false,// how about as a double tag?
 						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
 						'attributes' => array(
-								'slug' => array(
+								'field' => array(
+										'type' => 'array',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+								'table' => array(
 										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+								'where' => array(
+										'type' => 'array',// Can be: slug, number, flag, text, array, any.
 										'flags' => '',
 										'default' => '',
 										'required' => true,
@@ -81,16 +93,35 @@ class Plugin_Products extends Plugin
 		$this->load->model('products_m');
 	}
 	
-	public function render()
+	public function chunk()
 	{
-		$raw = $this->products_m->render($this->attribute('slug'));
-		return $raw;
+		$field = $this->attribute('field');
+		$where = $this->attribute('where');
+		$table;
+		
+		switch ($this->attribute('where')){
+			case 'product' :
+				$table = 'inn_products_data';
+				break;
+			case 'package' :
+				$table = 'inn_products_packages';
+				break;
+			case 'fields' :
+				$table = 'inn_products_packages_field';
+				break;
+			default :
+				$table = 'inn_products_data';
+				break;
+		}
+		
+		//Return object
+		return $this->products_m->get_parts($field,$table,$where);
 	}
 	
 	public function js()
 	{	
 		$prod = $this->products_m->get($this->attribute('value'));		
-		$js = $prod->attribute['product_js'];
+		$js = $prod->attribute->product_js;
 		
 		return '<script>' . $js . '</script>';
 	}
@@ -98,7 +129,7 @@ class Plugin_Products extends Plugin
 	public function css()
 	{
 		$prod = $this->products_m->get($this->attribute('value'));
-		$css = $prod->attribute['product_css'];
+		$css = $prod->attribute->product_css;
 			
 		return '<style type="text/css">' . $css . '</style>';
 	}

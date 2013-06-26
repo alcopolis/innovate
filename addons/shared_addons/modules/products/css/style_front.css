@@ -11,13 +11,17 @@ body.product .content-wrapper { width: 96%; margin: 80px auto 40px auto; text-al
 table.package-list{
 	width:100%;
 	margin:40px 0;	
+	
+	border-collapse:separate;
+	border-spacing:5px 15px;
 }
 
-table .list-footer{
+table.package-list .list-footer{
 	background:#EFEFEF;
 }
 
-table .list-footer{
-	background:#EFEFEF;
+table.package-list th, table.package-list td{
+	background:#007DC3;
+	margin:10px; padding:5px 2px;
 }
 

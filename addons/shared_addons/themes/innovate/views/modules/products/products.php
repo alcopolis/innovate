@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	{{ theme:partial name="metadata" }}	
-	{{ products:js value="<?php echo $product->attribute['product_slug']; ?>" }}
-	{{ products:css value="<?php echo $product->attribute['product_slug']; ?>" }}
+	{{ if alcopolis:site_status }}
+		{{ theme:partial name="metadata" }}
+		{{ products:js value="<?php echo $product->attribute->product_slug; ?>" }}
+		{{ products:css value="<?php echo $product->attribute->product_slug; ?>" }}
+	{{ else }}
+		{{ theme:partial name="maintenance" }}
+	{{ endif }}
+	
 </head>
-<body id="top" class="product product-<?php echo $product->attribute['product_slug']; ?>">
+<body id="top" class="product product-<?php echo $product->attribute->product_slug; ?>">
 
 	<!-- Begin pageWrapper -->
 	<div id="pageWrapper">
@@ -19,45 +24,32 @@
 
 		<!-- Begin contentWrapper -->
 		<div class="content-wrapper">		
-			<h1><?php echo $product->attribute['product_name']; ?></h1>
+			<h1><?php echo $product->attribute->product_name; ?></h1>
 			
-			<div id="product"><?php echo $product->attribute['product_body'] ?></p>
+			<div id="product"><?php echo $product->attribute->product_body; ?></p>
 			
-			<div id="product-tags"><?php $product->attribute['product_tags']; ?></div>
+			<div id="product-tags"><?php $product->attribute->product_tags; ?></div>
 			
 			<?php if($product->packages != NULL) { ?>
-				<div id="package">		
-					<table class="package-list">
-						<thead class="list-header">
-							<th>Package</th>
-							<th>Price</th>
-							<th>Description</th>
-						</thead>
-						
-						<tfoot class="list-footer">
-							<td colspan="3">Info tambahan</td>
-						</tfoot>
-						
-						<tbody>
-							<?php foreach($product->packages as $row) { ?>
-								<tr>
-									<?php
-										echo '<td><a href="admin/products/packages/#' . $row['package_slug'] . '">' . $row['package_name'] . '</a></td>';
-										echo '<td>' . $row['package_price'] . '</td>';
-										echo '<td>' . $row['package_body'] . '</td>';
-									?>
-								</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
+				<?php 
+					$group = array();
+					foreach ($product->packages as $package){						
+						if(!in_array($package->package_group, $group)){
+							$group[] = $package->package_group;		
+							echo '<div class="package-group">';
+							echo '<h4>' . $package->package_group . '</h4>';
+						}
+					}
+				?>		
 			<?php } ?>
+			
+			{{ products:chunk field="product_body" table="product" where="`product_id` = 2" }}
+			
 		</div>
 		<!-- End contentWrapper -->
 		
 		<!-- Begin Footer Content -->
 		<div class="partial-wrapper">			
-			{{ products:render slug="<?php echo $product->attribute['product_slug']; ?>" }}	
 			{{ theme:partial name="footer" }}
 		</div>
 		<!-- End Footer Content -->

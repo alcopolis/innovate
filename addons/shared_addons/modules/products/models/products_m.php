@@ -12,6 +12,8 @@ class Products_m extends MY_Model
 {
 	
 	//Start Product Model
+	protected $product;
+	
 
 	public function __construct() {
 		parent::__construct();
@@ -22,31 +24,43 @@ class Products_m extends MY_Model
 	
 	//Get data produk dan paket2nya sesuai dengan slug input
 	public function get($slug){		
-		$product = new stdClass();
+		$this->product = new stdClass();
 		
 		//Get product record
-		$product->attribute = $this->db->get_where($this->_table, array('product_slug' => $slug))->row_array();
+		$this->product->attribute = $this->db->get_where($this->_table, array('product_slug' => $slug))->row();
 		
 		//Get product packages record
 		$this->db->select('*');
 		$this->db->from('inn_products_packages');
-		$this->db->where('package_prod_id', intval($product->attribute['product_id']));
+		$this->db->where('package_prod_id', intval($this->product->attribute->product_id));
 		
-		$product->packages = $this->db->get()->result_array();
+		//$this->product->packages = $this->db->get()->result_object();
 		
-		//Get custom package fields record
-		foreach($product->packages as $key=>$package){
-			$this->db->select('field_name, field_value');
-			$this->db->from('inn_products_packages_field');
-			$this->db->where('package_id', intval($package['package_id']));
-			$product->packages[$key]['fields'] = $this->db->get()->result_array();
+		foreach($this->db->get()->result_object() as $key=>$package){
+			$this->product->packages[$key] = $package;
 			
-			//var_dump($key);
-			//var_dump($product->packages[$key]['fields']);
+			$this->db->select('field_name, field_value');
+				$this->db->from('inn_products_packages_field');
+				$this->db->where('package_id', intval($package->package_id));
+			
+			$fields = $this->db->get()->result_object();
+			$this->product->packages[$key]->fields = $fields;
 		}
 		
-		return $product;
+		return $this->product;
 	}
+	
+	//Get data by request
+	public function get_parts($field=NULL, $table=NULL, $where=NULL){
+		$part = new stdClass();
+		
+		$this->db->select($field);
+		$this->db->from($table);
+		$this->db->where($where);
+		
+		return $this->db->get()->result();
+	}
+	
 	
 	//Get semua data produk saja
 	public function get_all(){
@@ -73,13 +87,4 @@ class Products_m extends MY_Model
 		return 'delete method';
 	}
 	
-	
-	//Get data for frontend rendering
-	public function render($slug){
-// 		if(isset($slug) && $slug != ''){			
-// 			//return 'data raw';
-// 			$raw->product = $this->get($slug);
-// 			$raw->packages = $this->packages_m->get_packages($slug);
-// 		}
-	}
 }

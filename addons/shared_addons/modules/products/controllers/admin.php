@@ -136,21 +136,31 @@ class Admin extends Admin_Controller {
 		$post->product = $this->products_m->get($slug);
 		
 		//Seting ID Produk
-		$prod_id = $post->product->attribute['product_id'];
+		$prod_id = $post->product->attribute->product_id;
 		
 		//filter input post sesuai dengan data yg ingin di compare untuk melihat apakah ada perubahan data
-		$temp;
+		$temp = new stdClass();
+		$temp_post = new stdClass();;
+		
+		
 		$filter = array('product_name', 'product_section', 'product_slug', 'product_tags', 'product_body', 'product_css', 'product_js');
 			
-		for ($i=0; $i<count($filter); $i++){
-			$key = $filter[$i];
-			$temp[$key] = $post->product->attribute[$key];
-		}
+		foreach ($filter as $key_value){
+			//$key = $filter[$i];
+			$temp->$key_value = $post->product->attribute->$key_value;
+		}		
 		
 		//Validasi Data Form
 		if ($this->form_validation->run()){		
+
+
+			foreach ($this->input->post() as $key=>$key_value){
+				//$key = $filter[$i];
+				$temp_post->$key = $key_value;
+			}
 			
-			if($this->is_changed($temp, $this->input->post(), $filter)){				
+			
+			if($this->is_changed($temp, $temp_post, $filter)){				
 				foreach($this->input->post() as $key=>$field){
 					if(strpos($key,'product') !== FALSE){
 						$this->data->product_data[$key] = $field;
@@ -184,15 +194,17 @@ class Admin extends Admin_Controller {
 	}
 	
 	
-	function is_changed($array1 = NULL, $array2 = NULL, $filter){
+	function is_changed($data1, $data2, $filter){
 		
 		$result = FALSE;
 		$temp1; $temp2;
 		
-		if($array1 != NULL && $array2 != NULL){			
-			for ($i=0; $i<count($filter); $i++){				
-				$temp1[$filter[$i]] = $array1[$filter[$i]];
-				$temp2[$filter[$i]] = $array2[$filter[$i]];
+
+		if($data1 != NULL && $data2 != NULL){			
+			for ($i=0; $i<count($filter); $i++){
+				$key = $filter[$i];			
+				$temp1[$filter[$i]] = $data1->$key;
+				$temp2[$filter[$i]] = $data2->$key;
 			}
 			
 			$result = array_diff($temp1, $temp2);

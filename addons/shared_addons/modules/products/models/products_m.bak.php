@@ -13,6 +13,8 @@ class Products_m extends MY_Model
 	
 	//Start Product Model
 	
+	
+
 	public function __construct() {
 		parent::__construct();
 		$this->_table = 'inn_products_data';
@@ -20,6 +22,7 @@ class Products_m extends MY_Model
 	}
 	
 	
+	//Get data produk dan paket2nya sesuai dengan slug input
 	public function get($slug){		
 		$product = new stdClass();
 		
@@ -32,13 +35,27 @@ class Products_m extends MY_Model
 		$this->db->where('package_prod_id', intval($product->attribute['product_id']));
 		
 		$product->packages = $this->db->get()->result_array();
-
+		
+		//Get custom package fields record
+		foreach($product->packages as $key=>$package){
+			$this->db->select('field_name, field_value');
+			$this->db->from('inn_products_packages_field');
+			$this->db->where('package_id', intval($package['package_id']));
+			$product->packages[$key]['fields'] = $this->db->get()->result_array();
+			
+			
+			//var_dump($product->packages[$key]['fields']);
+		}
+		var_dump($product);
+		echo '<br>';
+		
 		return $product;
 	}
 	
+	//Get semua data produk saja
 	public function get_all(){
 		$q = $this->db->get($this->_table);
-		return $q;
+		return $q;		
 	}
 	
 	
@@ -63,10 +80,10 @@ class Products_m extends MY_Model
 	
 	//Get data for frontend rendering
 	public function render($slug){
-		if(isset($slug) && $slug != ''){			
-			//return 'data raw';
-			$raw->product = $this->get($slug);
-			$raw->packages = $this->packages_m->get_packages($slug);
-		}
+// 		if(isset($slug) && $slug != ''){			
+// 			//return 'data raw';
+// 			$raw->product = $this->get($slug);
+// 			$raw->packages = $this->packages_m->get_packages($slug);
+// 		}
 	}
 }
