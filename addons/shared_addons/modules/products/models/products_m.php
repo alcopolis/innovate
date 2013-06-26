@@ -41,8 +41,8 @@ class Products_m extends MY_Model
 			$this->db->where('package_id', intval($package['package_id']));
 			$product->packages[$key]['fields'] = $this->db->get()->result_array();
 			
-			var_dump($key);
-			var_dump($product->packages[$key]['fields']);
+			//var_dump($key);
+			//var_dump($product->packages[$key]['fields']);
 		}
 		
 		return $product;
@@ -76,10 +76,10 @@ class Products_m extends MY_Model
 	
 	//Get data for frontend rendering
 	public function render($slug){
-		if(isset($slug) && $slug != ''){			
-			//return 'data raw';
-			$raw->product = $this->get($slug);
-			$raw->packages = $this->packages_m->get_packages($slug);
-		}
+// 		if(isset($slug) && $slug != ''){			
+// 			//return 'data raw';
+// 			$raw->product = $this->get($slug);
+// 			$raw->packages = $this->packages_m->get_packages($slug);
+// 		}
 	}
 }
