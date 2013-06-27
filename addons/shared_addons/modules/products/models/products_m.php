@@ -103,8 +103,8 @@ class Products_m extends MY_Model
 			}
 			
 			if($value != NULL || $value != ''){
-				$filter = $this->_primary_filter;
-				$value = $filter($value);
+// 				$filter = $this->_primary_filter;
+// 				$value = $filter($value);
 				$method = 'row';
 				$this->db->where($this->_primary_key, $value);
 			}elseif($single == TRUE){
