@@ -15,9 +15,9 @@ class Products extends Public_Controller
 		$this->load->model('products_m');
 	}
 	
-	function view($slug){
-		$this->product =  $this->products_m->get($slug);
-		
+	function view($slug=NULL){
+		$this->product = $this->products_m->get($slug);
+
 		if($this->product != NULL){
 			$this->template
 			->title($this->module_details['name'])
@@ -27,5 +27,10 @@ class Products extends Public_Controller
 		}else{
 			//Redirect to Missing Page
 		}
+	}
+	
+	function tes(){
+		$this->result = $this->products_m->inn_get_by('field', array('field_name'=>'Saluran Premium'), TRUE);
+		var_dump($this->result);
 	}
 }

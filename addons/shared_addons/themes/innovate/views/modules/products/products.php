@@ -23,27 +23,14 @@
 		<!-- End Header Content -->
 
 		<!-- Begin contentWrapper -->
-		<div class="content-wrapper">		
-			<h1><?php echo $product->attribute->product_name; ?></h1>
-			
+		<div class="content-wrapper">					
 			<div id="product"><?php echo $product->attribute->product_body; ?></p>
 			
 			<div id="product-tags"><?php $product->attribute->product_tags; ?></div>
 			
 			<?php if($product->packages != NULL) { ?>
-				<?php 
-					$group = array();
-					foreach ($product->packages as $package){						
-						if(!in_array($package->package_group, $group)){
-							$group[] = $package->package_group;		
-							echo '<div class="package-group">';
-							echo '<h4>' . $package->package_group . '</h4>';
-						}
-					}
-				?>		
+				
 			<?php } ?>
-			
-			{{ products:chunk field="product_body" table="product" where="`product_id` = 2" }}
 			
 		</div>
 		<!-- End contentWrapper -->

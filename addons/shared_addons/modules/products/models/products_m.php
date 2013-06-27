@@ -10,6 +10,9 @@
  */
 class Products_m extends MY_Model
 {
+	protected $_table_name = '';
+	protected $_primary_key = '';
+	protected $_primary_filter = 'string';
 	
 	//Start Product Model
 	protected $product;
@@ -23,7 +26,7 @@ class Products_m extends MY_Model
 	
 	
 	//Get data produk dan paket2nya sesuai dengan slug input
-	public function get($slug){		
+	public function get($slug){	
 		$this->product = new stdClass();
 		
 		//Get product record
@@ -40,25 +43,21 @@ class Products_m extends MY_Model
 			$this->product->packages[$key] = $package;
 			
 			$this->db->select('field_name, field_value');
-				$this->db->from('inn_products_packages_field');
-				$this->db->where('package_id', intval($package->package_id));
+			$this->db->from('inn_products_packages_field');
+			$this->db->where('package_id', intval($package->package_id));
 			
 			$fields = $this->db->get()->result_object();
 			$this->product->packages[$key]->fields = $fields;
 		}
 		
 		return $this->product;
-	}
+}
 	
 	//Get data by request
-	public function get_parts($field=NULL, $table=NULL, $where=NULL){
-		$part = new stdClass();
-		
-		$this->db->select($field);
-		$this->db->from($table);
-		$this->db->where($where);
-		
-		return $this->db->get()->result();
+	public function package_group($field=NULL, $table=NULL, $where=NULL){
+		$this->db->select('*');
+		$this->db->from('inn_products_packages');
+		$this->db->where('package_prod_id', intval($this->product->attribute->product_id));
 	}
 	
 	
@@ -67,7 +66,6 @@ class Products_m extends MY_Model
 		$q = $this->db->get($this->_table);
 		return $q;		
 	}
-	
 	
 	public function insert($data, $skip_validation = false){		
 		var_dump($data);
@@ -82,9 +80,54 @@ class Products_m extends MY_Model
 		$this->db->update($this->_table, $data);
 	}
 	
-	
 	public function delete($id=NULL){
 		return 'delete method';
+	}
+	
+	
+	
+
+
+
+//-------------------------------------------------------------------------------------//
+	
+	public function inn_get($prefix, $value = NULL, $key = NULL, $single = FALSE){
+		
+		if($prefix != NULL || $prefix != ''){
+			switch($prefix){
+				case 'product':
+					$this->_table = 'inn_products_data';
+					$this->_primary_key = 'product_' . $key;
+					break;
+				case 'package':
+					$this->_table = 'inn_products_packages';
+					$this->_primary_key = 'package_' . $key;
+					break;
+				case 'field':
+					$this->_table = 'inn_products_packages_field';
+					$this->_primary_key = 'field_' . $key;
+					break;
+			}
+			
+			if($value != NULL || $value != ''){
+				$filter = $this->_primary_filter;
+				$value = $filter($value);
+				$method = 'row';
+				$this->db->where($this->_primary_key, $value);
+			}elseif($single == TRUE){
+				$method = 'row';
+			}else{
+				$method = 'result';
+			}
+
+			return $this->db->get($this->_table)->$method();
+		}	
+	}
+	
+	
+	public function inn_get_by($prefix, $where, $single = FALSE){
+		$this->db->where($where);
+		return $this->inn_get($prefix, NULL, NULL, $single);
 	}
 	
 }
