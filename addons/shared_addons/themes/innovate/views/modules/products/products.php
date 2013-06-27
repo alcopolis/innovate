@@ -23,19 +23,14 @@
 		<!-- End Header Content -->
 
 		<!-- Begin contentWrapper -->
-		<div class="content-wrapper">		
-			<h1><?php echo $product->attribute->product_name; ?></h1>
-			
+		<div class="content-wrapper">					
 			<div id="product"><?php echo $product->attribute->product_body; ?></p>
 			
 			<div id="product-tags"><?php $product->attribute->product_tags; ?></div>
 			
-			
-			{{ products:chunk  field="field_value" table="fields" where="`field_name` = 'Saluran Premium'" }}
-				{{ field }}
-			{{ /products:chunk }}
-			
-			
+			<?php if($product->packages != NULL) { ?>
+				
+			<?php } ?>
 		</div>
 		<!-- End contentWrapper -->
 		

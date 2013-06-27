@@ -23,40 +23,6 @@ class Plugin_Products extends Plugin
 	public function _self_doc()
 	{
 		$info = array(
-				'chunk' => array(
-						'description' => array(
-								'en' => 'Return selected product information with its attributes',
-						),
-						'single' => FALSE,// will it work as a single tag?
-						'double' => TRUE,// how about as a double tag?
-						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
-						'attributes' => array(
-								'field' => array(
-										'type' => 'array',// Can be: slug, number, flag, text, array, any.
-										'flags' => '',
-										'default' => '',
-										'required' => true,
-								),
-								'field' => array(
-										'type' => 'array',// Can be: slug, number, flag, text, array, any.
-										'flags' => '',
-										'default' => '',
-										'required' => true,
-								),
-								'table' => array(
-										'type' => 'text',// Can be: slug, number, flag, text, array, any.
-										'flags' => '',
-										'default' => '',
-										'required' => true,
-								),
-								'where' => array(
-										'type' => 'text',// Can be: slug, number, flag, text, array, any.
-										'flags' => '',
-										'default' => '',
-										'required' => true,
-								),
-						),
-				),
 				'js' => array(
 						'description' => array(// a single sentence to explain the purpose of this method
 								'en' => 'Return custom JS',
@@ -99,33 +65,7 @@ class Plugin_Products extends Plugin
 		$this->load->model('products_m');
 	}
 	
-	public function chunk()
-	{
-		$field = explode(',', $this->attribute('field'));
-		$where = $this->attribute('where');
-		$table;
-		
-		switch ($this->attribute('table')){
-			case 'product' :
-				$table = 'inn_products_data';
-				break;
-			case 'package' :
-				$table = 'inn_products_packages';
-				break;
-			case 'fields' :
-				$table = 'inn_products_packages_field';
-				break;
-			default :
-				$table = 'inn_products_data';
-				break;
-		}
-		
-		//Return object
-		$fields = $this->products_m->get_parts($field,$table,$where);
-		var_dump($fields);
-		return $fields;
-	}
-	
+
 	public function js()
 	{	
 		$prod = $this->products_m->get($this->attribute('value'));		
