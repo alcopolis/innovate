@@ -58,7 +58,14 @@ class Products_m extends MY_Model
 		$this->db->from($table);
 		$this->db->where($where);
 		
-		return $this->db->get()->result();
+		$result = $this->db->get()->result_object();
+		
+		if($result != NULL){
+			return $result;
+		}else{
+			return 'sdfgsdfgsdfg';
+		}
+		
 	}
 	
 	

@@ -27,10 +27,16 @@ class Plugin_Products extends Plugin
 						'description' => array(
 								'en' => 'Return selected product information with its attributes',
 						),
-						'single' => true,// will it work as a single tag?
-						'double' => false,// how about as a double tag?
+						'single' => FALSE,// will it work as a single tag?
+						'double' => TRUE,// how about as a double tag?
 						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
 						'attributes' => array(
+								'field' => array(
+										'type' => 'array',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
 								'field' => array(
 										'type' => 'array',// Can be: slug, number, flag, text, array, any.
 										'flags' => '',
@@ -44,7 +50,7 @@ class Plugin_Products extends Plugin
 										'required' => true,
 								),
 								'where' => array(
-										'type' => 'array',// Can be: slug, number, flag, text, array, any.
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
 										'flags' => '',
 										'default' => '',
 										'required' => true,
@@ -95,11 +101,11 @@ class Plugin_Products extends Plugin
 	
 	public function chunk()
 	{
-		$field = $this->attribute('field');
+		$field = explode(',', $this->attribute('field'));
 		$where = $this->attribute('where');
 		$table;
 		
-		switch ($this->attribute('where')){
+		switch ($this->attribute('table')){
 			case 'product' :
 				$table = 'inn_products_data';
 				break;
@@ -115,14 +121,16 @@ class Plugin_Products extends Plugin
 		}
 		
 		//Return object
-		return $this->products_m->get_parts($field,$table,$where);
+		$fields = $this->products_m->get_parts($field,$table,$where);
+		var_dump($fields);
+		return $fields;
 	}
 	
 	public function js()
 	{	
 		$prod = $this->products_m->get($this->attribute('value'));		
 		$js = $prod->attribute->product_js;
-		
+				
 		return '<script>' . $js . '</script>';
 	}
 	

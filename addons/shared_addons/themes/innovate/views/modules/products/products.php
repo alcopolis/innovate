@@ -30,20 +30,11 @@
 			
 			<div id="product-tags"><?php $product->attribute->product_tags; ?></div>
 			
-			<?php if($product->packages != NULL) { ?>
-				<?php 
-					$group = array();
-					foreach ($product->packages as $package){						
-						if(!in_array($package->package_group, $group)){
-							$group[] = $package->package_group;		
-							echo '<div class="package-group">';
-							echo '<h4>' . $package->package_group . '</h4>';
-						}
-					}
-				?>		
-			<?php } ?>
 			
-			{{ products:chunk field="product_body" table="product" where="`product_id` = 2" }}
+			{{ products:chunk  field="field_value" table="fields" where="`field_name` = 'Saluran Premium'" }}
+				{{ field }}
+			{{ /products:chunk }}
+			
 			
 		</div>
 		<!-- End contentWrapper -->
