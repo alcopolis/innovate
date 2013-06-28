@@ -85,6 +85,8 @@ class Products_m extends MY_Model
 //-------------------------------------------------------------------------------------//
 	
 	public function inn_get($prefix, $value = NULL, $key = NULL, $single = FALSE){
+
+		//$this->db->cache_delete();
 		
 		if($prefix != NULL || $prefix != ''){
 			switch($prefix){
@@ -103,8 +105,6 @@ class Products_m extends MY_Model
 			}
 			
 			if($value != NULL || $value != ''){
-// 				$filter = $this->_primary_filter;
-// 				$value = $filter($value);
 				$method = 'row';
 				$this->db->where($this->_primary_key, $value);
 			}elseif($single == TRUE){
@@ -123,4 +123,23 @@ class Products_m extends MY_Model
 		return $this->inn_get($prefix, NULL, NULL, $single);
 	}
 	
+	
+	public function inn_construct_data($prod_id){
+		$this->db->select(
+			't1.package_name,
+			t1.package_slug,
+			t1.package_price,
+			t1.package_body,
+			t1.package_group,
+			t2.field_name,
+			t2.field_value'
+		);
+		$this->db->from('default_inn_products_data t0');
+		$this->db->join('default_inn_products_packages t1','t1.package_prod_id = t0.product_id','LEFT');
+		$this->db->join('default_inn_products_packages_field t2', 't2.package_id = t1.package_id', 'LEFT');
+		$this->db->where('t0.product_id', $prod_id);
+		
+		return $this->db->get()->result();
+		
+	}
 }

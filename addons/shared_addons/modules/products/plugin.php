@@ -68,16 +68,16 @@ class Plugin_Products extends Plugin
 
 	public function js()
 	{	
-		$prod = $this->products_m->get($this->attribute('value'));		
-		$js = $prod->attribute->product_js;
-				
+		$prod = $this->products_m->inn_get('product', $this->attribute('value'), 'slug', TRUE);
+		$js = $prod->product_js;	
+			
 		return '<script>' . $js . '</script>';
 	}
 	
 	public function css()
 	{
-		$prod = $this->products_m->get($this->attribute('value'));
-		$css = $prod->attribute->product_css;
+		$prod = $this->products_m->inn_get('product', $this->attribute('value'), 'slug', TRUE);
+		$css = $prod->product_css;
 			
 		return '<style type="text/css">' . $css . '</style>';
 	}
