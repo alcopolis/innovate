@@ -5,6 +5,16 @@ var H;
 
 $(document).ready(function() {
 	setLayout();
+	
+	$('ul#main-menu li').mouseover(function(){
+		$(this).children('ul.dropdown').show();
+	//	$(this).css('background', '#000');
+	});
+	
+	$('ul#main-menu li').mouseout(function(){
+		$(this).children('ul.dropdown').hide();
+		$(this).css('background', 'none');
+	});
 });
 
 $(window).resize(function() {

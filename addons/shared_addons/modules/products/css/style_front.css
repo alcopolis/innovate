@@ -8,6 +8,15 @@ body.product .content-wrapper { width: 96%; margin: 80px auto 40px auto; text-al
 	
 }
 
+#product-body #content{
+	width:80%;
+	margin:0 10%;
+	color:#EFEFEF;
+	background:#007DC3;
+	padding:30px;
+	border-radius:10px;
+}
+
 table.package-list{
 	width:100%;
 	margin:40px 0;	

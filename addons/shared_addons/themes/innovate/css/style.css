@@ -11,7 +11,7 @@
 /* Wrappers */
 #pageWrapper { width: 75%; margin: 0 auto; }
 .partial-wrapper { width: 98%; height: 80px; margin: 0 1%;}
-body .content-wrapper { width: 96%; margin: 20px auto; text-align:center;}
+body .content-wrapper { width: 96%; margin: 20px auto; text-align:left;}
 .content-wrapper.scroll {overflow:hidden}
 .content-wrapper img{height:100%;}
 
@@ -28,10 +28,13 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 
 /* Main Menu */
 header #navigation #menu{margin-top:30px}
-header #navigation #menu ul {margin-right:10px;}
-header #navigation #menu ul li{display:inline; margin:0 10px}
-header #navigation #menu ul#main-menu li.current{border-bottom:2px solid #007DC3;}
+header #navigation #menu ul {margin-right:10px; }
+header #navigation #menu ul li{display:inline; margin:0; padding:0 10px; position:relative;}
+
+header #navigation #menu ul#main-menu li.current{}
 header #navigation #menu ul#main-menu li.current a{color:#007DC3;}
+
+header #navigation #menu ul#main-menu li.has_children .dropdown{ background:#000; position:absolute; left:0; width:100%; display:none;}
 
 /* Personal/Business Section */
 a.biz-section{height:20px; color:#C6C6C6; font-size:14px; margin-top:0; font-weight:bold;}
