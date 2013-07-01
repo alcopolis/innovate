@@ -7,6 +7,7 @@
 .right{float:right;}
 .clearfix{clear:both;}
 .list-inline li{display:inline; margin:0 10px}
+.hide{display:none}
 
 /* Wrappers */
 #pageWrapper { width: 75%; margin: 0 auto; }
