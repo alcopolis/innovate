@@ -14,7 +14,6 @@
 .partial-wrapper { width: 98%; height: 80px; margin: 0 1%;}
 body .content-wrapper { width: 96%; margin: 20px auto; text-align:left;}
 .content-wrapper.scroll {overflow:hidden}
-.content-wrapper img{height:100%;}
 
 /* Header */
 .partial-wrapper header {padding-top:20px;}
