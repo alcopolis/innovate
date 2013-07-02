@@ -13,8 +13,10 @@ $(document).ready(function() {
 	
 	$('ul#main-menu li').mouseout(function(){
 		$(this).children('ul.dropdown').hide();
-		$(this).css('background', 'none');
+		//$(this).css('background', 'none');
 	});
+	
+	$('#camera_wrap_1').camera();
 });
 
 $(window).resize(function() {

@@ -15,7 +15,7 @@
 							<th>Name</th>
 							<th>Slug</th>
 							<th>Section</th>
-							<th>Description</th>
+							<th>Body</th>
 							<th>Features</th>
 							<th>Tags</th>
 							<th>Action</th>
@@ -32,12 +32,12 @@
 						<tbody>
 							<?php foreach($data->query->result() as $row) { ?>
 								<tr>
-									<?php
+									<?php									
 										echo '<td class="align-center">' . form_checkbox('action_to[]', $row->product_id) . '</td>';
 										echo '<td><a href="admin/products/edit/' . $row->product_slug . '">' . $row->product_name . '</a></td>';
 										echo '<td>' . $row->product_slug . '</td>';
 										echo '<td>' . $row->product_section . '</td>';
-										echo '<td>' . $row->product_body . '</td>';
+										echo '<td>' . strip_tags(substr($row->product_body, 0, 300)) . '</td>';
 										echo '<td>View Features</td>';
 										echo '<td>' . $row->product_tags . '</td>';
 										echo '<td>Edit &nbsp; Delete</td>';
