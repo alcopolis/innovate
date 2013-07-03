@@ -21,7 +21,7 @@ class Products_m extends MY_Model
 	public function __construct() {
 		parent::__construct();
 		$this->_table = 'inn_products_data';
-		$this->load->model('packages_m');
+		$this->load->model('products/packages_m');
 	}
 	
 	
@@ -85,8 +85,6 @@ class Products_m extends MY_Model
 //-------------------------------------------------------------------------------------//
 	
 	public function inn_get($prefix, $value = NULL, $key = NULL, $single = FALSE){
-
-		//$this->db->cache_delete();
 		
 		if($prefix != NULL || $prefix != ''){
 			switch($prefix){
@@ -104,11 +102,23 @@ class Products_m extends MY_Model
 					break;
 			}
 			
+// 			if($value != NULL || $value != ''){
+// 				$method = 'row';
+// 				$this->db->where($this->_primary_key, $value);
+// 			}elseif($single == TRUE){
+// 				$method = 'row';
+// 			}else{
+// 				$method = 'result';
+// 			}
+
 			if($value != NULL || $value != ''){
-				$method = 'row';
 				$this->db->where($this->_primary_key, $value);
-			}elseif($single == TRUE){
-				$method = 'row';
+				
+				if($single){
+					$method = 'row';
+				}else{
+					$method = 'result';
+				}
 			}else{
 				$method = 'result';
 			}

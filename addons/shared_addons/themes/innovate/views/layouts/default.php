@@ -10,15 +10,14 @@
 <body id="top" class="">
 	{{ if alcopolis:site_status }}
 	
+		
 	 	<div id="pageWrapper">
 			{{ integration:analytics }}
-				
+						
 			<div class="partial-wrapper">				
 				{{ theme:partial name="header" }}
 			</div>
-			
-			
-												
+													
 			<div class="content-wrapper scroll">
 				{{ theme:partial name="content_default" }}
 			</div>

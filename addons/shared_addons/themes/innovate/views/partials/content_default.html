@@ -1,12 +1,23 @@
-<div>
-	
-</div>
-<div>
-	<h1>Lorem ipsum</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-</div>
-<div>{{ asset:image file="theme::tes-content-2.jpg" alt="Tes content 2" }}</div>
-<div>
-	<h1>Lorem ipsum 2</h1>
-	<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-</div>
+<!-- <div class="scroll-content">	 -->
+<!-- 	<div id="cam_wrapper"> -->
+<!-- 		<div data-src="{{ asset:image_path }}tes-ss-1.jpg"> -->
+<!--            	 <div style="position:absolute; top:5%; left:5%; background:#000; color:#fff; padding:5px; width:25%" class="fadeIn camera_effected">This is an HTML element included in the transition effect</div> -->
+<!--            </div> -->
+<!--            <div data-src="{{ theme:image_path }}tes-ss-2.jpg"> -->
+<!--               <div class="camera_caption fadeFromBottom"> -->
+<!--                    Changed the time and the transition time of this slide -->
+<!--                </div> -->
+<!--            </div> -->
+<!--            <div data-src="{{ theme:image_path }}tes-ss-3.jpg" data-link="http://www.google.com/" data-target="_self"> -->
+<!--                <div class="camera_caption fadeFromBottom"> -->
+<!--                    Changed the time and the transition time of this slide -->
+<!--                </div> -->
+<!--            </div> -->
+<!-- 	</div> -->
+<!-- </div> -->
+
+<div class="scroll-content">{{ asset:image file="theme::tes-content.jpg" alt="Tes content 1" }}</div>
+
+<div class="scroll-content">{{ asset:image file="theme::tes-content-2.jpg" alt="Tes content 2" }}</div>
+
+<div class="scroll-content">{{ products:featured }}</div>

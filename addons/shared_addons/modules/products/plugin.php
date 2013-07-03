@@ -55,6 +55,20 @@ class Plugin_Products extends Plugin
 								),
 						),
 				),
+				'featured' => array(
+						'description' => array(// a single sentence to explain the purpose of this method
+								'en' => ''
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+// 						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
+// 							'section' => array(
+// 								'type' => 'text',// Can be: slug, number, flag, text, array, any.
+// 								'flags' => '',// flags are predefined values like asc|desc|random.
+// 								'default' => '',// this attribute defaults to this if no value is given
+// 								'required' => true,// is this attribute required?		
+// 							),
+				),
 		);
 	
 		return $info;
@@ -81,6 +95,27 @@ class Plugin_Products extends Plugin
 		$css = $prod->product_css;
 			
 		return '<style type="text/css">' . $css . '</style>';
+	}
+	
+	function featured(){
+		$data = '';
+		//$key = $this->attribute('section');
+	
+		$this->db->select(
+				'product' . '_name,' .
+				'product' . '_teaser,'
+		);
+	
+		$raw = $this->products_m->inn_get('product', 1, 'is_featured', FALSE);
+		
+		foreach($raw as $featured){
+			$data .= '<div class="product-featured" style="margin:40px 20px; width:300px; float:left;">';
+			$data .= '<h3>' . $featured->product_name . '</h3>';		
+			$data .= $featured->product_teaser;
+			$data .= '</div>';
+		}
+		
+		return $data;
 	}
 	
 }

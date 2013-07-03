@@ -143,7 +143,7 @@ class Admin extends Admin_Controller {
 		$temp_post = new stdClass();;
 		
 		
-		$filter = array('product_name', 'product_section', 'product_slug', 'product_tags', 'product_body', 'product_css', 'product_js');
+		$filter = array('product_name', 'product_section', 'product_slug', 'product_is_featured', 'product_tags', 'product_teaser', 'product_body', 'product_css', 'product_js');
 			
 		foreach ($filter as $key_value){
 			//$key = $filter[$i];
@@ -154,9 +154,10 @@ class Admin extends Admin_Controller {
 		if ($this->form_validation->run()){		
 
 
-			foreach ($this->input->post() as $key=>$key_value){
+			foreach ($this->input->post() as $key => $key_value){
 				//$key = $filter[$i];
 				$temp_post->$key = $key_value;
+				echo $key . '<br/>';
 			}
 			
 			
@@ -168,6 +169,7 @@ class Admin extends Admin_Controller {
 						$this->data->package_data[$key] = $field;
 					}
 				}
+				
 				
 				//Setting update info & variables
 				//process form and redirect to products home
@@ -207,6 +209,10 @@ class Admin extends Admin_Controller {
 				$temp2[$filter[$i]] = $data2->$key;
 			}
 			
+// 			var_dump($temp1);
+// 			echo '<br/><br/><br/><br/>';
+// 			var_dump($temp2);
+					
 			$result = array_diff($temp1, $temp2);
 			
 			if(count($result)>0){

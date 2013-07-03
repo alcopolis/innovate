@@ -16,7 +16,7 @@ $(document).ready(function() {
 		//$(this).css('background', 'none');
 	});
 	
-	$('#camera_wrap_1').camera();
+	//$('#cam_wrapper').camera();
 });
 
 $(window).resize(function() {
@@ -64,11 +64,13 @@ function setScroller(elm, h){
             scrollAmount:h
 		},
 		callbacks:{
-			onScrollStart:function(){ $('.content-wrapper.scroll').css({'border-top':'1px solid #EEE', 'border-bottom':'1px solid #EEE'})},
+			onScrollStart:function(){ $('.content-wrapper.scroll').css({/*'border-top':'1px solid #EEE', 'border-bottom':'1px solid #EEE'*/})},
 			onScroll:function(){ $('.content-wrapper.scroll').css('border', 'none') },
 		}
 	});
 	
 	$('#mCSB_1').css('width', '100%');
-	$('.mCSB_container div').css('height', h + 'px');
+	$('.mCSB_container div.scroll-content').css('height', h + 'px');
+
+	
 }

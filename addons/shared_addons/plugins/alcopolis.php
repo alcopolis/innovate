@@ -46,6 +46,12 @@ class Plugin_Alcopolis extends Plugin
 	 *
 	 * @return string
 	 */
+	
+	public function __construct()
+	{
+		$this->load->model('products/products_m');
+	}
+	
 	function site_status()
 	{
 		if ( ! $this->settings->frontend_enabled && (empty($this->current_user) or $this->current_user->group != 'admin')){
@@ -54,6 +60,7 @@ class Plugin_Alcopolis extends Plugin
 			return TRUE;
 		}
 	}
+	
 }
 
 /* End of file example.php */

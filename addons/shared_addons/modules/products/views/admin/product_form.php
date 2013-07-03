@@ -43,7 +43,7 @@
 													</div>
 												</td>
 												<td style="width:20%;">
-													<div for="product_is_featured"><?php echo form_checkbox('product_is_featured', 'on', FALSE); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
+													<div for="product_is_featured"><?php echo form_checkbox('product_is_featured', $data->product->attribute->product_is_featured, $data->product->attribute->product_is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
 												</td>
 												<td style="width:20%;">
 													<div for="product_poster">Product Poster Here</div>
@@ -67,6 +67,11 @@
 									
 									<label for="product_tags">Tags - seperate words with ( , )</label>
 									<div class="input"><?php echo form_input('product_tags', $data->product->attribute->product_tags, 'maxlength="100" class="width-20"') ?></div>
+									
+									<br/>
+									
+									<label for="product_teaser">Teaser</label>
+									<div class="input"><?php echo form_textarea(array('id' => 'product_teaser', 'value' => $data->product->attribute->product_teaser, 'name' => 'product_teaser', 'rows' => 10)) ?></div>
 								</li>
 						
 								<li class="editor">
