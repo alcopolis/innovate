@@ -2,7 +2,7 @@
 	$(function () {
 				
 		// editor switcher
-		$('select[name^=type]').live('change', function () {
+		$('select[name^=editor_type]').live('change', function () {
 			
 			var chunk = $(this).closest('li.editor');
 			var textarea = $('textarea', chunk);
@@ -24,6 +24,14 @@
 			e.preventDefault();
 			$('#custom-field').append('<p><input type="text" name="" value="Field Name" /> &nbsp; <input type="text" name="" value="Field Value" /></p>');
 		});
+		
+		$(':checkbox').change(function(e){
+			if($(this).attr('value') == "0"){
+				$(this).attr('value', 1);
+			}else{
+				$(this).attr('value', 0);
+			} 
+		})
 		
 	})
 })(jQuery);

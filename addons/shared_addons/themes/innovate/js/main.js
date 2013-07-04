@@ -4,7 +4,6 @@ var W;
 var H;
 
 $(document).ready(function() {
-	setLayout();
 	
 	$('ul#main-menu li').mouseover(function(){
 		$(this).children('ul.dropdown').show();
@@ -17,6 +16,16 @@ $(document).ready(function() {
 	});
 	
 	//$('#cam_wrapper').camera();
+	
+	$feat = $('.featured');
+	console.log($feat);
+	$('.featured').each(function(){
+		if($(this).html() == ''){
+			$(this).remove();
+		}
+	})
+	
+	setLayout();
 });
 
 $(window).resize(function() {
