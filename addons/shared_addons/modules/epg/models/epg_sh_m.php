@@ -35,7 +35,8 @@ class Epg_Sh_m extends MY_Model {
 		$hari= date("Y-m-d");
 
 		$harirange=date('Y-m-d',strtotime("+7 day"));
-
+		
+		$this->db->SELECT('t0.id as showid');
 		$this->db->SELECT('t0.cid as channelid'); 
 		$this->db->SELECT('t0.title as title');
 		$this->db->SELECT('t0.date as tanggal');

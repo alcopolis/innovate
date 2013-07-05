@@ -4,8 +4,7 @@
 
 <section class="item">
 	<div class="content">
-		<?php echo $this->load->view('admin/partials/show_filters') ?>
-		<?php echo $this->db->last_query();?>		
+		<?php echo $this->load->view('admin/partials/show_filters') ?>	
 		<ul>
 			<li>Import CSV</li>
 			<li>Edit Record</li>
