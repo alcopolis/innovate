@@ -40,6 +40,7 @@ class Channels extends Admin_Controller
 		$offset = $this->uri->segment($uri_segment);
 		
 		$all_channels = $this->epg_ch_m->get_all_channel();
+
 		$tmpl = array( 'table_open'    => '<table id="tbl-view" class="dynamic" border="0" cellpadding="0" cellspacing="10">',
 						  'row_alt_start'  => '<tr class="zebra">',
 							'row_alt_end'    => '</tr>'
