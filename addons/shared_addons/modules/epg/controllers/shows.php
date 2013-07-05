@@ -47,7 +47,8 @@ class Shows extends Admin_Controller
 		$uri_segment = 3;
 		$offset = $this->uri->segment($uri_segment);
 		
-		$today_shows = $this->epg_sh_m->get_today_show();
+		//$today_shows = $this->epg_sh_m->get_today_show();
+		$today_shows = $this->epg_sh_m->get_featured_show();
 		
 		$tmpl = array( 'table_open'    => '<table id="tbl-view" class="dynamic" border="0" cellpadding="0" cellspacing="10">',
 						  'row_alt_start'  => '<tr class="zebra">',
