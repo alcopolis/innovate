@@ -11,5 +11,8 @@
 			<li>Edit channel</li>
 			<li>Add channel logo</li>
 		</ul>
+          <?php
+          	echo $table;
+          ?>
 	</div>
 </section>
