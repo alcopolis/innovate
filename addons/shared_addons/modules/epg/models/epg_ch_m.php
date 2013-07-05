@@ -28,11 +28,29 @@ class Epg_Ch_m extends MY_Model {
 	}
 	
 	//Functionality
+	// get all channel list for the admin page editor
+	public function get_all_channel()
+	{
+		$this->db->select('default_inn_epg_ch_detail.id');
+		$this->db->select('default_inn_epg_ch_detail.`name`');
+		$this->db->select('default_inn_epg_ch_detail.num');
+		$this->db->select('default_inn_epg_ch_detail.`desc`');
+		$this->db->select('default_inn_epg_ch_detail.logo');
+		$this->db->select('default_inn_epg_show_category.cat');
+		$this->db->from('default_inn_epg_ch_detail');
+		$this->db->join('default_inn_epg_show_category' ,'default_inn_epg_show_category.id = default_inn_epg_ch_detail.cat'); 
+		
+		return $this->db->get()->result();
+	}
+	
 	public function add(){}
 	
 	public function edit(){}
 	
 	public function del(){}
 	
-	public function search(){}
+	public function search()
+	{
+			
+	}
 }

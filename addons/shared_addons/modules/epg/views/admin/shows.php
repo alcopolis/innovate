@@ -12,5 +12,9 @@
 			<li>Set featured show</li>
 			<li>Add poster</li>
 		</ul>
+        <?php 
+			echo $table; 
+		?>
+        
 	</div>
 </section>
