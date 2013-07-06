@@ -57,7 +57,8 @@ class Module_Epg extends Module {
 						'name' => array('type' => 'VARCHAR','constraint' => '100'),
 						'num' => array('type' => 'INT',	'constraint' => '11'),
 						'cat' => array('type' => 'VARCHAR','constraint' => '100'),
-						'desc' => array('type' => 'TEXT')
+						'desc' => array('type' => 'TEXT'),
+						'logo' => array('type' => 'TEXT')
 				),
 				
 				//Category table for show genre(movie, serial, news, etc)
@@ -66,11 +67,11 @@ class Module_Epg extends Module {
 						'cat' => array('type' => 'VARCHAR','constraint' => '100'),
 				),
 		));
-	
+//CHANNEL'S NAME,START DATE,START TIME,DURATION,TITLE,SYNOPSIS INDONESIA,SYNOPSIS ENGLISH	
 		$show = array(
 					'id' => array('type' => 'INT','constraint' => '11','auto_increment' => TRUE, 'primary' => true),
 					'cid' => array('type' => 'INT','constraint' => '11'),
-					'cat_id' =>  array('type' => 'INT','constraint' => '11'),   //
+					'cat_id' =>  array('type' => 'INT','constraint' => '11'),   
 					'title' => array('type' => 'VARCHAR','constraint' => '100'),
 					'date' => array('type' => 'DATE'),
 					'time' => array('type' => 'TIME'),

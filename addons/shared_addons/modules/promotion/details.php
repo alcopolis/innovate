@@ -18,7 +18,7 @@ class Module_Promotion extends Module {
 				'menu' => 'content',
 				
 				'sections' => array(
-						'products' => array(
+						'Promotion' => array(
 								'name' => 'Promotion',
 								'uri' => 'admin/promotion',
 									'shortcuts' => array(
@@ -37,7 +37,26 @@ class Module_Promotion extends Module {
 	
 	public function install()
 	{
-		return TRUE;
+		$this->dbforge->drop_table('inn_promotion');
+
+		$promo = array(
+				'id' => array('type' => 'INT','constraint' => '11','auto_increment' => TRUE, 'primary' => TRUE),
+				'slug' => array('type' => 'VARCHAR','constraint' => '100'),
+				'body' => array('type' => 'TEXT'),
+				'category' => array('type' => 'VARCHAR','constraint' => '100'),
+				'tags' => array('type' => 'VARCHAR','constraint' => '100'),
+				'publish' => array('type' => 'DATE'),
+				'ended' => array('type' => 'DATE'),
+				'poster' => array('type' => 'VARCHAR', 'constraint' => '100')
+		);
+
+		$this->dbforge->add_field($promo);
+		$this->dbforge->add_key('id', TRUE);
+				
+		if($this->dbforge->create_table('inn_promotion'))
+		{
+			return TRUE;
+		}
 	}
 	
 	public function uninstall()
