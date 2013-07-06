@@ -18,7 +18,7 @@ class Products extends Public_Controller
 	
 	public function view($slug){
 
-		$this->product = $this->construct_data($slug);
+		$this->product = $this->products_m->get_product_by(NULL, array('product_slug'=>$slug), true);
 		
 		if($this->product != NULL){
 			$this->template

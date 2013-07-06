@@ -1,5 +1,5 @@
 <fieldset>
-<?php if(!empty($data->product->packages)){ ?>	
+<?php if(!empty($prod->packages)){ ?>	
 	<div id="package-list">		
 		<table>
 			<thead>
@@ -19,7 +19,7 @@
 			</tfoot>
 			
 			<tbody>
-				<?php foreach($data->product->packages as $row) { ?>
+				<?php foreach($prod->packages as $row) { ?>
 					<tr>
 						<?php
 							echo '<td class="align-center">' . form_checkbox('action_to[]', $row->package_id) . '</td>';
