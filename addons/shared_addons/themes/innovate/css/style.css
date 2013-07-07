@@ -36,7 +36,7 @@ header #navigation #menu ul#main-menu li{display:inline; margin:0; padding:3px 1
 header #navigation #menu ul#main-menu li:hover {}
 header #navigation #menu ul#main-menu li:hover a {color:#007dc3;}
 
-header #navigation #menu ul#main-menu li a{font-size:1.2em; font-weight:bold; color:#717174;}
+header #navigation #menu ul#main-menu li a{font-size:1em; font-weight:normal; color:#717174;}
 header #navigation #menu ul#main-menu li.current {}
 header #navigation #menu ul#main-menu li.current a{color:#007dc3;}
 

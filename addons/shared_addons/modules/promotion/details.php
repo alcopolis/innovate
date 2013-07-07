@@ -24,7 +24,7 @@ class Module_Promotion extends Module {
 									'shortcuts' => array(
 											'create' => array(
 													'name' 	=> 'Add',
-													'uri' 	=> 'admin/promotion/create',
+													'uri' 	=> 'admin/promotion/add',
 													'class' => 'add'
 											)
 									)

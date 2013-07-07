@@ -12,7 +12,19 @@ class Admin extends Admin_Controller {
 	{
 		parent::__construct();
 	
+		$this->load->model('promotion_m');
+		$this->load->model('category_m');
+	}
+	
+	public function index(){
+		$promos = $this->promotion_m->get_promotions();
+		$cats = $this->category_m->get_categories();
 		
+		$this->template
+			->title($this->module_details['name'])
+			->set('promos', $promos)
+			->set('cats', $cats)
+			->build('admin/index');
 	}
 	
 }
