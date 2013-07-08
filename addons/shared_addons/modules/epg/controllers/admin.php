@@ -27,59 +27,14 @@ class Admin extends Admin_Controller
 	 * List all items
 	 */
 	public function index()
-	{
-		// here we use MY_Model's get_all() method to fetch everything
-		$ch = $this->epg_ch_m->get_all();
-		$sh = $this->epg_sh_m->get_all();
-
-		// Build the view with sample/views/admin/items.php
+	{		
+		$pagination = create_pagination('admin/epg/index', $this->epg_sh_m->count_featured_show(), 5);
+		$featured = $this->epg_sh_m->limit($pagination['limit'], $pagination['offset'])->get_featured_show();
+		
 		$this->template
 			->title($this->module_details['name'])
-			->set('ch', $ch)
-			->set('sh', $sh)
+			->set('featured', $featured)
+			->set('pagination', $pagination)
 			->build('admin/dashboard');
 	}
-	
-// 	public function view_channels()
-// 	{
-// 		// here we use MY_Model's get_all() method to fetch everything
-// 		$ch = $this->epg_ch_m->get_all();
-	
-// 		// Build the view with sample/views/admin/items.php
-// 		$this->template
-// 		->title($this->module_details['name'])
-// 		->set('ch', $ch)
-// 		->build('admin/channels');
-// 	}
-	
-// 	public function view_shows()
-// 	{
-// 		// here we use MY_Model's get_all() method to fetch everything
-// 		$sh = $this->epg_sh_m->get_all();
-	
-// 		// Build the view with sample/views/admin/items.php
-// 		$this->template
-// 		->title($this->module_details['name'])
-// 		->set('sh', $sh)
-// 		->build('admin/shows');
-// 	}
-
-	
-// 	public function delete($id = 0)
-// 	{
-// 		echo $id;
-		
-// 		// make sure the button was clicked and that there is an array of ids
-// 		if (isset($_POST['btnAction']) AND is_array($_POST['action_to']))
-// 		{
-// 			// pass the ids and let MY_Model delete the items
-// 			$this->subscriber_m->delete_many($this->input->post('action_to'));
-// 		}
-// 		elseif (is_numeric($id))
-// 		{
-// 			// they just clicked the link so we'll delete that one
-// 			$this->subscriber_m->delete($id);
-// 		}
-// 		redirect('admin/subscriber');
-// 	}
 }
