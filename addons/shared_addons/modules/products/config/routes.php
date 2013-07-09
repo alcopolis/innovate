@@ -27,4 +27,3 @@
 
 // back-end
 $route['products/admin/packages(/:any)?']		= 'admin_packages$1';
-$route['admin/products/packages(/:any)?']		= 'admin_packages$1';

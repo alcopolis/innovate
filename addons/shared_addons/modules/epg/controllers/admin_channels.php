@@ -8,7 +8,7 @@
  * @subpackage 	Subscriber Module
  */
 
-class Channels extends Admin_Controller
+class Admin_Channels extends Admin_Controller
 {
 	protected $section = 'items';
 
@@ -27,8 +27,9 @@ class Channels extends Admin_Controller
 	 */
 	public function index()
 	{		
-		$pagination = create_pagination('admin/epg/channels/index', $this->epg_ch_m->count_channel(), 10, 3);
-		$all_channels = $this->epg_ch_m->limit($pagination['limit'], $pagination['offset'])->get_all_channel();
+		$pagination = create_pagination('admin/epg/channels/index', $this->epg_ch_m->count_channel(), 20,5);
+		
+		$all_channels = $this->epg_ch_m->order_by('name', 'ASC')->limit($pagination['limit'], $pagination['offset'])->get_all_channel();
 		
 		$this->template
 			->title($this->module_details['name'])
@@ -38,6 +39,7 @@ class Channels extends Admin_Controller
 			->build('admin/channels');
 	}
 	
-
-	
+	public function edit($id){
+		echo $id;
+	}
 }

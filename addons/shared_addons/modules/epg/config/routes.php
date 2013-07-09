@@ -26,5 +26,5 @@
 // $route['epg/view_shows(/:num)?']		= 'epg/view_shows/index$1';
 
 // back-end
-$route['epg/admin/channels(/:any)?']		= 'channels$1';
-$route['epg/admin/shows(/:any)?']			= 'shows$1';
+$route['epg/admin/channels(/:any)?']		= 'admin_channels$1';
+$route['epg/admin/shows(/:any)?']			= 'admin_shows$1';

@@ -28,15 +28,16 @@ class Epg extends Public_Controller
 	 */
 	public function index()
 	{
-		// here we use MY_Model's get_all() method to fetch everything
-		$ch = $this->epg_ch_m->get_all();
-		$sh = $this->epg_sh_m->get_all();
+		$sh = $this->epg_sh_m->get_epg();
 
-		// Build the view with sample/views/admin/items.php
+//		Build the view with sample/views/admin/items.php
 		$this->template
 			->title($this->module_details['name'])
-			->set('ch', $ch)
-			->set('sh', $sh)
+			->set('shows', $sh)
 			->build('epg');
+		
+
+		//$sh = $this->epg_sh_m->get_epg_by(array('title', 'date'), array('cid'=>29), FALSE);
+		//var_dump($sh);
 	}
 }

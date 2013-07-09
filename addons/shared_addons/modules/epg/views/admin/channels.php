@@ -38,9 +38,9 @@
 	        				<?php foreach($channels as $ch) { ?>
 	        					<tr>
 	        						<td><?php echo form_checkbox('action_to[]', $ch->id); ?></td>
-	        						<td><?php echo $ch->name; ?></td>
-	        						<td><?php echo $ch->num; ?></td>
-	        						<td>Edit</td>
+	        						<td><a href="admin/epg/channels/edit/<?php echo $ch->id; ?>"><?php echo $ch->name; ?></a></td>
+	        						<td class="align-center"><?php echo $ch->num; ?></td>
+	        						<td class="align-center">Edit</td>
 	        					</tr>
 	        				<?php } ?>	
 	        			</tbody>
