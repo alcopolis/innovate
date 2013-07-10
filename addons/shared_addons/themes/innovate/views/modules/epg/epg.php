@@ -6,25 +6,66 @@
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
+
+<script type="text/javascript">
+	$(document).ready(function(e) {
+
+		$('.channel').each(function(){
+			var temp = $(this).html().truncate(20, false, 'right', '');
+			$(this).html(temp);
+		})
+		
+		$('.show div').each(function(){
+			var temp = $(this).html().truncate(15, false, 'right', '...');
+			$(this).html(temp);
+		})
+
+		
+		var epgContW = $('#tdata').width();
+		var epgContH = $('#tdata').height();
+
+		var blockDataWidth = 240;
+		var blockDataMargin = 3;
+
+		var showContW = (blockDataWidth + blockDataMargin) * 26;
+
+		$('#tdata').width(epgContW + 16);
+		$('#tdata').height(epgContH + 16);
+		$('#tdata .sh-row').width(showContW);
+
+		console.log(showContW);
+    });
+
+	fnScroll = function(){
+	  $('#theader').scrollLeft($('#tdata').scrollLeft());
+	  $('#tcol').scrollTop($('#tdata').scrollTop());
+	}
 	
-	<style type="text/css">
-		#epg{margin:0 auto;}
-		#epg tr, #epg tr td, #epg div{margin:0; padding:0;}
-		#firstTd{width:140px;}
-		
-		#epg #divHeader{width:1200px; overflow:hidden;}
-		#epg #divHeader table{width:5760px; margin:0; padding:0;}
-		.tableHeader{width:240px; height:40px; background:#333; color:#FFF; padding:0 5px !important;}
-		
-		
-		#epg #tableDiv{width:1200px; overflow:auto;}
-		#epg #tableDiv table{width:5760px; margin:0; padding:0;}
-		
-		td.channel{width:140px; height:40px; background:#111; color:#FFF; font-size:12px; padding:5px !important;}
-		td.show{height:40px; max-height:40px; background:#333; color:#FFF; font-size:12px; padding:5px !important;}
-	</style>
+</script>
+
+<style type="text/css">
+	#epg {width:95%; margin:40px auto; font-size:12px;}
+	#origin, #theader, #tcol, #tdata {float:left; margin:.5% 0;}
+	
+	#origin{width:10%; height:40px;}
+	#theader{width:88%; height:40px; overflow:hidden;}
+	#tcol{width:10%; height:558px; overflow: hidden;}
+	#tdata{width:88%; height:558px; overflow: scroll; background:#111;}
+	
+	#theader #time-row {width:9000px; height:100%;}
+	#theader #time-row .time{width:240px; float:left; margin-right:3px; background:#0CE; color:#FFF;}
+	
+	#origin, #tcol {margin-right:5px}
+	
+	#tcol #ch-col{width:100%;}
+	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#333; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
+	
+	#tdata .sh-row{margin-bottom:3px;clear:both; width:9000px;} /* 24hrs x 240px */
+	#tdata .sh-row .show{float:left; margin-right:3px; background:rgba(255,255,255,.85); white-space:nowrap;}
+</style>
 	
 </head>
+
 <body id="top" class="epg">
 
 	<!-- Begin pageWrapper -->
@@ -40,81 +81,74 @@
 		<!-- Begin contentWrapper -->
 		<div class="content-wrapper">
 			<?php if($shows != NULL ){ ?>
-			
-				<table id="epg">
-					<tr>
-						<td id="firstTd"></td>
-						<td>
-      						<div id="divHeader">
-      							<table>
-      								<tr>
-      									<?php 
-      										for($i=0; $i<24; $i++){ 
-												if($i<10){
-													echo '<td class="tableHeader">0' . $i . ':00</td>';
-												}else{
-													echo '<td class="tableHeader">' . $i . ':00</td>';
-												}
-      										}
-      									?>
-      								</tr>	
-      							</table>
-      						</div>
-      					</td>
-					</tr>
-					
-					<tr>
-						<td valign="top">
-							<div id="firstcol">
-						        	<?php 
-						        		foreach($shows as $today_show){
-											if(count($today_show->sh) > 0 ){
-        										echo '<table><tr><td class="channel" style="text-align:center" valign="middle">' . $today_show->ch->name . '</td></tr></table>';
-        									}
-        								}
-      								?>
-					    	</div>
-						</td>
-						
-						<td valign="top">
-      						<div id="tableDiv" >
-      								<?php 		
+				<h2>TV GUIDE</h2>
+				<div id="epg">
+					<div id="origin"></div>
+    
+				    <div id="theader">
+				    	<div id="time-row">
+				    		<?php
+								for($i=0; $i<25; $i++){
+									if($i < 10){
+										echo '<div class="time"><div style="margin:10px">0' . $i . ':00</div></div>';	
+									}else if($i == 24){
+										echo '<div class="time last"><div style="margin:10px">00:00</div></div>';	
+									}else{
+										echo '<div class="time"><div style="margin:10px">' . $i . ':00</div></div>';
+									}
+								}
+							?>
+				    	</div>			        
+				    </div>
+				    
+				    <div id="tcol">
+				    	<div id="ch-col">
+				    		<?php 
+								foreach($shows as $today_show){
+									if(count($today_show->sh) > 0 ){
+										echo '<div class="channel">' . $today_show->ch->name . '</div>';
+									}
+								}
+							?>
+				    	</div>
+				    </div>
+				    
+				    <div id="tdata" onscroll="fnScroll()">
+				    	<?php 		
 											
-											foreach($shows as $today_show){
+							foreach($shows as $today_show){
+											
+								$sh_data = $today_show->sh;
+						
+								if(count($sh_data) > 0){
+									echo '<div class="sh-row">';
 												
-												$sh_data = $today_show->sh;
-												
-												
-												
-												if(count($sh_data) > 0){
-													echo '<table><tr>';
+									foreach($sh_data as $sh){
+										//set block width
+										$hms = explode(':', $sh->duration);
+										$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
 													
-													foreach($sh_data as $sh){
-														//set block width
-														$hms = explode(':', $sh->duration);
-														$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
-														
-														$title = '';
-														$w = floor($dur*240);
-														
-														if($w < 80){
-															$title = substr($sh->title, 0, floor($w/3)) . '...';
-														}else{
-															$title = $sh->title;
-														}
-														
-														echo '<td valign="middle" class="show" style="width:' . $w . 'px">' . $title . '</td>';
-													}
+										$title = '';
+										$w = floor($dur*240);
 													
-													echo '</tr></table>';
-												}												
-											}
-
-      								?>
-      						</div>
-      					</td>
-					</tr>
-				</table>
+										if($w < 80){
+											$title = substr($sh->title, 0, floor($w/3)) . '..';
+										}else{
+											$title = $sh->title;
+										}
+													
+										echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+									}
+												
+									echo '<br style="clear:both;" /></div>';
+								}											
+							}
+						
+						?>
+				    </div>
+				    
+				    <br style="clear: both"/>
+				</div>
 				
 			<?php }else{ ?>
 			

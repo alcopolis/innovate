@@ -13,7 +13,7 @@ img{width:100%;}
 /* Wrappers */
 
 #pageWrapper { width: 75%; margin: 0 auto; }
-.partial-wrapper { width: 98%; height: 80px; margin: 0 1%;}
+.partial-wrapper { width: 98%; height: 80px; margin: 0 1%; clear:both;}
 body .content-wrapper { width: 96%; margin: 20px auto; text-align:left;}
 .content-wrapper.scroll {overflow:hidden}
 
