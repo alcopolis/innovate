@@ -45,4 +45,10 @@
 	{{ theme:js file="jquery.mCustomScrollbar.min.js" }}
 	{{ theme:js file="jquery/camera.min.js" }}
 	{{ theme:js file="main.js" }}
+	
+	{{ if {alcopolis:connection uri="http://www.google.com"} == 'OK' }}
+	    <h2>OK</h2>
+	{{ else }}
+		<h2>ERROR</h2>    
+	{{ endif }}
 <!-- End scripts -->

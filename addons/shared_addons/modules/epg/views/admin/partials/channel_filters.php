@@ -1,5 +1,5 @@
 <fieldset id="filters">
-	<legend><?php echo lang('global:filters') ?></legend>
+	<legend>FILTER</legend>
 
 	<h2>SEARCH &amp; FILTER</h2>
 	<ul>

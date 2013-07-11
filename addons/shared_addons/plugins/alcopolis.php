@@ -33,6 +33,21 @@ class Plugin_Alcopolis extends Plugin
 // 					),
 //				),
 			),
+				
+			'connection' => array(
+					'description' => array(// a single sentence to explain the purpose of this method
+							'en' => ''
+					),
+					'single' => true,// will it work as a single tag?
+					'attributes' => array(
+						'uri' => array(
+									'type' => 'text',
+									'flags' => '',
+									'default' => '',
+									'required' => false,
+								),
+							),
+			),
 		);
 	
 		return $info;
@@ -59,6 +74,11 @@ class Plugin_Alcopolis extends Plugin
 		}else{
 			return TRUE;
 		}
+	}
+	
+	function connection()
+	{
+		
 	}
 	
 }

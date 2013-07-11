@@ -24,7 +24,7 @@ $(document).ready(function() {
 			$(this).remove();
 		}
 	})
-	
+		
 	setLayout();
 });
 
