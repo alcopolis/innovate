@@ -34,15 +34,14 @@ class Epg extends Public_Controller
 			->title($this->module_details['name'])
 			->set('shows', $sh)
 			->build('epg');
-		
-
-		//$sh = $this->epg_sh_m->get_epg_by(array('title', 'date'), array('cid'=>29), FALSE);
-		//var_dump($sh);
 	}
 	
 	public function show($id){
-		echo $id;
+		$sh = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
 		
-		var_dump($this->epg_sh_m->get_show(array('id'=>$id)));
+		$this->template
+			->title($this->module_details['name'])
+			->set('shows', $sh)
+			->build('show');
 	}
 }

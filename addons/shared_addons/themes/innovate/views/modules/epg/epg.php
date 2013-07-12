@@ -40,7 +40,6 @@
 	  $('#theader').scrollLeft($('#tdata').scrollLeft());
 	  $('#tcol').scrollTop($('#tdata').scrollTop());
 	}
-	
 </script>
 
 <style type="text/css">

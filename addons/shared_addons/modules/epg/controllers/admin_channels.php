@@ -42,8 +42,6 @@ class Admin_Channels extends Admin_Controller
 		->title($this->module_details['name'])
 		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
 		->append_js('module::channel_form.js')
-		->set('ch', $this->ch_data)
-		->set('page', $this->page_data)
 		->set($var)
 		->build($view);
 	}

@@ -9,6 +9,8 @@
  */
 class Epg_Sh_m extends MY_Model {
 	
+	public $rules = array();
+	
 	public function __construct()
 	{		
 		parent::__construct();
@@ -21,13 +23,10 @@ class Epg_Sh_m extends MY_Model {
 		$this->_table = 'inn_epg_show_detail';
 	}
 	
-	//View all subscriber
-	public function index($email)
-	{
-		return array('asdd','asdf');
-	}
 	
 
+//============= SHOW FUNCTION ===============	
+	
 	public function get_featured_show()
 	{
 		$bln=date("m");
@@ -90,48 +89,41 @@ class Epg_Sh_m extends MY_Model {
 		return $this->db->get()->result();
 	}
 
-	public function get_show($where, $single = FALSE)
+	
+	public function get_show($fields = NULL, $single = FALSE)
 	{
-		$method = '';
+		$hari= date("Y-m-d");
 		
-		if(!$single){
-			$method = 'result';
-		}else{
-			$method = 'row';
+		if($fields != NULL){
+			$this->db->select($fields);
 		}
 		
-		$this->db->where($where);
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
+		}
+		
+		$this->db->where('date >=', $hari);
+		
 		return $this->db->get($this->_table)->$method();
 	}
 
 	
+	public function get_show_by($fields, $where, $single = FALSE){
+		$this->db->where($where);
+		return $this->get_show($fields, $single);
+	}
 	
 	
-//====================================================================
-
 	
-// 	public function get_epg($where = NULL, $single = FALSE)
-// 	{
-// 		$hari= date("Y-m-d");
-
-// 		$data = new stdClass();
-		
-// 		$chs = $this->db->get('inn_epg_ch_detail')->result();
-		
-// 		foreach($chs as $ch){
-// 			$key = $ch->id;
-			
-// 			$data->$key = new stdClass();
-// 			$data->$key->ch = $ch;
-			
-// 			$this->db->where('cid',$key);
-// 			$this->db->where('date',$hari);
-// 			$data->$key->sh = $this->db->get($this->_table)->result();
-// 		}
-		
-// 		return $data;
-// 	}
-
+	
+	
+	
+	
+	
+	
+//============= EPG FUNCTION ===============
 	
 	
 	public function get_epg($fields = NULL, $single = FALSE)
@@ -169,6 +161,7 @@ class Epg_Sh_m extends MY_Model {
 		return $data;
 	}
 	
+	
 	public function get_epg_by($fields, $where, $single = FALSE){
 		$this->db->where($where);
 		return $this->get_epg($fields, $single);
@@ -182,11 +175,8 @@ class Epg_Sh_m extends MY_Model {
 	
 	
 	
-	
-	
-	
-	
-	//Functionality
+//============= CRUD FUNCTION ===============	
+
 	public function add(){}
 	
 	public function edit(){}

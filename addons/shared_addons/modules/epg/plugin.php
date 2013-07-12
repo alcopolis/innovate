@@ -30,6 +30,28 @@ class Plugin_Epg extends Plugin
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
 				),
+				
+				'related' => array(
+						'description' => array(// a single sentence to explain the purpose of this method
+								'en' => ''
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+						'attributes' => array(
+							'id' => array(
+									'type' => 'number',// Can be: slug, number, flag, text, array, any.
+									'flags' => '',
+									'default' => '',
+									'required' => false,
+							),
+							'channel' => array(
+										'type' => 'number',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => false,
+							),
+						),
+				),
 		);
 	
 		return $info;
@@ -120,7 +142,28 @@ class Plugin_Epg extends Plugin
 						$("#main").width($containerW * 0.396).height($containerW * 0.396);
 					}
 				</script>';
+		return $data;
+	}
+	
+	
+	
+	
+	function related(){
+		$data = '';
 		
+		$cid = $this->attribute('channel');
+		$id = $this->attribute('id');
+	
+		$raw = $this->epg_sh_m->limit(5)->get_show_by(NULL, array('cid'=>$cid, 'id!='=>$id), false);
+		shuffle($raw);
+		
+		foreach($raw as $related){
+			$data .= '<div class="related-show" style="width:18%; height:80px; background:#EFEFEF; margin:0 1%; float:left; text-align:center;">';
+			$data .= '<div class="poster"></div>';
+			$data .= '<p><a href="epg/show/' .  $related->id . '">' . $related->title . '</a></p>';
+			$data .= '</div>';
+		}
+	
 		return $data;
 	}
 	
