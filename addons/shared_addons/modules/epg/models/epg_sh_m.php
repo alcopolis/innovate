@@ -90,6 +90,20 @@ class Epg_Sh_m extends MY_Model {
 		return $this->db->get()->result();
 	}
 
+	public function get_show($where, $single = FALSE)
+	{
+		$method = '';
+		
+		if(!$single){
+			$method = 'result';
+		}else{
+			$method = 'row';
+		}
+		
+		$this->db->where($where);
+		return $this->db->get($this->_table)->$method();
+	}
+
 	
 	
 	

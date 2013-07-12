@@ -11,7 +11,7 @@
 	$(document).ready(function(e) {
 
 		$('.channel').each(function(){
-			var temp = $(this).html().truncate(20, false, 'right', '');
+			var temp = $(this).html().truncate(10, false, 'right', '');
 			$(this).html(temp);
 		})
 		

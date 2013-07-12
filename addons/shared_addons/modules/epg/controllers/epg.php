@@ -30,7 +30,6 @@ class Epg extends Public_Controller
 	{
 		$sh = $this->epg_sh_m->get_epg();
 
-//		Build the view with sample/views/admin/items.php
 		$this->template
 			->title($this->module_details['name'])
 			->set('shows', $sh)
@@ -39,5 +38,11 @@ class Epg extends Public_Controller
 
 		//$sh = $this->epg_sh_m->get_epg_by(array('title', 'date'), array('cid'=>29), FALSE);
 		//var_dump($sh);
+	}
+	
+	public function show($id){
+		echo $id;
+		
+		var_dump($this->epg_sh_m->get_show(array('id'=>$id)));
 	}
 }

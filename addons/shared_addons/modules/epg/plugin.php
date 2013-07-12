@@ -52,10 +52,11 @@ class Plugin_Epg extends Plugin
 		
 		$data .= '<style type="text/css">.featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
 				  .featured-show .poster{width:100%; height:100%;}
-	              .featured-show .info{margin:0; display:block; position:absolute; background:rgba(255,255,255,1); left:0; width:100%; opacity:0}
+	              .featured-show .info{margin:0 auto; padding:0 1%; display:block; position:absolute; background:rgba(255,255,255,1); left:0; width:98%; opacity:0}
 				  .featured-show .info h4 {font-size:14px;}
-	              .featured-show .info h4, .featured-show .info p, .featured-show .info .show-detail{margin:5px;}
-	              .featured-show .info p {font-size:12px; text-height:font-size;}
+	              .featured-show .info h4, .featured-show .info p, .featured-show .info .show-detail{margin:5px 0;}
+	              .featured-show .info p {font-size:12px; line-height:12px;}
+				  
 				  #main.featured-show .info h4 {font-size:18px;} 
 				  </style>';
 		
@@ -66,11 +67,10 @@ class Plugin_Epg extends Plugin
 				$data .= '<div id="main" class="featured-show">';
 					$data .= '<div class="poster"></div>';
 					$data .= '<div class="info">';
-					$data .= '<h4><a href="tv_guide/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
+					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
-					$data .= '<p class="syn-id"></p>';
-					$data .= '<hr/>';
-					$data .= '<p class="syn-en"></p>';
+					$data .= '<p class="syn-id">' .  $featured->ina . '</p>';
+					$data .= '<p class="syn-en">' .  $featured->eng . '</p>';
 					$data .= '<a class="show-detail" href="#">Detail Acara</a>';
 				$data .= '</div></div>';
 				
@@ -79,7 +79,7 @@ class Plugin_Epg extends Plugin
 				$data .= '<div class="featured-show">';
 					$data .= '<div class="poster"></div>';
 					$data .= '<div class="info">';
-					$data .= '<h4><a href="tv_guide/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
+					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
 					$data .= '<a class="show-detail" href="#">Detail Acara</a>';
 				$data .= '</div></div>';
