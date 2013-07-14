@@ -121,22 +121,34 @@
 						
 								if(count($sh_data) > 0){
 									echo '<div class="sh-row">';
+									
+									$first = TRUE;
 												
 									foreach($sh_data as $sh){
-										//set block width
-										$hms = explode(':', $sh->duration);
-										$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
-													
-										$title = '';
-										$w = floor($dur*240);
-													
-										if($w < 80){
+										$hms = explode(':', $sh->time);
+ 										$time = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
+										 
+										if($first && $time > 0){
+											$w = floor($time*240);
+											echo '<div class="past-show" style="width:' . $w . 'px; height: 40px; background:#999; float:left; margin-right:3px;">&nbsp;</div>';
+											
+											$hms = explode(':', $sh->duration);
+											$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
+											$w = floor($dur*240);
 											$title = substr($sh->title, 0, floor($w/3)) . '..';
+											
+											echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+											
+											$first = FALSE;
 										}else{
-											$title = $sh->title;
+											$hms = explode(':', $sh->duration);
+											$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
+											$w = floor($dur*240);
+											$title = substr($sh->title, 0, floor($w/3)) . '..';
+											echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+											$first = FALSE;
 										}
-													
-										echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+										
 									}
 												
 									echo '<br style="clear:both;" /></div>';
