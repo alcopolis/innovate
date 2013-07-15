@@ -9,17 +9,22 @@
  */
 class Epg_Sh_m extends MY_Model {
 	
-	public $rules = array();
+	public $rules = array(
+			'syn_id' => array(
+					'field' => 'syn_id',
+					'label' => 'Sinopsis Indonesia',
+					'rules' => 'trim|required|xss_clean'
+			),
+			'syn_en' => array(
+					'field' => 'syn_en',
+					'label' => 'Synopsis English',
+					'rules' => 'trim|required|xss_clean'
+			),
+	);
 	
 	public function __construct()
 	{		
 		parent::__construct();
-		
-		/**
-		 * If the sample module's table was named "samples"
-		 * then MY_Model would find it automatically. Since
-		 * I named it "sample" then we just set the name here.
-		 */
 		$this->_table = 'inn_epg_show_detail';
 	}
 	
@@ -117,6 +122,29 @@ class Epg_Sh_m extends MY_Model {
 	
 	
 	
+	public function get_count($fields = NULL)
+	{
+		$hari= date("Y-m-d");
+	
+		if($fields != NULL){
+			$this->db->select($fields);
+		}
+	
+		$this->db->where('date >=', $hari);
+		
+		//var_dump($this->db->get($this->_table)->num_rows());
+	
+		return $this->db->get($this->_table)->num_rows();
+	}
+	
+	
+	public function get_count_by($fields, $where){
+		$this->db->where($where);
+		return $this->get_count($fields);
+	}
+	
+	
+	
 	
 	
 	
@@ -176,6 +204,21 @@ class Epg_Sh_m extends MY_Model {
 	
 	
 //============= CRUD FUNCTION ===============	
+
+	
+	public function update_show($id, $data){
+		$this->db->where('id', $id);
+		
+		//var_dump($data);
+	
+		if($this->db->update($this->_table, $data)){
+			return TRUE;
+			echo 'TRUE';
+		}else{
+			return FALSE;
+			echo 'FALSE';
+		}
+	}
 
 	public function add(){}
 	

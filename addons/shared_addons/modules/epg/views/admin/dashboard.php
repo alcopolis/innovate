@@ -15,7 +15,7 @@
 				<fieldset>
 					<?php foreach($featured as $feat){ ?>
 						<div class="active-featured" style="float:left; width:18%; height:18%; background:rgba(200,200,200,.5); margin:1%;">
-							<h4><a href="shows/edit/<?php echo $feat->showid ?>"><?php echo $feat->title; ?></a></h4>
+							<h4><a href="admin/epg/shows/edit/<?php echo $feat->showid ?>"><?php echo $feat->title; ?></a></h4>
 							<p><?php echo $feat->chname?></p>
 						</div>
 					<?php } ?>

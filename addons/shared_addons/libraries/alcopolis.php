@@ -8,7 +8,11 @@ class Alcopolis
 		//var_dump($fields);
 	
 		foreach($fields as $field){
-			$data[$field] = $post[$field];
+			if(isset($post[$field])){
+				$data[$field] = $post[$field];
+			}else{
+				
+			}
 		}
 	
 		return $data;

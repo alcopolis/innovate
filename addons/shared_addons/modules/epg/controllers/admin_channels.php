@@ -30,7 +30,7 @@ class Admin_Channels extends Admin_Controller
 		$this->page_data = new stdClass();
 		
 		$this->page_data->section = $this->section;
-		$this->page_data->editor_type = 'wysiwyg-simple';
+		$this->page_data->editor_type = 'html';
 		
 		// Set validation rules
 		$this->form_validation->set_rules($this->epg_ch_m->rules);
@@ -48,7 +48,7 @@ class Admin_Channels extends Admin_Controller
 	
 	
 	public function index()
-	{		
+	{				
 		$pagination = create_pagination('admin/epg/channels/index', $this->epg_ch_m->count_channel(), 20,5);
 		$all_channels = $this->epg_ch_m->order_by('id', 'ASC')->limit($pagination['limit'], $pagination['offset'])->get_all_channel();
 
@@ -95,7 +95,7 @@ class Admin_Channels extends Admin_Controller
 			if($this->epg_ch_m->update_channel($id, $data)){
 				redirect('admin/epg/channels');
 			}else{
-				$this->render('admin/channel_form');
+				$this->render('admin/channel_form', array('page'=>$this->page_data, 'ch'=>$this->ch_data));
 			}
 			
 		}else{
@@ -108,7 +108,7 @@ class Admin_Channels extends Admin_Controller
 				$this->ch_data->categories[] = $cat->cat;
 			}
 			
-			$this->render('admin/channel_form');
+			$this->render('admin/channel_form', array('page'=>$this->page_data, 'ch'=>$this->ch_data));
 		}
 	}
 }
