@@ -14,6 +14,7 @@ class Admin_Shows extends Admin_Controller
 	protected $img_path;
 	protected $page_data;
 	protected $sh_data;
+	protected $upload_config;
 
 	public function __construct()
 	{
@@ -22,8 +23,12 @@ class Admin_Shows extends Admin_Controller
 		// Load all the required classes
 		$this->load->model('epg_sh_m');
 		$this->load->model('epg_ch_m');
+		
 		$this->load->library('form_validation');
+		$this->load->library('upload');
+		$this->load->library('image_lib');
 		$this->load->library('alcopolis');
+		
 		$this->lang->load('epg');
 		
 		//variables
@@ -37,16 +42,6 @@ class Admin_Shows extends Admin_Controller
 		
 		// Set validation rules
 		$this->form_validation->set_rules($this->epg_sh_m->rules);
-		
-		
-		//Upload image config
-		$config = array(
-				'allowed_types' => 'jpg|jpeg|png|JPG|JPEG|PNG',
-				'upload_path' => $this->img_path,
-				'max_size' => 2048,
-		);
-		
-		$this->load->library('upload', $config);
 	}
 
 	
@@ -112,42 +107,20 @@ class Admin_Shows extends Admin_Controller
 			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data));
 		}
 	}
-	
-	
-// 	public function edit($id){
-// 		$this->page_data->title = 'Edit Show';
-// 		$this->page_data->action = 'edit';
-		
-// 		if($this->form_validation->run()){
-				
-// 			//Process form
-// 			$data = $this->alcopolis->array_from_post(array('is_featured', 'syn_id', 'syn_en'), $this->input->post());
-			
-// 			if($this->epg_sh_m->update_show($id, $data)){
-// 				redirect('admin/epg/shows');
-// 			}else{
-// 				$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
-// 			}
-				
-// 		}else{
-				
-// 			//Load Form
-// 			$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
-// 			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
-// 		}
-// 	}
 
 	
 	public function edit($id){
 
 		$this->page_data->title = 'Edit Show';
-	
+		
+		$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
+		
+		
 		if($this->form_validation->run()){
 			//Process form			
 			$data = $this->alcopolis->array_from_post(array('is_featured', 'syn_id', 'syn_en'), $this->input->post());
 			
-			$this->upload->do_upload('poster');
-			$image_data = $this->upload->data();
+			$this->poster_upload($this->sh_data->id);
 			
 			if($this->epg_sh_m->update_show($id, $data)){
 				redirect('admin/epg/shows');
@@ -158,13 +131,47 @@ class Admin_Shows extends Admin_Controller
 		}else{
 	
 			//Load Form
-			$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
 			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
 		}
 	}
 	
 	
-	
+	function poster_upload($rename){
+		//Upload image config
+		$this->upload_config = array(
+				'allowed_types' => 'jpg|jpeg|png',
+				'upload_path' => $this->img_path,
+				'max_width' => 1920,
+				'max_size' => 2048,
+				'overwrite' => true,
+				'file_name' => $rename,
+		);
+			
+		$this->upload->initialize($this->upload_config);
+		
+		if($this->upload->do_upload('poster')){
+			$upload_data = $this->upload->data();
+			
+			$resize_config = array(
+					'source_image' => $upload_data['full_path'],
+					'new_image' => $this->img_path . '/thumbs',
+					'maintain_ration' => true,
+					'width' => 300,
+					'height' => 150,
+					'master_dim' => 'auto',
+			);
+			
+			$this->image_lib->clear();
+			$this->image_lib->initialize($resize_config);
+			
+			if (!$this->image_lib->resize())
+			{
+			    echo $this->image_lib->display_errors();
+			}
+		}else{
+			$upload_data = $this->upload->display_errors();
+		}
+	}
 	
 	
 	

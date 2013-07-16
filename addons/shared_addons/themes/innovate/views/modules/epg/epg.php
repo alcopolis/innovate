@@ -130,7 +130,7 @@
 										 
 										if($first && $time > 0){
 											$w = floor($time*240);
-											echo '<div class="past-show" style="width:' . $w . 'px; height: 59px; background:#666; float:left; border-radius:0 10px 10px 0;">&nbsp;</div>';
+											echo '<div class="past-show" style="width:' . $w . 'px; height: 59px; background:#666; float:left; border-radius:0 5px 5px 0; outline:1px solid #111;">&nbsp;</div>';
 											
 											$hms = explode(':', $sh->duration);
 											$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
