@@ -11,7 +11,7 @@
 class Admin_Shows extends Admin_Controller
 {
 	protected $section = 'shows';
-	
+	protected $img_path;
 	protected $page_data;
 	protected $sh_data;
 
@@ -33,8 +33,20 @@ class Admin_Shows extends Admin_Controller
 		$this->page_data->section = $this->section;
 		$this->page_data->editor_type = 'wysiwyg-simple';
 		
+		$this->img_path = $this->module_details['path'] . '/upload/shows';
+		
 		// Set validation rules
 		$this->form_validation->set_rules($this->epg_sh_m->rules);
+		
+		
+		//Upload image config
+		$config = array(
+				'allowed_types' => 'jpg|jpeg|png|JPG|JPEG|PNG',
+				'upload_path' => $this->img_path,
+				'max_size' => 2048,
+		);
+		
+		$this->load->library('upload', $config);
 	}
 
 	
@@ -94,7 +106,7 @@ class Admin_Shows extends Admin_Controller
 			$this->db->select('t0.id, t0.title, t0.date, t0.time, t0.duration, t1.name');
 			$this->db->from('inn_epg_show_detail t0');
 			$this->db->join('inn_epg_ch_detail t1', 't1.id = t0.cid', 'LEFT');
-			$this->db->where('t0.is_featured', 1);
+			$this->db->where(array('t0.date>='=>date('Y-m-d'),'t0.is_featured'=> 1));
 			$this->sh_data = $this->db->get()->result();
 			
 			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data));
@@ -102,28 +114,60 @@ class Admin_Shows extends Admin_Controller
 	}
 	
 	
-	public function edit($id){
-		$this->page_data->title = 'Edit Show';
-		$this->page_data->action = 'edit';
+// 	public function edit($id){
+// 		$this->page_data->title = 'Edit Show';
+// 		$this->page_data->action = 'edit';
 		
-		if($this->form_validation->run()){
+// 		if($this->form_validation->run()){
 				
-			//Process form
+// 			//Process form
+// 			$data = $this->alcopolis->array_from_post(array('is_featured', 'syn_id', 'syn_en'), $this->input->post());
+			
+// 			if($this->epg_sh_m->update_show($id, $data)){
+// 				redirect('admin/epg/shows');
+// 			}else{
+// 				$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
+// 			}
+				
+// 		}else{
+				
+// 			//Load Form
+// 			$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
+// 			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
+// 		}
+// 	}
+
+	
+	public function edit($id){
+
+		$this->page_data->title = 'Edit Show';
+	
+		if($this->form_validation->run()){
+			//Process form			
 			$data = $this->alcopolis->array_from_post(array('is_featured', 'syn_id', 'syn_en'), $this->input->post());
+			
+			$this->upload->do_upload('poster');
+			$image_data = $this->upload->data();
 			
 			if($this->epg_sh_m->update_show($id, $data)){
 				redirect('admin/epg/shows');
 			}else{
 				$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
 			}
-				
+	
 		}else{
-				
+	
 			//Load Form
 			$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
 			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
 		}
 	}
+	
+	
+	
+	
+	
+	
 	
 	public function delete($id = 0){echo $id;}
 

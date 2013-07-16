@@ -10,8 +10,6 @@ class Alcopolis
 		foreach($fields as $field){
 			if(isset($post[$field])){
 				$data[$field] = $post[$field];
-			}else{
-				
 			}
 		}
 	

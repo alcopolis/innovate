@@ -52,7 +52,7 @@
 	#tdata{width:88%; height:558px; overflow: scroll; background:#111;}
 	
 	#theader #time-row {width:9000px; height:100%;}
-	#theader #time-row .time{width:240px; float:left; border-radius:10px; background:#0CE; color:#FFF;}
+	#theader #time-row .time{width:240px; float:left; border-radius:5px; outline:1px solid #FFF; background:#0CE; color:#FFF;}
 	
 	#origin, #tcol {margin-right:5px}
 	
@@ -60,7 +60,7 @@
 	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#333; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
 	
 	#tdata .sh-row{margin-bottom:3px;clear:both; width:9000px;} /* 24hrs x 240px */
-	#tdata .sh-row .show{float:left; border-radius:10px; background:rgba(255,255,255,.85); white-space:nowrap;}
+	#tdata .sh-row .show{float:left; border-radius:5px; outline:1px solid #111; background:rgba(255,255,255,.85); white-space:nowrap;}
 </style>
 	
 </head>
