@@ -1,25 +1,32 @@
 <fieldset id="filters">
-	<legend><?php echo lang('global:filters') ?></legend>
-
-	<h2>SEARCH &amp; FILTER</h2>
+	<legend>Filters</legend>
 	
-	<?php echo form_open(); ?>
+	<style type="text/css">
+		.filter{float:left; margin:10px;}
+	</style>
 	
-		<label for="cat">Category</label>
-		<div class="input clearfix">
-			<?php echo form_dropdown('cat', $cat->categories, set_value($cat->categories) ); ?>
+	<?php echo form_open('admin/epg/shows/'); ?>					
+		<div class="filter">
+			<label for="cid">Channel</label>
+			<div class="input clearfix">
+				<?php echo form_dropdown('cid', $ch); ?>
+			</div>
 		</div>
 		
-		<label for="cid">Channel</label>
-		<div class="input clearfix">
-			<?php echo form_dropdown('cid', $ch->ch, set_value($ch->ch)); ?>
+		<div class="filter">
+			<label for="date">Date</label>
+			<div class="input"><?php echo form_input('date', date('Y-m-d'), 'class="datepicker" maxlength="20"'); ?></div>
 		</div>
 		
-		<label for="date">Date</label>
-		<div class="input"><?php echo form_input('date', '', 'maxlength="20"'); ?></div>
+		<div class="filter">
+			<label for="name">Title</label>
+			<div class="input"><?php echo form_input('title', '', 'maxlength="200" style="width:500px"'); ?></div>
+		</div>
 		
-		<label for="name">Title</label>
-		<div class="input"><?php echo form_input('title', '', 'maxlength="200"'); ?></div>
+		<div class="filter">
+			<label for="submit">&nbsp;</label>
+			<?php echo form_submit('submit', 'View'); ?>
+		</div>
 		
 	<?php echo form_close(); ?>
 </fieldset>

@@ -29,7 +29,7 @@
 									
 									<br/>
 									
-									<div for="is_featured"><?php echo form_checkbox('is_featured', $sh->is_featured, $sh->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
+									<div for="is_featured"><?php echo form_checkbox('is_featured', $sh->is_featured, $sh->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Set Feature</strong></div>
 								</li>
 								
 								<li>
@@ -40,10 +40,6 @@
 									
 									<label for="syn_en">Synopsis English</label>
 									<div class="input"><?php echo form_textarea(array('id' => 'syn_en', 'value' => $sh->syn_en, 'name' => 'syn_en', 'rows' => 5)) ?></div>
-								</li>
-								
-								<li>
-									<p>Set poster image</p>
 								</li>
 							</ul>
 						</fieldset>

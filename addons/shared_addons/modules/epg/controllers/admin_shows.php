@@ -70,6 +70,8 @@ class Admin_Shows extends Admin_Controller
 		}		
 		
 		if($this->input->post() != NULL){
+			$this->page_data->view = 'filter';
+			
 			$post_input = $this->alcopolis->array_from_post(array('cid', 'date', 'title'), $this->input->post());
 			
 			$cond = array();
@@ -83,10 +85,19 @@ class Admin_Shows extends Admin_Controller
 
 			$this->sh_data = $this->epg_sh_m->get_show_by(NULL, $cond, FALSE);
 			$ch_info = $this->epg_ch_m->get_channel($post_input['cid']);
+			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data, 'ch_info'=>$ch_info));
 			
-			$this->render('admin/shows', array('ch'=>$ch, 'sh'=>$this->sh_data, 'ch_info'=>$ch_info));
 		}else{
-			$this->render('admin/shows', array('ch'=>$ch));
+			
+			$this->page_data->view = 'featured';
+			
+			$this->db->select('t0.id, t0.title, t0.date, t0.time, t0.duration, t1.name');
+			$this->db->from('inn_epg_show_detail t0');
+			$this->db->join('inn_epg_ch_detail t1', 't1.id = t0.cid', 'LEFT');
+			$this->db->where('t0.is_featured', 1);
+			$this->sh_data = $this->db->get()->result();
+			
+			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data));
 		}
 	}
 	
@@ -115,4 +126,5 @@ class Admin_Shows extends Admin_Controller
 	}
 	
 	public function delete($id = 0){echo $id;}
+
 }

@@ -24,4 +24,6 @@ $(document).ready(function(){
 			$(this).attr('value', 0);
 		} 
 	})
+	
+	$('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
 })
