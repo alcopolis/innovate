@@ -15,11 +15,10 @@ class Category_m extends MY_Model
 
 	public function __construct() {
 		parent::__construct();
-		$this->_table = 'inn_products_data';
+		$this->_table = 'inn_promotion_category';
 	}
 	
 	function get_categories(){
-		$this->db->select('product_name');
 		return $this->db->get($this->_table)->result();
 	}
 

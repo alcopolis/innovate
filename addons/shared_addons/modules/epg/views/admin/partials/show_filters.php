@@ -15,7 +15,7 @@
 		
 		<div class="filter">
 			<label for="date">Date</label>
-			<div class="input"><?php echo form_input('date', date('Y-m-d'), 'class="datepicker" maxlength="20"'); ?></div>
+			<div class="input"><?php echo form_input('date', '', 'class="datepicker" maxlength="20"'); ?></div>
 		</div>
 		
 		<div class="filter">

@@ -52,6 +52,28 @@ class Plugin_Epg extends Plugin
 							),
 						),
 				),
+				
+				'poster' => array(
+						'description' => array(// a single sentence to explain the purpose of this method
+								'en' => ''
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+						'attributes' => array(
+							'filename' => array(
+									'type' => 'text',// Can be: slug, number, flag, text, array, any.
+									'flags' => '',
+									'default' => '',
+									'required' => true,
+							),
+							'size' => array(
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => 'medium',
+										'required' => false,
+							),
+						),
+				),
 		);
 	
 		return $info;
@@ -85,9 +107,11 @@ class Plugin_Epg extends Plugin
 		foreach($raw as $featured){
 			$ch = $this->epg_ch_m->get_channel($featured->channelid);
 			
+			$poster_path = $this->module_details['path'] . '/upload/shows' . $featured->poster;
+			
 			if(!$mainswitch){
 				$data .= '<div id="main" class="featured-show">';
-					$data .= '<div class="poster"></div>';
+					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . '" /></div>';
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
@@ -99,7 +123,7 @@ class Plugin_Epg extends Plugin
 				$mainswitch = TRUE;
 			}else{
 				$data .= '<div class="featured-show">';
-					$data .= '<div class="poster"></div>';
+					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . '" /></div>';
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
@@ -165,6 +189,31 @@ class Plugin_Epg extends Plugin
 		}
 	
 		return $data;
+	}
+
+	
+	
+	
+	function poster(){
+		$realpath = '';
+		
+		switch ($this->attribute('size')){
+			case 'big' :
+				$realpath = $this->module_details['path'] . '/upload/shows';
+				break;
+			case 'medium' :
+				$realpath = $this->module_details['path'] . '/upload/shows/thumbs';
+				break;
+			case 'small' :
+				$realpath = $this->module_details['path'] . '/upload/shows/small';
+				break;
+			default :
+				$realpath = $this->module_details['path'] . '/upload/shows/thumbs';
+		}
+		
+		$realpath .= $this->attribute('filename');
+		
+		return $realpath;
 	}
 	
 }

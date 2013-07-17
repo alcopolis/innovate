@@ -118,10 +118,15 @@ class Admin_Shows extends Admin_Controller
 		
 		if($this->form_validation->run()){
 			//Process form			
+			$input_post = array();
+
 			$data = $this->alcopolis->array_from_post(array('is_featured', 'syn_id', 'syn_en'), $this->input->post());
-			
-			$this->poster_upload($this->sh_data->id);
-			
+
+			$img_name = $this->poster_upload($this->sh_data->id);
+			if($img_name != NULL){
+				$data['poster'] = $img_name;
+			}
+				
 			if($this->epg_sh_m->update_show($id, $data)){
 				redirect('admin/epg/shows');
 			}else{
@@ -138,11 +143,14 @@ class Admin_Shows extends Admin_Controller
 	
 	function poster_upload($rename){
 		//Upload image config
+		
+		$var; 
+		
 		$this->upload_config = array(
 				'allowed_types' => 'jpg|jpeg|png',
 				'upload_path' => $this->img_path,
 				'max_width' => 1920,
-				'max_size' => 2048,
+				'max_size' => 1024,
 				'overwrite' => true,
 				'file_name' => $rename,
 		);
@@ -151,6 +159,8 @@ class Admin_Shows extends Admin_Controller
 		
 		if($this->upload->do_upload('poster')){
 			$upload_data = $this->upload->data();
+//			var_dump($upload_data);echo '<br/><br/>';
+			$var = $upload_data['file_name'];
 			
 			$resize_config = array(
 					'source_image' => $upload_data['full_path'],
@@ -168,13 +178,12 @@ class Admin_Shows extends Admin_Controller
 			{
 			    echo $this->image_lib->display_errors();
 			}
+			
+			return $var;
 		}else{
 			$upload_data = $this->upload->display_errors();
 		}
 	}
-	
-	
-	
 	
 	public function delete($id = 0){echo $id;}
 

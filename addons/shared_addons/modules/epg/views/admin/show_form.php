@@ -12,23 +12,28 @@
 			<!-- Render Product list  -->
 			<?php if(!empty($sh)){ ?>	
 				
-					<div class="form_inputs" id="channel-content-fields">
+					<div class="form_inputs" id="show-form">
 						<fieldset>
 							<ul>
 								<li>
 									<h1 id="sh-title"><?php echo $sh->title; ?></h1>
-									<p>
-										<span id="sh-date">Date &nbsp: <?php echo $sh->date; ?></span><br/>
-										<span id="sh-time">Time &nbsp: <?php echo $sh->time; ?></span><br/>
-										<span id="sh-duration">Dur &nbsp: <?php echo $sh->duration; ?></span>
-									</p>
 									
-									<br/>
+									<?php if($sh->poster != ''){ ?>
+										<img style="float:left;" class="poster small" src="<?php echo $this->module_details['path'] . '/upload/shows/thumbs/' . $sh->poster; ?>" title="<?php echo $sh->title; ?>" alt="<?php echo $sh->title; ?>" />
+									<?php } ?>
 									
-									<div for="is_featured">
-										<input type='hidden' value='<?php echo $sh->is_featured; ?>' name="is_featured">
-										<?php echo form_checkbox('is_featured', $sh->is_featured, $sh->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Set Feature</strong>
+									<div style="float:left; margin:10px;">
+										<p id="sh-date">Date &nbsp: <?php echo $sh->date; ?></p>
+										<p id="sh-time">Time &nbsp: <?php echo $sh->time; ?></p>
+										<p id="sh-duration">Dur &nbsp: <?php echo $sh->duration; ?></p>
+										
+										<div for="is_featured" >
+											<input type='hidden' value='<?php echo $sh->is_featured; ?>' name="is_featured">
+											<?php echo form_checkbox('is_featured', $sh->is_featured, $sh->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Set Feature</strong>
+										</div>
 									</div>
+									
+									<div class="clearfix"></div>
 								</li>
 								
 								<li>

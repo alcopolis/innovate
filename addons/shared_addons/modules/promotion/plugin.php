@@ -50,13 +50,13 @@ class Plugin_Promotion extends Plugin
 	function featured(){
 		$data = '';
 	
-		$raw = $this->promotion_m->get_promotions();
+		$raw = $this->promotion_m->get_promo();
 		
 		foreach($raw as $featured){			
-			$data .= '<div class="product-featured" style="margin:40px 20px; width:300px; float:left;">';
-			$data .= '<h3><a href="products/view/'  . $featured->slug . '">' . $featured->name . '</a></h3>';		
+			$data .= '<div class="promo-featured" style="margin:40px 20px; width:300px; float:left;">';
+			$data .= '<h3><a href="promotion/view/'  . $featured->slug . '">' . $featured->name . '</a></h3>';		
 			$data .= substr($featured->body, 0, 150) . ' ...<br/>';
-			$data .= '<a href="products/view/' . $featured->slug . '">Learn more &raquo;</a>';
+			$data .= '<a href="promotion/view/' . $featured->slug . '">Learn more &raquo;</a>';
 			$data .= '</div>';
 		}
 		

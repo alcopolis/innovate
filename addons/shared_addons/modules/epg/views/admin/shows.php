@@ -29,12 +29,12 @@
 	        	<table>
 	        		<?php if($page->view == 'featured'){ ?>	
 	        			<thead>
-	        				<th width="30"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>
+	        				<?php /*<th width="30"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>*/ ?>
 							<th>Title</th>
-							<th>Date</th>
-							<th>Time</th>
-							<th>Duration</th>
-							<th>Channel</th>
+							<th class="align-center">Date</th>
+							<th class="align-center">Time</th>
+							<th class="align-center">Duration</th>
+							<th class="align-center">Channel</th>
 							<th class="align-center" style="width:10%;">Action</th>
 	        			</thead>
 	        			
@@ -49,12 +49,12 @@
 	        			<tbody>
 	        				<?php foreach($sh as $s) { ?>
 	        					<tr>
-	        						<td><?php echo form_checkbox('action_to[]', $s->id); ?></td>
+	        						<?php /*<td><?php echo form_checkbox('action_to[]', $s->id); ?></td>*/ ?>
 	        						<td><a href="admin/epg/shows/edit/<?php echo $s->id; ?>"><?php echo $s->title; ?></a></td>
-	        						<td><?php echo $s->date; ?></td>
-	        						<td><?php echo $s->time; ?></td>
-	        						<td><?php echo $s->duration; ?></td>
-	        						<td><?php echo $s->name; ?></td>
+	        						<td class="align-center"><?php echo $s->date; ?></td>
+	        						<td class="align-center"><?php echo $s->time; ?></td>
+	        						<td class="align-center"><?php echo $s->duration; ?></td>
+	        						<td class="align-center"><?php echo $s->name; ?></td>
 	        						<td class="align-center"><a href="admin/epg/shows/edit/<?php echo $s->id; ?>">Edit</a></td>
 	        					</tr>
 	        				<?php } ?>	
@@ -63,10 +63,10 @@
 	        			<thead>
 	        				<th width="30"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>
 							<th>Title</th>
-							<th>Date</th>
-							<th>Time</th>
-							<th>Duration</th>
-							<th>Feature</th>
+							<th class="align-center">Date</th>
+							<th class="align-center">Time</th>
+							<th class="align-center">Duration</th>
+							<th class="align-center">Featured</th>
 							<th class="align-center" style="width:10%;">Action</th>
 	        			</thead>
 	        			
@@ -83,10 +83,10 @@
 	        					<tr>
 	        						<td><?php echo form_checkbox('action_to[]', $s->id); ?></td>
 	        						<td><a href="admin/epg/shows/edit/<?php echo $s->id; ?>"><?php echo $s->title; ?></a></td>
-	        						<td><?php echo $s->date; ?></td>
-	        						<td><?php echo $s->time; ?></td>
-	        						<td><?php echo $s->duration; ?></td>
-	        						<td><?php echo $s->is_featured; ?></td>
+	        						<td class="align-center"><?php echo $s->date; ?></td>
+	        						<td class="align-center"><?php echo $s->time; ?></td>
+	        						<td class="align-center"><?php echo $s->duration; ?></td>
+	        						<td class="align-center"><?php echo $s->is_featured == '1' ? 'Yes' : 'No'; ?></td>
 	        						<td class="align-center"><a href="admin/epg/shows/edit/<?php echo $s->id; ?>">Edit</a></td>
 	        					</tr>
 	        				<?php } ?>	
