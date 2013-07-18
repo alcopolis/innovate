@@ -21,11 +21,17 @@ class Admin extends Admin_Controller {
 		
 		$this->load->model('promotion_m');
 		$this->load->model('category_m');
+		$this->load->model('files/file_folders_m');
+		
+		$this->load->library('upload');
+		$this->load->library('image_lib');
+		$this->load->library('alcopolis');
+		$this->load->library('files/files');
 		
 		$this->page_data = new stdClass();
 		$this->user_data = new stdClass();
 		$this->promo_data = new stdClass();
-		$this->cat_data = new stdClass();
+		//$this->cat_data = new stdClass();
 		
 		$this->page_data->section = $this->section;
 		$this->page_data->editor_type = 'wysiwyg-advanced';
@@ -41,7 +47,7 @@ class Admin extends Admin_Controller {
 		$this->template
 		->title($this->module_details['name'])
 		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
-//		->append_js('module::product_form.js')
+		->append_js('module::main.js')
 		->set('page', $this->page_data)
 		->set('promos', $this->promo_data)
 		->set('cats', $this->cat_data)
@@ -54,11 +60,11 @@ class Admin extends Admin_Controller {
 		//Update promo status based on publish date
 		$this->update_promo_status();
 		
-		//Get data
 		$this->promo_data = $this->promotion_m->get_promo();
 		$this->cat_data = $this->category_m->get_categories();
 		
 		$this->render('admin/index');
+
 	}
 	
 	public function create()
@@ -71,7 +77,11 @@ class Admin extends Admin_Controller {
 		$this->page_data->title = 'Edit Promotion';
 		$this->page_data->action = 'edit';
 		
-		$this->cat_data = $this->category_m->get_categories();
+		$temp = $this->category_m->get_categories();
+		foreach($temp as $key=>$val){
+			$this->cat_data[$key] = $val->cat;
+		}
+		
 		
 		if($this->form_validation->run()){
 			
@@ -80,6 +90,11 @@ class Admin extends Admin_Controller {
 			$this->render('admin/promo_form');
 		}
 	}
+	
+	
+	
+	
+	//---------------------- tool --------------------------
 	
 	
 	
@@ -97,6 +112,34 @@ class Admin extends Admin_Controller {
 		foreach ($archived as $arc){
 			$this->promotion_m->update($arc->id, array('status'=>'archived'));
 		}
+	}
+	
+	
+	public function do_upload(){
+		
+		$var;
+		$promo_data = $this->input->post('form_data');
+		
+		$folder_id = $this->file_folders_m->get_by('slug', 'upload')->id;
+		
+		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 800, false, true);
+		$file_data = $this->parse_file_data($result['data']);
+		$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
+		
+		// Send ajax respond
+		echo json_encode($result);
+	}
+	
+	
+	function parse_file_data($data){
+		$result = array();
+		$key = array('id', 'folder_id', 'name', 'path', 'filename');
+		
+		foreach($key as $k){
+			$result[$k] = $data[$k];
+		}
+		
+		return json_encode($result);
 	}
 	
 }

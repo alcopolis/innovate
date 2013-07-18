@@ -7,9 +7,9 @@
 		<div class="content">
 			<?php 
 				if($page->action == 'create'){
-					echo form_open('admin/promotion/' . $page->action);
+					echo form_open_multipart('admin/promotion/' . $page->action, 'id="promo-form"');
 				}else if($page->action == 'edit'){
-					echo form_open('admin/promotion/' . $page->action . '/' . $promos->id);
+					echo form_open_multipart('admin/promotion/' . $page->action . '/' . $promos->id, 'id="promo-form"');
 				} 
 			?>
 			
@@ -26,20 +26,46 @@
 						<fieldset>
 							<ul>
 								<li>
-									<label for="name">Name <span>*</span></label>
-									<div class="input"><?php echo form_input('name', htmlspecialchars_decode($promos->name), 'maxlength="100"') ?></div>
+									<div style="float:left; width:50%;">
+										<label for="name">Name <span>*</span></label>
+										<div class="input"><?php echo form_input('name', htmlspecialchars_decode($promos->name), 'maxlength="100"') ?></div>
+										
+										<br/>
+										
+										<label for="cat">Category <span></span></label>
+										<div class="input"><?php echo form_dropdown('cat', $cats, $promos->cat) ?></div>
+										
+										<br/>
+										
+										<label for="slug">Slug <span>*</span></label>
+										<div class="input"><?php echo form_input('slug', $promos->slug, 'maxlength="100" class="width-20"') ?></div>
+										
+										<br/>
+										
+										<label for="tags">Tags - seperate words with ( , )</label>
+										<div class="input"><?php echo form_input('tags', $promos->tags, 'maxlength="100" class="width-20"') ?></div>
+									</div>
 									
-									<br/>
-									
-									<label for="slug">Slug <span>*</span></label>
-									<div class="input"><?php echo form_input('slug', $promos->slug, 'maxlength="100" class="width-20"') ?></div>
-									
-									<br/>
-									
-									<label for="tags">Tags - seperate words with ( , )</label>
-									<div class="input"><?php echo form_input('tags', $promos->tags, 'maxlength="100" class="width-20"') ?></div>
-									
-									<br/>
+									<div class="clearfix">
+										<label for="publish">Publish Date</label>
+										<div class="input"><?php echo form_input('publish', '', 'class="datepicker" maxlength="20"'); ?></div>
+										
+										<br/>
+										
+										<label for="ended">End Date</label>
+										<div class="input"><?php echo form_input('ended', '', 'class="datepicker" maxlength="20"'); ?></div>
+										
+										<br/>
+										
+										<label for="poster">Upload Poster</label>
+										<div class="input">
+											<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+											<br/>
+											<div id="msg-ajax"></div>
+										</div>
+										
+										<?php echo form_hidden('form_data', array('id'=>$promos->id, 'slug'=>$promos->slug)); ?>
+									</div>
 								</li>
 								
 								<li class="editor">
@@ -64,18 +90,44 @@
 					</div>
 					
 					<div class="form_inputs" id="category">
-						
+						<fieldset>
+							add new category form
+						</fieldset>
 					</div>
 					
 					<div class="form_inputs" id="promo-css-fields">
-						
+						<fieldset>
+							<ul>						
+								<li class="editor">
+									<label for="body">Custom CSS</label><br>
+									<div class="edit-content">
+										<?php echo form_textarea(array('id' => 'css', 'name' => 'css', 'value' => $promos->css, 'rows' => 30, 'class' => 'markdown')) ?>
+									</div>
+								</li>
+							</ul>
+						</fieldset>
 					</div>
 					
 					<div class="form_inputs" id="promo-js-fields">
-						
+						<fieldset>
+							<ul>						
+								<li class="editor">
+									<label for="body">Custom Javascript</label><br>
+									<div class="edit-content">
+										<?php echo form_textarea(array('id' => 'js', 'name' => 'js', 'value' => $promos->js, 'rows' => 30, 'class' => 'markdown')) ?>
+									</div>
+								</li>
+							</ul>
+						</fieldset>
 					</div>
 				</div>
-			<?php } ?>	
+			<?php } ?>
+			<div class="buttons">
+				<?php 
+						echo form_submit('submit', 'Save'); 
+						echo '<a href="admin/promotion" class="button" style="padding:5px 10px 4px 10px;">Cancel</a>';
+				?>
+			</div>	
 		</div>
 	</section>
 </div>
