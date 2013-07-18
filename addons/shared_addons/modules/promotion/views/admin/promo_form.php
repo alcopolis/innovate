@@ -26,7 +26,38 @@
 						<fieldset>
 							<ul>
 								<li>
-									<?php echo $promos->name; ?>
+									<label for="name">Name <span>*</span></label>
+									<div class="input"><?php echo form_input('name', htmlspecialchars_decode($promos->name), 'maxlength="100"') ?></div>
+									
+									<br/>
+									
+									<label for="slug">Slug <span>*</span></label>
+									<div class="input"><?php echo form_input('slug', $promos->slug, 'maxlength="100" class="width-20"') ?></div>
+									
+									<br/>
+									
+									<label for="tags">Tags - seperate words with ( , )</label>
+									<div class="input"><?php echo form_input('tags', $promos->tags, 'maxlength="100" class="width-20"') ?></div>
+									
+									<br/>
+								</li>
+								
+								<li class="editor">
+									<label for="body">Content <span>*</span></label><br>
+									<div class="input small-side">
+										<?php echo form_dropdown('editor_type', array(
+											'html' => 'html',
+											'markdown' => 'markdown',
+											'wysiwyg-simple' => 'wysiwyg-simple',
+											'wysiwyg-advanced' => 'wysiwyg-advanced',
+										), $page->editor_type) ?>
+									</div>
+									
+									<br/>
+									
+									<div class="edit-content">
+										<?php echo form_textarea(array('id' => 'body', 'value' => $promos->body, 'name' => 'body', 'rows' => 30, 'class' => $page->editor_type)) ?>
+									</div>
 								</li>
 							</ul>
 						</fieldset>
