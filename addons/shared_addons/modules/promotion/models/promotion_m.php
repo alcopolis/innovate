@@ -13,6 +13,24 @@ class Promotion_m extends MY_Model
 	protected $promo;
 	protected $method;
 	
+	public $rules = array(
+			'name' => array(
+					'field' => 'name',
+					'label' => 'Name',
+					'rules' => 'trim|htmlspecialchars|required|max_length[200]|xss_clean'
+			),
+			'slug' => array(
+					'field' => 'slug',
+					'label' => 'Slug',
+					'rules' => 'trim|required|alpha_dot_dash|max_length[200]|xss_clean'
+			),
+			'body' => array(
+					'field' => 'body',
+					'label' => 'Body',
+					'rules' => 'required'
+			),
+		);
+	
 	public function __construct() {
 		parent::__construct();
 		$this->_table = 'inn_promotion';

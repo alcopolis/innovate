@@ -48,12 +48,12 @@
 									
 									<div class="clearfix">
 										<label for="publish">Publish Date</label>
-										<div class="input"><?php echo form_input('publish', '', 'class="datepicker" maxlength="20"'); ?></div>
+										<div class="input"><?php echo form_input('publish', set_value('publish', $promos->publish), 'class="datepicker" maxlength="20"'); ?></div>
 										
 										<br/>
 										
 										<label for="ended">End Date</label>
-										<div class="input"><?php echo form_input('ended', '', 'class="datepicker" maxlength="20"'); ?></div>
+										<div class="input"><?php echo form_input('ended', set_value('publish', $promos->ended), 'class="datepicker" maxlength="20"'); ?></div>
 										
 										<br/>
 										
@@ -62,6 +62,12 @@
 											<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
 											<br/>
 											<div id="msg-ajax"></div>
+										</div>
+										
+										<div id="img-poster" style="width:100%;">
+											<?php if($poster != NULL){ ?>
+												<img style="width:300px;" src="<?php echo $poster['file'];?>" title="<?php echo $poster['name']; ?>" />
+											<?php } ?>
 										</div>
 										
 										<?php echo form_hidden('form_data', array('id'=>$promos->id, 'slug'=>$promos->slug)); ?>

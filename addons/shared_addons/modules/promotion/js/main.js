@@ -16,9 +16,17 @@ function process(){
 			var msg = respond.message;
 			
 			if(respond.status){
-				msg = respond.message;
+				var msg = respond.message;
+				var imgURL = respond.file;
+				
 				$('#msg-ajax').html(msg).fadeIn(600);
 				$('input#poster').attr('value', '')
+				
+				if($('#img-poster img').length > 0){
+					$('#img-poster img').css('display','none').attr('src', imgURL).fadeIn(600);
+				}else{
+					$('#img-poster').html('<img style="width:300px;" src="' + imgURL + '" />').css('display','none').fadeIn(600);
+				}
 			}
 			
 			
