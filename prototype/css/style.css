@@ -1,0 +1,48 @@
+/* CSS Document */
+
+@import 'reset.css';
+@import 'typo.css';
+
+.left{float:left}
+.right{float:right}
+
+.wrapper{width:90%; margin:0 auto;}
+
+/* --------------------------------------------Header------------------------------------- */
+header{
+	background-color:#EFEFEF;
+	position:fixed; top:0; left:5%;
+	height:80px;
+}
+
+/* Site Logo */
+header #logo{width:160px; height:50px; float:left; margin:10px;}
+header #logo h1 {width:160px; height:50px; background:url(../img/site/innovate.png) no-repeat center center;}
+header #logo h1 a{display:block; text-indent:-9999px;}
+
+/* Nav */
+div#navigation{float:right; margin:25px 10px;}
+nav#menu{}
+nav#menu ul{margin:0; padding:0; position:relative}
+nav#menu ul li{display:inline; margin:0 5px; padding:0 10px; text-align:center; position:relative;}
+nav#menu ul li.last:after{content:none}
+
+nav#menu ul li.has-children:hover{background:#39C;}
+nav#menu ul li.has-children:hover a{color:#FFF}
+nav#menu ul li.has-children:hover  ul.dropdown{display:block;}
+
+nav#menu ul li.has-children ul.dropdown{position:absolute; left:1px; }
+nav#menu ul li ul.dropdown li{display:list-item}
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------Content------------------------------------- */
+
+#content{margin-top:120px}
