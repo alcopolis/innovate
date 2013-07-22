@@ -70,7 +70,7 @@
 											<?php } ?>
 										</div>
 										
-										<?php echo form_hidden('form_data', array('id'=>$promos->id, 'slug'=>$promos->slug)); ?>
+										<?php echo form_hidden('form_data', array('id'=>$promos->id, 'slug'=>$promos->slug , 'poster_id'=>$poster['id'])); ?>
 									</div>
 								</li>
 								

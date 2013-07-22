@@ -1,25 +1,6 @@
-<!-- <div class="scroll-content">	 -->
-<!-- 	<div id="cam_wrapper"> -->
-<!-- 		<div data-src="{{ asset:image_path }}tes-ss-1.jpg"> -->
-<!--            	 <div style="position:absolute; top:5%; left:5%; background:#000; color:#fff; padding:5px; width:25%" class="fadeIn camera_effected">This is an HTML element included in the transition effect</div> -->
-<!--            </div> -->
-<!--            <div data-src="{{ theme:image_path }}tes-ss-2.jpg"> -->
-<!--               <div class="camera_caption fadeFromBottom"> -->
-<!--                    Changed the time and the transition time of this slide -->
-<!--                </div> -->
-<!--            </div> -->
-<!--            <div data-src="{{ theme:image_path }}tes-ss-3.jpg" data-link="http://www.google.com/" data-target="_self"> -->
-<!--                <div class="camera_caption fadeFromBottom"> -->
-<!--                    Changed the time and the transition time of this slide -->
-<!--                </div> -->
-<!--            </div> -->
-<!-- 	</div> -->
-<!-- </div> -->
 
-<div class="scroll-content featured">{{ asset:image file="theme::tes-content.jpg" alt="Tes content 1" }}</div>
-
-<div class="scroll-content featured"><h2>POPULAR SHOWS</h2>{{ epg:featured }}</div>
-
-<div class="scroll-content featured"><h2>PROMOTION</h2>{{ promotion:featured }}</div>
-
-<div class="scroll-content featured"><h2>PRODUCT</h2>{{ products:featured }}</div>
+<!-- Slideshow HTML -->
+<div id="mod-promo" class="orbit-slider">
+	{{ promotion:featured }}
+</div>
+<!-- Slideshow HTML -->

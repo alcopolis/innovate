@@ -45,6 +45,12 @@ class Admin extends Admin_Controller {
 		// Set validation rules
 		$this->rules = $this->promotion_m->rules;
 		$this->form_validation->set_rules($this->rules);
+		
+		// Get Category
+		$temp = $this->category_m->get_categories();
+		foreach($temp as $key=>$val){
+			$this->cat_data[$key] = $val->cat;
+		}
 	}
 	
 	
@@ -74,10 +80,29 @@ class Admin extends Admin_Controller {
 
 	}
 	
+	
+	
 	public function create()
 	{
+		$this->page_data->title = 'Add Promotion';
+		$this->page_data->action = 'create';
 		
+		if($this->form_validation->run()){
+			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'publish', 'ended', 'css', 'js');
+				
+			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
+
+			$data['author'] = $this->session->userdata('id');
+				
+			if($this->promotion_m->insert($data)){
+				redirect('admin/promotion');
+			}
+		}
+		
+		$this->render('admin/promo_form');
 	}
+	
+	
 	
 	public function edit($id)
 	{
@@ -89,22 +114,15 @@ class Admin extends Admin_Controller {
 		if($this->promo_data->poster != ''){
 			$poster = json_decode($this->promo_data->poster);
 			$this->poster_data = array(
-								'id' => $poster->id,
-								'name' => $poster->name,
-								'file' => Files::$path . $poster->filename,
-								'description' => $poster->description,
-								'keywords' => $poster->keywords,
-								'alt_attr' => $poster->alt_attribute,
-								'mimetype' => $poster->mimetype,
-							);
+							'id' => $poster->id,
+							'name' => $poster->name,
+							'file' => Files::$path . $poster->filename,
+							'description' => $poster->description,
+							'keywords' => $poster->keywords,
+							'alt_attr' => $poster->alt_attribute,
+							'mimetype' => $poster->mimetype,
+						);
 		}
-		
-		$temp = $this->category_m->get_categories();
-		foreach($temp as $key=>$val){
-			$this->cat_data[$key] = $val->cat;
-		}
-		
-		//var_dump(Files::get_file($this->poster_data->id), Files::$path);
 				
 		if($this->form_validation->run()){
 			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'publish', 'ended', 'css', 'js');
@@ -117,18 +135,14 @@ class Admin extends Admin_Controller {
 			}
 		}	
 		
-		
 		$this->render('admin/promo_form');
-		
 	}
 	
 	
 	
 	
 	//---------------------- tool --------------------------
-	
-	
-	
+
 	function update_promo_status(){
 		$hari= date("Y-m-d");		
 		
@@ -148,26 +162,33 @@ class Admin extends Admin_Controller {
 	
 	public function do_upload(){
 		
-		$var;
 		$promo_data = $this->input->post('form_data');
 		
-		$folder_id = $this->file_folders_m->get_by('slug', 'promotion')->id;
-		
-		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 800, false, true);
+		var_dump($promo_data);
 
-		if($result['status']){
-			$file_data = $this->parse_file_data($result['data']);
-			$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
-		}
+// 		if($promo_data['poster_id'] != ''){
+// 			if(Files::delete_file($promo_data['poster_id'])){
+// 				$this->promotion_m->update($promo_data['id'], array('poster'=>''));
+// 			}
+// 		}
 		
-		$respond = array(
-				'status'=>$result['status'],
-				'message'=>$result['message'],
-				'file'=>Files::$path . $result['data']['filename'],
-		);
+// 		$folder_id = $this->file_folders_m->get_by('slug', 'promotion')->id;
+		
+// 		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 1920, false, true);
+		
+// 		if($result['status']){
+// 			$file_data = $this->parse_file_data($result['data']);
+// 			$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
+// 		}
+		
+// 		$respond = array(
+// 				'status'=>$result['status'],
+// 				'message'=>$result['message'],
+// 				'file'=>Files::$path . $result['data']['filename'],
+// 		);
 		
 		// Send ajax respond
-		echo json_encode($respond);
+//		echo json_encode($respond);
 	}
 	
 	

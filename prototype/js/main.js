@@ -33,17 +33,18 @@ $(document).ready(function(e) {
 	  	itemSelector: '.featured-item'
 	});*/
 	
-	$('#featured').orbit({
-			 animation: 'fade',                  // fade, horizontal-slide, vertical-slide, horizontal-push
-			 animationSpeed: 800,                // how fast animtions are
-			 timer: true, 			 // true or false to have the timer
-			 advanceSpeed: 10000, 		 // if timer is enabled, time between transitions
-			 directionalNav: true, 		 // manual advancing directional navs
-			 captions: true, 			 // do you want captions?
-			 captionAnimation: 'fade', 		 // fade, slideOpen, none
-			 captionAnimationSpeed: 800, 	 // if so how quickly should they animate in
-			 bullets: true,			 // true or false to activate the bullet navigation
-			 bulletThumbs: false,		 // thumbnails for the bullets
+	$('.orbit-slider').orbit({
+			 animation: 'fade',  
+			 animationSpeed: 800,   
+			 timer: true, 			
+			 advanceSpeed: 10000, 		
+			 directionalNav: true, 		 
+			 captions: true, 			 
+			 captionAnimation: 'fade', 		 
+			 captionAnimationSpeed: 800, 	 
+			 bullets: true,			 
+			 bulletThumbs: false,
+			 fluid:true
 		});
 	
 });

@@ -8,24 +8,21 @@
 	{{ endif }}
 </head>
 <body id="top" class="">
-	{{ if alcopolis:site_status }}
 	
-		
-	 	<div id="pageWrapper">
-			{{ integration:analytics }}
-						
-			<div class="partial-wrapper">				
-				{{ theme:partial name="header" }}
-			</div>
-													
-			<div class="content-wrapper scroll">
-				{{ theme:partial name="content_default" }}
-			</div>
-			
-			<div class="partial-wrapper">
-				{{ theme:partial name="footer" }}
-			</div>
-		</div>
+	{{ integration:analytics }}
+	
+	{{ if alcopolis:site_status }}
+	 	<header class="wrapper">
+	 		{{ theme:partial name="header" }}
+	 	</header>
+	 	
+	 	 <div id="content" class="wrapper clear">
+			{{ theme:partial name="content_default" }}
+	 	 </div>
+	 	 
+	 	 <footer>
+	    	{{ theme:partial name="footer" }}
+	     </footer>  
 	 	
 	{{ else }}
 		

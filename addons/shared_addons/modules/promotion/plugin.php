@@ -51,11 +51,12 @@ class Plugin_Promotion extends Plugin
 		$data = '';
 	
 		$raw = $this->promotion_m->get_promo();
-		
-		foreach($raw as $featured){			
-			$data .= '<div class="promo-featured" style="margin:40px 20px; width:300px; float:left;">';
-			$data .= '<h3><a href="promotion/view/'  . $featured->slug . '">' . $featured->name . '</a></h3>';		
-			$data .= substr($featured->body, 0, 150) . ' ...<br/>';
+
+		foreach($raw as $featured){
+			$poster = json_decode($featured->poster, true);
+
+			$data .= '<div class="content" style="background:#FFF url(' . $poster['path'] . ') no-repeat center center">';
+			$data .= '<h3><a href="promotion/view/'  . $featured->slug . '">' . $featured->name . '</a></h3>';
 			$data .= '<a href="promotion/view/' . $featured->slug . '">Learn more &raquo;</a>';
 			$data .= '</div>';
 		}

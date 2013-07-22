@@ -18,13 +18,13 @@ class Module_Promotion extends Module {
 				'menu' => 'content',
 				
 				'sections' => array(
-						'Promotion' => array(
+						'promotion' => array(
 								'name' => 'Promotion',
 								'uri' => 'admin/promotion',
 									'shortcuts' => array(
 											'create' => array(
 													'name' 	=> 'Add',
-													'uri' 	=> 'admin/promotion/add',
+													'uri' 	=> 'admin/promotion/create',
 													'class' => 'add'
 											)
 									)
