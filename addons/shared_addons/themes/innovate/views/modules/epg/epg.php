@@ -8,34 +8,6 @@
 	{{ endif }}
 
 <script type="text/javascript">
-	$(document).ready(function(e) {
-
-		$('.channel').each(function(){
-			var temp = $(this).html().truncate(10, false, 'right', '');
-			$(this).html(temp);
-		})
-		
-		$('.show div').each(function(){
-			var temp = $(this).html().truncate(15, false, 'right', '...');
-			$(this).html(temp);
-		})
-
-		
-		var epgContW = $('#tdata').width();
-		var epgContH = $('#tdata').height();
-
-		var blockDataWidth = 240;
-		var blockDataMargin = 3;
-
-		var showContW = (blockDataWidth + blockDataMargin) * 26;
-
-		$('#tdata').width(epgContW + 16);
-		$('#tdata').height(epgContH + 16);
-		$('#tdata .sh-row').width(showContW);
-
-		console.log(showContW);
-    });
-
 	fnScroll = function(){
 	  $('#theader').scrollLeft($('#tdata').scrollLeft());
 	  $('#tcol').scrollTop($('#tdata').scrollTop());
@@ -69,16 +41,15 @@
 
 	<!-- Begin pageWrapper -->
 	<div id="pageWrapper">
-		{{ integration:analytics }}
 		
-		<!-- Begin Header Content -->
-		<div class="partial-wrapper">				
-			{{ theme:partial name="header" }}
-		</div>
-		<!-- End Header Content -->
+		{{ integration:analytics }}
+	
+	 	<header class="wrapper">
+	 		{{ theme:partial name="header" }}
+	 	</header>
 				
 		<!-- Begin contentWrapper -->
-		<div class="content-wrapper">
+		 <div id="content" class="wrapper clear">
 			<?php if($shows != NULL ){ ?>
 				<h2>TV GUIDE</h2>
 				<div id="epg">
@@ -172,9 +143,9 @@
 		<!-- End contentWrapper -->
 		
 		<!-- Begin Footer Content -->
-		<div class="partial-wrapper">			
-			{{ theme:partial name="footer" }}
-		</div>
+		<footer>
+	    	{{ theme:partial name="footer" }}
+	     </footer> 
 		<!-- End Footer Content -->
 	</div>
 	<!-- End pageWrapper -->

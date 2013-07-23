@@ -94,14 +94,16 @@ class Plugin_Epg extends Plugin
 		$raw = $this->epg_sh_m->order_by('cid', 'RANDOM')->limit(7)->get_featured_show();
 		shuffle($raw);
 		
-		$data .= '<style type="text/css">.featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
-				  .featured-show .poster{width:100%; height:100%;}
-	              .featured-show .info{margin:0 auto; padding:0 1%; display:block; position:absolute; background:rgba(255,255,255,1); left:0; width:98%; opacity:0}
-				  .featured-show .info h4 {font-size:14px;}
-	              .featured-show .info h4, .featured-show .info p, .featured-show .info .show-detail{margin:5px 0;}
-	              .featured-show .info p {font-size:12px; line-height:12px;}
-				  
-				  #main.featured-show .info h4 {font-size:18px;} 
+		$data .= '<style type="text/css">
+					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
+					  .featured-show .poster{width:100%; height:100%; outline:3px solid #FFF;}
+					  .featured-show .poster img{width:100%; height:auto;}
+		              .featured-show .info{margin:0 auto; padding:0 1%; display:block; position:absolute; background:rgba(255,255,255,1); left:0; width:98%; opacity:0}
+					  .featured-show .info h4 {font-size:14px;}
+		              .featured-show .info h4, .featured-show .info p, .featured-show .info .show-detail{margin:5px 0;}
+		              .featured-show .info p {font-size:12px; line-height:12px;}
+					  
+					  #main.featured-show .info h4 {font-size:18px;} 
 				  </style>';
 		
 		foreach($raw as $featured){
@@ -111,7 +113,7 @@ class Plugin_Epg extends Plugin
 			
 			if(!$mainswitch){
 				$data .= '<div id="main" class="featured-show">';
-					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . '" /></div>';
+					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/thumbs/' . $featured->poster . '" /></div>';
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
@@ -123,7 +125,7 @@ class Plugin_Epg extends Plugin
 				$mainswitch = TRUE;
 			}else{
 				$data .= '<div class="featured-show">';
-					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . '" /></div>';
+					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/thumbs/' . $featured->poster . '" /></div>';
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
@@ -144,11 +146,11 @@ class Plugin_Epg extends Plugin
 					
 					function show_layout(){
 						$feats = $(".featured-show");
-						$containerW = $(".scroll-content").width();
+						$containerW = $(".featured").width();
 						
 						$feats.each(function() {
-							$(this).css("margin", $containerW * 0.002);
-							$(this).width($containerW * 0.196).height($containerW * 0.196);
+							$(this).css("margin", Math.floor($containerW * 0.002));
+							$(this).width(Math.floor($containerW * 0.196)).height(Math.floor($containerW * 0.196));
 		
 				            $infobox = $(this).children(".info");
 							$infobox.css("bottom", -$infobox.height());
@@ -163,9 +165,10 @@ class Plugin_Epg extends Plugin
 							})
 			        	});
 					
-						$("#main").width($containerW * 0.396).height($containerW * 0.396);
+						$("#main").width(Math.floor($containerW * 0.396)).height(Math.floor($containerW * 0.396));
 					}
 				</script>';
+		
 		return $data;
 	}
 	

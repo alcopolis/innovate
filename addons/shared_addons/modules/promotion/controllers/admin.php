@@ -164,31 +164,31 @@ class Admin extends Admin_Controller {
 		
 		$promo_data = $this->input->post('form_data');
 		
-		var_dump($promo_data);
+		//var_dump($promo_data);
 
-// 		if($promo_data['poster_id'] != ''){
-// 			if(Files::delete_file($promo_data['poster_id'])){
-// 				$this->promotion_m->update($promo_data['id'], array('poster'=>''));
-// 			}
-// 		}
+		if($promo_data['poster_id'] != ''){
+			if(Files::delete_file($promo_data['poster_id'])){
+				$this->promotion_m->update($promo_data['id'], array('poster'=>''));
+			}
+		}
 		
-// 		$folder_id = $this->file_folders_m->get_by('slug', 'promotion')->id;
+		$folder_id = $this->file_folders_m->get_by('slug', 'promotion')->id;
 		
-// 		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 1920, false, true);
+		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 1920, false, true);
 		
-// 		if($result['status']){
-// 			$file_data = $this->parse_file_data($result['data']);
-// 			$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
-// 		}
+		if($result['status']){
+			$file_data = $this->parse_file_data($result['data']);
+			$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
+		}
 		
-// 		$respond = array(
-// 				'status'=>$result['status'],
-// 				'message'=>$result['message'],
-// 				'file'=>Files::$path . $result['data']['filename'],
-// 		);
+		$respond = array(
+				'status'=>$result['status'],
+				'message'=>$result['message'],
+				'file'=>Files::$path . $result['data']['filename'],
+		);
 		
-		// Send ajax respond
-//		echo json_encode($respond);
+		//Send ajax respond
+		echo json_encode($respond);
 	}
 	
 	

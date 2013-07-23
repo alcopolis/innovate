@@ -149,7 +149,6 @@ class Admin_Shows extends Admin_Controller
 		$this->upload_config = array(
 				'allowed_types' => 'jpg|jpeg|png',
 				'upload_path' => $this->img_path,
-				'max_width' => 1920,
 				'max_size' => 1024,
 				'overwrite' => true,
 				'file_name' => $rename,
@@ -158,31 +157,64 @@ class Admin_Shows extends Admin_Controller
 		$this->upload->initialize($this->upload_config);
 		
 		if($this->upload->do_upload('poster')){
-			$upload_data = $this->upload->data();
-//			var_dump($upload_data);echo '<br/><br/>';
-			$var = $upload_data['file_name'];
 			
+			$upload_data = $this->upload->data();
+			
+			$var = $upload_data['file_name'];
+			$image_width = $upload_data['image_width'];
+			$image_height = $upload_data['image_height'];
+			
+				
+			$axis_x = 0;
+			$axis_y = 0;
+				
+			if($image_width > 500){
+				$axis_x = ($image_width - 500)/2;
+			}
+			if($image_height > 500){
+				$axis_y = ($image_height - 500)/2;
+			}
+			
+			// Resize 
 			$resize_config = array(
 					'source_image' => $upload_data['full_path'],
-					'new_image' => $this->img_path . '/thumbs',
 					'maintain_ration' => true,
-					'width' => 300,
-					'height' => 150,
+					'width' => 1600,
+					'height' => 900,
 					'master_dim' => 'auto',
 			);
 			
 			$this->image_lib->clear();
 			$this->image_lib->initialize($resize_config);
 			
-			if (!$this->image_lib->resize())
+			if ($this->image_lib->resize())
 			{
-			    echo $this->image_lib->display_errors();
+				$crop_config = array(
+						'source_image' => $upload_data['full_path'],
+						'new_image' => $this->img_path . '/thumbs',
+						'x_axis' => $axis_x,
+						'y_axis' => 0,
+						'width' => 500,
+						'height' => 500,
+						'maintain_ratio' => false
+				);
+				
+				$this->image_lib->clear();
+				$this->image_lib->initialize($crop_config);
+				
+				if (!$this->image_lib->crop())
+				{
+					echo $this->image_lib->display_errors();
+				}
+			}else{
+				echo $this->image_lib->display_errors();
 			}
-			
-			return $var;
 		}else{
 			$upload_data = $this->upload->display_errors();
 		}
+
+
+		return $var;
 	}
 	
 	public function delete($id = 0){echo $id;}

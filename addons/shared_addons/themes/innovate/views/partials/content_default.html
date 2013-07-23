@@ -4,3 +4,30 @@
 	{{ promotion:featured }}
 </div>
 <!-- Slideshow HTML -->
+
+<br class="clear" />
+
+<div id="body-wrapper">
+	<div id="product-highlights" class="featured">
+		<h4>Products</h4>
+		{{ products:featured }}
+	</div>
+	
+	<br class="clear" />
+	
+	<div id="mod-epg" class="featured">
+		<h4>Upcoming Shows</h4>
+		{{ epg:featured }}
+	</div>
+	
+	<br class="clear" />
+	
+	<div id="utils" class="featured clearfix" style="background:#111; padding:0; box-shadow:0 0 3px #999;">
+		<div style="float:left; width:25%; height:300px; background:#FFF url({{ theme:image_path }}comparison.jpg) no-repeat center center;">Utility Link: Webselfcare, CS Hotline, Comparison</div>
+		<div style="float:left; width:25%; background:#EEE;"><img src="{{ theme:image_path }}promo_bts.jpg" style="width:100%; height:300px"/></div>
+		<div style="float:left; width:25%; background:#EEE;"><img src="{{ theme:image_path }}comparison.jpg" style="width:100%; height:300px"/></div>
+		<div style="float:left; width:25%; background:#EEE;"><img src="{{ theme:image_path }}tes-ss-2.jpg" style="width:100%; height:300px"/></div>
+	</div>
+	
+	<br class="clear" />
+</div>
