@@ -11,7 +11,7 @@
 
 .orbit-slider{
 	width:100%;
-	height:500px;
+	height:600px;
 	overflow:hidden;
 	background: #000 url('orbit/loading.gif') no-repeat center center;
 }
@@ -22,12 +22,6 @@
 .fluid .orbit-slider>img,  
 .fluid .orbit-slider>div,
 .fluid .orbit-slider>a {display: none; width:100%;}
-
-
-div.orbit .content{
-		
-}
-
 
 
 
@@ -188,13 +182,13 @@ div.slider-nav span.left {
     padding: 0;
 	background:#FFF;
 	border-radius:10px;
-	box-shadow:inset 0 0 2px #000;
+/* 	box-shadow:inset 0 0 2px #000; */
 }
 
 .orbit-bullets li {
     float: left;
-    margin-left: 5px;
-	margin-right: 5px;
+    margin-left: 10px;
+	margin-right: 10px;
     cursor: pointer;
     color: #999;
     text-indent: -9999px;

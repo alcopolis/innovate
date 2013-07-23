@@ -55,11 +55,18 @@ class Plugin_Promotion extends Plugin
 		foreach($raw as $featured){
 			$poster = json_decode($featured->poster, true);
 
-			$data .= '<div class="content" style="background:#FFF url(' . $poster['path'] . ') no-repeat center center">';
+			$data .= '<div class="promo" style="background:#FFF url(' . $poster['path'] . ') no-repeat top center">';
 			$data .= '<h3><a href="promotion/view/'  . $featured->slug . '">' . $featured->name . '</a></h3>';
 			$data .= '<a href="promotion/view/' . $featured->slug . '">Learn more &raquo;</a>';
 			$data .= '</div>';
 		}
+		
+		$data .= '
+					<script type="text/javascript">
+					
+					</script>
+				
+				';
 		
 		return $data;
 	}

@@ -110,7 +110,7 @@ class Plugin_Products extends Plugin
 		$raw = $this->products_m->get_product_by($fields, array('product_is_featured'=>1), false);
 		
 		foreach($raw as $featured){			
-			$data .= '<div class="product-featured" style="margin:40px 20px; width:300px; float:left;">';
+			$data .= '<div class="product-featured" style="margin:20px; width:25%; float:left;">';
 			$data .= '<h3>' . $featured->product_name . '</h3>';		
 			$data .= substr($featured->product_teaser, 0, 150) . ' ...<br/>';
 			$data .= '<a href="products/view/' . $featured->product_slug . '">Learn more &raquo;</a>';
