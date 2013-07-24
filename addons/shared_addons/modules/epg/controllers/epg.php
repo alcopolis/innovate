@@ -37,7 +37,11 @@ class Epg extends Public_Controller
 	}
 	
 	public function show($id){
-		$sh = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
+		//$sh = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
+		
+		$sh = $this->epg_sh_m->get_show_detail($id);
+		
+		//var_dump($sh);
 		
 		$this->template
 			->title($this->module_details['name'])

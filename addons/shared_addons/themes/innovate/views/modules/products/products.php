@@ -12,36 +12,25 @@
 </head>
 <body id="top" class="product product-<?php echo $product->product_slug; ?>">
 
-	<!-- Begin pageWrapper -->
-	<div id="pageWrapper">
 		{{ integration:analytics }}
 		
-		<!-- Begin Header Content -->
-		<div class="partial-wrapper">				
+		<header class="wrapper">				
 			{{ theme:partial name="header" }}
 		</div>
-		<!-- End Header Content -->
 				
-		<!-- Begin contentWrapper -->
-		<div class="content-wrapper">
-			<div id="product-tags" class="hide"><?php echo $product->product_tags; ?></div>					
-			<div id="product-body"><?php echo $product->product_body; ?></div>	
-			
-			<div id="faq" style="clear:both;">
-				<!-- <h1>FAQ Goes Here</h1> -->
+		<div id="content" class="wrapper clear">
+			<div id="body-wrapper">
+				<div id="product-tags" class="hide"><?php echo $product->product_tags; ?></div>					
+				<div id="product-body"><?php echo $product->product_body; ?></div>	
+				
+				<div id="faq" style="clear:both;">
+					<!-- <h1>FAQ Goes Here</h1> -->
+				</div>
 			</div>
 		</div>
 		
-		
-		<!-- End contentWrapper -->
-		
-		<!-- Begin Footer Content -->
-		<div class="partial-wrapper">			
+		<footer>	
 			{{ theme:partial name="footer" }}
 		</div>
-		<!-- End Footer Content -->
-	</div>
-	<!-- End pageWrapper -->
-
 </body>
 </html>

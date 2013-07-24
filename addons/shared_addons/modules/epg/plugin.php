@@ -91,14 +91,14 @@ class Plugin_Epg extends Plugin
 		
 		$mainswitch = false;
 		
-		$raw = $this->epg_sh_m->order_by('cid', 'RANDOM')->limit(7)->get_featured_show();
+		$raw = $this->epg_sh_m->order_by('cid', 'RANDOM')->limit(9)->get_featured_show();
 		shuffle($raw);
 		
 		$data .= '<style type="text/css">
-					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
+					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden; border-radius:10px;}
 					  .featured-show .poster{width:100%; height:100%; outline:3px solid #FFF;}
 					  .featured-show .poster img{width:100%; height:auto;}
-		              .featured-show .info{margin:0 auto; padding:0 1%; display:block; position:absolute; background:rgba(255,255,255,1); left:0; width:98%; opacity:0}
+		              .featured-show .info{margin:0 auto; padding:0 1%; display:block; position:absolute; background:rgba(255,255,255,.9); left:0; width:98%; opacity:0}
 					  .featured-show .info h4 {font-size:14px;}
 		              .featured-show .info h4, .featured-show .info p, .featured-show .info .show-detail{margin:5px 0;}
 		              .featured-show .info p {font-size:12px; line-height:12px;}
@@ -149,8 +149,11 @@ class Plugin_Epg extends Plugin
 						$containerW = $(".featured").width();
 						
 						$feats.each(function() {
-							$(this).css("margin", Math.floor($containerW * 0.002));
-							$(this).width(Math.floor($containerW * 0.196)).height(Math.floor($containerW * 0.196));
+							//$(this).css("margin", Math.floor($containerW * 0.002));
+							//$(this).width(Math.floor($containerW * 0.196)).height(Math.floor($containerW * 0.196));
+				
+							$(this).css("margin", Math.floor($containerW * 0.004));
+							$(this).width(Math.floor($containerW * 0.128)).height(Math.floor($containerW * 0.128));
 		
 				            $infobox = $(this).children(".info");
 							$infobox.css("bottom", -$infobox.height());
@@ -165,7 +168,7 @@ class Plugin_Epg extends Plugin
 							})
 			        	});
 					
-						$("#main").width(Math.floor($containerW * 0.396)).height(Math.floor($containerW * 0.396));
+						$("#main").width(Math.floor($containerW * 0.316)).height(Math.floor($containerW * 0.262));
 					}
 				</script>';
 		
@@ -202,21 +205,23 @@ class Plugin_Epg extends Plugin
 		
 		switch ($this->attribute('size')){
 			case 'big' :
-				$realpath = $this->module_details['path'] . '/upload/shows';
+				$realpath = $this->module_details['path'] . '/upload/shows/';
 				break;
 			case 'medium' :
-				$realpath = $this->module_details['path'] . '/upload/shows/thumbs';
+				$realpath = $this->module_details['path'] . '/upload/shows/thumbs/';
 				break;
 			case 'small' :
-				$realpath = $this->module_details['path'] . '/upload/shows/small';
+				$realpath = $this->module_details['path'] . '/upload/shows/small/';
 				break;
 			default :
-				$realpath = $this->module_details['path'] . '/upload/shows/thumbs';
+				$realpath = $this->module_details['path'] . '/upload/shows/';
 		}
 		
 		$realpath .= $this->attribute('filename');
 		
-		return $realpath;
+		$image = '<img src="' . $realpath . ' " style="width:100%;" />';
+		
+		return $image;
 	}
 	
 }

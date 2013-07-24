@@ -38,98 +38,95 @@
 </head>
 
 <body id="top" class="epg">
-
-	<!-- Begin pageWrapper -->
-	<div id="pageWrapper">
-		
+	
 		{{ integration:analytics }}
 	
 	 	<header class="wrapper">
 	 		{{ theme:partial name="header" }}
 	 	</header>
 				
-		<!-- Begin contentWrapper -->
 		 <div id="content" class="wrapper clear">
-			<?php if($shows != NULL ){ ?>
-				<h2>TV GUIDE</h2>
-				<div id="epg">
-					<div id="origin"></div>
-    
-				    <div id="theader">
-				    	<div id="time-row">
-				    		<?php
-								for($i=0; $i<25; $i++){
-									if($i < 10){
-										echo '<div class="time"><div style="margin:10px">0' . $i . ':00</div></div>';	
-									}else if($i == 24){
-										echo '<div class="time last"><div style="margin:10px">00:00</div></div>';	
-									}else{
-										echo '<div class="time"><div style="margin:10px">' . $i . ':00</div></div>';
-									}
-								}
-							?>
-				    	</div>			        
-				    </div>
-				    
-				    <div id="tcol">
-				    	<div id="ch-col">
-				    		<?php 
-								foreach($shows as $today_show){
-									if(count($today_show->sh) > 0 ){
-										echo '<div class="channel">' . $today_show->ch->name . '</div>';
-									}
-								}
-							?>
-				    	</div>
-				    </div>
-				    
-				    <div id="tdata" onscroll="fnScroll()">
-				    	<?php 		
-											
-							foreach($shows as $today_show){
-											
-								$sh_data = $today_show->sh;
-						
-								if(count($sh_data) > 0){
-									echo '<div class="sh-row">';
-									
-									$first = TRUE;
-												
-									foreach($sh_data as $sh){
-										$hms = explode(':', $sh->time);
- 										$time = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
-										 
-										if($first && $time > 0){
-											$w = floor($time*240);
-											echo '<div class="past-show" style="width:' . $w . 'px; height: 59px; background:#666; float:left; border-radius:0 5px 5px 0; outline:1px solid #111;">&nbsp;</div>';
-											
-											$hms = explode(':', $sh->duration);
-											$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
-											$w = floor($dur*240);
-											$title = substr($sh->title, 0, floor($w/3)) . '..';
-											
-											echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
-											
-											$first = FALSE;
+		 	<div id="body-wrapper">
+				<?php if($shows != NULL ){ ?>
+					<div id="epg">
+						<div id="origin"></div>
+	    
+					    <div id="theader">
+					    	<div id="time-row">
+					    		<?php
+									for($i=0; $i<25; $i++){
+										if($i < 10){
+											echo '<div class="time"><div style="margin:10px">0' . $i . ':00</div></div>';	
+										}else if($i == 24){
+											echo '<div class="time last"><div style="margin:10px">00:00</div></div>';	
 										}else{
-											$hms = explode(':', $sh->duration);
-											$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
-											$w = floor($dur*240);
-											$title = substr($sh->title, 0, floor($w/3)) . '..';
-											echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
-											$first = FALSE;
+											echo '<div class="time"><div style="margin:10px">' . $i . ':00</div></div>';
 										}
-										
 									}
+								?>
+					    	</div>			        
+					    </div>
+					    
+					    <div id="tcol">
+					    	<div id="ch-col">
+					    		<?php 
+									foreach($shows as $today_show){
+										if(count($today_show->sh) > 0 ){
+											echo '<div class="channel">' . $today_show->ch->name . '</div>';
+										}
+									}
+								?>
+					    	</div>
+					    </div>
+					    
+					    <div id="tdata" onscroll="fnScroll()">
+					    	<?php 		
 												
-									echo '<br style="clear:both;" /></div>';
-								}											
-							}
-						
-						?>
-				    </div>
-				    
-				    <br style="clear: both"/>
+								foreach($shows as $today_show){
+												
+									$sh_data = $today_show->sh;
+							
+									if(count($sh_data) > 0){
+										echo '<div class="sh-row">';
+										
+										$first = TRUE;
+													
+										foreach($sh_data as $sh){
+											$hms = explode(':', $sh->time);
+	 										$time = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
+											 
+											if($first && $time > 0){
+												$w = floor($time*240);
+												echo '<div class="past-show" style="width:' . $w . 'px; height: 59px; background:#666; float:left; border-radius:0 5px 5px 0; outline:1px solid #111;">&nbsp;</div>';
+												
+												$hms = explode(':', $sh->duration);
+												$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
+												$w = floor($dur*240);
+												$title = substr($sh->title, 0, floor($w/3)) . '..';
+												
+												echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+												
+												$first = FALSE;
+											}else{
+												$hms = explode(':', $sh->duration);
+												$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
+												$w = floor($dur*240);
+												$title = substr($sh->title, 0, floor($w/3)) . '..';
+												echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+												$first = FALSE;
+											}
+											
+										}
+													
+										echo '<br style="clear:both;" /></div>';
+									}											
+								}
+							
+							?>
+					    </div>
+					    
+					    <br style="clear: both"/>
+					</div>
 				</div>
 				
 			<?php }else{ ?>
@@ -139,16 +136,9 @@
 			<?php } ?>
 		</div>
 		
-		
-		<!-- End contentWrapper -->
-		
-		<!-- Begin Footer Content -->
+
 		<footer>
 	    	{{ theme:partial name="footer" }}
-	     </footer> 
-		<!-- End Footer Content -->
-	</div>
-	<!-- End pageWrapper -->
-
+	    </footer> 
 </body>
 </html>

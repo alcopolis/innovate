@@ -10,39 +10,58 @@
 
 <body id="top" class="epg">
 
-	<!-- Begin pageWrapper -->
-	<div id="pageWrapper">
 		{{ integration:analytics }}
 		
-		<!-- Begin Header Content -->
-		<div class="partial-wrapper">				
+		<header class="wrapper">			
 			{{ theme:partial name="header" }}
 		</div>
-		<!-- End Header Content -->
 				
-		<!-- Begin contentWrapper -->
-		<div class="content-wrapper">
-			<?php if($shows != NULL ){ ?>
-				<h1><?php echo $shows->title; ?></h1>
-				<p><?php echo $shows->syn_id; ?></p>
-				<p><?php echo $shows->syn_en; ?></p>			
-			<?php } ?>
+		<div id="content" class="wrapper clear">
+			<div id="body-wrapper">
 			
-			<div id="related">
-				<h4>More From This Channel</h4>
-				{{ epg:related id="<?php echo $shows->id; ?>" channel="<?php echo $shows->cid; ?>" }}
-				<br style="clear:both;" />
+				<div id="show" style="background:#F00;">
+					<?php if($shows != NULL ){ ?>
+						<div id="show-head" style="width:100%;">
+							<h1><?php echo $shows->title; ?></h1>
+						</div>
+						
+						<div id="show-body" style="width:100%;">
+							<div id="side" style="40px; background:#444; float:left; text-align:center;">
+								<p><?php echo $shows->name; ?></p>
+								<p><?php echo $shows->num; ?></p>
+								<p><?php echo $shows->date; ?> </br> <?php echo $shows->time; ?></p>
+								<p><a href="#">TV Guide</a></p>
+							</div>
+							
+							<?php if($shows->poster != NULL ){ ?>
+								<div id="poster" style="width:50%; float:left; height:225px; background:#EEE; margin:10px">
+									{{epg:poster filename="<?php echo $shows->poster; ?>" size="small" }}
+								</div>
+							<?php } ?>
+							
+							<div id="details" style="width:30%; float:left; ">	
+								<p><?php echo $shows->syn_id; ?></p>
+								<hr/>
+								<p><?php echo $shows->syn_en; ?></p>
+							</div>
+							
+							<div class="clear"></div>
+						</div>			
+					<?php } ?>
+				</div>
+				
+				
+				
+				<div id="related">
+					<h4>More From This Channel</h4>
+					{{ epg:related id="<?php echo $shows->id; ?>" channel="<?php echo $shows->cid; ?>" }}
+					<br style="clear:both;" />
+				</div>
 			</div>
 		</div>
-		<!-- End contentWrapper -->
 		
-		<!-- Begin Footer Content -->
-		<div class="partial-wrapper">			
+		<footer>			
 			{{ theme:partial name="footer" }}
-		</div>
-		<!-- End Footer Content -->
-	</div>
-	<!-- End pageWrapper -->
-
+		</footer>
 </body>
 </html>

@@ -120,6 +120,19 @@ class Epg_Sh_m extends MY_Model {
 		return $this->get_show($fields, $single);
 	}
 	
+	public function get_show_detail($id){
+		$this->db->select('t0.id, t0.title, t0.cid, t0.date, t0.time, t0.duration, t0.syn_id, t0.syn_en, t0.poster');
+		$this->db->select('t1.name, t1.num, t1.logo');
+		$this->db->from('inn_epg_show_detail t0');
+		$this->db->join('inn_epg_ch_detail t1', 't0.cid = t1.id', 'RIGHT');
+		$this->db->where('t0.id',$id);
+		
+		return $this->db->get()->row();
+	}
+	
+	
+	
+	
 	
 	
 	public function get_count($fields = NULL)
