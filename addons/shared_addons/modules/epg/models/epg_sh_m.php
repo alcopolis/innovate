@@ -48,6 +48,7 @@ class Epg_Sh_m extends MY_Model {
 		$this->db->SELECT('t0.syn_id as ina');
 		$this->db->SELECT('t0.syn_en as eng');
 		$this->db->SELECT('t0.poster as poster');
+		$this->db->SELECT('t0.trailer as trailer');
 		$this->db->SELECT('t1.name as chname');
 		$this->db->from('inn_epg_ch_detail t1');
 		

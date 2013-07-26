@@ -19,7 +19,7 @@
 									<h1 id="sh-title"><?php echo $sh->title; ?></h1>
 									
 									<?php if($sh->poster != ''){ ?>
-										<img style="float:left;" class="poster small" src="<?php echo $this->module_details['path'] . '/upload/shows/thumbs/' . $sh->poster; ?>" title="<?php echo $sh->title; ?>" alt="<?php echo $sh->title; ?>" />
+										<img style="float:left;" class="poster small" src="<?php echo $this->module_details['path'] . '/upload/shows/square/' . $sh->poster; ?>" title="<?php echo $sh->title; ?>" alt="<?php echo $sh->title; ?>" />
 									<?php } ?>
 									
 									<div style="float:left; margin:10px;">

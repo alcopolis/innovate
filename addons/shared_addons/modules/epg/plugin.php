@@ -29,6 +29,14 @@ class Plugin_Epg extends Plugin
 						),
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
+						'attributes' => array(
+								'limit' => array(
+									'type' => 'number',// Can be: slug, number, flag, text, array, any.
+									'flags' => '',
+									'default' => 11,
+									'required' => false,
+								),		
+						),
 				),
 				
 				'related' => array(
@@ -91,7 +99,7 @@ class Plugin_Epg extends Plugin
 		
 		$mainswitch = false;
 		
-		$raw = $this->epg_sh_m->order_by('cid', 'RANDOM')->limit(9)->get_featured_show();
+		$raw = $this->epg_sh_m->order_by('cid', 'RANDOM')->limit($this->attribute('limit'))->get_featured_show();
 		shuffle($raw);
 		
 		$data .= '<style type="text/css">
@@ -113,7 +121,8 @@ class Plugin_Epg extends Plugin
 			
 			if(!$mainswitch){
 				$data .= '<div id="main" class="featured-show">';
-					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/thumbs/' . $featured->poster . '" /></div>';
+				  //$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/square/' . $featured->poster . '" /></div>';
+					$data .= $featured->trailer;
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
@@ -125,7 +134,7 @@ class Plugin_Epg extends Plugin
 				$mainswitch = TRUE;
 			}else{
 				$data .= '<div class="featured-show">';
-					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/thumbs/' . $featured->poster . '" /></div>';
+					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/square/' . $featured->poster . '" /></div>';
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
@@ -188,7 +197,7 @@ class Plugin_Epg extends Plugin
 		shuffle($raw);
 		
 		foreach($raw as $related){
-			$data .= '<div class="related-show" style="width:18%; height:80px; background:#EFEFEF; margin:0 1%; float:left; text-align:center;">';
+			$data .= '<div class="related-show">';
 			$data .= '<div class="poster"></div>';
 			$data .= '<p><a href="epg/show/' .  $related->id . '">' . $related->title . '</a></p>';
 			$data .= '</div>';
@@ -207,8 +216,11 @@ class Plugin_Epg extends Plugin
 			case 'big' :
 				$realpath = $this->module_details['path'] . '/upload/shows/';
 				break;
+			case 'square' :
+				$realpath = $this->module_details['path'] . '/upload/shows/square/';
+				break;
 			case 'medium' :
-				$realpath = $this->module_details['path'] . '/upload/shows/thumbs/';
+				$realpath = $this->module_details['path'] . '/upload/shows/medium/';
 				break;
 			case 'small' :
 				$realpath = $this->module_details['path'] . '/upload/shows/small/';

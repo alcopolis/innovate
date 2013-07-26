@@ -2,6 +2,7 @@
 
 class Alcopolis
 {
+	
 	public function array_from_post($fields, $post){
 		$data = array();
 
