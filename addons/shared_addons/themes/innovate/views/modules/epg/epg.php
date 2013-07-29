@@ -56,11 +56,11 @@
 				
 			})
 
-			$(this).mouseleave(function(){
-				t = setTimeout(hide, 3000)
+			$(this).mouseout(function(){
+				t = setTimeout(hide, 5000);
 			})
 		})
-
+		
 		function hide(){
 			console.log('hide');
 			clearTimeout(t);
@@ -75,24 +75,24 @@
 </script>
 
 <style type="text/css">
-	#epg {width:95%; margin:40px auto; font-size:12px;}
+	#epg {width:100%; margin:40px auto; font-family: "Arial", Helvetica, Tahoma, sans-serif; font-size:12px}
 	#origin, #theader, #tcol, #tdata {float:left; margin:.5% 0;}
 	
 	#origin{width:10%; height:40px;}
-	#theader{width:88%; height:40px; overflow:hidden;}
+	#theader{width:89.5%; height:40px; overflow:hidden;}
 	#tcol{width:10%; height:558px; overflow: hidden;}
-	#tdata{width:88%; height:558px; overflow: scroll; background:#111;}
+	#tdata{width:88%; height:558px; overflow: scroll; background:#333;}
 	
 	#theader #time-row {width:9000px; height:100%;}
 	#theader #time-row .time{width:240px; float:left; border-radius:5px; outline:1px solid #FFF; background:#0CE; color:#FFF;}
 	
-	#origin, #tcol {margin-right:5px}
+	#origin, #tcol {margin-right:0}
 	
 	#tcol #ch-col{width:100%;}
 	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#333; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
 	
 	#tdata .sh-row{margin-bottom:3px;clear:both; width:9000px;} /* 24hrs x 240px */
-	#tdata .sh-row .show{float:left; cursor:pointer; border-radius:5px; outline:1px solid #111; background:rgba(255,255,255,.85); white-space:nowrap;}
+	#tdata .sh-row .show{float:left; cursor:pointer; border-radius:5px; outline:1px solid #333; background:rgba(255,255,255,1); white-space:nowrap;}
 	#tdata .sh-row .show:hover{background:#39C; color:#FFF}
 	#tdata .sh-row .show.active{background:#39F; color:#FFF}
 	
@@ -163,7 +163,7 @@
 											 
 											if($first && $time > 0){
 												$w = floor($time*240);
-												echo '<div class="past-show" style="width:' . $w . 'px; height: 59px; background:#666; float:left; border-radius:0 5px 5px 0; outline:1px solid #111;">&nbsp;</div>';
+												echo '<div class="past-show" style="width:' . $w . 'px; height: 59px; background:#666; float:left; border-radius:0 5px 5px 0; outline:1px solid #333;">&nbsp;</div>';
 												
 												$hms = explode(':', $sh->duration);
 												$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);

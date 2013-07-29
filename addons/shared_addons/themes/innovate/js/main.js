@@ -4,36 +4,13 @@ $(document).ready(function() {
 	
 	// ====================================== Main Menu Setting =======================================//
 		
-		var dropdown = $('.has_children > .dropdown');
-		dropdown.each(function(){			
-			$(this).removeClass('dropdown').wrap('<div class="dropdown-wrapper" />');
-		});
+		$('ul#main-menu > li').mouseenter(function(){
+			$(this).children('ul.dropdown').slideDown(400)
+		})
 		
-		
-		//Nav Menu		
-		
-		$('nav#menu > ul li.has_children').mouseenter(function(e){
-			var baseH = $(this).children('div.dropdown-wrapper').height();
-			
-			$(this).children('div.dropdown-wrapper').css('height', 'auto');
-			var targetH = $(this).children('div.dropdown-wrapper').innerHeight();
-			
-			$(this).children('div.dropdown-wrapper').css('height', baseH);
-			
-			$(this).children('div.dropdown-wrapper').css('display', 'block').slideDown('fast').animate(
-				{opacity:1, height:targetH}, 400
-			);
-		});
-		
-		$('nav#menu > ul li.has_children').mouseleave(function(e){
-			$(this).children('div.dropdown-wrapper').animate(
-				{height:40, opacity:0}, 
-				200, 
-				function(){
-					$(this).css('display','none');					
-				}
-			);
-		});
+		$('ul#main-menu > li').mouseleave(function(){
+			$(this).children('ul.dropdown').slideUp(150)
+		})
 	
 		
 	// ====================================== Orbit Slider ======================================= //

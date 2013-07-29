@@ -9,7 +9,7 @@
 	
 	<style type="text/css">
 		#show{background:#FFF;  margin-bottom:40px}
-		#show #head{width:100%;}
+		#show #head{width:100%; margin-bottom:20px;}
 		
 		#show #body{width:100%;}
 		#show #body #side{width:80px; float:left; text-align:center; margin:0 10px; color:#FFF; font-size:.75em}
@@ -20,7 +20,7 @@
 		#show #body #side #epg:hover{background:#399; cursor:pointer}
 		#show #body #side #epg:hover a{color:#FFF;}
 		
-		#show #body #poster{float:left; margin:0 10px; width:50%;}
+		#show #body #poster{float:left; margin:0; padding:5px; width:50%; background:#CCC;}
 		#show #body #details{width:30%; float:left; margin:0 10px}
 		#show #body #details:after{}
 		
@@ -72,10 +72,10 @@
 					<?php } ?>
 				</div>
 				
-				<div id="related" class="clearfix">
+<?php /*		<div id="related" class="clearfix">
 					<h4>More From <?php echo $shows->name; ?></h4>
 					{{ epg:related id="<?php echo $shows->id; ?>" channel="<?php echo $shows->cid; ?>" }}
-				</div>
+				</div> */ ?>
 			</div>
 		</div>
 		
