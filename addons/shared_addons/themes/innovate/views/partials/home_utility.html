@@ -9,10 +9,28 @@
 <!-- 		<h5>Comparison</h5> -->
 	</div>
 	<div id="hotline" class="util-item last">
-		<p style="margin-top:40px; font-size:1.25em;">
-			<strong>Customer's Hotline</strong><br/>
-			<span style="font-size:1.5em; font-weight:bold; color:#39C; line-height:1.5em">[ 021 ] 3199 8600</span>
+		<p style="margin:40px 0 -10px 0;">
+			<strong>Customer Care</strong><br/>
+			<span style="font-size:1.2em; font-weight:bold; color:#39C; line-height:1.5em">[ 021 ] 3199 8600</span>
 		</p>
-		<p style="width:80%; margin:0 auto">Hubungi untuk pendaftaran atau informasi lebih lanjut mengenai layanan Innovate.</p>
+		<p style="width:80%; margin:0 auto;font-size:.75em; color:#333;">Hubungi untuk pendaftaran atau informasi lebih lanjut mengenai layanan Innovate.</p>
 	</div>
+	
+	
 </div>
+
+<script type="text/javascript">
+utils = $('#utils .util-item');
+	utils.each(function(){
+		$(this).click(function(){
+			showUtil($(this).attr('id'));
+		})	
+	})
+	
+	function showUtil(id){
+		console.log($(this).attr('id'));
+		switch(id){
+				
+		}
+	}
+</script>

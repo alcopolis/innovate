@@ -103,7 +103,7 @@ class Plugin_Epg extends Plugin
 		shuffle($raw);
 		
 		$data .= '<style type="text/css">
-					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden; border-radius:10px;}
+					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
 					  .featured-show .poster{width:100%; height:100%; outline:3px solid #FFF;}
 					  .featured-show .poster img{width:100%; height:auto;}
 		              .featured-show .info{margin:0 auto; padding:0 1%; display:block; position:absolute; background:rgba(255,255,255,.9); left:0; width:98%; opacity:0}
@@ -121,8 +121,8 @@ class Plugin_Epg extends Plugin
 			
 			if(!$mainswitch){
 				$data .= '<div id="main" class="featured-show">';
-				  //$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/square/' . $featured->poster . '" /></div>';
-					$data .= $featured->trailer;
+				  	$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/square/' . $featured->poster . '" /></div>';
+					//$data .= $featured->trailer;
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';

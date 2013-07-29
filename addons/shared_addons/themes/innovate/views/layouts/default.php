@@ -7,7 +7,7 @@
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
 </head>
-<body id="top" class="">
+<body id="top" class="home">
 	
 	{{ integration:analytics }}
 	

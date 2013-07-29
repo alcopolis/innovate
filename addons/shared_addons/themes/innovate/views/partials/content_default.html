@@ -8,10 +8,11 @@
 <br class="clear" />
 
 <div id="body-wrapper">
-	
-	<div id="mod-epg" class="featured clearfix">
-		<h4>Upcoming Shows</h4>
-		{{ epg:featured limit="11" }}
+	<div id="banner-bg" class="clearfix">
+		<div id="mod-epg" class="featured">
+			<h4>Upcoming Shows</h4>
+			{{ epg:featured limit="11" }}
+		</div>
 	</div>
 	
 	{{ theme:partial name="home_utility" }}

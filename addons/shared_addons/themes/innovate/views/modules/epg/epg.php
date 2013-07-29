@@ -12,6 +12,66 @@
 	  $('#theader').scrollLeft($('#tdata').scrollLeft());
 	  $('#tcol').scrollTop($('#tdata').scrollTop());
 	}
+
+	$(document).ready(function(){
+
+		var t;
+				
+		$('.epg .show').each(function(){
+			$(this).click(function(e){
+				clearTimeout(t);
+				
+				boxpos = $(this).position();
+
+				$(this).append($('#detail-container'));
+
+				$('#detail-container').css({'top':boxpos.top + 70 + 'px', 'left':boxpos.left + 'px'})
+			
+				title = $(this).attr('data-title');
+				$('#detail-container p#title').html(title);
+			
+				
+				if($(this).attr('data-id') != ''){
+					synid = $(this).attr('data-id');
+					$('#detail-container p#id').html(synid);
+					$('#detail-container hr').show();
+				}else{
+					$('#detail-container hr').hide();
+					$('#detail-container p#id').html('');
+				}
+				
+				if($(this).attr('data-en') != ''){
+					synen = $(this).attr('data-en');
+					$('#detail-container p#en').html(synen);
+					$('#detail-container hr').show();
+				}else{
+					$('#detail-container hr').hide();
+					$('#detail-container p#en').html('');
+				}
+
+
+				$('#detail-container').css('display', 'block').animate(
+					{opacity:1}
+				)
+				
+			})
+
+			$(this).mouseleave(function(){
+				t = setTimeout(hide, 3000)
+			})
+		})
+
+		function hide(){
+			console.log('hide');
+			clearTimeout(t);
+			
+			$('#detail-container').animate(
+ 				{opacity:0},400,function(){
+ 					$(this).css('display', 'none');
+ 				}
+ 			)
+		}
+	})
 </script>
 
 <style type="text/css">
@@ -32,7 +92,13 @@
 	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#333; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
 	
 	#tdata .sh-row{margin-bottom:3px;clear:both; width:9000px;} /* 24hrs x 240px */
-	#tdata .sh-row .show{float:left; border-radius:5px; outline:1px solid #111; background:rgba(255,255,255,.85); white-space:nowrap;}
+	#tdata .sh-row .show{float:left; cursor:pointer; border-radius:5px; outline:1px solid #111; background:rgba(255,255,255,.85); white-space:nowrap;}
+	#tdata .sh-row .show:hover{background:#39C; color:#FFF}
+	#tdata .sh-row .show.active{background:#39F; color:#FFF}
+	
+	#detail-container{position:absolute; width:300px; background:#FFF; box-shadow:0 0 3px #333; border-radius:5px; opacity:0; display:block}
+	#detail-container p#title{font-size:14px; font-weight:bold;color:#39C;}
+	#detail-container p{margin:10px !important; padding:0; white-space:normal;color:#717174;}
 </style>
 	
 </head>
@@ -104,7 +170,7 @@
 												$w = floor($dur*240);
 												$title = substr($sh->title, 0, floor($w/3)) . '..';
 												
-												echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+												echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'"><div style="margin:20px 10px">' . $title . '</div></div>';
 												
 												$first = FALSE;
 											}else{
@@ -112,7 +178,9 @@
 												$dur = $hms[0] + ($hms[1]/60) + ($hms[2]/3600);
 												$w = floor($dur*240);
 												$title = substr($sh->title, 0, floor($w/3)) . '..';
-												echo '<div id="' . $sh->cid . '" class="show" style="width:' . $w . 'px"><div style="margin:20px 10px">' . $title . '</div></div>';
+												
+												echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'"><div style="margin:20px 10px">' . $title . '</div></div>';
+												
 												$first = FALSE;
 											}
 											
@@ -124,8 +192,16 @@
 							
 							?>
 					    </div>
-					    
+											    
 					    <br style="clear: both"/>
+					    
+					    
+						<div id="detail-container">
+							<p id="title"></p>
+					    	<p id="id"></p>
+					    	<hr>
+					    	<p id="en"></p>
+					    </div>
 					</div>
 				</div>
 				

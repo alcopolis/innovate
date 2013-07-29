@@ -14,7 +14,7 @@
 			?>
 			
 			<!-- Render Product list  -->
-			<?php if(!empty($prod)){ ?>	
+			<?php /* if(!empty($prod)){ */ ?>	
 				<div class="tabs">
 					<ul class="tab-menu">
 						<li><a href="#product-content-fields"><span>Content</span></a></li>
@@ -130,7 +130,7 @@
 						</fieldset>
 					</div>
 				</div>
-			<?php } ?>	
+			<?php /* } */ ?>	
 			<div class="buttons">
 				<?php 
 						echo form_submit('submit', 'Save'); 

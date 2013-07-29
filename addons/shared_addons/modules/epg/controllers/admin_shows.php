@@ -143,7 +143,7 @@ class Admin_Shows extends Admin_Controller
 	function poster_upload($rename){
 		//Upload image config
 		
-		$var;
+		$var = '';
 		
 		$this->upload_config = array(
 			'allowed_types' => 'jpg|jpeg|png',
@@ -179,7 +179,7 @@ class Admin_Shows extends Admin_Controller
 				'source_image' => $upload_data['full_path'],
 				'maintain_ration' => true,
 				'width' => 1600,
-				'height' => 900,
+				'height' =>1200,
 				'master_dim' => 'auto',
 			);
 		
