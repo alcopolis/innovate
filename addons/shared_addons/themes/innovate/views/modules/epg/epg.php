@@ -57,7 +57,7 @@
 			})
 
 			$(this).mouseout(function(){
-				t = setTimeout(hide, 5000);
+				t = setTimeout(hide, 10000);
 			})
 		})
 		

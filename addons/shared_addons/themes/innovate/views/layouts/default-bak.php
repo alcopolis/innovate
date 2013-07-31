@@ -15,9 +15,7 @@
 			<div class="partial-wrapper">				
 				{{ theme:partial name="header" }}
 			</div>
-			
-			
-													
+								
 			<div class="content-wrapper">
 				{{ theme:partial name="content_default" }}
 			</div>

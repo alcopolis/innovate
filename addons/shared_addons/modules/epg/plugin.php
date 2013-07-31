@@ -104,12 +104,19 @@ class Plugin_Epg extends Plugin
 		
 		$data .= '<style type="text/css">
 					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
-					  .featured-show .poster{width:100%; height:100%; outline:3px solid #FFF;}
+					  .featured-show .poster{
+							width:100%; height:100%; outline:3px solid #FFF;
+							background-repeat:no-repeat;
+							background-size:auto 100%;
+							background-position:center center;
+						}
 					  .featured-show .poster img{width:100%; height:auto;}
-		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(255,255,255,.9); left:0; width:100%; opacity:0}
+		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(255,255,255,.9); left:0; width:100%; opacity:0;}
 					  .featured-show .info h4 {font-size:12px; font-weight:none; }
 		              .featured-show .info h4, .featured-show .info p, .featured-show .info .show-detail{margin:5px;}
 		              .featured-show .info p {font-size:12px; line-height:12px;}
+					  .featured-show .info a {text-shadow:none; color:#333;}
+					  .featured-show .info a:hover {color:#39C;}
 					  
 					  #main.featured-show .info h4 {font-size:18px;} 
 				  </style>';
@@ -121,7 +128,7 @@ class Plugin_Epg extends Plugin
 			
 			if(!$mainswitch){
 				$data .= '<div id="main" class="featured-show">';
-				  	$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/square/' . $featured->poster . '" /></div>';
+				  	$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
 					//$data .= $featured->trailer;
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
@@ -134,7 +141,7 @@ class Plugin_Epg extends Plugin
 				$mainswitch = TRUE;
 			}else{
 				$data .= '<div class="featured-show">';
-					$data .= '<div class="poster"><img src="addons/shared_addons/modules/epg/upload/shows/square/' . $featured->poster . '" /></div>';
+					$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
 // 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
@@ -147,7 +154,6 @@ class Plugin_Epg extends Plugin
 					$(document).ready(function(){
 						show_layout();
 					});
-				
 				
 					$(window).resize(function(e){
 						show_layout();
@@ -198,7 +204,7 @@ class Plugin_Epg extends Plugin
 		
 		foreach($raw as $related){
 			$data .= '<div class="related-show">';
-			$data .= '<div class="poster"></div>';
+			$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $related->poster . ')"></div>';
 			$data .= '<p><a href="epg/show/' .  $related->id . '">' . $related->title . '</a></p>';
 			$data .= '</div>';
 		}

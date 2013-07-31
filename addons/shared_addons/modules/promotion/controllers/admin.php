@@ -60,6 +60,7 @@ class Admin extends Admin_Controller {
 		->title($this->module_details['name'])
 		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
 		->append_js('module::main.js')
+		->append_js('module::promo_form.js')
 		->set('page', $this->page_data)
 		->set('promos', $this->promo_data)
 		->set('poster', $this->poster_data)
@@ -176,10 +177,10 @@ class Admin extends Admin_Controller {
 		
 		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 1920, false, true);
 		
-		if($result['status']){
+		//if($result['status']){
 			$file_data = $this->parse_file_data($result['data']);
 			$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
-		}
+		//}
 		
 		$respond = array(
 				'status'=>$result['status'],
