@@ -132,7 +132,7 @@ class Admin extends Admin_Controller {
 			$data['author'] = $this->session->userdata('id');
 			
 			if($this->promotion_m->update($id, $data)){
-				redirect('admin/promotion');
+				//redirect('admin/promotion');
 			}
 		}	
 		

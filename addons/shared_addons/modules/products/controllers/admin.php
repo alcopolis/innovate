@@ -72,6 +72,8 @@ class Admin extends Admin_Controller {
 		if($this->form_validation->run()){
 			// Insert data
 		}else{
+			//$fields = $this->products_m->get_product();
+			//var_dump($fields);
 			$this->render('admin/product_form');
 		}
 	}
@@ -100,16 +102,15 @@ class Admin extends Admin_Controller {
 				$data['product_is_featured'] = '0';
 			}
 			
-			
 			if($this->products_m->update_product($id, $data)){
-				redirect('admin/products');
+				//redirect('admin/products');
+				$this->prod_data = $this->products_m->get_product($id);
+				$this->render('admin/product_form');
 			}else{
 				$this->render('admin/product_form');
 			}
 		}else{
-
 			$this->prod_data = $this->products_m->get_product($id);
-			
 			$this->render('admin/product_form');
 		}
 	}
