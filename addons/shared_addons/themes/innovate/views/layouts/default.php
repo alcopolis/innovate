@@ -7,7 +7,7 @@
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
 </head>
-<body id="top" class="home">
+<body id="top">
 	
 	{{ integration:analytics }}
 	
@@ -16,8 +16,12 @@
 	 		{{ theme:partial name="header" }}
 	 	</header>
 	 	
-	 	 <div id="content" class="wrapper clear">
-			{{ theme:partial name="content_default" }}
+	 	 <div id="content" class="wrapper">
+	 	 	<div id="body-theme" class="clearfix">
+		 	 	<div id="body-wrapper">
+					{{ template:body }}
+				</div>
+			</div>
 	 	 </div>
 	 	 
 	 	 <footer>

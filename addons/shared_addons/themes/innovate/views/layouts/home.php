@@ -17,7 +17,9 @@
 	 	</header>
 	 	
 	 	 <div id="content" class="wrapper clear">
-			{{ theme:partial name="content_default" }}
+	 	 	<div id="body-theme">
+				{{ theme:partial name="home" }}
+			</div>
 	 	 </div>
 	 	 
 	 	 <footer>

@@ -16,10 +16,10 @@
 		
 		<header class="wrapper">				
 			{{ theme:partial name="header" }}
-		</div>
+		</header>
 				
 		<div id="content" class="wrapper clear">
-			<div id="body-wrapper">
+			<div id="body-wrapper" class="clearfix">
 				<div id="product-tags" class="hide"><?php echo $product->product_tags; ?></div>					
 				<div id="product-body"><?php echo $product->product_body; ?></div>	
 				
@@ -31,6 +31,6 @@
 		
 		<footer>	
 			{{ theme:partial name="footer" }}
-		</div>
+		</footer>
 </body>
 </html>
