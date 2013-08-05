@@ -35,7 +35,7 @@
 		
 		<header class="wrapper">			
 			{{ theme:partial name="header" }}
-		</div>
+		</header>
 				
 		<div id="content" class="wrapper clear">
 			<div id="body-wrapper">
