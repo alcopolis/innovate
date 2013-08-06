@@ -10,17 +10,39 @@
 	width:90%;
 }
 
+.rotate{
+	/* Safari */
+	-webkit-transform: rotate(-90deg);
+	
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+	
+	/* IE */
+	-ms-transform: rotate(-90deg);
+	
+	/* Opera */
+	-o-transform: rotate(-90deg);
+	
+	/* Internet Explorer */
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
 .left{float:left;}
+
 .right{float:right;}
 
 .clear{clear:both;}
+
 .clearfix:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;}
 
 .list-inline li{display:inline; margin:0 10px}
+
 .hide{display:none}
 
 body{background:#FFF}
+
 .wrapper{width:100%; margin:0 auto;}
+
 footer{margin-top:40px;}
 
 
@@ -237,19 +259,21 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 }
 
 
+/* Sticker */
+.sticker{position:fixed; z-index:9999}
 
+#berlangganan{
+	right:-42px; 
+	bottom:120px; 
+	background:#39C;
+	padding:10px 20px;
+	
+	border-radius:5px 5px 0 0;
+	border-bottom:1px solid rgba(0,0,0,.5);
+	border-top:1px solid rgba(255,255,255,.5);
+}
 
-
-
-
-
-
-
-
-
-
-
-
+#berlangganan a{color:#FFF;}
 
 
 
