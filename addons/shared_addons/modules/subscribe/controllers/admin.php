@@ -10,17 +10,37 @@
 
 class Admin extends Admin_Controller
 {
-	protected $section = 'items';
+	protected $section = 'subscribe';
+	protected $rules = array();
+	
+	protected $page_data;
+	protected $subscribe_data;
 
 	public function __construct()
 	{
 		parent::__construct();
 
 		// Load all the required classes
-		$this->load->model('subscriber_m');
+		$this->load->model('subscribe_m');
 		$this->load->library('form_validation');
-		$this->lang->load('subscriber');
+		
+		// Set our validation rules
+		$this->rules = $this->subscribe_m->_rules;
+		$this->form_validation->set_rules($this->rules);
 	}
+	
+	
+	
+	function render($view){
+		$this->template
+		->title($this->module_details['name'])
+		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+		->append_js('module::product_form.js')
+		->set('prod', $this->prod_data)
+		->set('page', $this->page_data)
+		->build($view);
+	}
+	
 
 	/**
 	 * List all items
@@ -55,4 +75,6 @@ class Admin extends Admin_Controller
 		}
 		redirect('admin/subscriber');
 	}
+	
+	
 }
