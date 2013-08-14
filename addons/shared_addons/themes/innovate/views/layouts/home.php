@@ -21,7 +21,7 @@
 				{{ theme:partial name="home" }}
 			</div>
 			<div id="berlangganan" class="sticker rotate">
-				<a href="{{ url:site }}contact">Register Now</a>
+				<a href="{{ url:site }}subscribe">Register Now</a>
 			</div>
 	 	 </div>
 	 	 

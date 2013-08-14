@@ -47,6 +47,8 @@ footer{margin-top:40px;}
 
 
 
+form input, form textarea{border:1px solid #CCC; padding:8px 10px; border-radius:3px; font-family:"Arial", Helvetica, Tahoma, sans-serif; color:#333; font-size:12px}
+form input:focus, form textarea:focus{border:1px solid #39C; box-shadow:0 0 3px #39C;}
 
 
 /* --------------------------------------------Header------------------------------------- */
@@ -347,8 +349,22 @@ table#packages-detail .amount{font-weight:bold; font-size:18px}
 
 
 
+/* -------------------------------------- Subscribe ----------------------------------- */
+#subscribe-ack{
+	width:25%
+}
 
+#subscribe-form{
+	width:60%;
+	margin-left:40px;
+}
 
+form input[type='text']{width:200px;}
+form span{color:#F00; font-size:14px; font-weight:bold}
+
+ul#form{font-size:13px; margin-bottom:20px; border-radius:20px; overflow:hidden;}
+ul#form li{padding:10px; background:#EEE;}
+ul#form li.even{background:#EFEFEF;}
 
 
 

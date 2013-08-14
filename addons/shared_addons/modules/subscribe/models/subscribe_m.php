@@ -7,7 +7,7 @@
  * @package 	PyroCMS
  * @subpackage 	Sample Module
  */
-class Subscriber_m extends MY_Model {
+class Subscribe_m extends MY_Model {
 	
 	public $_rules = array(
 				'first_name' => array(
@@ -20,25 +20,30 @@ class Subscriber_m extends MY_Model {
 						'label' => 'Last Name',
 						'rules' => 'trim|required|max_length[20]|xss_clean',
 				),
+				'email' => array(
+						'field' => 'email',
+						'label' => 'Email',
+						'rules' => 'required|valid_email|is_unique[users.email]|xss_clean',
+				),
 				'address' => array(
 						'field' => 'address',
 						'label' => 'Address',
 						'rules' => 'required|xss_clean',
 				),
+				'area_code' => array(
+						'field' => 'area_code',
+						'label' => 'Area Code',
+						'rules' => 'trim|required|numeric|xss_clean',
+				),
 				'phone' => array(
-						'field' => 'Phone',
+						'field' => 'phone',
 						'label' => 'Phone',
-						'rules' => 'required|max_length[20]|xss_clean',
+						'rules' => 'trim|required|numeric|xss_clean',
 				),
 				'mobile' => array(
 						'field' => 'mobile',
-						'label' => 'Mobile Phone',
-						'rules' => 'required|max_length[20]|xss_clean',
-				),
-				'email' => array(
-						'field' => 'Email',
-						'label' => 'Email Address',
-						'rules' => 'required|max_length[100]|xss_clean',
+						'label' => 'Mobile',
+						'rules' => 'trim|required|numeric|xss_clean',
 				),
 			);
 	
@@ -54,29 +59,20 @@ class Subscriber_m extends MY_Model {
 		$this->_table = 'inn_subscribe';
 	}
 	
-	//View all subscriber
-// 	public function index($email)
-// 	{
-// 		return array('asdd','asdf');
-// 	}
 	
-	//Add subscriber
-// 	public function process($email)
-// 	{		
-				
-// 		//Check duplicate		
-// 		if($this->count_by('email',$email) > 0){
-// 			$exist = 'yes';
-// 		}else{
-// 			$exist = 'no';
-// 			$data = array(
-// 					'email' => $email
-// 			);
-// 			$this->insert($data);
-// 		}
+	public function get_new(){
+		$subscriber =  new stdClass();
 		
-// 		return $exist;
-// 	}
-
+		$subscriber->first_name = '';
+		$subscriber->last_name = '';
+		$subscriber->address = '';
+		$subscriber->area_code = '';
+		$subscriber->phone = '';
+		$subscriber->mobile = '';
+		$subscriber->email = '';
+		
+		return $subscriber;
+	}
+	
 	
 }
