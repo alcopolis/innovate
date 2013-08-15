@@ -10,14 +10,9 @@
 class Subscribe_m extends MY_Model {
 	
 	public $_rules = array(
-				'first_name' => array(
-						'field' => 'first_name',
-						'label' => 'First Name',
-						'rules' => 'trim|required|max_length[20]|xss_clean',
-				),
-				'last_name' => array(
-						'field' => 'last_name',
-						'label' => 'Last Name',
+				'name' => array(
+						'field' => 'name',
+						'label' => 'Nama',
 						'rules' => 'trim|required|max_length[20]|xss_clean',
 				),
 				'email' => array(
@@ -63,8 +58,7 @@ class Subscribe_m extends MY_Model {
 	public function get_new(){
 		$subscriber =  new stdClass();
 		
-		$subscriber->first_name = '';
-		$subscriber->last_name = '';
+		$subscriber->name = '';
 		$subscriber->address = '';
 		$subscriber->area_code = '';
 		$subscriber->phone = '';

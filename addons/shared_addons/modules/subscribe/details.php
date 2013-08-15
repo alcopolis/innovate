@@ -40,8 +40,9 @@ class Module_Subscribe extends Module {
 						'address' => array(
 								'type' => 'TEXT',
 						),
-						'kelurahan' => array(
-								'type' => 'TEXT',
+						'area_code' => array(
+								'type' => 'VARCHAR',
+								'constraint' => '4'
 						),
 						'phone' => array(
 								'type' => 'VARCHAR',
@@ -54,6 +55,10 @@ class Module_Subscribe extends Module {
 						'email' => array(
 								'type' => 'VARCHAR',
 								'constraint' => '100'
+						),
+						'package' => array(
+								'type' => 'VARCHAR',
+								'constraint' => '50'
 						),
 						'closing_flag' => array(
 								'type' => 'INT',

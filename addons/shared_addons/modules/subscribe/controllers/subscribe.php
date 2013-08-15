@@ -11,13 +11,17 @@ class Subscribe extends Public_Controller
 {
 	
 	protected $subscriber;
+	protected $packages = array();
 	protected $rules = array();
+	protected $packages_m;
 	
 	public function __construct()
 	{
 		parent::__construct();
 		
 		$this->load->model('subscribe_m');
+		$this->packages_m = $this->load->model('products/packages_m');
+		
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->library('alcopolis');
@@ -25,6 +29,13 @@ class Subscribe extends Public_Controller
 		// Set our validation rules
 		$this->rules = $this->subscribe_m->_rules;
 		$this->form_validation->set_rules($this->rules);
+		
+		// Get product packages
+		$this->packages[0] = '- Pilih Paket -';
+		$temp = $this->packages_m->get_packages_by(NULL, array('package_cat'=>'basic'), FALSE);
+		foreach($temp as $package){
+			$this->packages[$package->package_id] = $package->package_name;
+		}
 	}
 	
 	
@@ -32,6 +43,7 @@ class Subscribe extends Public_Controller
 		$this->template
 		->title($this->module_details['name'])
 		->set('subscriber', $this->subscriber)
+		->set('packages', $this->packages)
 		->build($view);
 	}
 	
@@ -41,16 +53,30 @@ class Subscribe extends Public_Controller
 		
 		if($this->form_validation->run()){
 			
-			$db_fields = array('first_name', 'last_name', 'email', 'address', 'area_code', 'phone', 'mobile');
+			$db_fields = array('name', 'email', 'address', 'area_code', 'phone', 'mobile', 'packages');
 				
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
-			
+			//var_dump($data);
 			if($this->subscribe_m->insert($data)){
-				echo 'inserted';
+				redirect('subscribe/success');
 			}
 		}else{
 			$this->render('subscribe');
 		}
+	}
+	
+	public function success(){
+		$this->render('success');
+	}
+	
+	
+	public function pack_info(){
+		$id = $this->input->post('packages');
+		
+		$pack = $this->packages_m->get_packages($id);
+				
+		//Send ajax respond
+		echo json_encode($pack);
 	}
 	
 	

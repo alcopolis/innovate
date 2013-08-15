@@ -46,9 +46,10 @@ body{background:#FFF}
 footer{margin-top:40px;}
 
 
-
-form input, form textarea{border:1px solid #CCC; padding:8px 10px; border-radius:3px; font-family:"Arial", Helvetica, Tahoma, sans-serif; color:#333; font-size:12px}
+div.input{margin:0; padding:0; width:auto;}
+form input, form textarea, form select{border:1px solid #DDD; padding:8px 10px; border-radius:3px; font-family:"Arial", Helvetica, Tahoma, sans-serif; color:#333; font-size:12px}
 form input:focus, form textarea:focus{border:1px solid #39C; box-shadow:0 0 3px #39C;}
+form label{color:#888; font-size:13px;}
 
 
 /* --------------------------------------------Header------------------------------------- */
@@ -188,7 +189,6 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 #body-theme{
 	width:100%; 
 	margin:0 auto;  
-	min-height:540px;
 /* 	background:#49E;	 */
 }
 
@@ -351,23 +351,36 @@ table#packages-detail .amount{font-weight:bold; font-size:18px}
 
 /* -------------------------------------- Subscribe ----------------------------------- */
 #subscribe-ack{
-	width:25%
+	width:25%;
+	font-size:14px;
+	color:#39C;
 }
 
 #subscribe-form{
-	width:60%;
-	margin-left:40px;
+	width:55%;
+	color:#333;
+	margin-left:80px;	
 }
+#subscribe-form h1{color:#39C}
+#subscribe-form label{color:#444}
 
 form input[type='text']{width:200px;}
+form input[type='submit']{cursor:pointer; background:#39C; border:none; width:160px; color:#FFF; margin:20px 0;}
+form input[type='submit']:hover{background:#61bdeb;}
 form span{color:#F00; font-size:14px; font-weight:bold}
 
-ul#form{font-size:13px; margin-bottom:20px; border-radius:20px; overflow:hidden;}
-ul#form li{padding:10px; background:#EEE;}
-ul#form li.even{background:#EFEFEF;}
+ul.form{overflow:hidden;}
+ul.form li{padding:10px; background:rgba(30,200,255,.5);}
+ul.form li.even{}
 
 
+#validation-msg{background:#C90000; margin-bottom:20px;}
+#validation-msg p{margin:0 10px; font-size:11px; color:#FFF; padding:10px 0;}
 
+#pack-info{
+	display:none;
+	padding:10px;
+}
 
 
 

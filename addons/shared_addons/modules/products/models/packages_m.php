@@ -17,29 +17,39 @@ class Packages_m extends MY_Model
 		$field_table = 'inn_products_package_field';
 	}
 	
-// 	public function get_packages($slug){
+	//Get data produk dan paket2nya sesuai dengan slug input
+	public function get_packages($id = NULL){	
+		$pack_query = new stdClass();
 		
-// 	}
-	
-// 	public function get($slug){
-// 		$q = $this->db->get_where($this->_table, array('slug' => $slug));
+		if($id == NULL || $id == ''){
+			$pack_query = $this->db->get($this->_table)->result();
+		}else{
+			$pack_query->data = $this->db->where('package_id', $id)->get($this->_table)->row();
+		}
 		
-// 		if($q->num_rows() > 0){
-// 			return $q->row();
-// 		}
-// 	}
+		return $pack_query;
+	}
 	
-// 	public function get_all(){
-// 		$q = $this->db->get($this->_table);
 	
-// 		return $q;
-// 	}
+	public function get_packages_by($fields = NULL, $condition = NULL, $single = FALSE){
+		$method = 'result';
+		
+		if($fields != NULL){
+			$this->db->select($fields);
+		}
+		
+		if($condition != NULL){
+			$this->db->where($condition);
+		}
+		
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
+		}
+		
+		return $this->db->get($this->_table)->$method();
+	}
 	
-// 	public function update($primary_value = NULL, $data = NULL, $skip_validation = false){
-// 		return 'update method';
-// 	}
-	
-// 	public function delete($id=NULL){
-// 		return 'delete method';
-// 	}
+
 }
