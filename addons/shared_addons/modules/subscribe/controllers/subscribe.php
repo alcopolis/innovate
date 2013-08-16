@@ -56,7 +56,10 @@ class Subscribe extends Public_Controller
 			$db_fields = array('name', 'email', 'address', 'area_code', 'phone', 'mobile', 'packages');
 				
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
-			//var_dump($data);
+			
+			$data['packages'] = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages')), TRUE)->package_name;
+			$data['date'] = date('Y-m-d');
+			
 			if($this->subscribe_m->insert($data)){
 				redirect('subscribe/success');
 			}
@@ -73,7 +76,7 @@ class Subscribe extends Public_Controller
 	public function pack_info(){
 		$id = $this->input->post('packages');
 		
-		$pack = $this->packages_m->get_packages($id);
+		$pack = $this->packages_m->get_packages_by(NULL, array('package_id' => $id), TRUE);
 				
 		//Send ajax respond
 		echo json_encode($pack);

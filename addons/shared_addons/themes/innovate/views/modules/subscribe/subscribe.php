@@ -101,7 +101,7 @@
 						data:formData,
 						dataType: 'json',
 						success: function(respond) {
-							var data = respond.data;
+							var data = respond;
 							$('#pack-info h3').html(data.package_name);
 							$('#pack-info p').html(data.package_body);
 						},

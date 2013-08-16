@@ -1,44 +1,72 @@
-<section class="title">
-	<h4><?php echo lang('subscriber:item_list'); ?></h4>
-</section>
-
-<section class="item">
-	<?php echo form_open('admin/subscriber/delete');?>
+<div class="one_full">
+	<section class="title">
+		<h4><?php echo lang('subscribe:item_list'); ?></h4>
+	</section>
 	
-	<?php if (!empty($items)): ?>
-	
-		<table>
-			<thead>
-				<tr>
-					<th><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>
-					<th><?php echo lang('subscriber:email'); ?>
-				</tr>
-			</thead>
-			<tfoot>
-				<tr>
-					<td colspan="2">
-						<div class="inner"><?php $this->load->view('admin/partials/pagination'); ?></div>
-					</td>
-				</tr>
-			</tfoot>
-			<tbody>
-				<?php foreach( $items as $item ): ?>
-				<tr>
-					<td><?php echo form_checkbox('action_to[]', $item->id); ?></td>
-					<td><?php echo $item->email; ?></td>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
+	<section class="item">
+		<div class="content">
 		
-		<div class="table_action_buttons">
-			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('delete'))); ?>
+		<div id="filter">
+			<?php $this->load->view('admin/partials/filter'); ?>
 		</div>
 		
-	<?php else: ?>
-		<div class="no_data"><?php echo lang('subscriber:no_items'); ?></div>
-	<?php endif;?>
-	
-	<?php echo form_close(); ?>
-</section>
+		<?php echo form_open('admin/subscribe');?>
+		
+			<div id="promo-list">
+			<?php if (!empty($subscribes)): ?>
+				
+				<div id="record-counter">Total <?php echo count($subscribes)?> Records</div>
+				
+				<table>
+					<thead>
+						<tr>
+							<th><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>
+							<th>Name</th>
+							<th>Address</th>
+							<th>Phone</th>
+							<th>Mobile</th>
+							<th>Email</th>
+							<th>Package</th>
+							<th>Entry Date</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<td colspan="9">
+								<div class="inner"><?php $this->load->view('admin/partials/pagination'); ?></div>
+							</td>
+						</tr>
+					</tfoot>
+					<tbody>
+						<?php foreach( $subscribes as $subscribe ): ?>
+						<tr>
+							<td><?php echo form_checkbox('action_to[]', $subscribe->id); ?></td>
+							<td><?php echo $subscribe->name; ?></td>
+							<td><?php echo $subscribe->address; ?></td>
+							<td><?php echo '(' . $subscribe->area_code . ') ' . $subscribe->phone; ?></td>
+							<td><?php echo $subscribe->mobile; ?></td>
+							<td><?php echo $subscribe->email; ?></td>
+							<td><?php echo $subscribe->packages; ?></td>
+							<td><?php echo $subscribe->date; ?></td>
+							<td><?php echo $subscribe->closing_flag == 1 ? 'Closing' : 'Open' ; ?></td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+				
+				<div class="table_action_buttons">
+					<?php $this->load->view('admin/partials/buttons', array('buttons' => array('delete'))); ?>
+				</div>
+				
+			<?php else: ?>
+				<div class="no_data">No Records Found</div>
+			<?php endif;?>
+			
+			<?php echo form_close(); ?>
+			</div>
+			
+		</div>
+	</section>
+</div>
 
