@@ -48,8 +48,23 @@
 							<td><?php echo $subscribe->mobile; ?></td>
 							<td><?php echo $subscribe->email; ?></td>
 							<td><?php echo $subscribe->packages; ?></td>
-							<td><?php echo $subscribe->date; ?></td>
-							<td><?php echo $subscribe->closing_flag == 1 ? 'Closing' : 'Open' ; ?></td>
+							<td>
+								<?php
+									$d = strtotime($subscribe->date);
+									echo date('d-m-Y', $d); 
+								?>
+							</td>
+							<td><?php 
+									//echo $subscribe->closing_flag == 1 ? 'Closing' : 'Open' ;
+									if ($subscribe->closing_flag == 0){
+										echo 'Open';
+									}elseif($subscribe->closing_flag == 1){
+										echo 'On Progress';
+									}else{
+										echo 'Closed';
+									}
+								?>
+							</td>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>

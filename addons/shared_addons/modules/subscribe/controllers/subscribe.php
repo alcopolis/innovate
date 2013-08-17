@@ -49,7 +49,6 @@ class Subscribe extends Public_Controller
 	
 	
 	public function index(){
-		$this->subscriber = $this->subscribe_m->get_new();
 		
 		if($this->form_validation->run()){
 			
@@ -64,6 +63,7 @@ class Subscribe extends Public_Controller
 				redirect('subscribe/success');
 			}
 		}else{
+			$this->subscriber = $this->subscribe_m->get_new();
 			$this->render('subscribe');
 		}
 	}

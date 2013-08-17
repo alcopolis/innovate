@@ -17,11 +17,11 @@
 												'name'		=>'Name',
 												'area_code' => 'Phone Area',
 												'date' 		=> 'Entry Date',
-											),'', 'style="width:140px"');
+											), set_value('search_key', $filter->search_key), 'style="width:140px"');
 					 ?> 
 				</div>
 			</div>
-			<div class="filter"><label>&nbsp</label><div class="input"><?php echo form_input('search_term','', 'style="width:300px;"'); ?></div></div>
+			<div class="filter"><label>&nbsp</label><div class="input"><?php echo form_input('search_term', set_value('search_term', $filter->search_term), 'class="" style="width:300px;"'); ?></div></div>
 			
 			<div class="filter">
 				<label>Status</label>
@@ -30,8 +30,9 @@
 						echo form_dropdown('status', array(
 												'no_entry' => 'Select',
 												'0'	=> 'Open',
-												'1'	=> 'Close',
-											),'', 'style="width:120px"');
+												'1'	=> 'On Progress',
+												'2'	=> 'Closing',
+											), set_value('status', $filter->status), 'style="width:120px"');
 					 ?>
 				</div>
 			</div>
@@ -42,9 +43,9 @@
 					<?php echo form_dropdown('sort', array(
 												'no_entry' 	=> 'Select',
 												'name'		=>'Name',
-												'phone'	=> 'Phone',
+												'phone'		=> 'Phone',
 												'date' 		=> 'Entry Date',
-											),'no_entry');
+											), set_value('sort', $filter->sort));
 					?>
 				</div>
 			</div>
@@ -57,3 +58,21 @@
 	
 	<a href="admin/subscribe/savecsv">Download</a>
 </fieldset>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		if($('[name="search_key"]').val() == 'date'){
+			$('[name="search_term"]').addClass('datepicker').datepicker({dateFormat: 'dd-mm-yy'});
+		}
+		
+		$('[name="search_key"]').change(function(){
+			if($(this).val() == 'date'){
+				$('[name="search_term"]').attr('value', '');
+				$('[name="search_term"]').addClass('datepicker').datepicker({dateFormat: 'dd-mm-yy'});
+			}else{
+				$('[name="search_term"]').datepicker('destroy');
+				$('[name="search_term"]').attr('value', '');
+			}
+		})	
+	})
+</script>
