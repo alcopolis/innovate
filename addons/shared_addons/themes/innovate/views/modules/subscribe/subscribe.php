@@ -59,9 +59,7 @@
 								<label for="mobile">No. Ponsel <span>*</span></label>
 								<div class="input"><?php echo form_input('mobile', set_value('mobile', $subscriber->mobile), 'class="width-15"'); ?></div>
 							</li>
-						</ul>
-						
-						<ul class="form">
+							
 							<li class="<?php echo alternator('', 'even'); ?>">
 								<label for="packages">Pilih paket layanan Innovate yang Anda inginkan.</label>
 								<div class="input">
@@ -72,6 +70,10 @@
 									<p></p>
 								</div>
 							</li>
+						</ul>
+						
+						<ul class="form">
+							
 						</ul>
 						
 						<div class="input" style="text-align:center"><?php echo form_submit('subscribe', 'Daftar'); ?></div>

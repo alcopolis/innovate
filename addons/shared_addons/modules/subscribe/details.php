@@ -8,13 +8,13 @@ class Module_Subscribe extends Module {
 	{
 		return array(
 			'name' => array(
-				'en' => 'Subscribe'
+				'en' => 'Subscription'
 			),
 			'description' => array(
 				'en' => 'New Customer Subscription'
 			),
 			'backend' => TRUE,
-			'menu' => 'content'
+			'menu' => 'Subscription'
 		);
 	}
 

@@ -1,11 +1,11 @@
 <fieldset id="filters">
-	<legend>Filters</legend>
+	<legend>Filter</legend>
 	
 	<style type="text/css">
 		.filter{float:left; margin:10px;}
 	</style>
 	
-	<?php echo form_open('admin/subscribe'); ?>
+	<?php echo form_open('admin/subscribe', 'id="filter-form"'); ?>
 		<div id="search">
 			
 			<div class="filter">
@@ -49,14 +49,17 @@
 					?>
 				</div>
 			</div>
+			
 			<div class="filter">
 				<label for="submit">&nbsp;</label>
 				<?php echo form_submit('submit', 'View'); ?>
 			</div>
+				
+			<div id="download-data" style="background:#CCC; margin:36px 0 0 0;" class="filter">
+				<a onclick="doSave()" class="button" style="padding:5px 10px 4px 10px;">Download</a>
+			</div>
 		</div>
 	<?php echo form_close(); ?>
-	
-	<a href="admin/subscribe/savecsv">Download</a>
 </fieldset>
 
 <script type="text/javascript">
@@ -75,4 +78,21 @@
 			}
 		})	
 	})
+	
+		
+	function doSave(){
+		var formData = new FormData($('#filter-form')[0]);
+		
+		$.ajax({
+			type: 'POST',
+			url: 'admin/subscribe/do_save',
+			processData: false,
+		    contentType: false,
+			data:formData,
+			dataType: 'json',
+			success: function(response) {
+				window.location = response.url;
+			},
+		});
+	}
 </script>

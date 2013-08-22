@@ -10,7 +10,7 @@
 			<?php $this->load->view('admin/partials/filter'); ?>
 		</div>
 		
-		<?php echo form_open('admin/subscribe');?>
+		<?php /* echo form_open('admin/subscribe'); */ ?>
 		
 			<div id="promo-list">
 			<?php if (!empty($subscribes)): ?>
@@ -56,13 +56,24 @@
 							</td>
 							<td><?php 
 									//echo $subscribe->closing_flag == 1 ? 'Closing' : 'Open' ;
-									if ($subscribe->closing_flag == 0){
-										echo 'Open';
-									}elseif($subscribe->closing_flag == 1){
-										echo 'On Progress';
-									}else{
-										echo 'Closed';
-									}
+// 									if ($subscribe->closing_flag == 0){
+// 										echo 'Open';
+// 									}elseif($subscribe->closing_flag == 1){
+// 										echo 'On Progress';
+// 									}else{
+// 										echo 'Closed';
+// 									}
+
+									
+									echo form_dropdown('', array(
+											'no_entry' => 'Select',
+											'0'	=> 'Open',
+											'1'	=> 'On Progress',
+											'2'	=> 'Closing',
+									), set_value('status', $subscribe->closing_flag), 'style="width:120px" class="status-dropdown"');
+
+									echo '<a onclick="saveChanges()" class="save-status button" style="padding:5px 10px 4px 10px;">Save</a>';
+									
 								?>
 							</td>
 						</tr>
@@ -70,18 +81,20 @@
 					</tbody>
 				</table>
 				
-				<div class="table_action_buttons">
-					<?php $this->load->view('admin/partials/buttons', array('buttons' => array('delete'))); ?>
-				</div>
-				
 			<?php else: ?>
 				<div class="no_data">No Records Found</div>
 			<?php endif;?>
 			
-			<?php echo form_close(); ?>
+			<?php /* echo form_close(); */ ?>
 			</div>
 			
 		</div>
 	</section>
 </div>
+
+<script type="text/javascript">
+	$('.status-dropdown').change(function(){
+		console.log('changed');
+	})
+</script>
 

@@ -72,10 +72,13 @@
 					<?php } ?>
 				</div>
 				
+				<?php /* 
 				<div id="related" class="clearfix">
 					<h4>More From <?php echo $shows->name; ?></h4>
 					{{ epg:related id="<?php echo $shows->id; ?>" channel="<?php echo $shows->cid; ?>" }}
 				</div>
+				*/ ?>
+				
 			</div>
 		</div>
 		

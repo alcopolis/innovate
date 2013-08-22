@@ -68,5 +68,22 @@ class Subscribe_m extends MY_Model {
 		return $subscriber;
 	}
 	
+	public function get_subscriber($fields = '', $single = false){
+		if($fields != '' || $fields != NULL){
+			$this->db->select($fields);
+		}
+		
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
+		}
+		
+		return $this->db->get($this->_table)->$method();
+	}
 	
+	public function get_subscriber_by($fields, $where, $single = false){
+		$this->db->where($where);
+		return $this->get_subscriber($fields, $single);
+	}
 }

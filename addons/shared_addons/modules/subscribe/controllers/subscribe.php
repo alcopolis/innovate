@@ -81,7 +81,7 @@ class Subscribe extends Public_Controller
 		//Send ajax respond
 		echo json_encode($pack);
 	}
-	
+		
 	
 	
 	//Validation callback
