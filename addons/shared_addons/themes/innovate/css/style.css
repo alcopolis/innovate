@@ -370,7 +370,7 @@ form input[type='submit']:hover{background:#61bdeb;}
 form span{color:#F00; font-size:14px; font-weight:bold}
 
 ul.form{overflow:hidden;}
-ul.form li{padding:10px; background:rgba(30,200,255,.5);}
+ul.form li{padding:10px; /*background:rgba(30,200,255,.5);*/}
 ul.form li.even{}
 
 
@@ -380,6 +380,34 @@ ul.form li.even{}
 #pack-info{
 	display:none;
 	padding:10px;
+	margin-top:20px;
+	color:#333;
+	width:600px;
+}
+
+#pack-info .pack-name, #pack-info .pack-desc{
+	margin:10px 0;
+}
+
+#pack-info .pack-name{
+	font-size:18px; 
+	font-weight:bold;
+	background:#EEE;
+		
+	margin-right:10px;
+	padding:5px 10px;
+	border-radius:3px;
+}
+
+#pack-info .pack-name span.bundle{	
+	font-size:14px; 
+	font-weight:bold; 
+	color:#333;
+}
+
+#pack-info .pack-desc{
+	font-size:14px;
+	padding-left:10px; 
 }
 
 

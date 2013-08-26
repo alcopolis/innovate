@@ -31,11 +31,25 @@ class Subscribe extends Public_Controller
 		$this->form_validation->set_rules($this->rules);
 		
 		// Get product packages
-		$this->packages[0] = '- Pilih Paket -';
-		$temp = $this->packages_m->get_packages_by(NULL, array('package_cat'=>'basic'), FALSE);
-		foreach($temp as $package){
-			$this->packages[$package->package_id] = $package->package_name;
+// 		$this->packages[0] = '- Pilih Paket -';
+// 		$temp = $this->packages_m->get_packages_by(NULL, array('package_cat'=>'basic'), FALSE);
+// 		foreach($temp as $package){
+// 			$this->packages[$package->package_id] = $package->package_name;
+// 		}
+
+		$this->packages = new stdClass();
+		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('package_group'=>'Super Cepat'), FALSE), 'Internet');
+		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('package_group'=>'Starter'), FALSE), 'TV');
+	}
+	
+	private function packages_result($data, $info){
+		$arr = array();
+		
+		$arr[0] = '- Paket ' . $info . ' -';
+		foreach($data as $d){
+			$arr[$d->package_id] = $d->package_name;
 		}
+		return $arr;
 	}
 	
 	
@@ -51,12 +65,25 @@ class Subscribe extends Public_Controller
 	public function index(){
 		
 		if($this->form_validation->run()){
+			$pack = '';
 			
-			$db_fields = array('name', 'email', 'address', 'area_code', 'phone', 'mobile', 'packages');
-				
+			$db_fields = array('name', 'email', 'address', 'area_code', 'phone', 'mobile');
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
 			
-			$data['packages'] = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages')), TRUE)->package_name;
+			//$data['packages'] = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages')), TRUE)->package_name;
+			//$this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-net')), TRUE)->package_name;
+			
+			if($this->input->post('packages-net') != '0' and $this->input->post('packages-tv') != '0'){
+				$pack = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-net')), TRUE)->package_name . ' & ' . $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-tv')), TRUE)->package_name;
+			}else{
+				if($this->input->post('packages-net') != '0'){
+					$pack = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-net')), TRUE)->package_name;
+				}elseif($this->input->post('packages-tv') != '0'){
+					$pack = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-tv')), TRUE)->package_name;
+				}
+			}
+			
+			$data['packages'] = $pack;
 			$data['date'] = date('Y-m-d');
 			
 			if($this->subscribe_m->insert($data)){
@@ -74,11 +101,39 @@ class Subscribe extends Public_Controller
 	
 	
 	public function pack_info(){
-		$id = $this->input->post('packages');
-		
-		$pack = $this->packages_m->get_packages_by(NULL, array('package_id' => $id), TRUE);
+// 		$id = $this->input->post('packages');
+// 		$pack = $this->packages_m->get_packages_by(NULL, array('package_id' => $id), TRUE);
 				
 		//Send ajax respond
+		$pack = array();
+		$inet_id = $this->input->post('packages-net');
+		$tv_id = $this->input->post('packages-tv');
+
+		
+		if($inet_id != '0' and $tv_id != '0'){
+			$inet = $this->packages_m->get_packages_by(NULL, array('package_id' => $inet_id), TRUE);
+			$tv = $this->packages_m->get_packages_by(NULL, array('package_id' => $tv_id), TRUE);
+			
+			$pack = array(
+				'bundle' => true,
+				'data' => array(
+					'net' => $inet,
+					'tv' => $tv
+				)	
+			);
+		}else{
+			
+			if($inet_id != '0'){
+				$inet = $this->packages_m->get_packages_by(NULL, array('package_id' => $inet_id), TRUE);
+				$pack['data'] = $inet;
+			}elseif($tv_id != '0'){
+				$tv = $this->packages_m->get_packages_by(NULL, array('package_id' => $tv_id), TRUE);
+				$pack['data'] = $tv;
+			}
+			
+			$pack['bundle'] = false;
+		}
+		
 		echo json_encode($pack);
 	}
 		

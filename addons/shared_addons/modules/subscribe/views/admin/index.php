@@ -72,7 +72,7 @@
 											'2'	=> 'Closing',
 									), set_value('status', $subscribe->closing_flag), 'style="width:120px" class="status-dropdown"');
 
-									echo '<a onclick="saveChanges()" class="save-status button" style="padding:5px 10px 4px 10px;">Save</a>';
+									//echo '<a onclick="saveChanges()" class="save-status button" style="padding:5px 10px 4px 10px;">Save</a>';
 									
 								?>
 							</td>

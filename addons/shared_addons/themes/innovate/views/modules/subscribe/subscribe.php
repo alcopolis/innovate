@@ -60,14 +60,18 @@
 								<div class="input"><?php echo form_input('mobile', set_value('mobile', $subscriber->mobile), 'class="width-15"'); ?></div>
 							</li>
 							
-							<li class="<?php echo alternator('', 'even'); ?>">
+							<li class="<?php echo alternator('', 'even'); ?>" style="background: #EFEFEF;">
 								<label for="packages">Pilih paket layanan Innovate yang Anda inginkan.</label>
+						
 								<div class="input">
-									<?php echo form_dropdown('packages', $packages, $packages[0]) ?>
+									<?php echo form_dropdown('packages-net', $packages->inet, $packages->inet[0], 'class="packages"') ?>
+									&nbsp;
+									<?php echo form_dropdown('packages-tv', $packages->tv, $packages->inet[0], 'class="packages"') ?>
 								</div>
+						
 								<div id="pack-info">
-									<h3></h3>
-									<p></p>
+									<div class="pack-name"></div>
+									<div class="pack-desc"></div>
 								</div>
 							</li>
 						</ul>
@@ -90,10 +94,44 @@
 // 			h = $('#subscribe-form').innerHeight();
 // 			$('#pack-selection').css('min-height', h + 'px');
 
-			$('[name="packages"]').change(function(){
-				if($(this).val() != 0){
+			$('.packages').change(function(){
+// 				if($(this).val() != 0){
+// 					$('#pack-info').show();
+// 					var formData = new FormData($('#subscriber-form')[0]);
+					
+// 					$.ajax({
+// 						type: 'POST',
+// 						url: 'subscribe/pack_info',
+// 						processData: false,
+// 						contentType: false,
+// 						data:formData,
+// 						dataType: 'json',
+// 						success: function(respond) {
+// // 							var data = respond;
+// // 							$('#pack-info h3').html(data.package_name);
+// // 							$('#pack-info p').html(data.package_body);
+
+// 							if(respond.bundle){
+// 								console.log('Bundle');
+// 							}else{
+// 								console.log('Single');
+// 							}
+// 						},
+// 					});
+// 				}else{
+// 					$('#pack-info h3').html('');
+// 					$('#pack-info p').html('');
+// 					$('#pack-info').hide();
+// 				}
+
+				var formData = new FormData($('#subscriber-form')[0]);
+
+				if($(this).val() != 0 || ($(this).val() == 0 && $(this).siblings().val() != 0)){
 					$('#pack-info').show();
-					var formData = new FormData($('#subscriber-form')[0]);
+
+					var title = '';
+					var desc = '';
+					var price = '';
 					
 					$.ajax({
 						type: 'POST',
@@ -103,13 +141,22 @@
 						data:formData,
 						dataType: 'json',
 						success: function(respond) {
-							var data = respond;
-							$('#pack-info h3').html(data.package_name);
-							$('#pack-info p').html(data.package_body);
+							console.log(respond);
+							
+							if(respond.bundle){
+								title = '<span class="bundle">Bundle</span>' + respond.data.net.package_name + ' & ' + respond.data.tv.package_name;
+								desc = 'Paket bundle layanan <em>' + respond.data.net.package_name + '</em> dengan <em>' + respond.data.tv.package_name + '</em>';
+							}else{
+								title = respond.data.package_name;
+								desc = respond.data.package_body;
+							}
+
+							$('#pack-info .pack-name').html(title);
+							$('#pack-info .pack-desc').html(desc);
 						},
 					});
 				}else{
-					$('#pack-info h3').html('');
+					$('#pack-info .pack-name').html('');
 					$('#pack-info p').html('');
 					$('#pack-info').hide();
 				}
