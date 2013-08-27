@@ -94,10 +94,24 @@ class Admin extends Admin_Controller
 		$this->render('admin/index');
 	}
 
-	
+	public function change_status(){
+		$sid = $this->input->get('id');
+		$val = $this->input->get('val');
+		
+		if($this->db->update('default_inn_subscribe', array('closing_flag' => $val), "id = " . $sid)){
+			$respond = array();
+			
+			if($val == '2'){
+				$respond['lock'] = true;
+			}else{
+				$respond['lock'] = false;
+			}
+		}
+		
+		echo json_encode($respond);
+	}
 	
 	public function do_save(){
-		
 		
 		//Get subscriber data from database		
 		$fields = 'name, address, area_code, phone, mobile, email, packages, closing_flag, date';
