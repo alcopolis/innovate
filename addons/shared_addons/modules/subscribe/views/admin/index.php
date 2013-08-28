@@ -59,13 +59,18 @@
 								
 									$attr = 'id="' . $subscribe->id . '" style="width:120px" class="status-dropdown"';
 									
-									if($subscribe->closing_flag == '2'){
-										echo '<span style="color:#F00;"><strong>CLOSED</strong></span>';
+									if($subscribe->closing_flag == '2' || $subscribe->closing_flag == '3'){
+										switch($subscribe->closing_flag){
+											case '2': echo '<span style="color:rgba(0,180,0,.75);"><strong>Closed</strong></span>'; break;
+											case '3': echo '<span style="color:rgba(255,0,0,.75);"><strong>Cancelled</strong></span>'; break;
+										}
+										
 									}else{
 										echo form_dropdown('', array(
 												'0'	=> 'Open',
 												'1'	=> 'On Progress',
-												'2'	=> 'Closed',
+												'2'	=> 'Close',
+												'3'	=> 'Cancel',
 										), set_value('status', $subscribe->closing_flag), $attr);
 									}									
 								?>
@@ -93,17 +98,16 @@
 		$.ajax({
 			type: 'GET',
 			url: 'admin/subscribe/change_status/?id=' + sid + '&val=' + $(this).val(),
-			//processData: false,
-		    //contentType: false,
-			//data:formData,
 			dataType: 'json',
 			success: function(response) {
-				//window.location = response.url;
-				//console.log(response.lock);
 				if(response.lock){
 					$parent = $('td#' + sid);
-					$parent.html('<span style="color:#F00;"><strong>CLOSED</strong></span>');
-					//console.log($('td#' + sid).children('select').attr('id'));
+
+					switch(response.val){
+						case '2': $parent.html('<span style="color:rgba(0,180,0,.75);"><strong>Closed</strong></span>'); break;
+						case '3': $parent.html('<span style="color:rgba(255,0,0,.75);"><strong>Cancelled</strong></span>'); break;
+					}
+					
 				}
 			},
 		});

@@ -32,6 +32,7 @@
 												'0'	=> 'Open',
 												'1'	=> 'On Progress',
 												'2'	=> 'Closed',
+												'3'	=> 'Cancelled',
 											), set_value('status', $filter->status), 'style="width:120px"');
 					 ?>
 				</div>

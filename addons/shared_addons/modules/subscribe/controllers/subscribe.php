@@ -29,17 +29,11 @@ class Subscribe extends Public_Controller
 		// Set our validation rules
 		$this->rules = $this->subscribe_m->_rules;
 		$this->form_validation->set_rules($this->rules);
-		
-		// Get product packages
-// 		$this->packages[0] = '- Pilih Paket -';
-// 		$temp = $this->packages_m->get_packages_by(NULL, array('package_cat'=>'basic'), FALSE);
-// 		foreach($temp as $package){
-// 			$this->packages[$package->package_id] = $package->package_name;
-// 		}
+	
 
 		$this->packages = new stdClass();
 		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('package_group'=>'Super Cepat'), FALSE), 'Internet');
-		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('package_group'=>'Starter'), FALSE), 'TV');
+		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('package_group'=>'Starter'), FALSE), 'Televisi');
 	}
 	
 	private function packages_result($data, $info){
@@ -70,9 +64,6 @@ class Subscribe extends Public_Controller
 			$db_fields = array('name', 'email', 'address', 'area_code', 'phone', 'mobile');
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
 			
-			//$data['packages'] = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages')), TRUE)->package_name;
-			//$this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-net')), TRUE)->package_name;
-			
 			if($this->input->post('packages-net') != '0' and $this->input->post('packages-tv') != '0'){
 				$pack = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-net')), TRUE)->package_name . ' & ' . $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-tv')), TRUE)->package_name;
 			}else{
@@ -89,11 +80,16 @@ class Subscribe extends Public_Controller
 			if($this->subscribe_m->insert($data)){
 				redirect('subscribe/success');
 			}
+			
+			//send email to sales
+			
+			
 		}else{
 			$this->subscriber = $this->subscribe_m->get_new();
 			$this->render('subscribe');
 		}
 	}
+	
 	
 	public function success(){
 		$this->render('success');
@@ -101,32 +97,29 @@ class Subscribe extends Public_Controller
 	
 	
 	public function pack_info(){
-// 		$id = $this->input->post('packages');
-// 		$pack = $this->packages_m->get_packages_by(NULL, array('package_id' => $id), TRUE);
+ 		$net_id = $this->input->get('net');
+ 		$tv_id = $this->input->get('tv');
 				
 		//Send ajax respond
 		$pack = array();
-		$inet_id = $this->input->post('packages-net');
-		$tv_id = $this->input->post('packages-tv');
 
-		
-		if($inet_id != '0' and $tv_id != '0'){
-			$inet = $this->packages_m->get_packages_by(NULL, array('package_id' => $inet_id), TRUE);
+		if($net_id != '0' and $tv_id != '0'){
+			$net = $this->packages_m->get_packages_by(NULL, array('package_id' => $net_id), TRUE);
 			$tv = $this->packages_m->get_packages_by(NULL, array('package_id' => $tv_id), TRUE);
 			
 			$pack = array(
 				'bundle' => true,
 				'data' => array(
-					'net' => $inet,
+					'net' => $net,
 					'tv' => $tv
 				)	
 			);
 		}else{
 			
-			if($inet_id != '0'){
-				$inet = $this->packages_m->get_packages_by(NULL, array('package_id' => $inet_id), TRUE);
-				$pack['data'] = $inet;
-			}elseif($tv_id != '0'){
+			if($net_id != '0' && $tv_id == '0'){
+				$net = $this->packages_m->get_packages_by(NULL, array('package_id' => $net_id), TRUE);
+				$pack['data'] = $net;
+			}elseif($tv_id != '0' && $net_id == '0'){
 				$tv = $this->packages_m->get_packages_by(NULL, array('package_id' => $tv_id), TRUE);
 				$pack['data'] = $tv;
 			}

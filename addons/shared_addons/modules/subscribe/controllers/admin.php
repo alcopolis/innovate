@@ -101,8 +101,9 @@ class Admin extends Admin_Controller
 		if($this->db->update('default_inn_subscribe', array('closing_flag' => $val), "id = " . $sid)){
 			$respond = array();
 			
-			if($val == '2'){
+			if($val == '2' || $val == '3'){
 				$respond['lock'] = true;
+				$respond['val'] = $val;
 			}else{
 				$respond['lock'] = false;
 			}
@@ -151,11 +152,11 @@ class Admin extends Admin_Controller
 		
 	//Process sql data into Excel format 
 		$sheet = $this->phpexcel->getActiveSheet();
-		
+		$filename = 'Subscriber-' . time();
 		
 		//Metadata & Properties
-		
-		
+		$this->phpexcel->getProperties()->setCreator('Innovate Admin');		
+		$this->phpexcel->getProperties()->setTitle($filename);
 		
 		//Header
 		$sheet->setCellValue('A1', 'NAME');
@@ -235,7 +236,7 @@ class Admin extends Admin_Controller
 		$writer = new PHPExcel_Writer_Excel2007($this->phpexcel);
 		header('Content-type: application/vnd.ms-excel');	
 		
-		$file = 'temp/subscriber-' . date('dmY') . '.xlsx';
+		$file = 'temp/' . $filename . '.xlsx';
 		$writer->save($file);
 		
 		$response = array(

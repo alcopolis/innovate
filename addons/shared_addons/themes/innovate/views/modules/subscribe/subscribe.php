@@ -64,16 +64,17 @@
 								<li class="<?php echo alternator('', 'even'); ?>" style="border-top:1px dotted #CCC;">
 									<div class="input clearfix">
 										<div class="" style="margin:20px 20px 40px 20px;">
-											<label for="packages" style="font-size:16px;"><em>Pilih paket layanan Innovate yang Anda inginkan.</em></label><br/><br/>
+											<label for="packages" style="font-size:16px;"><em>Paket Layanan Innovate</em></label>
+											<br/><small>Pilih layanan internet dan televisi untuk melanjutkan proses pendaftaran.</small><br/><br/>
 											<?php echo form_dropdown('packages-net', $packages->inet, $packages->inet[0], 'class="packages"') ?>
-											&nbsp;
+											&nbsp; &amp; &nbsp;
 											<?php echo form_dropdown('packages-tv', $packages->tv, $packages->inet[0], 'class="packages"') ?>
 											<div id="pack-info">
 												<div class="pack-name"></div>
 												<div class="pack-desc"></div>
 											</div>
 										</div>
-										<div class="input" style="margin:80px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
+										<div class="input" style="margin:60px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
 									</div>
 								</li>
 							</ul>
@@ -96,9 +97,10 @@
 
 			$('.packages').change(function(){
 
-				var formData = new FormData($('#subscriber-form')[0]);
+				var net = $('[name="packages-net"]').val();
+				var tv = $('[name="packages-tv"]').val();
 
-				if($(this).val() != 0 || ($(this).val() == 0 && $(this).siblings().val() != 0)){
+				if(net != 0 || tv != 0){
 					$('#pack-info').show();
 
 					var title = '';
@@ -106,26 +108,23 @@
 					var price = '';
 					
 					$.ajax({
-						type: 'POST',
-						url: 'subscribe/pack_info',
-						processData: false,
-						contentType: false,
-						data:formData,
+						type: 'GET',
+						url: 'subscribe/pack_info/?net=' + net + '&tv=' + tv,
 						dataType: 'json',
-						success: function(respond) {
-							console.log(respond);
-							
-							if(respond.bundle){
-								title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.package_name + ' & ' + respond.data.tv.package_name;
-								desc = 'Paket bundle layanan ' + respond.data.net.package_name.toLowerCase() + ' ' + respond.data.net.package_body.toLowerCase() + ' + ' + respond.data.tv.package_body.toLowerCase();
-							}else{
-								title = respond.data.package_name;
-								desc = respond.data.package_body;
-							}
-
-							$('#pack-info .pack-name').html(title);
-							$('#pack-info .pack-desc').html(desc);
-						},
+						success: 
+							function(respond) {							
+								if(respond.bundle){
+									title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.package_name + ' & ' + respond.data.tv.package_name;
+									desc = 'Paket bundle layanan ' + respond.data.net.package_name.toLowerCase() + ' ' + respond.data.net.package_body.toLowerCase() + ' + ' + respond.data.tv.package_body.toLowerCase();
+									desc += '<br/><small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>'
+								}else{
+									title = respond.data.package_name;
+									desc = respond.data.package_body;
+								}
+	
+								$('#pack-info .pack-name').html(title);
+								$('#pack-info .pack-desc').html(desc);
+							},
 					});
 				}else{
 					$('#pack-info .pack-name').html('');

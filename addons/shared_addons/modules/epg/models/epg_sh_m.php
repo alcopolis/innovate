@@ -60,7 +60,6 @@ class Epg_Sh_m extends MY_Model {
 //		var_dump($this->db->count_all_results());
 		
 		return $this->db->get()->result();
-		
 	}
 	
 	public function count_featured_show(){
