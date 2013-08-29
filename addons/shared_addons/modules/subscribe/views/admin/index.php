@@ -15,20 +15,20 @@
 			<div id="promo-list">
 			<?php if (!empty($subscribes)): ?>
 				
-				<div id="record-counter">Total <?php echo count($subscribes)?> Records</div>
+				<div id="record-counter" style="margin:30px 0 10px 0; font-weight:bold; background:#EEE; padding:10px; border-radius:3px;"><?php echo count($subscribes)?> Subscribers</div>
 				
 				<table>
 					<thead>
 						<tr>
 							<?php /* <th><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th> */ ?>
-							<th style="width:120px;">Name</th>
-							<th>Address</th>
-							<th class="align-center" style="width:120px;">Phone</th>
-							<th class="align-center" style="width:120px;">Mobile</th>
-							<th class="align-center" style="width:120px;">Email</th>
-							<th>Package</th>
-							<th class="align-center">Entry Date</th>
-							<th class="align-center">Status</th>
+							<th style="width:10%;">Name</th>
+							<th style="width:12.5%;">Address</th>
+							<th class="align-center" style="width:5%;">Phone</th>
+							<th class="align-center" style="width:5%;">Mobile</th>
+							<th class="align-center" style="width:12.5%;">Email</th>
+							<th style="width:12.5%;">Package</th>
+							<th class="align-center" style="width:10%;">Entry Date</th>
+							<th class="align-center" style="width:10%;">Status</th>
 						</tr>
 					</thead>
 					<tfoot>
@@ -92,25 +92,25 @@
 </div>
 
 <script type="text/javascript">
-	$('.status-dropdown').change(function(){
-		var sid = $(this).attr('id');
+// 	$('.status-dropdown').change(function(){
+// 		var sid = $(this).attr('id');
 		
-		$.ajax({
-			type: 'GET',
-			url: 'admin/subscribe/change_status/?id=' + sid + '&val=' + $(this).val(),
-			dataType: 'json',
-			success: function(response) {
-				if(response.lock){
-					$parent = $('td#' + sid);
+// 		$.ajax({
+// 			type: 'GET',
+// 			url: 'admin/subscribe/change_status/?id=' + sid + '&val=' + $(this).val(),
+// 			dataType: 'json',
+// 			success: function(response) {
+// 				if(response.lock){
+// 					$parent = $('td#' + sid);
 
-					switch(response.val){
-						case '2': $parent.html('<span style="color:rgba(0,180,0,.75);"><strong>Closed</strong></span>'); break;
-						case '3': $parent.html('<span style="color:rgba(255,0,0,.75);"><strong>Cancelled</strong></span>'); break;
-					}
+// 					switch(response.val){
+// 						case '2': $parent.html('<span style="color:rgba(0,180,0,.75);"><strong>Closed</strong></span>'); break;
+// 						case '3': $parent.html('<span style="color:rgba(255,0,0,.75);"><strong>Cancelled</strong></span>'); break;
+// 					}
 					
-				}
-			},
-		});
-	})
+// 				}
+// 			},
+// 		});
+// 	})
 </script>
 

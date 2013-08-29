@@ -38,8 +38,8 @@ class Admin extends Admin_Controller
 	function render($view){
 		$this->template
 		->title($this->module_details['name'])
-		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
-//		->append_js('module::product_form.js')
+//		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+		->append_js('module::subscribe-admin.js')
 		->set('subscribes', $this->subscribes_data)
 		->set('filter', $this->filter)
 		->build($view);

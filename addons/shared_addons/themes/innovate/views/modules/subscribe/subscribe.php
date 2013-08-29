@@ -70,17 +70,14 @@
 											&nbsp; &amp; &nbsp;
 											<?php echo form_dropdown('packages-tv', $packages->tv, $packages->inet[0], 'class="packages"') ?>
 											<div id="pack-info">
-												<div class="pack-name"></div>
-												<div class="pack-desc"></div>
+												<div id="pack-name"></div>
+												<div id="pack-desc"></div>
+												<div id="additional-info"></div>
 											</div>
 										</div>
 										<div class="input" style="margin:60px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
 									</div>
 								</li>
-							</ul>
-							
-							<ul class="form">
-								
 							</ul>
 						</div>	
 						
@@ -88,55 +85,9 @@
 				<?php echo form_close(); ?>	
 			</div>
 		</div>
-		
+
 		<footer>	
 			{{ theme:partial name="footer" }}
 		</footer>
-		
-		<script type="text/javascript">
-
-			$('.packages').change(function(){
-
-				var net = $('[name="packages-net"]').val();
-				var tv = $('[name="packages-tv"]').val();
-
-				if(net != 0 || tv != 0){
-					$('#pack-info').show();
-
-					var title = '';
-					var desc = '';
-					var price = '';
-					
-					$.ajax({
-						type: 'GET',
-						url: 'subscribe/pack_info/?net=' + net + '&tv=' + tv,
-						dataType: 'json',
-						success: 
-							function(respond) {							
-								if(respond.bundle){
-									title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.package_name + ' & ' + respond.data.tv.package_name;
-									desc = 'Paket bundle layanan ' + respond.data.net.package_name.toLowerCase() + ' ' + respond.data.net.package_body.toLowerCase() + ' + ' + respond.data.tv.package_body.toLowerCase();
-									desc += '<br/><small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>'
-								}else{
-									title = respond.data.package_name;
-									desc = respond.data.package_body;
-								}
-	
-								$('#pack-info .pack-name').html(title);
-								$('#pack-info .pack-desc').html(desc);
-							},
-					});
-				}else{
-					$('#pack-info .pack-name').html('');
-					$('#pack-info p').html('');
-					$('#pack-info').hide();
-				}
-			});
-
-			function capitaliseFirstLetter(string)
-			{
-			    return string.charAt(0).toUpperCase() + string.slice(1);
-			}
-		</script>
 </body>
 </html>

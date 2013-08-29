@@ -2,49 +2,43 @@
 
 $(document).ready(function(){
 		
-		$("input[type=text]").focus(function(){
-		    // Select field contents
-			if(this.value == this.defaultValue){
-		        this.select();
-		    }
-		});
-		
-		$('#subscribe-form').submit(function(e){
-			e.preventDefault();
-			process();
-		});
-	
-		$('#subscribe').click(function(e){
-			e.preventDefault();
-			process();
-		});
-});
+	$('.packages').change(function(){
+		var net = $('[name="packages-net"]').val();
+		var tv = $('[name="packages-tv"]').val();
 
-function process(){
-	$('#msg-ajax').css('display','none');
-	dataString = $('#subscribe-form').serialize();
-	
-	$.ajax({
-		type: 'POST',
-		url: 'subscriber/process',
-		data: dataString,
-		dataType: 'json',
-		success: function(data) {
-			var msg;
+		if(net != 0 || tv != 0){
+			$('#pack-info').show();
+
+			var title = '';
+			var desc = '';
+			var add = '';
+			var price = '';
 			
-			if(data.email_check == "invalid"){
-				msg = '<p class="errorMessage">Sorry, <span class="emph">' +  data.email + '</span> is NOT a valid e-mail address. Please try again.</p>';
-			} else if(data.email_check == "no input") {
-				msg = '<p class="error">Please enter your email address.</p>';
-			} else {
-				if(data.exist == "yes"){
-					msg = '<p class="success"><span class="emph">' + data.email + '</span> is already registered.</p>';
-				}else{
-					msg = '<p class="success">Thank you for your subscription.</p>';
-				}
-			}
-			
-			$('#msg-ajax').html(msg).fadeIn(600);
+			$.ajax({
+				type: 'GET',
+				url: 'subscribe/pack_info/?net=' + net + '&tv=' + tv,
+				dataType: 'json',
+				success: 
+					function(respond) {							
+						if(respond.bundle){
+							title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.package_name + ' & ' + respond.data.tv.package_name;
+							desc = 'Paket bundle layanan ' + respond.data.net.package_name.toLowerCase() + ' ' + respond.data.net.package_body.toLowerCase() + ' + ' + respond.data.tv.package_body.toLowerCase();
+							add = '<small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>';
+						}else{
+							title = respond.data.package_name;
+							desc = respond.data.package_body;
+							add = '';
+						}
+
+						$('#pack-info #pack-name').html(title);
+						$('#pack-info #pack-desc').html(desc);
+						$('#pack-info #additional-info').html(add);
+					},
+			});
+		}else{
+			$('#pack-info #pack-name').html('');
+			$('#pack-info').hide();
 		}
 	});
-}
+	
+});

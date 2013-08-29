@@ -62,38 +62,3 @@
 		</div>
 	<?php echo form_close(); ?>
 </fieldset>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		if($('[name="search_key"]').val() == 'date'){
-			$('[name="search_term"]').addClass('datepicker').datepicker({dateFormat: 'dd-mm-yy'});
-		}
-		
-		$('[name="search_key"]').change(function(){
-			if($(this).val() == 'date'){
-				$('[name="search_term"]').attr('value', '');
-				$('[name="search_term"]').addClass('datepicker').datepicker({dateFormat: 'dd-mm-yy'});
-			}else{
-				$('[name="search_term"]').datepicker('destroy');
-				$('[name="search_term"]').attr('value', '');
-			}
-		})	
-	})
-	
-		
-	function doSave(){
-		var formData = new FormData($('#filter-form')[0]);
-		
-		$.ajax({
-			type: 'POST',
-			url: 'admin/subscribe/do_save',
-			processData: false,
-		    contentType: false,
-			data:formData,
-			dataType: 'json',
-			success: function(response) {
-				window.location = response.url;
-			},
-		});
-	}
-</script>

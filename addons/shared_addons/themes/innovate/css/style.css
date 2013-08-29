@@ -350,11 +350,9 @@ table#packages-detail .amount{font-weight:bold; font-size:18px}
 
 
 
+/* -------------------------------------- Subscribe Page ----------------------------------- */
 
 
-
-
-/* -------------------------------------- Subscribe ----------------------------------- */
 body.subscribe{
 	background-image:url(../img/subscribe.jpg);
 	background-repeat:no-repeat;
@@ -365,75 +363,7 @@ body.subscribe #content{
 	min-height:500px;	
 }
 
-#subscribe-ack{
-	width:25%;
-	font-size:14px;
-	color:#39C;
-	position:relative;
-	top:100px;
-}
 
-#form-container{
-	width:55%;
-	color:#333;
-	margin-left:80px;	
-}
-
-#subscribe-form{
-	background:rgba(255,255,255,.9);
-	padding:40px 0 20px 0;
-	box-shadow:0 0 20px rgba(0,0,0,.1);	
-	border-radius:5px;
-}
-
-#form-container h1{color:#39C; text-shadow:0 -1px 1px #FFF;}
-#subscribe-form label{color:#444}
-
-form #subscribe-form input[type='text']{width:200px;}
-form #subscribe-form input[type='submit']{cursor:pointer; background:#39C; border:none; width:160px; color:#FFF; font-weight:bold;}
-form #subscribe-form input[type='submit']:hover{background:#717170; color:#FFF;}
-form #subscribe-form span{color:#F00; font-size:14px; font-weight:bold}
-
-ul.form{overflow:hidden;}
-ul.form li{padding:10px; /*background:rgba(30,200,255,.5);*/}
-ul.form li.even{}
-
-
-#validation-msg{background:#C90000; margin-bottom:20px;}
-#validation-msg p{margin:0 10px; font-size:11px; color:#FFF; padding:10px 0;}
-
-#pack-info{
-	display:none;
-	padding:20px 0;
-	color:#333;
-	width:100%;
-}
-
-#pack-info .pack-name, #pack-info .pack-desc{
-	margin:10px 0;
-}
-
-#pack-info .pack-name{
-	font-size:18px; 
-	font-weight:bold;
-	color:#333;
-	border-bottom:1px solid #CCC;
-
-/* 	background:#39C; */	
-/* 	padding:5px 10px; */
-/* 	border-radius:3px; */
-}
-
-#pack-info .pack-name span.bundle{	
-	font-size:14px; 
-	font-weight:bold; 
-/* 	color:rgba(255,255,255,.65); */
-	color:#39C;
-}
-
-#pack-info .pack-desc{
-	font-size:14px; 
-}
 
 
 

@@ -9,6 +9,8 @@
  */
 class Subscribe extends Public_Controller
 {
+	protected $ADMIN_PATH;
+	protected $SALES_EMAIL;
 	
 	protected $subscriber;
 	protected $packages = array();
@@ -18,6 +20,9 @@ class Subscribe extends Public_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->ADMIN_PATH = base_url() . 'admin';
+		$this->SALES_EMAIL = 'sales@innovate-indonesia.com';
 		
 		$this->load->model('subscribe_m');
 		$this->packages_m = $this->load->model('products/packages_m');
@@ -50,6 +55,8 @@ class Subscribe extends Public_Controller
 	function render($view){
 		$this->template
 		->title($this->module_details['name'])
+		->append_css('module::subscribe.css')
+		->append_js('module::subscribe.js')
 		->set('subscriber', $this->subscriber)
 		->set('packages', $this->packages)
 		->build($view);
@@ -77,12 +84,35 @@ class Subscribe extends Public_Controller
 			$data['packages'] = $pack;
 			$data['date'] = date('Y-m-d');
 			
+			
 			if($this->subscribe_m->insert($data)){
+				
+				//send notification email to sales team
+				$msg = '<p><strong>' . $data['name'] . '</strong> telah mengajukan permohonan berlangganan Innovate. Mohon segera di follow up calon pelanggan ini dengan data berikut:</p>';
+				$msg .= '<table><tr><td>Nama</td><td>: ' . $data['name'] . '</td></tr>';
+				$msg .= '<tr><td>Alamat</td><td>: ' . $data['address'] . '</td></tr>';
+				$msg .= '<tr><td>Telepon</td><td>: ' . $data['area_code'] . ' ' . $data['phone'] . '</td></tr>';
+				$msg .= '<tr><td>Ponsel</td><td>: ' . $data['mobile'] . '</td></tr></table>';
+				$msg .= '<p>Silahkan masuk ke <a href="' . $this->ADMIN_PATH . '">Admin Panel</a> untuk memproses permohonan ini.<br/><br/><br/><br/>Terima kasih.</p>';
+				
+				$this->load->library('email');
+					
+				$this->email->from('admin@innovate-indonesia.com', 'Innovate Subscription System');
+				$this->email->to($this->SALES_EMAIL);
+				//$this->email->to('myseconddigitalmail@yahoo.com');
+				$this->email->cc('');
+				$this->email->bcc('');
+					
+				$this->email->subject('[Notification] Permohonan Berlangganan');
+				$this->email->message($msg);
+					
+				$this->email->send();
+					
+				echo $this->email->print_debugger();
+				
+				//Redirect
 				redirect('subscribe/success');
 			}
-			
-			//send email to sales
-			
 			
 		}else{
 			$this->subscriber = $this->subscribe_m->get_new();
