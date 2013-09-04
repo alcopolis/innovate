@@ -2,7 +2,7 @@
 
 class Alcopolis
 {
-	
+	//Filter post data into desired/specific input
 	public function array_from_post($fields, $post){
 		$data = array();
 
@@ -14,4 +14,5 @@ class Alcopolis
 	
 		return $data;
 	}
+	
 }

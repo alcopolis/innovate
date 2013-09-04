@@ -12,32 +12,32 @@ class Subscribe_m extends MY_Model {
 	public $_rules = array(
 				'name' => array(
 						'field' => 'name',
-						'label' => 'Nama',
-						'rules' => 'trim|required|max_length[20]|xss_clean',
+						'label' => 'name',
+						'rules' => 'trim|required|is_unique[default_inn_subscribe.name]|xss_clean',
 				),
 				'email' => array(
 						'field' => 'email',
-						'label' => 'Email',
-						'rules' => 'required|valid_email|is_unique[users.email]|xss_clean',
+						'label' => 'email',
+						'rules' => 'trim|required|valid_email|is_unique[default_inn_subscribe.email]|xss_clean',
 				),
 				'address' => array(
 						'field' => 'address',
-						'label' => 'Address',
-						'rules' => 'required|xss_clean',
+						'label' => 'address',
+						'rules' => 'required|min_length[10]|xss_clean',
 				),
 				'area_code' => array(
 						'field' => 'area_code',
-						'label' => 'Area Code',
+						'label' => 'area code',
 						'rules' => 'trim|required|numeric|xss_clean',
 				),
 				'phone' => array(
 						'field' => 'phone',
-						'label' => 'Phone',
+						'label' => 'phone',
 						'rules' => 'trim|required|numeric|xss_clean',
 				),
 				'mobile' => array(
 						'field' => 'mobile',
-						'label' => 'Mobile',
+						'label' => 'mobile',
 						'rules' => 'trim|required|numeric|xss_clean',
 				),
 			);
@@ -85,5 +85,28 @@ class Subscribe_m extends MY_Model {
 	public function get_subscriber_by($fields, $where, $single = false){
 		$this->db->where($where);
 		return $this->get_subscriber($fields, $single);
+	}
+	
+	
+	
+	
+	//UTILITY FUNCTION
+	
+	//Get the data ID from db insert operation
+	public function get_id(){
+		$query = $this->db->query('SELECT LAST_INSERT_ID()');
+		$row = $query->row_array();
+	
+		return $row['LAST_INSERT_ID()'];
+	}
+	
+	//Count Result Data
+	public function count_subscriber(){
+// 		$this->db->from($this->_table);
+
+		$query = $this->db->get($this->_table);
+		return $query->num_rows();
+		
+		//return $this->db->count_all_results();
 	}
 }

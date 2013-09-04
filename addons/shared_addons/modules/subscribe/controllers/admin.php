@@ -35,13 +35,14 @@ class Admin extends Admin_Controller
 	
 	
 	
-	function render($view){
+	function render($view, $var){
 		$this->template
 		->title($this->module_details['name'])
 //		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
 		->append_js('module::subscribe-admin.js')
 		->set('subscribes', $this->subscribes_data)
 		->set('filter', $this->filter)
+		->set($var)
 		->build($view);
 	}
 	
@@ -88,11 +89,12 @@ class Admin extends Admin_Controller
 			$this->filter->status = $this->input->post('status');
 			$this->filter->sort = $this->input->post('sort');
 		}
+
 		
-		$this->subscribes_data = $this->subscribe_m->get_all();
-		
-		$this->render('admin/index');
+	 	$this->subscribes_data = $this->subscribe_m->get_all();
+	 	$this->render('admin/index');
 	}
+	
 
 	public function change_status(){
 		$sid = $this->input->get('id');
