@@ -62,6 +62,13 @@
 										<?php echo form_textarea(array('id' => 'package_body', 'name' => 'package_body', 'rows' => 30, 'class' => $post->type)) ?>
 									</div>
 								</li>
+								<li>
+									<div class="buttons align-right padding-top">							
+										<button class="btn blue" value="save" name="btnAction" type="submit"><span>Save</span></button>
+										<button class="btn blue" value="save_exit" name="btnAction" type="submit"><span>Save &amp; Exit</span></button>					
+										<a class="btn gray cancel" href="http://localhost/innovate/admin/pages">Cancel</a>
+									</div>
+								</li>
 							</ul>
 						</fieldset>
 					</div>

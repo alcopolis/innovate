@@ -38,21 +38,30 @@ class Admin_Packages extends Admin_Controller {
 	
 	public function create()
 	{
+		if($this->input-get('prod_id') != null){
+			//create from product page
+		}else{
+			//create from package page
+		}
 		
-		$post = new stdClass();
-		$post->type = 'wysiwyg-advanced';
 		
-		$this->data->form_action = 'create';
-		$this->data->page_title = 'New Package';
+// 		$post = new stdClass();
+// 		$post->type = 'wysiwyg-advanced';
 		
-		$this->template
-			->title($this->data->page_title)
-			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
-			->append_js('module::product_form.js')
-			->set('data', $this->data)
-			->set('post', $post)
-			->build('admin/package_form');
+// 		$this->data->form_action = 'create';
+// 		$this->data->page_title = 'New Package';
+		
+// 		$this->template
+// 			->title($this->data->page_title)
+// 			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+// 			->append_js('module::product_form.js')
+// 			->set('data', $this->data)
+// 			->set('post', $post)
+// 			->build('admin/package_form');
 	}
+	
+	
+	
 	
 	public function edit($slug)
 	{
