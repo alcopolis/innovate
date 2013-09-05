@@ -21,12 +21,12 @@ $(document).ready(function(){
 				success: 
 					function(respond) {							
 						if(respond.bundle){
-							title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.package_name + ' & ' + respond.data.tv.package_name;
-							desc = 'Paket bundle layanan ' + respond.data.net.package_name.toLowerCase() + ' ' + respond.data.net.package_body.toLowerCase() + ' + ' + respond.data.tv.package_body.toLowerCase();
+							title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.name + ' & ' + respond.data.tv.name;
+							desc = 'Paket bundle layanan ' + respond.data.net.name.toLowerCase() + ' ' + respond.data.net.body.toLowerCase() + ' + ' + respond.data.tv.body.toLowerCase();
 							add = '<small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>';
 						}else{
-							title = respond.data.package_name;
-							desc = respond.data.package_body;
+							title = respond.data.name;
+							desc = respond.data.body;
 							add = '';
 						}
 

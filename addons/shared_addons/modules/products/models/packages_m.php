@@ -10,10 +10,40 @@
  */
 class Packages_m extends MY_Model
 {
+	public $_rules = array(
+			'name' => array(
+					'field' => 'name',
+					'label' => 'name',
+					'rules' => 'trim|required|xss_clean',
+			),
+			'slug' => array(
+					'field' => 'slug',
+					'label' => 'slug',
+					'rules' => 'trim|required|xss_clean',
+			),
+			'price' => array(
+					'field' => 'price',
+					'label' => 'price',
+					'rules' => 'required|numeric',
+			),
+			'body' => array(
+					'field' => 'body',
+					'label' => 'body',
+					'rules' => 'xss_clean',
+			),
+			'group' => array(
+					'field' => 'group',
+					'label' => 'group',
+					'rules' => 'xss_clean',
+			),
+		);
+	
+	
 	public function __construct() {
 		parent::__construct();
 		
-		$this->_table = 'inn_products_packages';
+		//$this->_table = 'inn_products_packages';
+		$this->_table = 'inn_products_packages_copy';
 		$field_table = 'inn_products_package_field';
 	}
 	

@@ -38,8 +38,8 @@ class Subscribe extends Public_Controller
 		$this->form_validation->set_message('is_unique','You have been signed up with this %s');
 
 		$this->packages = new stdClass();
-		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('package_group'=>'Super Cepat'), FALSE), 'Internet');
-		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('package_group'=>'Starter'), FALSE), 'Televisi');
+		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group'=>'Super Cepat'), FALSE), 'Internet');
+		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group'=>'Starter'), FALSE), 'Televisi');
 	}
 	
 	private function packages_result($data, $info){
@@ -47,7 +47,7 @@ class Subscribe extends Public_Controller
 		
 		$arr[0] = '- Paket ' . $info . ' -';
 		foreach($data as $d){
-			$arr[$d->package_id] = $d->package_name;
+			$arr[$d->id] = $d->name;
 		}
 		return $arr;
 	}
@@ -145,8 +145,8 @@ class Subscribe extends Public_Controller
 		$pack = array();
 
 		if($net_id != '0' and $tv_id != '0'){
-			$net = $this->packages_m->get_packages_by(NULL, array('package_id' => $net_id), TRUE);
-			$tv = $this->packages_m->get_packages_by(NULL, array('package_id' => $tv_id), TRUE);
+			$net = $this->packages_m->get_packages_by(NULL, array('id' => $net_id), TRUE);
+			$tv = $this->packages_m->get_packages_by(NULL, array('id' => $tv_id), TRUE);
 			
 			$pack = array(
 				'bundle' => true,
@@ -158,10 +158,10 @@ class Subscribe extends Public_Controller
 		}else{
 			
 			if($net_id != '0' && $tv_id == '0'){
-				$net = $this->packages_m->get_packages_by(NULL, array('package_id' => $net_id), TRUE);
+				$net = $this->packages_m->get_packages_by(NULL, array('id' => $net_id), TRUE);
 				$pack['data'] = $net;
 			}elseif($tv_id != '0' && $net_id == '0'){
-				$tv = $this->packages_m->get_packages_by(NULL, array('package_id' => $tv_id), TRUE);
+				$tv = $this->packages_m->get_packages_by(NULL, array('id' => $tv_id), TRUE);
 				$pack['data'] = $tv;
 			}
 			
