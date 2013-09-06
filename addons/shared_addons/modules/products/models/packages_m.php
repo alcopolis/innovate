@@ -10,6 +10,8 @@
  */
 class Packages_m extends MY_Model
 {
+	//public $_table = 'inn_products_packages_copy';
+	
 	public $_rules = array(
 			'name' => array(
 					'field' => 'name',
@@ -65,6 +67,28 @@ class Packages_m extends MY_Model
 	public function get_packages_by($fields, $where, $single = false){
 		$this->db->where($where);
 		return $this->get_packages($fields, $single);
+	}
+	
+	public function update_package($id, $data){
+		$this->db->where('id', $id);
+	
+		if($this->db->update($this->_table, $data)){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}
+	
+	
+	
+	//UTILITY FUNCTION
+	
+	//Get the data ID from db insert operation
+	public function get_id(){
+		$query = $this->db->query('SELECT LAST_INSERT_ID()');
+		$row = $query->row_array();
+	
+		return $row['LAST_INSERT_ID()'];
 	}
 
 }

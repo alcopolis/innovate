@@ -23,7 +23,7 @@
 					<tr>
 						<?php
 							echo '<td class="align-center">' . form_checkbox('action_to[]', $row->package_id) . '</td>';
-							echo '<td><a href="admin/products/packages/edit/' . $row->package_slug . '">' . $row->package_name . '</a></td>';
+							echo '<td><a href="admin/products/packages/edit/' . $row->package_id . '">' . $row->package_name . '</a></td>';
 							echo '<td>' . number_format($row->package_price, 0, ',', '.') . '</td>';
 							echo '<td>' . $row->package_body . '</td>';
 							echo '<td>Edit &nbsp; Delete</td>';
@@ -34,6 +34,9 @@
 		</table>
 	</div>
 <?php }else{ ?>
-	<div class="no_data">There are no packages at the moment.</div>
+	<div class="no_data">
+		There are no packages at the moment.<br>
+		<a href="admin/products/packages/create" class="add btn blue">Add New</a>
+	</div>
 <?php } ?>
 </fieldset>	

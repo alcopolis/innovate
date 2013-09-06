@@ -25,8 +25,16 @@
 						<fieldset>
 							<ul>
 								<li>
-									<label for="product_name">Product <span>*</span></label>
-									<div class="input"><?php echo form_input('prod_name', set_value('prod_name', htmlspecialchars($packages_data->prod_name))) ?></div>
+									<label for="product_name">Product Parent</label>
+									<div class="input">
+										<?php 
+											if($page_data->action == 'create'){
+												echo form_dropdown('prod_id', $packages_data->prod_list, $this->input->post('prod_id'));
+											}else{
+												echo form_input('prod_id', set_value('prod_name', htmlspecialchars_decode($packages_data->prod_name)), 'disabled');
+											} 
+										?>
+									</div>
 									
 									<br/>
 																										

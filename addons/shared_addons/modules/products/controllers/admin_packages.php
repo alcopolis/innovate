@@ -21,7 +21,7 @@ class Admin_Packages extends Admin_Controller {
 		$this->page_data = new stdClass();
 		$this->page_data->section = $this->section;
 		$this->page_data->post_type = 'wysiwyg-simple';
-		$this->data_filter = array('name, cat, slug, price, body, group');
+		$this->data_filter = array('name', 'slug', 'price', 'body', 'group');
 	
 		$this->load->model('packages_m');
 		$this->load->model('products_m');
@@ -63,31 +63,44 @@ class Admin_Packages extends Admin_Controller {
 	public function create()
 	{
 		$this->page_data->action = 'create';
+		
+		array_push($this->data_filter, 'prod_id');
+		
 		$this->rules['name']['rules'] = 'trim|required|is_unique[inn_products_packages_copy.name]|xss_clean';
 		$this->rules['slug']['rules'] = 'trim|required|is_unique[inn_products_packages_copy.slug]|xss_clean';
 		$this->form_validation->set_rules($this->rules);
 		
-		if($this->input->get('prod_id') != null){
-			//create from product page
-			
-		}else{
-			//create from package page
+		//Setting dropdown data for product selection
+		$prod_list = $this->products_m->get_product_by('product_id, product_name', NULL, false);	
+		$this->packages_data->prod_list[0] = 'Select Product Parent';
+		foreach($prod_list as $prod){
+			$this->packages_data->prod_list[$prod->product_id] = $prod->product_name;
 		}
 		
 		
-// 		$post = new stdClass();
-// 		$post->type = 'wysiwyg-advanced';
+		//Setting default value
+		$this->packages_data->name = '';
+		$this->packages_data->slug = '';
+		$this->packages_data->group = '';
+		$this->packages_data->price = '';
+		$this->packages_data->body = '';
 		
-// 		$this->data->form_action = 'create';
-// 		$this->data->page_title = 'New Package';
-		
-// 		$this->template
-// 			->title($this->data->page_title)
-// 			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
-// 			->append_js('module::product_form.js')
-// 			->set('data', $this->data)
-// 			->set('post', $post)
-// 			->build('admin/package_form');
+		if($this->form_validation->run()){
+			$data = $this->alcopolis->array_from_post($this->data_filter, $this->input->post());
+			
+			if($this->packages_m->insert($data)){
+				$newID = $this->packages_m->get_id();
+				
+				if($this->input->post('btnAction') == 'save_exit'){
+					$this->index();
+				}else{
+					redirect('admin/products/packages/edit/' . $newID);
+				}
+			}
+		}else{
+			
+			$this->render('admin/package_form');
+		}
 	}
 	
 	
@@ -98,22 +111,23 @@ class Admin_Packages extends Admin_Controller {
 		$this->page_data->action = 'edit';
 		
 		if($this->form_validation->run()){
-			var_dump($this->input->post());
+			$data = $this->alcopolis->array_from_post($this->data_filter, $this->input->post());
 			
-			
-			$data = $this->alcopolis->array_from_post();
-			
-			if($this->input->post('btnAction') == 'save_exit'){
-				$this->index();
+			if($this->packages_m->update_package($id, $data)){
+				if($this->input->post('btnAction') == 'save_exit'){
+					$this->index();
+				}else{
+					$this->packages_data = $this->packages_m->get_packages_by('', array('id' => $id), true);
+					$this->packages_data->prod_name = $this->products_m->get_product_by('product_name', array('product_id' => $this->packages_data->prod_id), true)->product_name;
+						
+					$this->render('admin/package_form');
+				}
 			}
 		}else{
+			$this->packages_data = $this->packages_m->get_packages_by('', array('id' => $id), true);
+			$this->packages_data->prod_name = $this->products_m->get_product_by('product_name', array('product_id' => $this->packages_data->prod_id), true)->product_name;
 			
+			$this->render('admin/package_form');
 		}
-		
-		$this->packages_data = $this->packages_m->get_packages_by('', array('id' => $id), true);
-		$this->packages_data->prod_name = $this->products_m->get_product_by('product_name', array('product_id' => $this->packages_data->prod_id), true);
-		
-		$this->render('admin/package_form');
-		
 	}
 }
