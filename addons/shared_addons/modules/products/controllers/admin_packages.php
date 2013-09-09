@@ -19,6 +19,7 @@ class Admin_Packages extends Admin_Controller {
 	{
 		parent::__construct();
 		$this->page_data = new stdClass();
+		$this->packages_data = new stdClass();
 		$this->page_data->section = $this->section;
 		$this->page_data->post_type = 'wysiwyg-simple';
 		$this->data_filter = array('name', 'slug', 'price', 'body', 'group');
@@ -60,7 +61,7 @@ class Admin_Packages extends Admin_Controller {
 		//echo 'Packages Index';
 	}
 	
-	public function create()
+	public function create($prod_id = NULL)
 	{
 		$this->page_data->action = 'create';
 		
@@ -71,19 +72,25 @@ class Admin_Packages extends Admin_Controller {
 		$this->form_validation->set_rules($this->rules);
 		
 		//Setting dropdown data for product selection
+
 		$prod_list = $this->products_m->get_product_by('product_id, product_name', NULL, false);	
 		$this->packages_data->prod_list[0] = 'Select Product Parent';
 		foreach($prod_list as $prod){
 			$this->packages_data->prod_list[$prod->product_id] = $prod->product_name;
 		}
-		
+
+
 		
 		//Setting default value
+		if($prod_id != NULL){
+			$this->packages_data->prod_id = $prod_id;
+		}
 		$this->packages_data->name = '';
 		$this->packages_data->slug = '';
 		$this->packages_data->group = '';
 		$this->packages_data->price = '';
 		$this->packages_data->body = '';
+		
 		
 		if($this->form_validation->run()){
 			$data = $this->alcopolis->array_from_post($this->data_filter, $this->input->post());
@@ -98,7 +105,6 @@ class Admin_Packages extends Admin_Controller {
 				}
 			}
 		}else{
-			
 			$this->render('admin/package_form');
 		}
 	}

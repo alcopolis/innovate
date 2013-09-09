@@ -38,7 +38,7 @@ class Admin extends Admin_Controller {
 		$this->load->model('products_m');
 		
 		// Set our validation rules
-		$this->rules = $this->products_m->product_rules;
+		$this->rules = $this->products_m->_rules;
 		$this->form_validation->set_rules($this->rules);
 	}
 
@@ -111,7 +111,9 @@ class Admin extends Admin_Controller {
 			}
 		}else{
 			$this->prod_data = $this->products_m->get_product($id);
-			$this->render('admin/product_form');
+			var_dump($this->prod_data);
+			
+			//$this->render('admin/product_form');
 		}
 	}
 	

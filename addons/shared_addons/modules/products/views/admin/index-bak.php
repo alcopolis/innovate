@@ -32,13 +32,13 @@
 							<?php foreach($prod as $row) { ?>
 								<tr>
 									<?php							
-										echo '<td class="align-center">' . form_checkbox('action_to[]', $row->id) . '</td>';
-										echo '<td><a href="admin/products/edit/' . $row->id . '">' . $row->name . '</a></td>';
-										echo '<td>' . $row->slug . '</td>';
-										echo '<td>' . $row->section . '</td>';
-										echo '<td style="width:40%;">' . strip_tags(substr($row->teaser, 0, 150)) . '</td>';
-										echo '<td>' . $row->tags . '</td>';
-										echo '<td><a href="admin/products/edit/' . $row->id . '">Edit</a> &nbsp; Delete</td>';
+										echo '<td class="align-center">' . form_checkbox('action_to[]', $row->product_id) . '</td>';
+										echo '<td><a href="admin/products/edit/' . $row->product_id . '">' . $row->product_name . '</a></td>';
+										echo '<td>' . $row->product_slug . '</td>';
+										echo '<td>' . $row->product_section . '</td>';
+										echo '<td style="width:40%;">' . strip_tags(substr($row->product_teaser, 0, 150)) . '</td>';
+										echo '<td>' . $row->product_tags . '</td>';
+										echo '<td><a href="admin/products/edit/' . $row->product_id . '">Edit</a> &nbsp; Delete</td>';
 									?>
 								</tr>
 							<?php } ?>

@@ -18,7 +18,7 @@
 				<div class="tabs">
 					<ul class="tab-menu">
 						<li><a href="#package-content-fields"><span>Content</span></a></li>
-						<li><a href="#package-custom-fields"><span>Custom Fields</span></a></li>
+<!-- 						<li><a href="#package-custom-fields"><span>Custom Fields</span></a></li> -->
 					</ul>
 					
 					<div id="package-content-fields" class="form_inputs">
@@ -27,9 +27,11 @@
 								<li>
 									<label for="product_name">Product Parent</label>
 									<div class="input">
-										<?php 
-											if($page_data->action == 'create'){
+										<?php 										
+											if(empty($packages_data->prod_id) && $page_data->action == 'create'){
 												echo form_dropdown('prod_id', $packages_data->prod_list, $this->input->post('prod_id'));
+											}elseif(!empty($packages_data->prod_id) && $page_data->action == 'create'){
+												echo form_dropdown('prod_id', $packages_data->prod_list, $packages_data->prod_id);
 											}else{
 												echo form_input('prod_id', set_value('prod_name', htmlspecialchars_decode($packages_data->prod_name)), 'disabled');
 											} 
@@ -74,13 +76,7 @@
 										<?php echo form_textarea(array('value' => set_value('body', $packages_data->body), 'id' => 'body', 'name' => 'body', 'rows' => 10, 'class' => $page_data->post_type)) ?>
 									</div>
 								</li>
-								<li>
-<!-- 									<div class="buttons align-right padding-top">							 -->
-<!-- 										<button class="btn blue" value="save" name="btnAction" type="submit"><span>Save</span></button> -->
-<!-- 										<button class="btn blue" value="save_exit" name="btnAction" type="submit"><span>Save &amp; Exit</span></button>					 -->
-<!-- 										<a class="btn gray cancel" href="admin/products/packages">Cancel</a> -->
-<!-- 									</div> -->
-								
+								<li>								
 									<div class="buttons align-right padding-top">
 										<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel') )) ?>
 									</div>
@@ -89,14 +85,14 @@
 						</fieldset>
 					</div>
 					
-					<div id="package-custom-fields" class="form_inputs">
-						<fieldset>
-							<div class="util-bar"><a id="new-field" class="add button">Add New Field</a></div>
-							<div id="custom-field">
+<!-- 					<div id="package-custom-fields" class="form_inputs"> -->
+<!-- 						<fieldset> -->
+<!-- 							<div class="util-bar"><a id="new-field" class="add button">Add New Field</a></div> -->
+<!-- 							<div id="custom-field"> -->
 								
-							</div>
-						</fieldset>
-					</div>
+<!-- 							</div> -->
+<!-- 						</fieldset> -->
+<!-- 					</div> -->
 				</div>
 				
 			<?php } ?>
