@@ -11,6 +11,7 @@
 class Products_m extends MY_Model
 {
 		
+	protected $_table = 'inn_products_data_copy';
 	
 	public $_rules = array(
 			'name' => array(
@@ -37,70 +38,36 @@ class Products_m extends MY_Model
 	
 	
 	
-	
-	//Start Product Model
-//	protected $product;
-	protected $_table = 'inn_products_data_copy';
-	
 	public function __construct() {
 		parent::__construct();
 	}
 	
 	
 	//Get data produk dan paket2nya sesuai dengan id input
-	public function get_product($id = NULL){	
-		$prod_query = new stdClass();
-		
-		if($id == NULL || $id == ''){
-			$prod_query = $this->db->get($this->_table)->result();
-		}else{
-			$prod_query->data = $this->db->where('id', $id)->get($this->_table)->row();
-			$prod_query->packages = $this->get_packages($prod_query->data->id);
-		}
-		
-		return $prod_query;
-	}
+	public function get_product($fields = NULL, $single = FALSE)
+	{
 	
-	
-	public function get_product_by($fields = NULL, $condition = NULL, $single = FALSE){
-		$method = 'result';
-		
 		if($fields != NULL){
 			$this->db->select($fields);
 		}
-		
-		if($condition != NULL){
-			$this->db->where($condition);
-		}
-		
+	
 		if($single){
 			$method = 'row';
 		}else{
 			$method = 'result';
 		}
 		
-		return $this->db->get($this->_table)->$method();
+		$this->db->from('default_inn_products_data_copy t0');
+		$this->db->join('default_inn_products_packages_copy t1','t1.prod_id = t0.id','LEFT');
+		
+		//return $this->db->get($this->_table)->$method();
+		return $this->db->get()->result();
 	}
 	
 	
-	public function get_packages($id = NULL){
-		$packages_table = 'inn_products_packages_copy';
-		
-		if($id != NULL || $id != ''){
-			return $this->db->where('prod_id', $id)
-							->get($packages_table)->result();
-		}
-	}
-	
-	
-	public function update_product($id, $data){
-		$this->db->where('id', $id);
-		
-		if($this->db->update($this->_table, $data)){
-			return TRUE;
-		}else{
-			return FALSE;
-		}		
+	public function get_product_by($fields, $where, $single = FALSE){
+		$this->db->where($where);
+		return $this->get_product($fields, $single);
 	}
 
 }

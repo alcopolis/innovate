@@ -39,7 +39,7 @@
 															'select' => '',
 															'retail' => 'Retail',
 															'corporate' => 'Corporate'
-														), 'select') ?>
+														), set_value('section', $prod->data->section)) ?>
 													</div>
 												</td>
 												<td style="width:20%;">
@@ -88,7 +88,7 @@
 									<br/>
 									
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'body', 'value' => $prod->data->body, 'name' => 'body', 'rows' => 30, 'class' => $page->editor_type)) ?>
+										<?php echo form_textarea(array('id' => 'body', 'value' => set_value('body', $prod->data->body), 'name' => 'body', 'rows' => 30, 'class' => $page->editor_type)) ?>
 									</div>
 								</li>
 							</ul>
@@ -99,7 +99,8 @@
 					<!-- Product package tab -->
 					<div class="form_inputs" id="product-packages-fields">
 						<?php $this->load->view('admin/partials/package_list', $prod->packages); ?> 
-					</div>					
+					</div>	
+									
 					
 					<!-- Product CSS tab -->
 					<div class="form_inputs" id="product-css-fields">
@@ -108,7 +109,7 @@
 								<li class="editor">
 									<label for="body">Custom CSS</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'css', 'name' => 'css', 'value' => $prod->data->css, 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'css', 'name' => 'css', 'value' => set_value('css', $prod->data->css), 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>
@@ -123,7 +124,7 @@
 								<li class="editor">
 									<label for="body">Custom Javascript</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'js', 'name' => 'js', 'value' => $prod->data->js, 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'js', 'name' => 'js', 'value' => set_value('js', $prod->data->js), 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>

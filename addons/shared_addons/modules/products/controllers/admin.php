@@ -79,41 +79,56 @@ class Admin extends Admin_Controller {
 	}
 	
 	
+// 	public function edit($id)
+// 	{
+// 		//Setting page variable
+// 		$this->page_data->title = 'Edit Product';
+// 		$this->page_data->action = 'edit';
+		
+		
+// 		if($this->form_validation->run()){
+// 			$data = array();
+// 			$fields_key = array();
+
+// 			//Cari nama input dg awalan "product"
+// 			foreach($this->input->post() as $field=>$value){
+// 				if (strpos($field,'product') !== false) {
+// 					$fields_key[] = $field;
+// 					$data[$field] = $value;
+// 				}
+// 			}	
+
+// 			if(!in_array('product_is_featured', $fields_key)){
+// 				$data['product_is_featured'] = '0';
+// 			}
+			
+// 			if($this->products_m->update_product($id, $data)){
+// 				//redirect('admin/products');
+// 				$this->prod_data = $this->products_m->get_product($id);
+// 				$this->render('admin/product_form');
+// 			}else{
+// 				$this->render('admin/product_form');
+// 			}
+// 		}else{
+// 			$this->prod_data = $this->products_m->get_product($id);
+// 			//var_dump($this->prod_data->data->section);
+			
+// 			$this->render('admin/product_form');
+// 		}
+// 	}
+
+	
 	public function edit($id)
 	{
 		//Setting page variable
 		$this->page_data->title = 'Edit Product';
 		$this->page_data->action = 'edit';
-		
-		
+	
 		if($this->form_validation->run()){
-			$data = array();
-			$fields_key = array();
-
-			//Cari nama input dg awalan "product"
-			foreach($this->input->post() as $field=>$value){
-				if (strpos($field,'product') !== false) {
-					$fields_key[] = $field;
-					$data[$field] = $value;
-				}
-			}	
-
-			if(!in_array('product_is_featured', $fields_key)){
-				$data['product_is_featured'] = '0';
-			}
 			
-			if($this->products_m->update_product($id, $data)){
-				//redirect('admin/products');
-				$this->prod_data = $this->products_m->get_product($id);
-				$this->render('admin/product_form');
-			}else{
-				$this->render('admin/product_form');
-			}
 		}else{
-			$this->prod_data = $this->products_m->get_product($id);
-			var_dump($this->prod_data);
-			
-			//$this->render('admin/product_form');
+			$this->prod_data = $this->products_m->get_product_by(NULL, array('id' => $id), TRUE);
+			$this->render('admin/product_form');
 		}
 	}
 	
