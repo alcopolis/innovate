@@ -71,12 +71,13 @@ class Admin_Packages extends Admin_Controller {
 		$this->rules['slug']['rules'] = 'trim|required|is_unique[inn_products_packages_copy.slug]|xss_clean';
 		$this->form_validation->set_rules($this->rules);
 		
+		
+		
 		//Setting dropdown data for product selection
-
-		$prod_list = $this->products_m->get_product_by('product_id, product_name', NULL, false);	
+		$prod_list = $this->products_m->get_product_by('id, name', NULL, false);	
 		$this->packages_data->prod_list[0] = 'Select Product Parent';
 		foreach($prod_list as $prod){
-			$this->packages_data->prod_list[$prod->product_id] = $prod->product_name;
+			$this->packages_data->prod_list[$prod->id] = $prod->name;
 		}
 
 
@@ -85,6 +86,8 @@ class Admin_Packages extends Admin_Controller {
 		if($prod_id != NULL){
 			$this->packages_data->prod_id = $prod_id;
 		}
+		
+		
 		$this->packages_data->name = '';
 		$this->packages_data->slug = '';
 		$this->packages_data->group = '';
@@ -124,14 +127,14 @@ class Admin_Packages extends Admin_Controller {
 					$this->index();
 				}else{
 					$this->packages_data = $this->packages_m->get_packages_by('', array('id' => $id), true);
-					$this->packages_data->prod_name = $this->products_m->get_product_by('product_name', array('product_id' => $this->packages_data->prod_id), true)->product_name;
+					$this->packages_data->prod_name = $this->products_m->get_product_by('name', array('id' => $this->packages_data->prod_id), true)->name;
 						
 					$this->render('admin/package_form');
 				}
 			}
 		}else{
 			$this->packages_data = $this->packages_m->get_packages_by('', array('id' => $id), true);
-			$this->packages_data->prod_name = $this->products_m->get_product_by('product_name', array('product_id' => $this->packages_data->prod_id), true)->product_name;
+			$this->packages_data->prod_name = $this->products_m->get_product_by('name', array('id' => $this->packages_data->prod_id), true)->name;
 			
 			$this->render('admin/package_form');
 		}

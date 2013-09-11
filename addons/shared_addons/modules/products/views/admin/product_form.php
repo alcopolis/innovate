@@ -9,7 +9,7 @@
 				if($page->action == 'create'){
 					echo form_open('admin/products/' . $page->action);
 				}else if($page->action == 'edit'){
-					echo form_open('admin/products/' . $page->action . '/' . $prod->data->id);
+					echo form_open('admin/products/' . $page->action . '/' . $prod->id);
 				} 
 			?>
 			
@@ -39,11 +39,11 @@
 															'select' => '',
 															'retail' => 'Retail',
 															'corporate' => 'Corporate'
-														), set_value('section', $prod->data->section)) ?>
+														), 'select') ?>
 													</div>
 												</td>
 												<td style="width:20%;">
-													<div for="product_is_featured"><?php echo form_checkbox('is_featured', $prod->data->is_featured, $prod->data->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
+													<div for="product_is_featured"><?php echo form_checkbox('is_featured', $prod->is_featured, $prod->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
 												</td>
 												<td style="width:20%;">
 													<div for="product_poster">Product Poster Here</div>
@@ -56,22 +56,22 @@
 									<br/>
 																		
 									<label for="product_name">Name <span>*</span></label>
-									<div class="input"><?php echo form_input('name', htmlspecialchars_decode($prod->data->name), 'maxlength="100"') ?></div>
+									<div class="input"><?php echo form_input('name', htmlspecialchars_decode($prod->name), 'maxlength="100"') ?></div>
 									
 									<br/>
 									
 									<label for="product_slug">Slug <span>*</span></label>
-									<div class="input"><?php echo form_input('slug', $prod->data->slug, 'maxlength="100" class="width-20"') ?></div>
+									<div class="input"><?php echo form_input('slug', $prod->slug, 'maxlength="100" class="width-20"') ?></div>
 									
 									<br/>
 									
 									<label for="product_tags">Tags - seperate words with ( , )</label>
-									<div class="input"><?php echo form_input('tags', $prod->data->tags, 'maxlength="100" class="width-20"') ?></div>
+									<div class="input"><?php echo form_input('tags', $prod->tags, 'maxlength="100" class="width-20"') ?></div>
 									
 									<br/>
 									
 									<label for="product_teaser">Teaser</label>
-									<div class="input"><?php echo form_textarea(array('id' => 'teaser', 'value' => $prod->data->teaser, 'name' => 'teaser', 'rows' => 5)) ?></div>
+									<div class="input"><?php echo form_textarea(array('id' => 'teaser', 'value' => $prod->teaser, 'name' => 'teaser', 'rows' => 5)) ?></div>
 								</li>
 						
 								<li class="editor">
@@ -88,7 +88,7 @@
 									<br/>
 									
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'body', 'value' => set_value('body', $prod->data->body), 'name' => 'body', 'rows' => 30, 'class' => $page->editor_type)) ?>
+										<?php echo form_textarea(array('id' => 'body', 'value' => set_value('body', $prod->body), 'name' => 'body', 'rows' => 30, 'class' => $page->editor_type)) ?>
 									</div>
 								</li>
 							</ul>
@@ -98,7 +98,7 @@
 					
 					<!-- Product package tab -->
 					<div class="form_inputs" id="product-packages-fields">
-						<?php $this->load->view('admin/partials/package_list', $prod->packages); ?> 
+						<?php $this->load->view('admin/partials/package_list', $pack); ?> 
 					</div>	
 									
 					
@@ -109,7 +109,7 @@
 								<li class="editor">
 									<label for="body">Custom CSS</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'css', 'name' => 'css', 'value' => set_value('css', $prod->data->css), 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'css', 'name' => 'css', 'value' => set_value('css', $prod->css), 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>
@@ -124,7 +124,7 @@
 								<li class="editor">
 									<label for="body">Custom Javascript</label><br>
 									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'js', 'name' => 'js', 'value' => set_value('js', $prod->data->js), 'rows' => 30, 'class' => 'markdown')) ?>
+										<?php echo form_textarea(array('id' => 'js', 'name' => 'js', 'value' => set_value('js', $prod->js), 'rows' => 30, 'class' => 'markdown')) ?>
 									</div>
 								</li>
 							</ul>

@@ -1,7 +1,7 @@
 <fieldset>
-<?php if(!empty($prod->packages)){ ?>	
+<?php if(!empty($pack)){ ?>	
 	<div id="package-list">		
-		<div style="margin-bottom:20px;"><a href="admin/products/packages/create/<?php echo $prod->data->id; ?>" class="add btn blue">Add New</a></div>
+		<div style="margin-bottom:20px;"><a href="admin/products/packages/create/<?php echo $prod->id; ?>" class="add btn blue">Add New</a></div>
 		<table>
 			<thead>
 				<th with="30" class="align-center"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>
@@ -20,7 +20,7 @@
 			</tfoot>
 			
 			<tbody>
-				<?php foreach($prod->packages as $row) { ?>
+				<?php foreach($pack as $row) { ?>
 					<tr>
 						<?php
 							echo '<td class="align-center">' . form_checkbox('action_to[]', $row->id) . '</td>';
@@ -37,7 +37,7 @@
 <?php }else{ ?>
 	<div class="no_data">
 		There are no packages at the moment.<br>
-		<a href="admin/products/packages/create/<?php echo $prod->data->id; ?>" class="add btn blue">Add New</a>
+		<a href="admin/products/packages/create/<?php echo $prod->id; ?>" class="add btn blue">Add New</a>
 	</div>
 <?php } ?>
 </fieldset>	

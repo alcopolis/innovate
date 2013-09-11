@@ -16,7 +16,8 @@ class Admin extends Admin_Controller {
 	protected $rules = array();
 	
 	protected $page_data;
-	protected $prod_data;	
+	protected $prod_data;
+	protected $pack_data;
 
 	/**
 	 * Constructor method
@@ -29,13 +30,17 @@ class Admin extends Admin_Controller {
 	{
 		parent::__construct();
 		
-		$this->prod_data = new stdClass();
-		$this->page_data = new stdClass();
+		$this->load->model('products_m');
+		$this->load->model('packages_m');
 		
+		$this->prod_data = new stdClass();
+		$this->pack_data = new stdClass();
+		
+		
+		$this->page_data = new stdClass();
 		$this->page_data->section = $this->section;
 		$this->page_data->editor_type = 'wysiwyg-advanced';
 		
-		$this->load->model('products_m');
 		
 		// Set our validation rules
 		$this->rules = $this->products_m->_rules;
@@ -49,6 +54,7 @@ class Admin extends Admin_Controller {
 			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
 			->append_js('module::product_form.js')
 			->set('prod', $this->prod_data)
+			->set('pack', $this->pack_data)
 			->set('page', $this->page_data)
 			->build($view);
 	}
@@ -127,7 +133,10 @@ class Admin extends Admin_Controller {
 		if($this->form_validation->run()){
 			
 		}else{
-			$this->prod_data = $this->products_m->get_product_by(NULL, array('id' => $id), TRUE);
+			$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
+			$this->pack_data = $this->packages_m->get_packages_by(NULL, array('prod_id'=>$id));
+			//var_dump($this->prod_data, $this->pack_data);
+			
 			$this->render('admin/product_form');
 		}
 	}

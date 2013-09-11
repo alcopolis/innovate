@@ -57,17 +57,27 @@ class Products_m extends MY_Model
 			$method = 'result';
 		}
 		
-		$this->db->from('default_inn_products_data_copy t0');
-		$this->db->join('default_inn_products_packages_copy t1','t1.prod_id = t0.id','LEFT');
 		
-		//return $this->db->get($this->_table)->$method();
-		return $this->db->get()->result();
+		return $this->db->get($this->_table)->$method();
 	}
 	
 	
 	public function get_product_by($fields, $where, $single = FALSE){
-		$this->db->where($where);
+		if(isset($where)){
+			$this->db->where($where);
+		}
+		
 		return $this->get_product($fields, $single);
+	}
+	
+	
+	public function get_packages_for_product($id){
+		$this->db->select('t1.*');
+		
+		$this->db->from('default_inn_products_data_copy t0');
+		$this->db->join('default_inn_products_packages_copy t1','t1.prod_id = t0.id','LEFT');
+		$this->db->where('t0.id', $id);
+		return $this->db->get()->result();
 	}
 
 }
