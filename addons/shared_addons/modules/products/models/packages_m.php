@@ -10,7 +10,7 @@
  */
 class Packages_m extends MY_Model
 {
-	//public $_table = 'inn_products_packages_copy';
+	protected $_table = 'inn_products_packages';
 	
 	public $_rules = array(
 			'name' => array(
@@ -43,9 +43,6 @@ class Packages_m extends MY_Model
 	
 	public function __construct() {
 		parent::__construct();
-		
-		//$this->_table = 'inn_products_packages';
-		$this->_table = 'inn_products_packages_copy';
 		$field_table = 'inn_products_package_field';
 	}
 	
@@ -55,13 +52,22 @@ class Packages_m extends MY_Model
 			$this->db->select($fields);
 		}
 		
+		$query = $this->db->get($this->_table);
+		
 		if($single){
 			$method = 'row';
 		}else{
 			$method = 'result';
 		}
+
 		
-		return $this->db->get($this->_table)->$method();
+		if($query->num_rows() > 0){
+			return  $query->$method();
+		}else{
+			return NULL;
+		}
+		
+		$this->db->flush_cache();
 	}
 	
 	public function get_packages_by($fields, $where, $single = false){

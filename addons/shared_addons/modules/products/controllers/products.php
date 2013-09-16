@@ -15,29 +15,31 @@ class Products extends Public_Controller
 		parent::__construct();
 		$this->load->model('products_m');
 	}
+
 	
 	public function view($slug){
-
-		$this->product = $this->products_m->get_product_by(NULL, array('product_slug'=>$slug), true);
+	
+		
+		$this->product = $this->products_m->get_product_by(NULL, array('slug' => $slug), true);
 		
 		if($this->product != NULL){
 			$this->template
-				->title($this->module_details['name'])
-				->append_css('module::style_front.css')
-				->set('product', $this->product)
-				->build('products');
+			->title($this->module_details['name'])
+			->append_css('module::style_front.css')
+			->set('product', $this->product)
+			->build('products');
 		}else{
 			//Redirect to Missing Page
 		}
 	}
 	
-	private function construct_data($slug){
-		$prod = new stdClass();
-		$prod->data = $this->products_m->inn_get('product', $slug, 'slug', true); //return object
-		$prod->packages = $this->products_m->inn_construct_data($prod->data->product_id);
+// 	private function construct_data($slug){
+// 		$prod = new stdClass();
+// 		$prod->data = $this->products_m->inn_get('product', $slug, 'slug', true); //return object
+// 		$prod->packages = $this->products_m->inn_construct_data($prod->data->product_id);
 		
-		return $prod;
-	}
+// 		return $prod;
+// 	}
 	
 	
 }

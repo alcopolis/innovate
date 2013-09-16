@@ -11,7 +11,7 @@
 class Products_m extends MY_Model
 {
 		
-	protected $_table = 'inn_products_data_copy';
+	protected $_table = 'inn_products_data';
 	
 	public $_rules = array(
 			'name' => array(
@@ -43,11 +43,27 @@ class Products_m extends MY_Model
 	}
 	
 	
+	public function add_new(){
+		$prod = new stdClass();
+		
+		$prod->name = '';
+		$prod->slug = '';
+		$prod->teaser = '';
+		$prod->body = '';
+		$prod->section = 'select';
+		$prod->css = '';
+		$prod->js = '';
+		$prod->is_featured = '';
+		$prod->tags = '';
+		
+		return $prod;
+	}
+	
 	//Get data produk dan paket2nya sesuai dengan id input
 	public function get_product($fields = NULL, $single = FALSE)
 	{
 	
-		if($fields != NULL){
+		if(isset($fields)){
 			$this->db->select($fields);
 		}
 	
@@ -56,13 +72,12 @@ class Products_m extends MY_Model
 		}else{
 			$method = 'result';
 		}
-		
-		
+				
 		return $this->db->get($this->_table)->$method();
 	}
 	
 	
-	public function get_product_by($fields, $where, $single = FALSE){
+	public function get_product_by($fields, $where, $single){
 		if(isset($where)){
 			$this->db->where($where);
 		}
@@ -71,13 +86,14 @@ class Products_m extends MY_Model
 	}
 	
 	
-	public function get_packages_for_product($id){
-		$this->db->select('t1.*');
+// 	public function get_packages_for_product($id){
+// 		$this->db->select('t1.*');
 		
-		$this->db->from('default_inn_products_data_copy t0');
-		$this->db->join('default_inn_products_packages_copy t1','t1.prod_id = t0.id','LEFT');
-		$this->db->where('t0.id', $id);
-		return $this->db->get()->result();
-	}
+// 		$this->db->from('default_inn_products_data_copy t0');
+// 		$this->db->join('default_inn_products_packages_copy t1','t1.prod_id = t0.id','LEFT');
+// 		$this->db->where('t0.id', $id);
+
+// 		return $this->db->get()->result();
+// 	}
 
 }

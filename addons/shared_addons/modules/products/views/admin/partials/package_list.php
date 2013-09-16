@@ -1,5 +1,5 @@
 <fieldset>
-<?php if(!empty($pack)){ ?>	
+<?php if(isset($pack)){ ?>	
 	<div id="package-list">		
 		<div style="margin-bottom:20px;"><a href="admin/products/packages/create/<?php echo $prod->id; ?>" class="add btn blue">Add New</a></div>
 		<table>
@@ -37,7 +37,14 @@
 <?php }else{ ?>
 	<div class="no_data">
 		There are no packages at the moment.<br>
-		<a href="admin/products/packages/create/<?php echo $prod->id; ?>" class="add btn blue">Add New</a>
+		
+		<?php 
+			if(isset($prod->id)){
+				echo '<a href="admin/products/packages/create/' . $prod->id . '" class="add btn blue">Add New</a>';
+			}else{
+				echo 'Please create the product first.';
+			}
+		?>
 	</div>
 <?php } ?>
 </fieldset>	

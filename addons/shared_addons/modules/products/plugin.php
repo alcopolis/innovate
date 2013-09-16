@@ -82,8 +82,8 @@ class Plugin_Products extends Plugin
 
 	public function js()
 	{	
- 		$prod = $this->products_m->get_product_by(NULL, array('product_slug'=>$this->attribute('value')), true);
- 		$js = $prod->product_js;	
+ 		$prod = $this->products_m->get_product_by(NULL, array('slug'=>$this->attribute('value')), true);
+ 		$js = $prod->js;	
 			
  		return '<script>' . $js . '</script>';
 	}
@@ -91,8 +91,8 @@ class Plugin_Products extends Plugin
 	
 	public function css()
 	{
-		$prod = $this->products_m->get_product_by(NULL, array('product_slug'=>$this->attribute('value')), true);
-		$css = $prod->product_css;
+		$prod = $this->products_m->get_product_by(NULL, array('slug'=>$this->attribute('value')), true);
+		$css = $prod->css;
 			
 		return '<style type="text/css">' . $css . '</style>';
 	}
@@ -102,18 +102,18 @@ class Plugin_Products extends Plugin
 		//$key = $this->attribute('section');
 	
 		$fields = array(
-				'product_name',
-				'product_slug',
-				'product_teaser',
+				'name',
+				'slug',
+				'teaser',
 		);
 	
-		$raw = $this->products_m->get_product_by($fields, array('product_is_featured'=>1), false);
+		$raw = $this->products_m->get_product_by($fields, array('is_featured'=>1), false);
 		
 		foreach($raw as $featured){			
 			$data .= '<div class="product-featured" style="margin:20px; width:25%; float:left;">';
-			$data .= '<h3>' . $featured->product_name . '</h3>';		
-			$data .= substr($featured->product_teaser, 0, 150) . ' ...<br/>';
-			$data .= '<a href="products/view/' . $featured->product_slug . '">Learn more &raquo;</a>';
+			$data .= '<h3>' . $featured->name . '</h3>';		
+			$data .= substr($featured->teaser, 0, 150) . ' ...<br/>';
+			$data .= '<a href="products/view/' . $featured->slug . '">Learn more &raquo;</a>';
 			$data .= '</div>';
 		}
 		
