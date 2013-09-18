@@ -73,12 +73,12 @@ class Subscribe extends Public_Controller
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
 			
 			if($this->input->post('packages-net') != '0' and $this->input->post('packages-tv') != '0'){
-				$pack = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-net')), TRUE)->package_name . ' & ' . $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-tv')), TRUE)->package_name;
+				$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name . ' & ' . $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
 			}else{
 				if($this->input->post('packages-net') != '0'){
-					$pack = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-net')), TRUE)->package_name;
+					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name;
 				}elseif($this->input->post('packages-tv') != '0'){
-					$pack = $this->packages_m->get_packages_by('package_name', array('package_id' => $this->input->post('packages-tv')), TRUE)->package_name;
+					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
 				}
 			}
 			
@@ -119,7 +119,7 @@ class Subscribe extends Public_Controller
 					
 				$this->email->send();
 					
-				echo $this->email->print_debugger();
+				//echo $this->email->print_debugger();
 				
 				//Redirect
 				redirect('subscribe/success');

@@ -17,11 +17,9 @@
 	 	</header>
 	 	
 	 	 <div id="content" class="wrapper clear">
+			
 	 	 	<div id="body-theme">
 				{{ theme:partial name="home" }}
-			</div>
-			<div id="berlangganan" class="sticker rotate">
-				<a href="{{ url:site }}subscribe">Register Now</a>
 			</div>
 	 	 </div>
 	 	 

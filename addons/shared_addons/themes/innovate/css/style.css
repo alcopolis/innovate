@@ -210,6 +210,7 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 	position:relative; 
 	margin:0 auto 0 auto; 
 	z-index:9000;
+	padding-top:0;
 }
 
 #mod-epg{
@@ -270,17 +271,26 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 .sticker{position:fixed; z-index:9999}
 
 #berlangganan{
-	right:-42px; 
-	bottom:120px; 
-	background:#39C;
-	padding:10px 20px;
+	width:100%;	
+	text-align:right;
 	
-	border-radius:5px 5px 0 0;
-	border-bottom:1px solid rgba(0,0,0,.5);
-	border-top:1px solid rgba(255,255,255,.5);
+	margin:5px 0 40px 0; padding:0;
+	
+	
 }
 
-#berlangganan a{color:#FFF;}
+#berlangganan a{
+	color:#FFF; 
+	margin-right:40px; padding:5px 10px 5px 10px; 
+	font-size:16px;
+	background:#C00;
+	
+	border-radius:0 0 5px 5px;
+	border-top:1px solid rgba(0,0,0,.25);
+	border-bottom:1px solid rgba(255,255,255,.5);
+}
+
+#berlangganan a:hover{background:#F00;}
 
 
 
