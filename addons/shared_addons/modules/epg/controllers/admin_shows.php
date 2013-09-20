@@ -102,6 +102,8 @@ class Admin_Shows extends Admin_Controller
 			$this->db->from('inn_epg_show_detail t0');
 			$this->db->join('inn_epg_ch_detail t1', 't1.id = t0.cid', 'LEFT');
 			$this->db->where(array('t0.date>='=>date('Y-m-d'),'t0.is_featured'=> 1));
+			$this->db->group_by('poster');
+			$this->db->order_by('date', 'ASC');
 			$this->sh_data = $this->db->get()->result();
 			
 			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data));

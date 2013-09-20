@@ -100,6 +100,7 @@ class Plugin_Epg extends Plugin
 		$mainswitch = false;
 		
 		$raw = $this->epg_sh_m->order_by('cid', 'RANDOM')->limit($this->attribute('limit'))->get_featured_show();
+		
 		shuffle($raw);
 		
 		$data .= '<style type="text/css">
@@ -123,7 +124,7 @@ class Plugin_Epg extends Plugin
 		
 		foreach($raw as $featured){
 			$ch = $this->epg_ch_m->get_channel($featured->channelid);
-			
+						
 			$poster_path = $this->module_details['path'] . '/upload/shows' . $featured->poster;
 			
 			if(!$mainswitch){

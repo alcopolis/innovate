@@ -56,8 +56,8 @@ class Epg_Sh_m extends MY_Model {
 		
 		$this->db->join('inn_epg_show_detail t0','t1.id = t0.cid','LEFT');
 		$this->db->where('t0.is_featured',1);
- 		$this->db->where('t0.date >= ',$hari);
-		$this->db->group_by('poster');
+ 		$this->db->where('t0.date>=',$hari);
+ 		$this->db->where('t0.date<=',$harirange);
 			
 		return $this->db->get()->result();
 	}
