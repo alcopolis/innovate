@@ -20,55 +20,16 @@
 									
 									<?php if($sh->poster != ''){ ?>
 										<img style="float:left;" class="poster small" src="<?php echo $this->module_details['path'] . '/upload/shows/square/' . $sh->poster; ?>" title="<?php echo $sh->title; ?>" alt="<?php echo $sh->title; ?>" />
-										<input type='hidden' value='true' name="poster_status">
-									<?php }else{ ?>
-										<input type='hidden' value='false' name="poster_status">
 									<?php } ?>
 									
 									<div style="float:left; margin:10px;">
+										<p id="sh-date">Date &nbsp: <?php echo $sh->date; ?></p>
+										<p id="sh-time">Time &nbsp: <?php echo $sh->time; ?></p>
+										<p id="sh-duration">Dur &nbsp: <?php echo $sh->duration; ?></p>
 										
 										<div for="is_featured" >
 											<input type='hidden' value='<?php echo $sh->is_featured; ?>' name="is_featured">
 											<?php echo form_checkbox('is_featured', $sh->is_featured, $sh->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Set Feature</strong>
-										</div>
-										
-										<div>
-											<h4>Show Schedules</h4>
-											<?php if(isset($similar)){ ?>
-												<table>
-													<thead>
-														<th></th>
-														<th class="align-center">Date</th>
-														<th class="align-center">Time</th>
-														<th class="align-center">Duration</th>
-													</thead>
-													
-													<tbody>
-														<?php
-															$is_first = TRUE;
-															foreach ($similar as $same){ 
-																if($is_first){
-														?>
-																	<tr style="color:green; font-weight: bold;">
-																		<td>Next on &raquo;</td>
-																		<td class="align-center"><?php echo $same->date; ?></td>
-																		<td class="align-center"><?php echo $same->time; ?></td>
-																		<td class="align-center"><?php echo $same->duration; ?></td>
-																	</tr>
-														<?php 
-																	$is_first = FALSE;	
-															}else{ 
-														?>
-															<tr style="color:#999; font-weight: bold;">
-																<td>Later on &raquo;</td>
-																<td class="align-center"><?php echo $same->date; ?></td>
-																<td class="align-center"><?php echo $same->time; ?></td>
-																<td class="align-center"><?php echo $same->duration; ?></td>
-															</tr>
-														<?php }} ?>
-													</tbody>
-												</table>
-											<?php } ?>
 										</div>
 									</div>
 									

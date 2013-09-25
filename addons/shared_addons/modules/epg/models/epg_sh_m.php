@@ -24,6 +24,10 @@ class Epg_Sh_m extends MY_Model {
 			),
 	);
 	
+	
+	
+//=================== General Function ====================//
+	
 	public function __construct()
 	{		
 		parent::__construct();
@@ -31,9 +35,98 @@ class Epg_Sh_m extends MY_Model {
 	}
 	
 	
-
-//============= SHOW FUNCTION ===============	
+	public function get_show($fields = NULL, $single = FALSE)
+	{
+		//$hari= date("Y-m-d");
 	
+		if($fields != NULL){
+			$this->db->select($fields);
+		}
+	
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
+		}
+	
+		//$this->db->where('date >=', $hari);
+	
+		return $this->db->get($this->_table)->$method();
+	}
+	
+	
+	public function get_show_by($fields, $where, $single = FALSE){
+		$this->db->where($where);
+		return $this->get_show($fields, $single);
+	}
+	
+	public function get_show_detail($id){
+		$this->db->select('t0.id, t0.title, t0.cid, t0.date, t0.time, t0.duration, t0.syn_id, t0.syn_en, t0.poster');
+		$this->db->select('t1.name, t1.num, t1.logo');
+		$this->db->from('inn_epg_show_detail t0');
+		$this->db->join('inn_epg_ch_detail t1', 't0.cid = t1.id', 'RIGHT');
+		$this->db->where('t0.id',$id);
+	
+		return $this->db->get()->row();
+	}
+	
+	
+
+//=================== Admin Function ====================//
+	
+	
+
+	public function featured_list(){
+		$hari= date('Y-m-d');
+		
+		$this->db->select('t0.id, t0.cid, t0.title, t0.date, t0.time, t0.duration, t1.name');
+		$this->db->from('inn_epg_show_detail t0');
+		$this->db->join('inn_epg_ch_detail t1', 't1.id = t0.cid', 'LEFT');
+		$this->db->where(array('t0.date>='=>$hari,'t0.is_featured'=> 1));
+		$this->db->order_by('date', 'ASC');
+		$this->db->group_by('title');
+		
+		return $this->db->get()->result();
+		
+// 		$data = array();
+		
+// 		foreach($raw as $show){
+// 			$data[$show->id]['details'] = $show;
+// 			$data[$show->id]['similar'] = $this->similar_show(array('title' => $show->title, 'cid' => $show->cid), 'date, time');
+// 		}
+		
+// 		return $data;
+	}
+	
+	
+	public function similar_show($var = NULL, $fields = NULL){
+		$hari= date('Y-m-d');
+		
+		if(is_array($var)){
+			if(isset($fields)){
+				$this->db->select($fields);
+			}
+
+			$this->db->where($var);
+			$this->db->where('date>=', $hari);
+			return $this->db->get($this->_table)->result();
+		}else{
+			return FALSE;
+		}
+	}
+	
+	
+	public function update_show_data($data){
+		
+	}
+	
+
+	
+	
+	
+	
+//=================== Frontend Function ====================//
+
 	public function get_featured_show()
 	{
 		$bln=date("m");
@@ -97,46 +190,7 @@ class Epg_Sh_m extends MY_Model {
 	}
 
 	
-	public function get_show($fields = NULL, $single = FALSE)
-	{
-		$hari= date("Y-m-d");
 		
-		if($fields != NULL){
-			$this->db->select($fields);
-		}
-		
-		if($single){
-			$method = 'row';
-		}else{
-			$method = 'result';
-		}
-		
-		$this->db->where('date >=', $hari);
-		
-		return $this->db->get($this->_table)->$method();
-	}
-
-	
-	public function get_show_by($fields, $where, $single = FALSE){
-		$this->db->where($where);
-		return $this->get_show($fields, $single);
-	}
-	
-	public function get_show_detail($id){
-		$this->db->select('t0.id, t0.title, t0.cid, t0.date, t0.time, t0.duration, t0.syn_id, t0.syn_en, t0.poster');
-		$this->db->select('t1.name, t1.num, t1.logo');
-		$this->db->from('inn_epg_show_detail t0');
-		$this->db->join('inn_epg_ch_detail t1', 't0.cid = t1.id', 'RIGHT');
-		$this->db->where('t0.id',$id);
-		
-		return $this->db->get()->row();
-	}
-	
-	
-	
-	
-	
-	
 	public function get_count($fields = NULL)
 	{
 		$hari= date("Y-m-d");
@@ -221,17 +275,17 @@ class Epg_Sh_m extends MY_Model {
 //============= CRUD FUNCTION ===============	
 
 	
-	public function update_show($id, $data){
-		$this->db->where('id', $id);
+	public function update_show($title, $data){
+		$this->db->where('title', $title);
 		
 		//var_dump($data);
 	
 		if($this->db->update($this->_table, $data)){
 			return TRUE;
-			echo 'TRUE';
+			//echo 'TRUE';
 		}else{
 			return FALSE;
-			echo 'FALSE';
+			//echo 'FALSE';
 		}
 	}
 
