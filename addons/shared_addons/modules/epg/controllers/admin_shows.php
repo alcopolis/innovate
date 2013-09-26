@@ -14,6 +14,7 @@ class Admin_Shows extends Admin_Controller
 	protected $img_path;
 	protected $page_data;
 	protected $sh_data;
+	protected $ch_data;
 	protected $upload_config;
 
 	public function __construct()
@@ -26,7 +27,13 @@ class Admin_Shows extends Admin_Controller
 		
 		//variables
 		$this->sh_data = new stdClass();
+		$this->ch_data = new stdClass();
 		$this->page_data = new stdClass();
+		
+		$this->page_data->section = $this->section;
+		$this->page_data->editor_type = 'wysiwyg-simple';
+		
+		$this->img_path = $this->module_details['path'] . '/upload/shows';
 		
 		//Library
 		$this->load->library('form_validation');
@@ -48,6 +55,7 @@ class Admin_Shows extends Admin_Controller
 			->title($this->module_details['name'])
 			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
 			->append_js('module::main.js')
+			->append_css('module::style.css')
 			->set($var)
 			->build($view);
 	}
@@ -85,15 +93,7 @@ class Admin_Shows extends Admin_Controller
 		}else{
 				
 			$this->page_data->view = 'featured';
-			$this->sh_data = $this->epg_sh_m->featured_list();
-			
-// 			echo count($this->sh_data) . '<br/><br/>';
-			
-// 			foreach ($this->sh_data as $t){
-// 				var_dump($t['similar']);
-// 				echo '<br/><br/><br/>';
-// 			}
-				
+			$this->sh_data = $this->epg_sh_m->featured_list();				
 			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data));
 		}
 	}
@@ -101,12 +101,14 @@ class Admin_Shows extends Admin_Controller
 	
 	public function edit($id){
 		$this->page_data->title = 'Edit Show';
-		
-		$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);	
+				
+		$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
 		$title = $this->sh_data->title;
 		$cid = $this->sh_data->cid;
 		$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid), 'id, date, time, duration');
 		
+		$this->ch_data = $this->epg_ch_m->get_channel($cid);
+
 		
 		if($this->form_validation->run()){
 			//Process form
@@ -114,24 +116,34 @@ class Admin_Shows extends Admin_Controller
 			
 			$data = $this->alcopolis->array_from_post(array('is_featured', 'syn_id', 'syn_en'), $this->input->post());
 			
-			if(isset($this->sh_data->poster)){
+			if($this->sh_data->poster != ''){	
+				var_dump($this->sh_data->poster);
+				$data['poster'] = $this->sh_data->poster;
+			}else{
 				$img_name = $this->poster_upload($this->sh_data->id);
 				if($img_name != NULL){
 					$data['poster'] = $img_name;
 				}
-			}else{
-				$data['poster'] = $this->sh_data->poster;
+					
+				var_dump($this->sh_data->poster);
+				echo 'poster uploaded';
 			}
 			
 			if($this->epg_sh_m->update_show($this->sh_data->title, $data)){
-				//redirect('admin/epg/shows');
-				echo 'success';
-			}else{
-				$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data));
+				if($this->input->post('btnAction') == 'save_exit'){
+					redirect('admin/epg/shows');
+				}else{
+					$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);	
+					$title = $this->sh_data->title;
+					$cid = $this->sh_data->cid;
+					$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid), 'id, date, time, duration');
+										
+					$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'ch'=>$this->ch_data, 'similar'=>$similar));
+				}
 			}
 		}else{
-			//load form			
-			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'similar'=>$similar));
+			//load form				
+			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'ch'=>$this->ch_data, 'similar'=>$similar));
 		}
 	}
 	

@@ -16,26 +16,23 @@
 						<fieldset>
 							<ul>
 								<li>
-									<h1 id="sh-title"><?php echo $sh->title; ?></h1>
+									<h1 id="sh-title"><?php echo $sh->title; ?><br/><span id="ch"><?php echo $ch->name . ' | ' . $ch->num; ?></span></h1>
 									
 									<?php if($sh->poster != ''){ ?>
 										<img style="float:left;" class="poster small" src="<?php echo $this->module_details['path'] . '/upload/shows/square/' . $sh->poster; ?>" title="<?php echo $sh->title; ?>" alt="<?php echo $sh->title; ?>" />
-										<input type='hidden' value='true' name="poster_status">
-									<?php }else{ ?>
-										<input type='hidden' value='false' name="poster_status">
 									<?php } ?>
 									
 									<div style="float:left; margin:10px;">
 										
-										<div for="is_featured" >
+										<div class="input-div">
 											<input type='hidden' value='<?php echo $sh->is_featured; ?>' name="is_featured">
 											<?php echo form_checkbox('is_featured', $sh->is_featured, $sh->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Set Feature</strong>
 										</div>
 										
-										<div>
-											<h4>Show Schedules</h4>
-											<?php if(isset($similar)){ ?>
-												<table>
+										<?php if(isset($similar) && count($similar) > 0){ ?>
+											<div class="input-div">
+												<label>Show Schedules</label>
+												<table id="schedule">
 													<thead>
 														<th></th>
 														<th class="align-center">Date</th>
@@ -57,7 +54,7 @@
 																	</tr>
 														<?php 
 																	$is_first = FALSE;	
-															}else{ 
+																}else{ 
 														?>
 															<tr style="color:#999; font-weight: bold;">
 																<td>Later on &raquo;</td>
@@ -68,7 +65,12 @@
 														<?php }} ?>
 													</tbody>
 												</table>
-											<?php } ?>
+											</div>
+										<?php } ?>
+										
+										<div class="input-div">
+											<label for="poster">Upload Poster</label>
+											<div class="input"><?php echo form_upload('poster'); ?></div>
 										</div>
 									</div>
 									
@@ -84,23 +86,13 @@
 									<label for="syn_en">Synopsis English</label>
 									<div class="input"><?php echo form_textarea(array('id' => 'syn_en', 'value' => $sh->syn_en, 'name' => 'syn_en', 'rows' => 5)) ?></div>
 								</li>
-								
-								<li>
-									<label for="poster">Upload Poster</label>
-									<div class="input"><?php echo form_upload('poster'); ?></div>
-								</li>
 							</ul>
 						</fieldset>
 					</div>
 			<?php } ?>	
-			<div class="buttons">
-				<?php 
-						echo form_submit('submit', 'Save'); 
-						echo '<a href="admin/epg/shows/" class="button" style="padding:5px 10px 4px 10px;">Cancel</a>';
-				?>
-			</div>
-			
-			
+					<div class="buttons align-right padding-top">
+						<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel') )) ?>
+					</div>			
 			<?php echo form_close() ?>
 		</div>
 	</section>

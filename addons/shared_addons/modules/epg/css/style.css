@@ -1,0 +1,28 @@
+/* Admin form */
+
+.input-div{
+	margin-bottom: 20px;
+}
+
+.input-div input{margin:0}
+
+.input, .input label{margin:0 !important;}
+
+.poster{
+	margin-right:20px;
+	width:400px; height:400px;
+}
+
+table#schedule{width:400px;}
+
+h1#sh-title{
+	font-size:2.5em;
+	line-height:.75em !important;	
+}
+
+span#ch{
+	font-weight:400;
+	font-size:16px;
+	margin:0; padding:0;
+	color:#999;
+}
