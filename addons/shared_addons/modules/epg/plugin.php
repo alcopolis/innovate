@@ -200,7 +200,7 @@ class Plugin_Epg extends Plugin
 		$cid = $this->attribute('channel');
 		$id = $this->attribute('id');
 	
-		$raw = $this->epg_sh_m->limit(5)->get_show_by(NULL, array('cid'=>$cid, 'id!='=>$id), false);
+		$raw = $this->epg_sh_m->limit(5)->get_show_by(NULL, array('is_featured'=>'1', 'cid'=>$cid, 'id!='=>$id), false);
 		shuffle($raw);
 		
 		foreach($raw as $related){

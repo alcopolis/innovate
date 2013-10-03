@@ -12,6 +12,11 @@ class Epg_Sh_m extends MY_Model {
 	protected $_table = 'inn_epg_show_detail';
 	
 	public $rules = array(
+			'title' => array(
+					'field' => 'title',
+					'label' => 'Show Title',
+					'rules' => 'trim|required|xss_clean'
+			),
 			'syn_id' => array(
 					'field' => 'syn_id',
 					'label' => 'Sinopsis Indonesia',
@@ -100,7 +105,6 @@ class Epg_Sh_m extends MY_Model {
 	
 	
 	public function similar_show($var = NULL, $fields = NULL){
-		$hari= date('Y-m-d');
 		
 		if(is_array($var)){
 			if(isset($fields)){
@@ -108,7 +112,6 @@ class Epg_Sh_m extends MY_Model {
 			}
 
 			$this->db->where($var);
-			$this->db->where('date>=', $hari);
 			return $this->db->get($this->_table)->result();
 		}else{
 			return FALSE;

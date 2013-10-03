@@ -23,29 +23,37 @@ class Epg extends Public_Controller
 		$this->lang->load('epg');
 	}
 
-	/**
-	 * List all items
-	 */
+	
+	function render($view, $var = NULL){		
+		$this->template
+			->title($this->module_details['name'])
+			->append_css('module::style.css')
+			->set($var)
+			->build($view);
+	}
+	
+	
 	public function index()
 	{
 		$sh = $this->epg_sh_m->get_epg();
-
-		$this->template
-			->title($this->module_details['name'])
-			->set('shows', $sh)
-			->build('epg');
+		
+		$this->render('epg', array('shows'=>$sh));
+		
+// 		$this->template
+// 			->title($this->module_details['name'])
+// 			->set('shows', $sh)
+// 			->build('epg');
 	}
 	
 	public function show($id){
-		//$sh = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
 		
 		$sh = $this->epg_sh_m->get_show_detail($id);
+		$title = $sh->title;
+		$cid = $sh->cid;
+		$date = $sh->date;
 		
-		//var_dump($sh);
+		$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration');
 		
-		$this->template
-			->title($this->module_details['name'])
-			->set('shows', $sh)
-			->build('show');
+		$this->render('show', array('shows'=>$sh, 'similar'=>$similar));		
 	}
 }

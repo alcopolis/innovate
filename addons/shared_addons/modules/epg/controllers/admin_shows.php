@@ -105,7 +105,9 @@ class Admin_Shows extends Admin_Controller
 		$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
 		$title = $this->sh_data->title;
 		$cid = $this->sh_data->cid;
-		$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid), 'id, date, time, duration');
+		$date = $this->sh_data->date;
+		
+		$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date>'=>$date), 'id, date, time, duration');
 		
 		$this->ch_data = $this->epg_ch_m->get_channel($cid);
 
@@ -114,19 +116,15 @@ class Admin_Shows extends Admin_Controller
 			//Process form
 			$input_post = array();
 			
-			$data = $this->alcopolis->array_from_post(array('is_featured', 'syn_id', 'syn_en'), $this->input->post());
+			$data = $this->alcopolis->array_from_post(array('title', 'is_featured', 'syn_id', 'syn_en'), $this->input->post());
 			
 			if($this->sh_data->poster != ''){	
-				var_dump($this->sh_data->poster);
 				$data['poster'] = $this->sh_data->poster;
 			}else{
 				$img_name = $this->poster_upload($this->sh_data->id);
 				if($img_name != NULL){
 					$data['poster'] = $img_name;
 				}
-					
-				var_dump($this->sh_data->poster);
-				echo 'poster uploaded';
 			}
 			
 			if($this->epg_sh_m->update_show($this->sh_data->title, $data)){
@@ -136,7 +134,8 @@ class Admin_Shows extends Admin_Controller
 					$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);	
 					$title = $this->sh_data->title;
 					$cid = $this->sh_data->cid;
-					$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid), 'id, date, time, duration');
+					$date = $this->sh_data->date;
+					$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date>'=>$date), 'id, date, time, duration');
 										
 					$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'ch'=>$this->ch_data, 'similar'=>$similar));
 				}

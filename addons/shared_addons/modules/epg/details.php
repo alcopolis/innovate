@@ -31,13 +31,6 @@ class Module_Epg extends Module {
 					'shows' => array(
 						'name' => 'Shows',
 						'uri' => 'admin/epg/shows',
-						'shortcuts' => array(
-							array(
-								'name' => 'Add Shows',
-								'uri' => 'admin/epg/shows/create',
-								'class' => 'add',
-							),
-						),
 					),
 				)
 		);

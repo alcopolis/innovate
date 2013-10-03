@@ -8,25 +8,40 @@
 	{{ endif }}	
 	
 	<style type="text/css">
-		#show{background:#FFF;  margin-bottom:40px}
-		#show #head{width:100%; margin-bottom:20px;}
+		#body-wrapper{
+			background: #003a6d; /* Old browsers */
+			background: -moz-linear-gradient(top,  #003a6d 0%, #436b99 23%, #ffffff 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#003a6d), color-stop(23%,#436b99), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003a6d', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+			
+			width:100%;
+			height:auto;:
+		}
 		
-		#show #body{width:100%;}
-		#show #body #side{width:80px; float:left; text-align:center; margin:0 10px; color:#FFF; font-size:.75em}
-		#show #body #side .item{width:100%; margin:2px 0 ;padding: 10px 0; background:#333; border-radius:5px;}
-		
-		#show #body #side #epg{background:#39C;}
-		#show #body #side #epg a{color:#111;}
-		#show #body #side #epg:hover{background:#399; cursor:pointer}
-		#show #body #side #epg:hover a{color:#FFF;}
-		
-		#show #body #poster{float:left; margin:0; padding:5px; width:50%; background:#CCC;}
-		#show #body #details{width:30%; float:left; margin:0 10px}
-		#show #body #details:after{}
-		
-		#related{}
-		.related-show{width:19%; background:#EFEFEF; margin:0 .5%; float:left; text-align:center;}
+		#background, #poster{
+			background-image:url('addons/shared_addons/modules/epg/upload/shows/<?php echo $shows->poster; ?>');
+		}
+			
+		#show{
+			position: relative;
+			z-index:0;
+			margin:40px 5%;
+		}w
 	</style>
+	
+	<script>
+		$(document).ready(function() {
+			var posterW = $('#poster').width();
+			$('#poster').height(Math.round(posterW*0.75));
+			
+			var contentH = $('#body-wrapper').innerHeight();
+			$('#background').height(contentH);
+		});
+	</script>
 </head>
 
 <body id="top" class="epg">
@@ -39,45 +54,59 @@
 				
 		<div id="content" class="wrapper clear">
 			<div id="body-wrapper">
-			
+				<div id="background"></div>
 				<div id="show">
 					<?php if($shows != NULL ){ ?>
 						<div id="head">
 							<h1><?php echo $shows->title; ?></h1>
 						</div>
-						
-						<div id="body" class="clearfix">
+						<div id="body">
 							<div id="side">
+								<div id="epg" class="item"><a href="{{ url:site }}epg">TV Guide</a></div>
 								<div class="item"><?php echo $shows->name; ?></div>
 								<div class="item">Ch. <?php echo $shows->num; ?></div>
-								<div class="item"><?php echo date('d M <br/>Y', strtotime($shows->date)); ?> </br> <?php echo $shows->time; ?></div>
-								<div id="epg" class="item"><a href="{{ url:site }}epg">TV Guide</a></div>
+								<div class="item"><?php echo date('d M <br/>Y', strtotime($shows->date)); ?> </br> <?php echo date('H:m A', strtotime($shows->time)); ?></div>
 							</div>
 							
 							<?php if($shows->poster != '' ){ ?>
-								<div id="poster">
-									{{ epg:poster filename="<?php echo $shows->poster; ?>" }}
+								<div id="poster" class="clearfix">
+
 								</div>
 								
 								<div id="details">
 							<?php }else{ ?>
 								<div id="details">
 							<?php } ?>
-									<p><?php echo $shows->syn_id; ?></p>
-									<hr/>
-									<p><?php echo $shows->syn_en; ?></p>
+									
+									
+									<div id="synopsis" class="detail">
+										<?php echo $shows->syn_id; ?>
+										<hr>
+										<?php echo $shows->syn_en; ?>
+									</div>
+									
+									<?php if(isset($similar)){ ?>
+										<div id="all-schedules" class="detail">
+											<h4>Later On</h4>
+											<table id="all-schedules">
+												<?php foreach ($similar as $s){ ?>
+													<tr>
+														<td style="width:70%"><?php echo date('l, d\<\s\u\p\>S\<\/\s\u\p\> M', strtotime($s->date)); ?></td>
+														<td style="width:30%; text-align:center"><?php echo date('H:m a', strtotime($s->time)); ?></td>
+													</tr>
+												<?php } ?>
+											</table>
+										</div>
+									<?php } ?>
+																		
+									
 								</div>
-							
-						</div>			
+							</div>			
 					<?php } ?>
 				</div>
 				
-				<?php /* 
-				<div id="related" class="clearfix">
-					<h4>More From <?php echo $shows->name; ?></h4>
-					{{ epg:related id="<?php echo $shows->id; ?>" channel="<?php echo $shows->cid; ?>" }}
-				</div>
-				*/ ?>
+				<br style="clear:both; display:hidden; width:0; height:0;" /> 
+				
 				
 			</div>
 		</div>
