@@ -6,101 +6,6 @@
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
-
-<script type="text/javascript">
-	fnScroll = function(){
-	  $('#theader').scrollLeft($('#tdata').scrollLeft());
-	  $('#tcol').scrollTop($('#tdata').scrollTop());
-	}
-
-	$(document).ready(function(){
-
-		var t;
-				
-		$('.epg .show').each(function(){
-			$(this).click(function(e){
-				clearTimeout(t);
-				
-				boxpos = $(this).position();
-
-				$(this).append($('#detail-container'));
-
-				$('#detail-container').css({'top':boxpos.top + 70 + 'px', 'left':boxpos.left + 'px'})
-			
-				title = $(this).attr('data-title');
-				$('#detail-container p#title').html(title);
-			
-				
-				if($(this).attr('data-id') != ''){
-					synid = $(this).attr('data-id');
-					$('#detail-container p#id').html(synid);
-					$('#detail-container hr').show();
-				}else{
-					$('#detail-container hr').hide();
-					$('#detail-container p#id').html('');
-				}
-				
-				if($(this).attr('data-en') != ''){
-					synen = $(this).attr('data-en');
-					$('#detail-container p#en').html(synen);
-					$('#detail-container hr').show();
-				}else{
-					$('#detail-container hr').hide();
-					$('#detail-container p#en').html('');
-				}
-
-
-				$('#detail-container').css('display', 'block').animate(
-					{opacity:1}
-				)
-				
-			})
-
-			$(this).mouseout(function(){
-				t = setTimeout(hide, 10000);
-			})
-		})
-		
-		function hide(){
-			console.log('hide');
-			clearTimeout(t);
-			
-			$('#detail-container').animate(
- 				{opacity:0},400,function(){
- 					$(this).css('display', 'none');
- 				}
- 			)
-		}
-	})
-</script>
-
-<style type="text/css">
-	#epg {width:100%; margin:40px auto; font-family: "Arial", Helvetica, Tahoma, sans-serif; font-size:12px}
-	#origin, #theader, #tcol, #tdata {float:left; margin:.5% 0;}
-	
-	#origin{width:10%; height:40px;}
-	#theader{width:89.5%; height:40px; overflow:hidden;}
-	#tcol{width:10%; height:558px; overflow: hidden;}
-	#tdata{width:88%; height:558px; overflow: scroll; background:#333;}
-	
-	#theader #time-row {width:9000px; height:100%;}
-	#theader #time-row .time{width:240px; float:left; border-radius:5px; outline:1px solid #FFF; background:#0CE; color:#FFF;}
-	
-	#origin, #tcol {margin-right:0}
-	
-	#tcol #ch-col{width:100%;}
-	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#333; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
-	
-	#tdata .sh-row{margin-bottom:3px;clear:both; width:9000px;} /* 24hrs x 240px */
-	#tdata .sh-row .show{float:left; cursor:pointer; border-radius:5px; outline:1px solid #333; background:rgba(255,255,255,1); white-space:nowrap;}
-	#tdata .sh-row .show:hover{background:#39C; color:#FFF}
-	#tdata .sh-row .show.active{background:#39F; color:#FFF}
-	
-	#detail-container{position:absolute; width:300px; background:#FFF; box-shadow:0 0 3px #333; border-radius:5px; opacity:0; display:block}
-	#detail-container p#title{font-size:14px; font-weight:bold;color:#39C;}
-	#detail-container p{margin:10px !important; padding:0; white-space:normal;color:#717174;}
-</style>
-	
 </head>
 
 <body id="top" class="epg">
@@ -111,9 +16,62 @@
 	 		{{ theme:partial name="header" }}
 	 	</header>
 				
-		 <div id="content" class="wrapper clear">
+		 <div id="content" class="wrapper clearfix">
 		 	<div id="body-wrapper">
 				<?php if($shows != NULL ){ ?>
+					<div id="tools" class="clearfix">
+						<div id="page-title" class="tool"><h4>TV Guide</h4></div>
+						
+						<div id="filter" class="tool">
+							<fieldset id="filters">
+								
+								<style type="text/css">
+									.filter{float:left; margin:10px;}
+									.filter label{color:#FFF;}
+								</style>
+								
+								<?php echo form_open('admin/epg/shows/'); ?>					
+									<div class="filter">
+										<label for="cid">Channel</label>
+										<div class="input clearfix">
+											<?php echo form_dropdown('channels', $ch); ?>
+										</div>
+									</div>
+									
+									<div class="filter">
+										<label for="date">Date</label>
+										<div class="input"><?php echo form_input('date', date('Y-m-d'), 'class="datepicker" maxlength="20"'); ?></div>
+									</div>
+									
+									<div class="filter">
+										<label for="category">Channel Category</label>
+										<div class="input"><?php echo form_dropdown('category', $cat); ?></div>
+									</div>
+									
+									<div class="filter">
+										<label for="submit">&nbsp;</label>
+										<div class="input"><?php echo form_submit('submit', 'View'); ?></div>
+									</div>
+									
+								<?php echo form_close(); ?>
+							</fieldset>
+						</div>
+						
+						<div id="social" class="tool">
+							<!-- AddThis Button BEGIN -->
+							<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+							<a class="addthis_button_preferred_1"></a>
+							<a class="addthis_button_preferred_4"></a>
+							<a class="addthis_button_compact"></a>
+							</div>
+							<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+							<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-524d3df91ec4307c"></script>
+							<!-- AddThis Button END -->
+						</div>
+					</div>
+					
+					<br class="clear"/>
+					
 					<div id="epg">
 						<div id="origin"></div>
 	    
@@ -193,7 +151,7 @@
 							?>
 					    </div>
 											    
-					    <br style="clear: both"/>
+					    <br class="clear"/>
 					    
 					    
 						<div id="detail-container">
@@ -210,6 +168,8 @@
 				ERROR
 			
 			<?php } ?>
+			
+			
 		</div>
 		
 

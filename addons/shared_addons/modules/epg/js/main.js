@@ -27,5 +27,71 @@ $(document).ready(function(){
 		} 
 	})
 	
-	$('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+	$('#datepicker, .datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+	
+	
+	
+	// ========================== TV Guide Function ========================//
+	
+	var t;
+	
+	$('.epg .show').each(function(){
+		$(this).click(function(e){
+			clearTimeout(t);
+			
+			boxpos = $(this).position();
+
+			$(this).append($('#detail-container'));
+
+			$('#detail-container').css({'top':boxpos.top + 70 + 'px', 'left':boxpos.left + 'px'})
+		
+			title = $(this).attr('data-title');
+			$('#detail-container p#title').html(title);
+		
+			
+			if($(this).attr('data-id') != ''){
+				synid = $(this).attr('data-id');
+				$('#detail-container p#id').html(synid);
+				$('#detail-container hr').show();
+			}else{
+				$('#detail-container hr').hide();
+				$('#detail-container p#id').html('');
+			}
+			
+			if($(this).attr('data-en') != ''){
+				synen = $(this).attr('data-en');
+				$('#detail-container p#en').html(synen);
+				$('#detail-container hr').show();
+			}else{
+				$('#detail-container hr').hide();
+				$('#detail-container p#en').html('');
+			}
+
+
+			$('#detail-container').css('display', 'block').animate(
+				{opacity:1}
+			)
+			
+		})
+
+		$(this).mouseout(function(){
+			t = setTimeout(hide, 10000);
+		})
+	})
 })
+
+function hide(){
+		console.log('hide');
+		clearTimeout(t);
+		
+		$('#detail-container').animate(
+				{opacity:0},400,function(){
+					$(this).css('display', 'none');
+				}
+			)
+	}
+
+fnScroll = function(){
+  $('#theader').scrollLeft($('#tdata').scrollLeft());
+  $('#tcol').scrollTop($('#tdata').scrollTop());
+}

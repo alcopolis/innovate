@@ -27,6 +27,7 @@ class Epg extends Public_Controller
 	function render($view, $var = NULL){		
 		$this->template
 			->title($this->module_details['name'])
+			->append_js('module::main.js')
 			->append_css('module::style.css')
 			->set($var)
 			->build($view);
@@ -35,9 +36,25 @@ class Epg extends Public_Controller
 	
 	public function index()
 	{
+		$channels = $this->epg_ch_m->get_all_channel();
+		$ch[0] = 'Select';
+		foreach($channels as $c){
+			$ch[$c->id] = $c->name;
+		}
+		
+		$cats = $this->epg_ch_m->get_categories();
+		foreach($cats as $ct){
+			if($ct->id == '0'){
+				$cat[0] = 'All Categories';
+			}else{
+				$cat[$ct->id] = $ct->cat;
+			}
+		}
+		
+		
 		$sh = $this->epg_sh_m->get_epg();
 		
-		$this->render('epg', array('shows'=>$sh));
+		$this->render('epg', array('shows'=>$sh, 'ch'=>$ch, 'cat'=>$cat));
 		
 // 		$this->template
 // 			->title($this->module_details['name'])
