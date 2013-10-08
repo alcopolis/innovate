@@ -77,7 +77,8 @@ $(document).ready(function(){
 		})
 
 		$(this).mouseout(function(){
-			t = setTimeout(hide, 10000);
+			clearTimeout(t);
+			t = setTimeout(hide, 3000);
 		})
 	})
 	
@@ -104,22 +105,13 @@ $(document).ready(function(){
 
 		var showContW = (blockDataWidth + blockDataMargin) * 26;
 
-//		$('#tdata').width(epgContW + 16);
+		$('#tdata').width(epgContW + 16);
 		$('#tdata').height(epgContH + 16);
 		$('#tdata .sh-row').width(showContW);
 	}
-
-//	fnScroll = function(){
-//		console.log($('#theader').scrollLeft());
-//		$('#theader').scrollLeft($('#tdata').scrollLeft());
-//		$('#tcol').scrollTop($('#tdata').scrollTop());
-//	}
 })
 
 function hide(){
-		console.log('hide');
-		clearTimeout(t);
-		
 		$('#detail-container').animate(
 				{opacity:0},400,function(){
 					$(this).css('display', 'none');
@@ -128,6 +120,7 @@ function hide(){
 	}
 
 fnScroll = function(){
-  $('#theader').scrollLeft($('#tdata').scrollLeft());
-  $('#tcol').scrollTop($('#tdata').scrollTop());
+	$('#detail-container').css({'display':'none', 'opacity':'0'});
+	$('#theader').scrollLeft($('#tdata').scrollLeft());
+	$('#tcol').scrollTop($('#tdata').scrollTop());
 }

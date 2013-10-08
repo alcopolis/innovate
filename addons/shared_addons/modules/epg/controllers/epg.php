@@ -21,6 +21,9 @@ class Epg extends Public_Controller
 		$this->load->model('epg_sh_m');
 		$this->load->library('form_validation');
 		$this->lang->load('epg');
+		
+		// Set validation rules
+		$this->form_validation->set_rules($this->epg_sh_m->filter_rules);
 	}
 
 	
@@ -43,6 +46,7 @@ class Epg extends Public_Controller
 		}
 		
 		$cats = $this->epg_ch_m->get_categories();
+		
 		foreach($cats as $ct){
 			if($ct->id == '0'){
 				$cat[0] = 'All Categories';
@@ -50,17 +54,26 @@ class Epg extends Public_Controller
 				$cat[$ct->id] = $ct->cat;
 			}
 		}
+
+		$tgl = '';
 		
+		if($this->form_validation->run()){
+
+			$cond = array(
+					'date' => $this->input->post('date'),
+					'cat_id' => $this->input->post('cat_id')
+			);
+			
+			$sh = $this->epg_sh_m->get_epg_by($cond);
+		}else{
+			$sh = $this->epg_sh_m->get_epg();
+			$tgl = date('Y-m-d');
+		}
 		
-		$sh = $this->epg_sh_m->get_epg();
-		
-		$this->render('epg', array('shows'=>$sh, 'ch'=>$ch, 'cat'=>$cat));
-		
-// 		$this->template
-// 			->title($this->module_details['name'])
-// 			->set('shows', $sh)
-// 			->build('epg');
+		$this->render('epg', array('shows'=>$sh, 'ch'=>$ch, 'cat'=>$cat, 'tgl'=>$tgl));
 	}
+	
+	
 	
 	public function show($id){
 		

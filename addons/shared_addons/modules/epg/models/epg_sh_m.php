@@ -30,6 +30,20 @@ class Epg_Sh_m extends MY_Model {
 	);
 	
 	
+	public $filter_rules = array(
+			'date' => array(
+					'field' => 'date',
+					'label' => 'Show Date',
+					'rules' => 'required|xss_clean'
+			),
+			'cat_id' => array(
+					'field' => 'cat_id',
+					'label' => 'Category ID',
+					'rules' => 'xss_clean'
+			)
+	);
+	
+	
 	
 //=================== General Function ====================//
 	
@@ -92,15 +106,6 @@ class Epg_Sh_m extends MY_Model {
 		$this->db->group_by('title');
 		
 		return $this->db->get()->result();
-		
-// 		$data = array();
-		
-// 		foreach($raw as $show){
-// 			$data[$show->id]['details'] = $show;
-// 			$data[$show->id]['similar'] = $this->similar_show(array('title' => $show->title, 'cid' => $show->cid), 'date, time');
-// 		}
-		
-// 		return $data;
 	}
 	
 	
@@ -202,10 +207,7 @@ class Epg_Sh_m extends MY_Model {
 			$this->db->select($fields);
 		}
 	
-		$this->db->where('date >=', $hari);
-		
-		//var_dump($this->db->get($this->_table)->num_rows());
-	
+		$this->db->where('date >=', $hari);	
 		return $this->db->get($this->_table)->num_rows();
 	}
 	
@@ -234,7 +236,7 @@ class Epg_Sh_m extends MY_Model {
 		if($fields == NULL && !$single){
 			$hari= date("Y-m-d");
 			
-			$chs = $this->db->get('inn_epg_ch_detail')->result();
+			$chs = $this->db->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
 			
 			foreach($chs as $ch){
 				$key = $ch->id;
@@ -262,9 +264,30 @@ class Epg_Sh_m extends MY_Model {
 	}
 	
 	
-	public function get_epg_by($fields, $where, $single = FALSE){
-		$this->db->where($where);
-		return $this->get_epg($fields, $single);
+	
+	
+	
+	public function get_epg_by($where){
+		$data = new stdClass();
+		
+		if($where['cat_id'] == '0'){
+			$chs = $this->db->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
+		}else{
+			$chs = $this->db->where('cat', $where['cat_id'])->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
+		}
+			
+		foreach($chs as $ch){
+			$key = $ch->id;
+				
+			$data->$key = new stdClass();
+			$data->$key->ch = $ch;
+
+			$this->db->where('cid',$key);
+			$this->db->where('date', $where['date']);
+			$data->$key->sh = $this->db->get($this->_table)->result();
+		}
+				
+		return $data;
 	}
 	
 	

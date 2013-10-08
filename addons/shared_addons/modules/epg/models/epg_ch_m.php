@@ -51,11 +51,28 @@ class Epg_Ch_m extends MY_Model {
 		return $this->db->count_all_results();
 	}
 	
+	
 	public function get_channel($id = NULL)
 	{
 		//$this->db->select('name, num');
 		$this->db->where('id', $id);
 		return $this->db->get($this->_table)->row();
+	}
+	
+	public function get_channel_by($where, $fields = '', $single = FALSE)
+	{
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
+		}
+		
+		if($fields != ''){
+			$this->db->select(fields);
+		}
+		
+		$this->db->where($where);
+		return $this->db->get($this->_table)->$method();
 	}
 	
 	public function get_categories()
