@@ -14,7 +14,7 @@
 	</script>
 </head>
 
-<body id="top" class="epg">
+<body id="top" class="epg" style="overflow:hidden;">
 	
 		{{ integration:analytics }}
 	
@@ -23,7 +23,8 @@
 	 	</header>
 				
 		 <div id="content" class="wrapper clearfix">
-		 	<div id="body-wrapper">
+		 	<div id="content-bg" style="position:absolute; width:100%; height:auto; background-image:url({{theme:image_path}}epg-bg.png); background-repeat: no-repeat; background-size:1920px auto; background-position:center 40px; opacity:0.15; z-index:0;"></div>
+		 	<div id="body-wrapper" style="position: relative;">
 				<?php if($shows != NULL ){ ?>
 					<div id="tools">
 						<div id="page-title" class="tool"><h4>TV Guide</h4></div>
@@ -125,7 +126,7 @@
 													$w = floor($dur*240);
 													$title = substr($sh->title, 0, floor($w/3)) . '..';
 													
-													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'"><div style="margin:20px 10px">' . $title . '</div></div>';
+													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'" data-url="epg/show/' . $sh->id . '" data-time="' . date('H:m' , strtotime($sh->time)) . '"><div style="margin:20px 10px">' . $title . '</div></div>';
 													
 													$first = FALSE;
 												}else{
@@ -134,7 +135,7 @@
 													$w = floor($dur*240);
 													$title = substr($sh->title, 0, floor($w/3)) . '..';
 													
-													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'"><div style="margin:20px 10px">' . $title . '</div></div>';
+													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'" data-url="epg/show/' . $sh->id . '" data-time="' . date('H:m' , strtotime($sh->time)) . '"><div style="margin:20px 10px">' . $title . '</div></div>';
 													
 													$first = FALSE;
 												}

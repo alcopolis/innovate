@@ -30,7 +30,7 @@ $(document).ready(function(){
 	$('#datepicker, .datepicker').datepicker({dateFormat: 'yy-mm-dd'});
 	
 	
-	
+	$('#content-bg').height($('#content').innerHeight() + 16);
 	
 	
 	// ========================== TV Guide Function ========================//
@@ -47,7 +47,10 @@ $(document).ready(function(){
 
 			$('#detail-container').css({'top':boxpos.top + 70 + 'px', 'left':boxpos.left + 'px'})
 		
-			title = $(this).attr('data-title');
+			title = '<a title="Click for more info" href="' + $(this).attr('data-url') + '">' + $(this).attr('data-title') + '</a> | <span id="time">' + $(this).attr('data-time'); + '</span>';
+			time = $(this).attr('data-time');
+			
+			
 			$('#detail-container p#title').html(title);
 		
 			

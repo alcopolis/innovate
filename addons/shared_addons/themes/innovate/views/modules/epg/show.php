@@ -9,15 +9,6 @@
 	
 	<style type="text/css">
 		#body-wrapper{
-			background: #003a6d; /* Old browsers */
-			background: -moz-linear-gradient(top,  #003a6d 0%, #436b99 23%, #ffffff 100%); /* FF3.6+ */
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#003a6d), color-stop(23%,#436b99), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
-			background: -webkit-linear-gradient(top,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
-			background: -o-linear-gradient(top,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* Opera 11.10+ */
-			background: -ms-linear-gradient(top,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* IE10+ */
-			background: linear-gradient(to bottom,  #003a6d 0%,#436b99 23%,#ffffff 100%); /* W3C */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003a6d', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-			
 			width:100%;
 			height:auto;:
 		}
@@ -52,7 +43,7 @@
 			{{ theme:partial name="header" }}
 		</header>
 				
-		<div id="content" class="wrapper clear">
+		<div id="content" class="wrapper clearfix">
 			<div id="body-wrapper">
 				<div id="background"></div>
 				<div id="show">
