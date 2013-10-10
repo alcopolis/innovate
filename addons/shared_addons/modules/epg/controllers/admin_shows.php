@@ -13,6 +13,7 @@ class Admin_Shows extends Admin_Controller
 	protected $img_path;
 	protected $page_data;
 	protected $sh_data;
+	protected $sh_cat = array();
 	protected $ch_data;
 	protected $upload_config;
 
@@ -22,12 +23,18 @@ class Admin_Shows extends Admin_Controller
 
 		// Load all the required classes
 		$this->load->model('epg_sh_m');
+		$this->load->model('epg_sh_cat_m');
 		$this->load->model('epg_ch_m');
 		
 		//variables
 		$this->sh_data = new stdClass();
 		$this->ch_data = new stdClass();
 		$this->page_data = new stdClass();
+		
+		$temp = $this->epg_sh_cat_m->get_categories();
+		foreach ($temp as $t){
+			$this->sh_cat[$t->id] = $t->cat;
+		}
 		
 		$this->page_data->section = $this->section;
 		$this->page_data->editor_type = 'wysiwyg-simple';
@@ -71,7 +78,8 @@ class Admin_Shows extends Admin_Controller
 		}
 		
 		
-		if($this->input->post() != NULL){
+		//if($this->input->post() != NULL){
+		if($this->form_validation->run()){
 			$this->page_data->view = 'filter';
 				
 			$post_input = $this->alcopolis->array_from_post(array('cid', 'date', 'title'), $this->input->post());
@@ -93,7 +101,7 @@ class Admin_Shows extends Admin_Controller
 				
 			$this->page_data->view = 'featured';
 			$this->sh_data = $this->epg_sh_m->featured_list();				
-			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data));
+			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data, 'sh_cat'=>$this->sh_cat));
 		}
 	}
 
@@ -115,7 +123,7 @@ class Admin_Shows extends Admin_Controller
 			//Process form
 			$input_post = array();
 			
-			$data = $this->alcopolis->array_from_post(array('title', 'is_featured', 'syn_id', 'syn_en'), $this->input->post());
+			$data = $this->alcopolis->array_from_post(array('title', 'is_featured', 'cat_id', 'syn_id', 'syn_en'), $this->input->post());
 			
 			if($this->sh_data->poster != ''){	
 				$data['poster'] = $this->sh_data->poster;
@@ -136,12 +144,12 @@ class Admin_Shows extends Admin_Controller
 					$date = $this->sh_data->date;
 					$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date>'=>$date), 'id, date, time, duration');
 										
-					$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'ch'=>$this->ch_data, 'similar'=>$similar));
+					$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'ch'=>$this->ch_data, 'similar'=>$similar, 'sh_cat'=>$this->sh_cat));
 				}
 			}
 		}else{
 			//load form				
-			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'ch'=>$this->ch_data, 'similar'=>$similar));
+			$this->render('admin/show_form', array('page'=>$this->page_data, 'sh'=>$this->sh_data, 'ch'=>$this->ch_data, 'similar'=>$similar, 'sh_cat'=>$this->sh_cat));
 		}
 	}
 	

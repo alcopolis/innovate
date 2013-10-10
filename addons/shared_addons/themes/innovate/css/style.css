@@ -214,15 +214,16 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 	padding-top:0;
 }
 
-#mod-epg{
+.mod-epg{
 	padding:0;
 	width:99%;
-	margin:0;
+	margin:0 0 60px 0;
 }
 
-#mod-epg>h4{
+.mod-epg>h4{
 	margin:20px 0 5px 10px;
 	width:100%;
+	text-shadow:0 -1px 1px #FFF;
 }
 
 

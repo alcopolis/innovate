@@ -14,7 +14,7 @@
 	</script>
 </head>
 
-<body id="top" class="epg" style="overflow:hidden;">
+<body id="top" class="epg">
 	
 		{{ integration:analytics }}
 	
@@ -126,7 +126,7 @@
 													$w = floor($dur*240);
 													$title = substr($sh->title, 0, floor($w/3)) . '..';
 													
-													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'" data-url="epg/show/' . $sh->id . '" data-time="' . date('H:m' , strtotime($sh->time)) . '"><div style="margin:20px 10px">' . $title . '</div></div>';
+													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'" data-url="epg/show/' . $sh->id . '" data-time="' . date('H:i' , strtotime($sh->time)) . '"><div style="margin:20px 10px">' . $title . '</div></div>';
 													
 													$first = FALSE;
 												}else{
@@ -135,7 +135,7 @@
 													$w = floor($dur*240);
 													$title = substr($sh->title, 0, floor($w/3)) . '..';
 													
-													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'" data-url="epg/show/' . $sh->id . '" data-time="' . date('H:m' , strtotime($sh->time)) . '"><div style="margin:20px 10px">' . $title . '</div></div>';
+													echo '<div class="'.$sh->cid.' show" style="width:' . $w . 'px"  data-title="'. $sh->title.'" data-id="'. $sh->syn_id.'" data-en="'.$sh->syn_en.'" data-url="epg/show/' . $sh->id . '" data-time="' . date('H:i' , strtotime($sh->time)) . '"><div style="margin:20px 10px">' . $title . '</div></div>';
 													
 													$first = FALSE;
 												}

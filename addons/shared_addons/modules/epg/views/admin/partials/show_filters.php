@@ -9,13 +9,13 @@
 		<div class="filter">
 			<label for="cid">Channel</label>
 			<div class="input clearfix">
-				<?php echo form_dropdown('cid', $ch); ?>
+				<?php echo form_dropdown('cid', $ch, set_value('cid')); ?>
 			</div>
 		</div>
 		
 		<div class="filter">
 			<label for="date">Date</label>
-			<div class="input"><?php echo form_input('date', '', 'class="datepicker" maxlength="20"'); ?></div>
+			<div class="input"><?php echo form_input('date', set_value('date'), 'class="datepicker" maxlength="20"'); ?></div>
 		</div>
 		
 		<div class="filter">

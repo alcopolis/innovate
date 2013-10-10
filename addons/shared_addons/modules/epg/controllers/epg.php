@@ -82,7 +82,7 @@ class Epg extends Public_Controller
 		$cid = $sh->cid;
 		$date = $sh->date;
 		
-		$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration');
+		$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration', 5);
 		
 		$this->render('show', array('shows'=>$sh, 'similar'=>$similar));		
 	}

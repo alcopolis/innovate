@@ -15,17 +15,27 @@ class Epg_Sh_m extends MY_Model {
 			'title' => array(
 					'field' => 'title',
 					'label' => 'Show Title',
-					'rules' => 'trim|required|xss_clean'
+					'rules' => 'trim|xss_clean'
+			),
+			'cid' => array(
+					'field' => 'cid',
+					'label' => 'Channel ID',
+					'rules' => 'xss_clean'
+			),
+			'date' => array(
+					'field' => 'date',
+					'label' => 'Show Date',
+					'rules' => 'xss_clean'
 			),
 			'syn_id' => array(
 					'field' => 'syn_id',
 					'label' => 'Sinopsis Indonesia',
-					'rules' => 'trim|required|xss_clean'
+					'rules' => 'trim|xss_clean'
 			),
 			'syn_en' => array(
 					'field' => 'syn_en',
 					'label' => 'Synopsis English',
-					'rules' => 'trim|required|xss_clean'
+					'rules' => 'trim|xss_clean'
 			),
 	);
 	
@@ -98,10 +108,11 @@ class Epg_Sh_m extends MY_Model {
 	public function featured_list(){
 		$hari= date('Y-m-d');
 		
-		$this->db->select('t0.id, t0.cid, t0.title, t0.date, t0.time, t0.duration, t1.name');
+		$this->db->select('t0.id, t0.cid, t0.cat_id, t0.title, t0.date, t0.time, t0.duration, t1.name');
 		$this->db->from('inn_epg_show_detail t0');
 		$this->db->join('inn_epg_ch_detail t1', 't1.id = t0.cid', 'LEFT');
 		$this->db->where(array('t0.date>='=>$hari,'t0.is_featured'=> 1));
+		$this->db->order_by('cid', 'ASC');
 		$this->db->order_by('date', 'ASC');
 		$this->db->group_by('title');
 		
@@ -109,11 +120,15 @@ class Epg_Sh_m extends MY_Model {
 	}
 	
 	
-	public function similar_show($var = NULL, $fields = NULL){
+	public function similar_show($var = NULL, $fields = NULL, $limit = NULL){
 		
 		if(is_array($var)){
 			if(isset($fields)){
 				$this->db->select($fields);
+			}
+			
+			if(isset($limit)){
+				$this->db->limit($limit);
 			}
 
 			$this->db->where($var);
@@ -135,7 +150,7 @@ class Epg_Sh_m extends MY_Model {
 	
 //=================== Frontend Function ====================//
 
-	public function get_featured_show()
+	public function get_featured_show($category = NULL)
 	{
 		$bln=date("m");
 		$thn=date("Y");
@@ -156,6 +171,10 @@ class Epg_Sh_m extends MY_Model {
 		$this->db->from('inn_epg_ch_detail t1');
 		
 		$this->db->join('inn_epg_show_detail t0','t1.id = t0.cid','LEFT');
+		
+		if(isset($category)){
+			$this->db->where('t0.cat_id', $category);
+		}
 		$this->db->where('t0.is_featured',1);
  		$this->db->where('t0.date >= ',$hari);
 		$this->db->group_by('poster');

@@ -69,14 +69,15 @@
 								<div id="details">
 							<?php } ?>
 									
+									<?php if($shows->syn_id != '' || $shows->syn_en != ''){ ?>
+										<div id="synopsis" class="detail">
+											<?php echo $shows->syn_id; ?>
+											<hr>
+											<?php echo $shows->syn_en; ?>
+										</div>
+									<?php } ?>
 									
-									<div id="synopsis" class="detail">
-										<?php echo $shows->syn_id; ?>
-										<hr>
-										<?php echo $shows->syn_en; ?>
-									</div>
-									
-									<?php if(isset($similar)){ ?>
+									<?php if(count($similar) > 0){ ?>
 										<div id="all-schedules" class="detail">
 											<h4>Later On</h4>
 											<table id="all-schedules">

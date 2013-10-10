@@ -30,6 +30,11 @@
 											<?php echo form_checkbox('is_featured', $sh->is_featured, $sh->is_featured == 1 ? TRUE : FALSE); ?>&nbsp;&nbsp;<strong>Set Feature</strong>
 										</div>
 										
+										<div class="input-div">
+											<label for="cat_id">Category</label>
+											<div class="input"><?php echo form_dropdown('cat_id', $sh_cat, set_value('cat_id', $sh->cat_id)); ?></div>
+										</div>
+										
 										<?php if(isset($similar) && count($similar) > 0){ ?>
 											<div class="input-div">
 												<label>Show Schedules</label>

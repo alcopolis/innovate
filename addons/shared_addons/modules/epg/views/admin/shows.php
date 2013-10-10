@@ -35,6 +35,7 @@
 							<th class="align-center">Time</th>
 							<th class="align-center">Duration</th>
 							<th class="align-center">Channel</th>
+							<th class="align-center">Category</th>
 							<th class="align-center" style="width:10%;">Action</th>
 	        			</thead>
 	        			
@@ -55,6 +56,7 @@
 	        						<td class="align-center"><?php echo $s->time; ?></td>
 	        						<td class="align-center"><?php echo $s->duration; ?></td>
 	        						<td class="align-center"><?php echo $s->name; ?></td>
+	        						<td class="align-center"><?php echo $sh_cat[$s->cat_id]; ?></td>
 	        						<td class="align-center"><a href="admin/epg/shows/edit/<?php echo $s->id; ?>">Edit</a></td>
 	        					</tr>
 	        				<?php } ?>	

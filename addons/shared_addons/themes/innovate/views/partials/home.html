@@ -9,9 +9,15 @@
 	<div id="berlangganan">
 		<a href="{{ url:site }}subscribe">Register Now</a>
 	</div>
-	<div id="mod-epg" class="featured clearfix">
-		<h4>Upcoming Shows</h4>
-		{{ epg:featured limit="11" }}
+	
+	<div class="mod-epg featured clearfix">
+		<h4>Big Screen</h4>
+		{{ epg:featured limit="11" category="Movies" }}
+	</div>
+	
+	<div class="mod-epg featured clearfix">
+		<h4>Movie Series</h4>
+		{{ epg:featured limit="11" category="Movie Series" }}
 	</div>
 
 	{{ theme:partial name="home_utility" }}
