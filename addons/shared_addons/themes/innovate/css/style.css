@@ -102,7 +102,7 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 #navigation #menu ul#main-menu li a{
 	color: #39C;
     display: block;
-	font-size:18px;
+	font-size:15px;
     float: none;
     line-height: 19px;
     padding: 15px 10px;
@@ -157,7 +157,7 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 
 #navigation #menu ul#main-menu li.has_children > ul.dropdown li a{
 	color:#FFF;
-	font-size:14px;	
+	font-size:13px;	
 }
 
 #navigation #menu ul#main-menu li.has_children > ul.dropdown li:hover{
@@ -217,13 +217,23 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 .mod-epg{
 	padding:0;
 	width:99%;
-	margin:0 0 60px 0;
+	margin:0 0 0 0;
 }
 
 .mod-epg>h4{
+	font-size:18px;
+	font-weight:normal;
 	margin:20px 0 5px 10px;
-	width:100%;
-	text-shadow:0 -1px 1px #FFF;
+	width:160px;
+	color:#666;
+	text-shadow:0 -1px 1px rgba(255,255,255,.5);
+	background:#CCC;
+	position: relative;
+	top:112px; left:-108px;
+	text-align:center;
+	
+	padding:3px 5px;
+	border-radius:5px 5px 0 0;
 }
 
 

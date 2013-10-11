@@ -111,6 +111,83 @@ class Plugin_Epg extends Plugin
 		$this->load->model('epg_sh_cat_m');
 	}	
 	
+
+	function metadata(){
+		$meta = '<style type="text/css">
+					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
+					  .featured-show .poster{
+							width:100%; height:100%; outline:3px solid #FFF;
+							background-repeat:no-repeat;
+							background-size:auto 100%;
+							background-position:center center;
+						}
+					  .featured-show .poster img{width:100%; height:auto;}
+		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(0,0,0,.95); left:0; width:100%; opacity:0;}
+					  .featured-show .info h4 {font-size:14px; font-weight:600; line-height:14px; text-align:center; margin:15px 10px}
+				
+					  .featured-show .info p.subinfo{font-weight:normal; margin:5px 10px; background:#CCC; font-size:12px; color:#111; padding:10px; border-radius:5px;}
+					  .featured-show .info p.subinfo{text-align:center;}
+				      .main.featured-show p.subinfo {text-align:left;}
+					  
+					  .featured-show .info p, .featured-show .info .sh-detail-link, .main.featured-show hr, .main.featured-show .sh-detail-link{margin:5px 20px;}
+				
+		              .featured-show .info p {font-size:12px; line-height:13px; width:auto; color:#CCC; padding:0px;}
+					  .featured-show .info a {text-shadow:none; color:#3CF;}
+					  .featured-show .info a:hover {color:#FFF;}
+				
+					  .main{}
+					  .main.featured-show .info h4 {font-size:18px; margin:20px 10px; text-align:left;}
+					  .main.featured-show .sh-detail-link {font-size:12px; font-weight:500;}
+					  .main.featured-show hr{border-style:dotted; border-color:#999;}
+				  </style>
+	
+				  <script type="text/javascript">
+					$(document).ready(function(){
+						show_layout();
+					});
+	
+					$(window).resize(function(e){
+						show_layout();
+					});
+			
+					function show_layout(){
+						$feats = $(".featured-show");
+						$containerW = $(".featured").width();
+	
+						$feats.each(function() {
+							//$(this).css("margin", Math.floor($containerW * 0.002));
+							//$(this).width(Math.floor($containerW * 0.196)).height(Math.floor($containerW * 0.196));
+							
+							featW = Math.floor($containerW * 0.128);
+							featH = Math.floor($containerW * 0.128);
+				
+							$(this).css("margin", Math.floor($containerW * 0.004));
+
+							$(this).width(featW).height(featH);
+				
+							$(this).mouseenter(function(e){
+								$(this).children(".info").animate({bottom:0, opacity:1}, 600);
+							});
+				
+							$(this).mouseleave(function(e){
+								$offset = -$(this).children(".info").height();
+								$(this).children(".info").animate({bottom:$offset, opacity:0}, 400);
+							})
+			        	});
+			
+						$(".main").width(Math.floor($containerW * 0.316)).height(Math.floor($containerW * 0.262));
+						
+						$infobox = $(".featured-show .info");
+						$infobox.each(function(){
+							$(this).height($(this).parent().innerHeight());
+							$(this).css("bottom", -$(this).height());
+						});
+					}
+				  </script>';
+	
+		return $meta;
+	}
+	
 	
 	function featured(){
 		
@@ -161,10 +238,10 @@ class Plugin_Epg extends Plugin
 					//$data .= $featured->trailer;
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
-					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
-// 					$data .= '<p class="syn-id">' .  $featured->ina . '</p>';
-// 					$data .= '<p class="syn-en">' .  $featured->eng . '</p>';
-					$data .= '<a class="show-detail" href="epg/show/' .  $featured->showid . '">Detail Acara &raquo</a>';
+					$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . '</p>';
+					$data .= '<p class="syn-id">' .  $featured->ina . '</p><hr/>';
+					$data .= '<p class="syn-en">' .  $featured->eng . '</p>';
+					$data .= '<p class="sh-detail-link"><a href="epg/show/' .  $featured->showid . '">Detail Acara &raquo</a></p>';
 				$data .= '</div></div>';
 				
 				$mainswitch = TRUE;
@@ -173,16 +250,14 @@ class Plugin_Epg extends Plugin
 					$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
 					$data .= '<div class="info">';
 					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
-// 					$data .= '<p class="subinfo">' . $ch->name . ' | ' . $ch->num . '</p>';
-// 					$data .= '<a class="show-detail" href="#">Detail Acara</a>';
+ 					$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . '<br/><br/>' . date('d M y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
+ 					$data .= '<p class="sh-detail-link" style="text-align:center;"><a href="epg/show/' .  $featured->showid . '">Detail Acara</a></p>';
 				$data .= '</div></div>';
 			}		
 		}
 		
 		return $data;
 	}
-	
-	
 	
 	
 	function related(){
@@ -232,67 +307,6 @@ class Plugin_Epg extends Plugin
 		$image = '<img src="' . $realpath . ' " style="width:100%;" />';
 		
 		return $image;
-	}
-	
-	
-	function metadata(){
-		$meta = '<style type="text/css">
-					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
-					  .featured-show .poster{
-							width:100%; height:100%; outline:3px solid #FFF;
-							background-repeat:no-repeat;
-							background-size:auto 100%;
-							background-position:center center;
-						}
-					  .featured-show .poster img{width:100%; height:auto;}
-		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(255,255,255,.9); left:0; width:100%; opacity:0;}
-					  .featured-show .info h4 {font-size:12px; font-weight:none; }
-		              .featured-show .info h4, .featured-show .info p, .featured-show .info .show-detail{margin:5px;}
-		              .featured-show .info p {font-size:12px; line-height:12px;}
-					  .featured-show .info a {text-shadow:none; color:#333;}
-					  .featured-show .info a:hover {color:#39C;}
-					  
-					  .main.featured-show .info h4 {font-size:18px;} 
-				  </style>
-				
-				  <script type="text/javascript">
-					$(document).ready(function(){
-						show_layout();
-					});
-				
-					$(window).resize(function(e){
-						show_layout();
-					});
-					
-					function show_layout(){
-						$feats = $(".featured-show");
-						$containerW = $(".featured").width();
-						
-						$feats.each(function() {
-							//$(this).css("margin", Math.floor($containerW * 0.002));
-							//$(this).width(Math.floor($containerW * 0.196)).height(Math.floor($containerW * 0.196));
-				
-							$(this).css("margin", Math.floor($containerW * 0.004));
-							$(this).width(Math.floor($containerW * 0.128)).height(Math.floor($containerW * 0.128));
-		
-				            $infobox = $(this).children(".info");
-							$infobox.css("bottom", -$infobox.height());
-							
-							$(this).mouseenter(function(e){
-								$(this).children(".info").animate({bottom:0, opacity:1}, 600);
-							});
-							
-							$(this).mouseleave(function(e){
-								$offset = -$(this).children(".info").height();
-								$(this).children(".info").animate({bottom:$offset, opacity:0}, 400);
-							})
-			        	});
-					
-						$(".main").width(Math.floor($containerW * 0.316)).height(Math.floor($containerW * 0.262));
-					}
-				  </script>';
-		
-		return $meta;
 	}
 	
 }
