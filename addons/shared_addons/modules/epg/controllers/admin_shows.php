@@ -123,7 +123,7 @@ class Admin_Shows extends Admin_Controller
 			//Process form
 			$input_post = array();
 			
-			$data = $this->alcopolis->array_from_post(array('title', 'is_featured', 'cat_id', 'syn_id', 'syn_en'), $this->input->post());
+			$data = $this->alcopolis->array_from_post(array('title', 'is_featured', 'cat_id', 'syn_id', 'syn_en', 'trailer'), $this->input->post());
 			
 			if($this->sh_data->poster != ''){	
 				$data['poster'] = $this->sh_data->poster;

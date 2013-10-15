@@ -75,15 +75,20 @@ class Epg extends Public_Controller
 	
 	
 	
-	public function show($id){
+	public function show($id = NULL){
+		if($id == NULL){
+			$this->render('show_home');
+		}else{
+			$sh = $this->epg_sh_m->get_show_detail($id);
+			$title = $sh->title;
+			$cid = $sh->cid;
+			$date = $sh->date;
+			
+			$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration', 5);
+			
+			$this->render('show', array('shows'=>$sh, 'similar'=>$similar));
+		}
 		
-		$sh = $this->epg_sh_m->get_show_detail($id);
-		$title = $sh->title;
-		$cid = $sh->cid;
-		$date = $sh->date;
-		
-		$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration', 5);
-		
-		$this->render('show', array('shows'=>$sh, 'similar'=>$similar));		
+				
 	}
 }

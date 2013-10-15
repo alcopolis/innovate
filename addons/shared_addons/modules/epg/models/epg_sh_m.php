@@ -66,7 +66,7 @@ class Epg_Sh_m extends MY_Model {
 	
 	public function get_show($fields = NULL, $single = FALSE)
 	{
-		//$hari= date("Y-m-d");
+		$hari= date("Y-m-d");
 	
 		if($fields != NULL){
 			$this->db->select($fields);
@@ -78,7 +78,7 @@ class Epg_Sh_m extends MY_Model {
 			$method = 'result';
 		}
 	
-		//$this->db->where('date >=', $hari);
+		$this->db->where('date >=', $hari);
 	
 		return $this->db->get($this->_table)->$method();
 	}
@@ -90,7 +90,7 @@ class Epg_Sh_m extends MY_Model {
 	}
 	
 	public function get_show_detail($id){
-		$this->db->select('t0.id, t0.title, t0.cid, t0.date, t0.time, t0.duration, t0.syn_id, t0.syn_en, t0.poster');
+		$this->db->select('t0.id, t0.title, t0.cid, t0.date, t0.time, t0.duration, t0.syn_id, t0.syn_en, t0.poster, t0.trailer');
 		$this->db->select('t1.name, t1.num, t1.logo');
 		$this->db->from('inn_epg_show_detail t0');
 		$this->db->join('inn_epg_ch_detail t1', 't0.cid = t1.id', 'RIGHT');

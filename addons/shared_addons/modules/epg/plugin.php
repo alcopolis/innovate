@@ -52,6 +52,12 @@ class Plugin_Epg extends Plugin
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
 						'attributes' => array(
+							'limit' => array(
+									'type' => 'number',// Can be: slug, number, flag, text, array, any.
+									'flags' => '',
+									'default' => 5,
+									'required' => false,
+							),
 							'id' => array(
 									'type' => 'number',// Can be: slug, number, flag, text, array, any.
 									'flags' => '',
@@ -122,23 +128,25 @@ class Plugin_Epg extends Plugin
 							background-position:center center;
 						}
 					  .featured-show .poster img{width:100%; height:auto;}
-		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(0,0,0,.95); left:0; width:100%; opacity:0;}
+		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(0,120,180,.95); left:0; width:100%; opacity:0;}
 					  .featured-show .info h4 {font-size:14px; font-weight:600; line-height:14px; text-align:center; margin:15px 10px}
 				
-					  .featured-show .info p.subinfo{font-weight:normal; margin:5px 10px; background:#CCC; font-size:12px; color:#111; padding:10px; border-radius:5px;}
+					  .featured-show .info p.subinfo{font-weight:normal; margin:5px 10px; background:#FFF; font-size:12px; color:#111; padding:10px; border-radius:5px;}
 					  .featured-show .info p.subinfo{text-align:center;}
 				      .main.featured-show p.subinfo {text-align:left;}
 					  
 					  .featured-show .info p, .featured-show .info .sh-detail-link, .main.featured-show hr, .main.featured-show .sh-detail-link{margin:5px 20px;}
 				
-		              .featured-show .info p {font-size:12px; line-height:13px; width:auto; color:#CCC; padding:0px;}
-					  .featured-show .info a {text-shadow:none; color:#3CF;}
-					  .featured-show .info a:hover {color:#FFF;}
+		              .featured-show .info p {font-size:12px; line-height:13px; width:auto; color:#FFF; padding:0px;}
+					  .featured-show .info a {text-shadow:none; color:#FFF; font-weight:800;}
+					  .featured-show .info a:hover {color:#9CF;}
 				
 					  .main{}
 					  .main.featured-show .info h4 {font-size:18px; margin:20px 10px; text-align:left;}
-					  .main.featured-show .sh-detail-link {font-size:12px; font-weight:500;}
-					  .main.featured-show hr{border-style:dotted; border-color:#999;}
+					  .main.featured-show .sh-detail-link {font-size:14px; padding:5px 5px 5px 0;}
+					  .main.featured-show .sh-detail-link a{color:#FFF;font-weight:800;} 
+					  .main.featured-show .sh-detail-link a:hover {color:#9CF;}
+					  .main.featured-show hr{border-style:dashed; border-color:#CCC;}
 				  </style>
 	
 				  <script type="text/javascript">
@@ -249,8 +257,13 @@ class Plugin_Epg extends Plugin
 				$data .= '<div class="featured-show">';
 					$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
 					$data .= '<div class="info">';
-					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
- 					$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . '<br/><br/>' . date('d M y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
+					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . substr($featured->title, 0, 20);
+					if(strlen($featured->title) < 20){
+						$data .=  '</a></h4>';
+					}else{
+						$data .=  '...' . '</a></h4>';
+					}
+ 					$data .= '<p class="subinfo">' . substr($ch->name, 0, 10) . ' | Ch. ' . $ch->num . '<br/><br/>' . date('d M y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
  					$data .= '<p class="sh-detail-link" style="text-align:center;"><a href="epg/show/' .  $featured->showid . '">Detail Acara</a></p>';
 				$data .= '</div></div>';
 			}		
@@ -266,7 +279,7 @@ class Plugin_Epg extends Plugin
 		$cid = $this->attribute('channel');
 		$id = $this->attribute('id');
 	
-		$raw = $this->epg_sh_m->limit(5)->get_show_by(NULL, array('is_featured'=>'1', 'cid'=>$cid, 'id!='=>$id), false);
+		$raw = $this->epg_sh_m->limit($this->attribute('limit'))->get_show_by(NULL, array('is_featured'=>'1', 'cid'=>$cid, 'id!='=>$id), false);
 		shuffle($raw);
 		
 		foreach($raw as $related){

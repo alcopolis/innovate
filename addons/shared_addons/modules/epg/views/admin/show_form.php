@@ -74,6 +74,11 @@
 											<label for="poster">Upload Poster</label>
 											<div class="input"><?php echo form_upload('poster'); ?></div>
 										</div>
+										
+										<div class="input-div">
+											<label for="trailer">Trailer</label>
+											<div class="input"><?php echo form_input('trailer', set_value('trailer', $sh->trailer)); ?></div>
+										</div>
 									</div>
 									
 									<div class="clearfix"></div>
