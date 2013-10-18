@@ -95,6 +95,22 @@ class Plugin_Epg extends Plugin
 						),
 				),
 				
+				'ch_lineup' => array(
+						'description' => array(// a single sentence to explain the purpose of this method
+								'en' => ''
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+						'attributes' => array(
+							'category' => array(
+									'type' => 'text',// Can be: slug, number, flag, text, array, any.
+									'flags' => '',
+									'default' => 'Uncategorized',
+									'required' => false,
+							),
+						),
+				),
+				
 				'metadata' => array(
 						'description' => array(// a single sentence to explain the purpose of this method
 								'en' => ''
@@ -196,6 +212,35 @@ class Plugin_Epg extends Plugin
 		return $meta;
 	}
 	
+	function ch_lineup(){
+//		Channel Category
+// 		0	Uncategorized
+// 		1	National FTA
+// 		2	International FTA
+// 		3	Movies
+// 		4	Entertainment
+// 		5	Knowledge
+// 		6	Life Style
+// 		7	Sports
+// 		8	Kids And Toddler
+// 		9	News
+		
+		$cat = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), TRUE);
+		$raw = $this->epg_ch_m->get_channel_by(array('cat' => $cat->id), '');
+		
+		
+		$data = '';
+		
+		foreach($raw as $ch){
+			$data .= $ch->name . '<br/>';	
+		}
+		
+		return $data;
+	}
+	
+	
+	
+	
 	
 	function featured(){
 		
@@ -225,7 +270,6 @@ class Plugin_Epg extends Plugin
 		
 		
 		$data = '';
-		$mainswitch = false;
 		
 		if(isset($result)){
 			$raw = $this->epg_sh_m->order_by('cid', 'RANDOM')->limit($this->attribute('limit'))->get_featured_show($result->id);
@@ -234,6 +278,9 @@ class Plugin_Epg extends Plugin
 		}
 		
 		shuffle($raw);
+		
+
+		$mainswitch = false;
 		
 		foreach($raw as $featured){
 			$ch = $this->epg_ch_m->get_channel($featured->channelid);

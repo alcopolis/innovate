@@ -87,8 +87,10 @@ class Epg extends Public_Controller
 			$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration', 5);
 			
 			$this->render('show', array('shows'=>$sh, 'similar'=>$similar));
-		}
-		
-				
+		}		
+	}
+	
+	public function channel_lineup(){
+		$this->render('channel_lineup');
 	}
 }

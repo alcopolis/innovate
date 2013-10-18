@@ -69,15 +69,12 @@ class Epg_Ch_m extends MY_Model {
 		
 		if($fields != ''){
 			$this->db->select(fields);
+		}else{
+			$this->db->select('*');
 		}
 		
 		$this->db->where($where);
 		return $this->db->get($this->_table)->$method();
-	}
-	
-	public function get_categories()
-	{
-		return $this->db->get('inn_epg_ch_category')->result();
 	}
 	
 	public function add_channel(){
@@ -97,10 +94,23 @@ class Epg_Ch_m extends MY_Model {
 		}
 	}
 	
-	public function del(){}
-	
-	public function search()
+	public function get_categories()
 	{
-			
+		return $this->db->get('inn_epg_ch_category')->result();
+	}
+	
+	public function get_category_by($where, $single = FALSE)
+	{
+		$method = 'result';
+		
+		if($single){
+			$method = 'row';
+		}
+		
+		if(isset($where)){
+			$this->db->where($where);	
+		}
+		
+		return $this->db->get('inn_epg_ch_category')->$method();
 	}
 }

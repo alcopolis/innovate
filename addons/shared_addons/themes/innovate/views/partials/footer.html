@@ -1,17 +1,36 @@
 
 <div id="footer-theme" class="theme">
     <div class="footer-menu">
+        <h4>NEWS</h4>
         <ul>
-			{{ navigation:links group="footer" }}
+			{{ navigation:links group="news" }}
         </ul>
     </div>
-    <div class="right">
-<!--     	<p id="social"> -->
-<!--     		<a id="twitter" href="https://twitter.com/intent/follow?&screen_name=adriantrivano"><img src="{{ theme:image_path }}twitter.png" /></a> -->
-<!--     		<a id="facebook" href="https://facebook.com/adriantrivano"><img src="{{ theme:image_path }}fb.png" /></a> -->
-<!--     	</p> -->
-		<p style="text-align:right; margin-right:15px;"><img src="{{ theme:image_path }}sinarmas-logo.png" style="width:130px" /></p>
-    	<p id="copy">Copyright &copy; 2013 Innovate Indonesia. All Rights Reserved</p>	
+    <div class="footer-menu">
+        <h4>FAQ</h4>
+        <ul>
+			{{ navigation:links group="faq" }}
+        </ul>
+    </div>
+    <div class="footer-menu">
+        <h4>ABOUT US</h4>
+        <ul>
+			{{ navigation:links group="about-us" }}
+        </ul>
+    </div>
+    <div class="footer-menu">
+        
+    </div>
+    <div class="footer-menu right">
+    	<div id="social" class="left" style="text-align:center;">
+    		<h4>FOLLOW</h4>
+    		<a class="social-links" id="twitter" href="https://twitter.com/intent/follow?&screen_name=innovateind" target="_blank">Twitter</a>
+    		<a class="social-links" id="fb" href="https://facebook.com/innovate" target="_blank">Facebook</a>
+    		<a class="social-links" id="pinterest" href="http://www.pinterest.com/innovate-indonesia" target="_blank">Pinterest</a>
+    	</div>
+		<div id="sinarmas" class="right"><img src="{{ theme:image_path }}sinarmas-logo.png" style="width:130px" /></div>
+    	<div class="clear"></div>
+    	<div id="copy" class="right">Copyright &copy; 2013 Innovate Indonesia. All Rights Reserved</div>	
     </div>
     
     <div class="clear"></div>

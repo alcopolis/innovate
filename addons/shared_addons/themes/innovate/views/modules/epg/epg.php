@@ -23,7 +23,7 @@
 	 	</header>
 				
 		 <div id="content" class="wrapper clearfix">
-		 	<div id="content-bg" style="position:absolute; width:100%; height:auto; background-image:url({{theme:image_path}}epg-bg.png); background-repeat: no-repeat; background-size:1920px auto; background-position:center 40px; opacity:0.15; z-index:0;"></div>
+		 	<div id="content-bg" style="position:absolute; width:100%; height:auto; background-image:url({{theme:image_path}}epg-bg.jpg); background-repeat: no-repeat; background-size:1920px auto; background-position:center 40px; opacity:0.15; z-index:0;"></div>
 		 	<div id="body-wrapper" style="position: relative;">
 				<?php if($shows != NULL ){ ?>
 					<div id="tools">

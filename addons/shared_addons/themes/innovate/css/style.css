@@ -28,9 +28,9 @@
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
-.left{float:left;}
+.left{float:left !important;}
 
-.right{float:right;}
+.right{float:right !important;}
 
 .clear{clear:both;}
 
@@ -128,12 +128,26 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 
 #navigation #menu ul#main-menu li.has_children > ul.dropdown{
 	display:none;
-	background: rgba(51,153,204,.95);
+/* 	background: rgba(51,153,204,.95); */
 	min-width:180px;
 	max-width:240px;
 	overflow:hidden;
 	position:absolute;
 	z-index:1;
+	border-top: 1px solid #999;
+	box-shadow:0 1px 3px rgba(0,0,0,.35);
+	opacity:.95;
+	border-radius: 0 0 5px 5px;
+	
+	background: #005099; /* Old browsers */
+	background: -moz-linear-gradient(top,  #005099 0%, #2989d8 15%, #51a3cc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#005099), color-stop(15%,#2989d8), color-stop(100%,#51a3cc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #005099 0%,#2989d8 15%,#51a3cc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #005099 0%,#2989d8 15%,#51a3cc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #005099 0%,#2989d8 15%,#51a3cc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #005099 0%,#2989d8 15%,#51a3cc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005099', endColorstr='#51a3cc',GradientType=0 ); /* IE6-9 */
+		
 }
 
 #navigation #menu ul#main-menu li.has_children:hover > ul.dropdown{
@@ -217,7 +231,7 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 .mod-epg{
 	padding:0;
 	width:99%;
-	margin:0 0 0 0;
+	margin:-20px 0 0 0;
 }
 
 .mod-epg>h4{
@@ -285,10 +299,7 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 #berlangganan{
 	width:100%;	
 	text-align:right;
-	
-	margin:5px 0 40px 0; padding:0;
-	
-	
+	margin:5px 0 0 0; padding:0;
 }
 
 #berlangganan a{
@@ -391,17 +402,66 @@ body.subscribe #content{
 
 /* --------------------------------------------Footer------------------------------------- */
 
-footer{width:100%; background:#111; margin:0; padding:10px 0;}
+footer{width:100%; background:#111; margin:0; padding:0; border-top:1px solid #333;}
 
-.footer-menu{}
-.footer-menu ul{margin:0 20px; float:left}
-.footer-menu ul li{float:left; margin:0 4px 0 0; padding:0; font-size:12px;}
-.footer-menu ul li:after{content:" | "; color:#333;}
-.footer-menu ul li a{color:#FFF;}
-.footer-menu ul li a:hover{color:#39F; text-shadow:none;}
+#footer-theme{width:90%; margin:0 auto;}
 
-footer p{margin:0; padding:10px 0; line-height:0;}
-footer #social{margin-right:20px; text-align:right;}
-footer #copy{margin-right:20px; font-size:12px; color:#CCC; font-family: "Arial", Helvetica, Tahoma, sans-serif; font-size:10px}
+.footer-menu{
+	float:left;
+	margin:40px 20px 20px 20px;
+}
+
+.footer-menu h4{
+	color:#29ABE1;
+	text-shadow:0 -1px 1px rgba(255,255,255,.25);
+	font-size:16px;
+	font-weight:normal;
+}
+
+.footer-menu ul{font-size:12px;}
+.footer-menu ul li a{color:#999;}
+.footer-menu ul li a:hover{color:#FFF;}
+.footer-menu ul li{
+	margin:0 0 0 0; padding:5px 0;
+	border-top:1px solid #222;
+	border-bottom:1px solid #000;
+}
+.footer-menu ul li:first-child{border-top:none;}
+.footer-menu ul li:last-child{border-bottom:none;}
+
+#social{
+	color:#999;
+}
+
+a.social-links{
+	display:block;
+	float:left;
+	text-indent:-9999px;
+	background-repeat:no-repeat;
+	background-position: center center;
+	background-size: cover;
+	width:24px; height:24px;
+}
+
+a#twitter{background-image:url(../img/twitter.png)}
+a#twitter:hover{background-image:url(../img/twitter-color.png)}
+a#fb{background-image:url(../img/fb.png)}
+a#fb:hover{background-image:url(../img/fb-color.png)}
+a#pinterest{background-image:url(../img/pinterest.png)}
+a#pinterest:hover{background-image:url(../img/pinterest-color.png)}
+
+#sinarmas{margin-top:0; padding:5px 10px 0 10px; border:1px solid #000; border-radius:10px; box-shadow: inset 0 0 2px rgba(255,255,255,.15);}
+#copy{font-size:11px; color:#CCC; margin-top:10px}
+
+/* .footer-menu{} */
+/* .footer-menu ul{margin:0 20px; float:left} */
+/* .footer-menu ul li.group-header{margin:0 4px 0 0; padding:0; font-size:18px;} */
+/* .footer-menu ul li{margin:0 4px 0 0; padding:0; font-size:12px;} */
+/* .footer-menu ul li a{color:#FFF;} */
+/* .footer-menu ul li a:hover{color:#39F; text-shadow:none;} */
+
+/* footer p{margin:0; padding:10px 0; line-height:0;} */
+/* footer #social{margin-right:20px; text-align:right;} */
+/* footer #copy{margin-right:20px; font-size:12px; color:#CCC; font-family: "Arial", Helvetica, Tahoma, sans-serif; font-size:10px} */
 
 
