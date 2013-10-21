@@ -39,7 +39,7 @@ class Epg_Ch_m extends MY_Model {
 // 		$this->db->from('default_inn_epg_ch_detail');
 		
 		
-		$this->db->select('t0.id, t0.name, t0.num, t1.cat, t0.desc, t0.logo');
+		$this->db->select('t0.id, t0.name, t0.num, t1.cat, t0.is_active, t0.desc, t0.logo');
 		$this->db->from('default_inn_epg_ch_detail t0');
 		$this->db->join('default_inn_epg_ch_category t1' ,'t1.id = t0.cat'); 
 		
@@ -55,7 +55,7 @@ class Epg_Ch_m extends MY_Model {
 	public function get_channel($id = NULL)
 	{
 		//$this->db->select('name, num');
-		$this->db->where('id', $id);
+		$this->db->where('id',$id);
 		return $this->db->get($this->_table)->row();
 	}
 	

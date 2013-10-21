@@ -91,6 +91,16 @@ class Epg extends Public_Controller
 	}
 	
 	public function channel_lineup(){
-		$this->render('channel_lineup');
+		$cats = $this->epg_ch_m->get_categories();
+		
+		foreach($cats as $ct){
+			if($ct->id == '0'){
+				$cat[0] = 'All Categories';
+			}else{
+				$cat[$ct->id] = $ct->cat;
+			}
+		}
+		
+		$this->render('channel_lineup', array('cat'=>$cat));
 	}
 }

@@ -23,6 +23,7 @@
 	        				<th width="30"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>
 							<th style="width:20%;">Name</th>
 							<th class="align-center" style="width:5%;">Number</th>
+							<th class="align-center" style="width:5%;">Status</th>
 							<th class="align-center" style="width:20%;">Category</th>
 							<th class="align-center" style="width:40%;">Description</th>
 							<th class="align-center" style="width:10%;">Action</th>
@@ -42,6 +43,7 @@
 	        						<td><?php echo form_checkbox('action_to[]', $ch->id); ?></td>
 	        						<td><a href="admin/epg/channels/edit/<?php echo $ch->id; ?>"><?php echo $ch->name; ?></a></td>
 	        						<td class="align-center"><?php echo $ch->num; ?></td>
+	        						<td class="align-center"><?php echo $ch->is_active == '0' ? 'Disabled' : 'Active'; ?></td>
 	        						<td class="align-center"><?php echo $ch->cat; ?></td>
 	        						<td><?php echo substr($ch->desc,0,150); ?></td>
 	        						<td class="align-center"><a href="admin/epg/channels/edit/<?php echo $ch->id; ?>">Edit</a></td>

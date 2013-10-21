@@ -226,13 +226,25 @@ class Plugin_Epg extends Plugin
 // 		9	News
 		
 		$cat = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), TRUE);
-		$raw = $this->epg_ch_m->get_channel_by(array('cat' => $cat->id), '');
+		$raw = $this->epg_ch_m->get_channel_by(array('cat' => $cat->id, 'is_active'=>'1'), '');
 		
 		
 		$data = '';
 		
 		foreach($raw as $ch){
-			$data .= $ch->name . '<br/>';	
+			if($ch->desc != ''){
+				$desc = $ch->desc;	
+			}else{
+				$desc = 'Not Available';
+			}
+			
+			if($ch->logo != ''){
+				$logo = $ch->logo;
+			}else{
+				$logo = '{{theme:image_path}}/theme/default-icon.jpg';
+			}
+			
+			$data .= '<div class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $ch->cat . '" data-logo="' . $logo . '" data-desc="' . $desc . '">' . $ch->name . '</div>';	
 		}
 		
 		return $data;

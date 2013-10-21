@@ -22,6 +22,14 @@
 								<li>
 								
 									<div id="ch-logo" style="width:240px; height: 240px; background:#07E; float:left; margin-right:20px;"></div>
+									
+									
+									<div class="input">
+										<?php echo form_checkbox('is_active', $ch->is_active, $ch->is_active == 1 ? TRUE : FALSE, 'style="min-width:0 !important"'); ?>&nbsp;&nbsp;<strong>Is Active</strong>
+										<input type='hidden' value='<?php echo $ch->is_active; ?>' name="is_active">
+									</div>
+									
+									<br/>
 																		
 									<label for="num">Channel Number <span>*</span></label>
 									<div class="input"><?php echo form_input('num', !empty($ch->num) ? $ch->num : '', 'maxlength="3" style="min-width:10px !important; width:30px; text-align:right;"') ?></div>

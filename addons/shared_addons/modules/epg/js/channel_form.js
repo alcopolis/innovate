@@ -17,6 +17,16 @@
 			// Set up the new instance
 			textarea.addClass(this.value);
 			pyro.init_ckeditor();
-		});		
+		});	
+		
+		$(':checkbox').change(function(e){
+			if($(this).attr('value') == "0"){
+				$(this).attr('value', 1);
+				$(this).siblings(':hidden').attr('value', 1);
+			}else{
+				$(this).attr('value', 0);
+				$(this).siblings(':hidden').attr('value', 0);
+			} 
+		})
 	})
 })(jQuery);

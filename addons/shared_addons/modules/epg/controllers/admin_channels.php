@@ -50,7 +50,7 @@ class Admin_Channels extends Admin_Controller
 	public function index()
 	{				
 		$pagination = create_pagination('admin/epg/channels/index', $this->epg_ch_m->count_channel(), 20,5);
-		$all_channels = $this->epg_ch_m->order_by('id', 'ASC')->limit($pagination['limit'], $pagination['offset'])->get_all_channel();
+		$all_channels = $this->epg_ch_m->order_by('is_active','DESC')->limit($pagination['limit'], $pagination['offset'])->get_all_channel();
 
 		$this->render('admin/channels', array('pagination'=>$pagination, 'channels'=>$all_channels));
 	}
@@ -90,7 +90,7 @@ class Admin_Channels extends Admin_Controller
 		if($this->form_validation->run()){
 			
 			//Process form		
-			$data = $this->alcopolis->array_from_post(array('name', 'num', 'cat', 'desc'), $this->input->post());
+			$data = $this->alcopolis->array_from_post(array('name', 'num', 'cat', 'desc', 'is_active'), $this->input->post());
 
 			if($this->epg_ch_m->update_channel($id, $data)){
 				redirect('admin/epg/channels');
