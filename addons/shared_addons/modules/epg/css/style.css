@@ -128,6 +128,51 @@ span#ch{
 	
 	
 	
+/* ========================================= Frontend Channel Lineup =======================================*/	
+	#ch-lineup {
+	    font-family: "Arial",Helvetica,Tahoma,sans-serif;
+	    font-size: 12px;
+	    margin: 0 auto;
+	    width: 960px;
+	}
+	
+	.ch{
+		width:61px; height:61px;
+		border:2px solid #FFF;			
+		font-size:1em;
+		text-align:center;
+		margin:0 5px 5px 0; padding:5px;
+		float:left;
+		border-radius:5px;
+		color:rgba(32,120,200,.85);
+		background:rgba(255,255,255,.85);
+		cursor:pointer;
+	}
+	
+	.ch:hover, .ch.selected{
+		border:2px solid rgba(32,120,200,.85);
+	}
+	
+	#list{width:60%;}
+	
+	#ch-detail{color:#007DC3}
+	#ch-detail #name{font-size:14px;}
+	#ch-detail #sch-link{margin:10px}
+	#ch-detail #sch-link a{background:#007DC3; color:#FFF; padding:5px 10px;}
+	#ch-detail #ch-desc{clear:both;}
+	
+	
+/* ======================== Side ===========================*/	
+	
+	#side{width:40%;}
+	#side .side-item{
+		background:rgba(255,255,255,.85);
+		padding:20px;
+		margin-bottom:20px;
+		border-radius:5px;
+		border:2px solid #FFF;
+	}
+	
 /* ======================== Tools ===========================*/
 /* 	#tools{ */
 /* 		width:80%; margin:40px 6% 10px 0; */

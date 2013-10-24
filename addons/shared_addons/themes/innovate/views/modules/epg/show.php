@@ -106,7 +106,7 @@
 										</div>
 									<?php } ?>
 									
-									<div id="ads" class="detail" style="height:200px; background:#FFF;">Advertisment</div>
+									<div class="ads detail" style="height:200px; background:#FFF;">Advertisment</div>
 								</div>
 					
 							</div>			

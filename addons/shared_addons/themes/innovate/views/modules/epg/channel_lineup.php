@@ -18,32 +18,20 @@
 			padding-top:0;
 			float:none;
 		}
-		
-		#ch-lineup {
-		    font-family: "Arial",Helvetica,Tahoma,sans-serif;
-		    font-size: 12px;
-		    margin: 0 auto;
-		    width: 960px;
-		}
-		
-		.ch{
-			width:72px; height:72px;
-			border:2px solid #FFF;			
-			font-size:1em;
-			text-align:center;
-			margin:5px;
-			float:left;
-			border-radius:5px;
-			color:rgba(32,120,200,.85);
-			background:rgba(255,255,255,.85);
-			cursor:pointer;
-		}
-		
-		.ch:hover, .ch.selected{
-			border:2px solid rgba(32,120,200,.85);
-		}
-		
 	</style>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.ch').click(function(){
+				$('#ch-detail').removeClass('hide');
+				$('#cat').html($(this).attr('data-cat'));
+				$('#name').html($(this).attr('data-name'));
+				$('#num').html($(this).attr('data-num'));
+				$('#ch-desc').html($(this).attr('data-desc'));
+				//$('#sch-link a').attr('href', 'epg/' + $(this).attr('data-link'));
+			})
+		});
+	</script>
 </head>
 
 <body id="top" class="epg">
@@ -55,7 +43,7 @@
 		</header>
 				
 		<div id="content" class="wrapper clearfix">
-		 	<div id="content-bg" style="position:absolute; width:100%; height:auto; background-image:url({{theme:image_path}}epg-bg.jpg); background-repeat: no-repeat; background-size:1920px auto; background-position:center 40px; opacity:0.15; z-index:0;"></div>
+		 	
 		 	<div id="body-wrapper" style="position: relative;">
 				<div id="tools">
 					<div id="page-title" class="tool"><h4>Channel Lineup</h4></div>
@@ -94,55 +82,23 @@
 				</div>
 					
 				<div id="ch-lineup" class="clearfix">
-					<div id="list" class="left" style="width:60%;">	
-						<div class="clearfix">
-							<h4>National FTA</h4>
-							{{ epg:ch_lineup category="National FTA" }}
-						</div>
-						
-						<div class="clearfix">
-							<h4>International FTA</h4>
-							{{ epg:ch_lineup category="International FTA" }}
-						</div>
-						
-<!-- 						<div class="clearfix"> -->
-<!-- 							<h4>Movies</h4> -->
-<!-- 							{{ epg:ch_lineup category="Movies" }} -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="clearfix"> -->
-<!-- 							<h4>Knowledge</h4> -->
-<!-- 							{{ epg:ch_lineup category="Knowledge" }} -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="clearfix"> -->
-<!-- 							<h4>Entertainment</h4> -->
-<!-- 							{{ epg:ch_lineup category="Entertainment" }} -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="clearfix"> -->
-<!-- 							<h4>Life Style</h4> -->
-<!-- 							{{ epg:ch_lineup category="Life Style" }} -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="clearfix"> -->
-<!-- 							<h4>Sports</h4> -->
-<!-- 							{{ epg:ch_lineup category="Sports" }} -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="clearfix"> -->
-<!-- 							<h4>News</h4> -->
-<!-- 							{{ epg:ch_lineup category="News" }} -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="clearfix"> -->
-<!-- 							<h4>Kids</h4> -->
-<!-- 							{{ epg:ch_lineup category="Kids And Toddler" }} -->
-<!-- 						</div> -->
+					<div id="list" class="left">	
+						{{ epg:ch_lineup category="<?php echo $category; ?>" }}
 					</div>
-					
-					<div id="side" class="left" style="width:40%; height:300px; background:#FFF;">
-						asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas
+					<div id="side" class="left">
+						<div id="ch-detail" class="side-item hide clearfix">
+							<img id="logo" src="{{theme:image_path}}themes/default-icon.jpg" style="float:left; width:96px; height:96px; background:#CCC; margin-right:10px;" />
+							<h6 id="name"></h6>
+							<div>Ch: <span id="num"></span></div>
+							<div id="cat">Category: <?php echo $category; ?></div>
+<!-- 						<div id="sch-link"><a href="epg/">Today's Schedule</a></div> -->
+							<div style="clear:left;"></div>
+							<div id="ch-desc" style="margin-top:10px;"></div>
+						</div>
+						
+						<div class="ads side-item">
+							Advertisement
+						</div>
 					</div>
 				</div>
 			</div>

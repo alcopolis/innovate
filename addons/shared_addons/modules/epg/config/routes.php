@@ -21,9 +21,11 @@
 */
 
 // front-end
-// $route['epg(/:num)?']					= 'epg/index$1';
+//$route['epg(/:any)?']					= 'epg/index$1';
 // $route['epg/view_channels(/:num)?']		= 'epg/view_channels/index$1';
-$route['epg/(/:any)?']		= 'epg/show$1';
+$route['epg/show(/:any)?']		= 'epg/show$1';
+$route['epg/channels']		= 'epg/channel_lineup';
+$route['epg/schedule(/:any)?']		= 'epg/schedule$1';
 
 // back-end
 $route['epg/admin/channels(/:any)?']		= 'admin_channels$1';

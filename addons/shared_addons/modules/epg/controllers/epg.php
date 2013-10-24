@@ -39,14 +39,14 @@ class Epg extends Public_Controller
 	
 	public function index()
 	{
+
 		$channels = $this->epg_ch_m->get_all_channel();
-		$ch[0] = 'Select';
 		foreach($channels as $c){
 			$ch[$c->id] = $c->name;
 		}
-		
+				
 		$cats = $this->epg_ch_m->get_categories();
-		
+			
 		foreach($cats as $ct){
 			if($ct->id == '0'){
 				$cat[0] = 'All Categories';
@@ -54,8 +54,9 @@ class Epg extends Public_Controller
 				$cat[$ct->id] = $ct->cat;
 			}
 		}
-
+		
 		$tgl = '';
+		
 		
 		if($this->form_validation->run()){
 
@@ -101,6 +102,12 @@ class Epg extends Public_Controller
 			}
 		}
 		
-		$this->render('channel_lineup', array('cat'=>$cat));
+		if($this->input->post('cat_id') == NULL || $this->input->post('cat_id') == '0'){
+			$c = 'All Categories';
+		}else{
+			$c = $cat[intval($this->input->post('cat_id'))];
+		}
+		
+		$this->render('channel_lineup', array('cat'=>$cat, 'category'=>$c));
 	}
 }
