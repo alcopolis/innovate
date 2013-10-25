@@ -1,116 +1,105 @@
-<div class="one_full">
-	<section class="title">
-		<h4><?php echo lang('subscribe:item_list'); ?></h4>
-	</section>
-	
-	<section class="item">
-		<div class="content">
-		
-		<div id="filter">
-			<?php $this->load->view('admin/partials/filter'); ?>
-		</div>
-		
-		<?php /* echo form_open('admin/subscribe'); */ ?>
-		
-			<div id="promo-list">
-			<?php if (!empty($subscribes)): ?>
-				
-				<div id="record-counter" style="margin:30px 0 10px 0; font-weight:bold; background:#EEE; padding:10px; border-radius:3px;"><?php echo count($subscribes)?> Subscribers</div>
-				
-				<table>
-					<thead>
-						<tr>
-							<?php /* <th><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th> */ ?>
-							<th style="width:10%;">Name</th>
-							<th style="width:12.5%;">Address</th>
-							<th class="align-center" style="width:5%;">Phone</th>
-							<th class="align-center" style="width:5%;">Mobile</th>
-							<th class="align-center" style="width:12.5%;">Email</th>
-							<th style="width:12.5%;">Package</th>
-							<th class="align-center" style="width:10%;">Entry Date</th>
-							<th class="align-center" style="width:10%;">Status</th>
-						</tr>
-					</thead>
-					<tfoot>
-						<tr>
-							<td colspan="9">
-								<div class="inner"><?php $this->load->view('admin/partials/pagination'); ?></div>
-							</td>
-						</tr>
-					</tfoot>
-					<tbody>
-						<?php foreach( $subscribes as $subscribe ): ?>
-						<tr>
-							<?php /*<td><?php echo form_checkbox('action_to[]', $subscribe->id); ?></td> */ ?>
-							<td><?php echo $subscribe->name; ?></td>
-							<td><?php echo $subscribe->address; ?></td>
-							<td class="align-center"><?php echo '(' . $subscribe->area_code . ') ' . $subscribe->phone; ?></td>
-							<td class="align-center"><?php echo $subscribe->mobile; ?></td>
-							<td class="align-center"><?php echo $subscribe->email; ?></td>
-							<td><?php echo $subscribe->packages; ?></td>
-							<td class="align-center">
-								<?php
-									$d = strtotime($subscribe->date);
-									echo date('d-m-Y', $d); 
-								?>
-							</td>
-							<td class="align-center" id="<?php echo $subscribe->id; ?>">
-								<?php 			
-								
-									$attr = 'id="' . $subscribe->id . '" style="width:120px" class="status-dropdown"';
-									
-									if($subscribe->closing_flag == '2' || $subscribe->closing_flag == '3'){
-										switch($subscribe->closing_flag){
-											case '2': echo '<span style="color:rgba(0,180,0,.75);"><strong>Closed</strong></span>'; break;
-											case '3': echo '<span style="color:rgba(255,0,0,.75);"><strong>Cancelled</strong></span>'; break;
-										}
-										
-									}else{
-										echo form_dropdown('', array(
-												'0'	=> 'Open',
-												'1'	=> 'On Progress',
-												'2'	=> 'Close',
-												'3'	=> 'Cancel',
-										), set_value('status', $subscribe->closing_flag), $attr);
-									}									
-								?>
-							</td>
-						</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
-				
-			<?php else: ?>
-				<div class="no_data">No Records Found</div>
-			<?php endif;?>
-			
-			<?php /* echo form_close(); */ ?>
-			</div>
-			
-		</div>
-	</section>
-</div>
+<style type="text/css">
+.box .collapsed {
+    border: medium none;
+    display: none;
+}
+section.item.collapsed ~ section.title.files-title {
+    border-radius: 5px 5px 5px 5px;
+}
+section.title li {
+    display: inline;
+}
+section.title {
+    cursor: pointer;
+}
+section.title li .button {
+    display: inline-block;
+    float: right;
+    font-size: 13px;
+    line-height: initial;
+    margin: 0 10px 0 0;
+    padding: 2px 6px;
+}
+section.title li:first-child {
+    margin-right: 16px;
+}
+</style>
+
 
 <script type="text/javascript">
-// 	$('.status-dropdown').change(function(){
-// 		var sid = $(this).attr('id');
-		
-// 		$.ajax({
-// 			type: 'GET',
-// 			url: 'admin/subscribe/change_status/?id=' + sid + '&val=' + $(this).val(),
-// 			dataType: 'json',
-// 			success: function(response) {
-// 				if(response.lock){
-// 					$parent = $('td#' + sid);
-
-// 					switch(response.val){
-// 						case '2': $parent.html('<span style="color:rgba(0,180,0,.75);"><strong>Closed</strong></span>'); break;
-// 						case '3': $parent.html('<span style="color:rgba(255,0,0,.75);"><strong>Cancelled</strong></span>'); break;
-// 					}
-					
-// 				}
-// 			},
-// 		});
-// 	})
+$(function(){
+	$('section.item:first-child').slideDown(200).removeClass('collapsed');
+	
+	// show and hide the sections
+	$('.box .title').click(function(){
+		window.scrollTo(0, 0);
+		if ($(this).next('section.item').hasClass('collapsed')) {
+			$('.box .item').slideUp(200).addClass('collapsed');
+			$.cookie('nav_groups', $(this).parents('.box').attr('rel'), { expires: 1, path: window.location.pathname });
+			$(this).next('section.collapsed').slideDown(200).removeClass('collapsed');
+		}
+	});
+})
 </script>
 
+
+
+<?php if ($faqs != NULL): ?>
+	<?php foreach ($faqs as $key=>$value){ ?>
+		<div class="group-<?php echo $key; ?> box" rel="<?php echo $key; ?>">
+			<div class="one_full">
+				<section class="title">					
+					<ul>
+						<li>
+							<h4><?php echo ucwords($key); ?></h4>
+						</li>
+						<li>
+							<?php echo anchor('admin/faq/create/'.$key, 'Add', 'rel="'.$key.'" class="add ajax button"'); ?>
+						</li>
+					</ul>
+				</section>
+				
+				<section class="item collapsed">
+					<div class="content">
+						<?php if($value!=NULL){ ?>
+							<table>
+								<thead>
+									<tr>
+										<th class="align-center">Title</th>
+										<th class="align-center">Question</th>
+										<th class="align-center">Answer</th>
+										<th class="align-center">Action</th>
+									</tr>
+									<tbody>
+										<?php foreach( $value as $faq ){ ?>
+											<tr>
+												<td class="align-center"><a href="admin/faq/edit/<?php echo $faq->id; ?>"><?php echo $faq->title; ?></a></td>
+												<td class="align-center"><?php echo $faq->question; ?></td>
+												<td class="align-center"><?php echo $faq->answer; ?></td>
+												<td class="align-center"><a href="admin/faq/edit/<?php echo $faq->id; ?>">Edit</a> | <a href="admin/faq/delete/<?php echo $faq->id; ?>">Delete</a></td>
+											</tr>
+										<?php }; ?>
+									</tbody>
+								</thead>
+							</table>
+						<?php }else{ ?>
+							<div class="no_data">No FAQ</div>
+						<?php } ?>
+					</div>
+				</section>
+			</div>
+		</div>
+	<?php } ?>
+<?php else: ?>
+	<div class="one_full">
+		<section class="title">
+			<h4><?php echo 'Frequently Asked Question' ?></h4>
+		</section>
+		
+		<section class="item">
+			<div class="content">
+				<div class="no_data">No Records Found</div>
+			</div>
+		</section>
+	</div>
+<?php endif; ?>

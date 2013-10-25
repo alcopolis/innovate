@@ -322,15 +322,11 @@ class Epg_Sh_m extends MY_Model {
 	
 	public function update_show($title, $data){
 		$this->db->where('title', $title);
-		
-		//var_dump($data);
 	
 		if($this->db->update($this->_table, $data)){
 			return TRUE;
-			//echo 'TRUE';
 		}else{
 			return FALSE;
-			//echo 'FALSE';
 		}
 	}
 

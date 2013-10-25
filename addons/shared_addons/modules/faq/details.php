@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Module_Subscribe extends Module {
+class Module_Faq extends Module {
 
 	public $version = '1.0';
 
@@ -8,72 +8,70 @@ class Module_Subscribe extends Module {
 	{
 		return array(
 			'name' => array(
-				'en' => 'Subscription'
+				'en' => 'FAQ'
 			),
 			'description' => array(
-				'en' => 'New Customer Subscription'
+				'en' => 'Frequently Asked Questions'
 			),
 			'backend' => TRUE,
-			'menu' => 'Subscription'
+			'menu' => 'content',
+			'shortcuts' => array(
+					array(
+							'name' => 'faq:group_create_title',
+							'uri' => 'admin/faq/groups/create',
+							'class' => 'add',
+					),
+			),
 		);
 	}
 
 	public function install()
 	{
-		$this->dbforge->drop_table('inn_subscribe');
-		//$this->db->delete('settings', array('module' => 'sample'));    //Maybe usefull for future projects
-
-		$subscribe_table = array(
+		$this->dbforge->drop_table('inn_faq');
+		$this->dbforge->drop_table('inn_faq_category');
+		
+		$this->install_tables(array(
+				'inn_faq_category' => array(
+						'id' => array('type' => 'INT', 'constraint' => 11, 'auto_increment' => true, 'primary' => true),
+						'category' => array('type' => 'VARCHAR','constraint' => '20'),
+				),
+			));
+		
+		$faq_table = array(
                         'id' => array(
 									  'type' => 'INT',
 									  'constraint' => '11',
-									  'auto_increment' => FALSE
+									  'auto_increment' => TRUE
 						),
-						'first_name' => array(
-								'type' => 'VARCHAR',
-								'constraint' => '20'
+						'category' => array(
+								'type' => 'INT',
+								'constraint' => '11'
 						),
-						'last_name' => array(
-								'type' => 'VARCHAR',
-								'constraint' => '20'
-						),
-						'address' => array(
-								'type' => 'TEXT',
-						),
-						'area_code' => array(
-								'type' => 'VARCHAR',
-								'constraint' => '4'
-						),
-						'phone' => array(
-								'type' => 'VARCHAR',
-								'constraint' => '20'
-						),
-						'mobile' => array(
-								'type' => 'VARCHAR',
-								'constraint' => '20'
-						),
-						'email' => array(
-								'type' => 'VARCHAR',
-								'constraint' => '100'
-						),
-						'package' => array(
+						'Title' => array(
 								'type' => 'VARCHAR',
 								'constraint' => '50'
 						),
-						'closing_flag' => array(
-								'type' => 'INT',
-								'constraint' => '11'
-						)
+						'question' => array(
+								'type' => 'TEXT',
+						),
+						'answer' => array(
+								'type' => 'TEXT',
+						),
+						'attachment' => array(
+								'type' => 'VARCHAR',
+								'constraint' => '200'
+						),
 				);
 
-		$this->dbforge->add_field($subscribe_table);
+		$this->dbforge->add_field($faq_table);
 		$this->dbforge->add_key('id', TRUE);
 
-		if($this->dbforge->create_table('inn_subscribe'))
+		if($this->dbforge->create_table('inn_faq'))
 		{
 			return TRUE;
 		}
 	}
+	
 
 	public function uninstall()
 	{
