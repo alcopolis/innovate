@@ -25,6 +25,7 @@
 				
 				<div id="faq" style="clear:both;">
 					<!-- <h1>FAQ Goes Here</h1> -->
+					{{faq:get group="product" subject="<?php echo $product->tags; ?>" display="full"}}
 				</div>
 			</div>
 		</div>

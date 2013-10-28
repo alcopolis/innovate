@@ -57,7 +57,7 @@ class Admin_Groups extends Admin_Controller
 		$this->page_data->action = 'create';
 		
 		if($this->form_validation->run()){
-			$data = $this->alcopolis->array_from_post(array('title'), $this->input->post());
+			$data = $this->alcopolis->array_from_post(array('category'), $this->input->post());
 			if($this->faq_cat_m->insert_category($data)){
 				redirect('admin/faq');
 			}
@@ -69,9 +69,9 @@ class Admin_Groups extends Admin_Controller
 	}
 	
 	
-	function delete($id){
-		$this->faq_m->delete($id);
-		$this->index();
+	function delete($cat){
+		$this->faq_cat_m->delete_category($cat);
+		//$this->index();
 	}
 	
 }

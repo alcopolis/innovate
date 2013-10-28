@@ -54,13 +54,15 @@ $(function(){
 							<h4><?php echo ucwords($key); ?></h4>
 						</li>
 						<li>
-							<?php echo anchor('admin/faq/create/'.$key, 'Add', 'rel="'.$key.'" class="add ajax button"'); ?>
+							<?php echo anchor('admin/faq/groups/delete/'.$key, 'Delete Group', 'rel="'.$key.'" class="tooltip-e confirm btn button red"'); ?>
 						</li>
 					</ul>
 				</section>
 				
 				<section class="item collapsed">
 					<div class="content">
+						<div style="clear:both; margin-bottom:20px;"><?php echo anchor('admin/faq/create/'.$key, 'Add FAQ', 'rel="'.$key.'" class="add ajax button"'); ?></div>
+						
 						<?php if($value!=NULL){ ?>
 							<table>
 								<thead>

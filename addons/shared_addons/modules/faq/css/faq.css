@@ -1,0 +1,26 @@
+.faq{color:#007DC3;}
+
+.faq-item{
+	width:100%;
+	margin:0 0 20px 0;
+}
+
+.faq-subject{
+	font-size:1.25em;
+	background:#111;
+	margin:0; padding:5px 10px;
+	color:#FFF;
+}
+
+.faq-content{
+	margin:0; padding:5px 10px;
+	background:#EFEFEF;
+	color:#666;
+	font-size:.85em;
+	line-height:1.2em;
+}
+
+.faq-q, .faq-a{
+	color:#666;
+	margin:10px 0;
+}
