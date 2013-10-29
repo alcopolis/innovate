@@ -51,7 +51,7 @@ $(function(){
 				<section class="title">					
 					<ul>
 						<li>
-							<h4><?php echo ucwords($key); ?></h4>
+							<h4><?php echo ucwords(str_replace('-', ' ', $key)); ?></h4>
 						</li>
 						<li>
 							<?php echo anchor('admin/faq/groups/delete/'.$key, 'Delete Group', 'rel="'.$key.'" class="tooltip-e confirm btn button red"'); ?>
@@ -67,17 +67,17 @@ $(function(){
 							<table>
 								<thead>
 									<tr>
-										<th class="align-center">Title</th>
-										<th class="align-center">Question</th>
-										<th class="align-center">Answer</th>
-										<th class="align-center">Action</th>
+										<th style="width:20%;">Title</th>
+										<th style="width:35%;">Question</th>
+										<th style="width:35%;">Answer</th>
+										<th class="align-center" style="width:10%;">Action</th>
 									</tr>
 									<tbody>
 										<?php foreach( $value as $faq ){ ?>
 											<tr>
-												<td class="align-center"><a href="admin/faq/edit/<?php echo $faq->id; ?>"><?php echo $faq->title; ?></a></td>
-												<td class="align-center"><?php echo $faq->question; ?></td>
-												<td class="align-center"><?php echo $faq->answer; ?></td>
+												<td><a href="admin/faq/edit/<?php echo $faq->id; ?>"><?php echo $faq->title; ?></a></td>
+												<td><?php echo $faq->question; ?></td>
+												<td><?php echo substr($faq->answer, 0, 100) . ' ...'; ?></td>
 												<td class="align-center"><a href="admin/faq/edit/<?php echo $faq->id; ?>">Edit</a> | <a href="admin/faq/delete/<?php echo $faq->id; ?>">Delete</a></td>
 											</tr>
 										<?php }; ?>

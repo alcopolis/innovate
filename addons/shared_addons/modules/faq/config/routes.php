@@ -21,10 +21,9 @@
 */
 
 // front-end
-// $route['epg(/:num)?']					= 'epg/index$1';
-// $route['epg/view_channels(/:num)?']		= 'epg/view_channels/index$1';
-// $route['epg/view_shows(/:num)?']		= 'epg/view_shows/index$1';
+// $route['faq/index(/:any)?']					= 'index$1';
+// $route['faq/view(/:any)?']				= 'view$1';
 
 // back-end
-$route['admin/faq(/:any)?']		= 'admin$1';
+$route['admin/faq(/:any)?']				= 'admin$1';
 $route['faq/admin/groups(/:any)?']		= 'admin_groups$1';

@@ -79,11 +79,19 @@ class Faq_Cat_m extends MY_Model {
 	
 	public function update_category(){}
 	
-	public function delete_category($cat){
-		$this->db->where('category', $cat);
+	public function delete_category($slug){
+		$this->db->where('slug', $slug);
 		$cat_data = $this->db->get($this->_table)->row();
 
-		$this->db->delete($this->_table, array('id' => $cat_data->id));
-		$this->db->delete('inn_faq', array('category' => $cat_data->id));
+		if($this->db->delete($this->_table, array('id' => $cat_data->id))){
+			if($this->db->delete('inn_faq', array('category' => $cat_data->id))){
+				return TRUE;
+			}else{
+				return FALSE;
+			}
+		}else{
+			return FALSE;
+		}
+		
 	}	
 }

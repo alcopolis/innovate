@@ -9,7 +9,10 @@
 	
 	<script>
         $(document).ready(function(){
-            //$("#tdata").mCustomScrollbar();
+			h = $('#item-list').innerHeight();
+			if($('#faq-side').height() < h){
+				$('#faq-side').height(h);
+			}
         });
 	</script>
 </head>
@@ -24,24 +27,28 @@
 				
 		<div id="content" class="wrapper clearfix">
 			<div id="body-wrapper" style="position: relative; width:60%;" class="clearfix">
-				<h4>Frequently Asked Questions</h4><br/>
-				<ul class="left" style="position: relative; width:20%;height:600px;">
+				<ul id="faq-side" class="left">
 					<?php foreach ($cats as $cat){ ?>
-						<li><a href="faq/group/<?php echo $cat->category; ?>"><?php echo ucwords($cat->category); ?></a></li>				
+						<li><a href="faq/group/<?php echo strtolower($cat->slug); ?>"><?php echo ucwords($cat->category); ?></a></li>				
 					<?php } ?>
 				</ul>
 				
-				<?php if($faqs != NULL){ ?>
-					<?php foreach ($faqs as $faq){ ?>
-						<div class="faq-item left" style="position: relative; width:60%;">
-							<div class="faq-subject"><?php echo $faq->title; ?><span class="right" style="font-size:.65em; margin-top:5px;"><a href="">Read more &raquo;</a></span></div>
-							<div class="faq-content">
-								<div class="faq-q"><?php echo $faq->question; ?></div>
-								<div class="faq-a"><?php echo $faq->answer; ?></div>
+				<div id="item-list" class="left">
+					<h3 style="margin-bottom:20px;">Frequently Asked Questions</h3>
+					<?php if($faqs != NULL){ ?>
+						<?php foreach ($faqs as $faq){ ?>
+							<div class="faq-item left">
+								<div class="faq-subject"><?php echo $faq->title; ?><span class="right" style="font-size:.65em; margin-top:5px;"><a href="faq/view/<?php echo $faq->slug; ?>" style="color:#0CE">Read more &raquo;</a></span></div>
+								<div class="faq-content">
+									<div class="faq-q"><?php echo $faq->question; ?></div>
+									<div class="faq-a"><?php echo substr($faq->answer, 0, 100) . ' ...'; ?></div>
+								</div>
 							</div>
-						</div>
-					<?php } ?>
-		 		<?php } ?>
+						<?php } ?>
+			 		<?php } ?>
+		 		</div>
+		 		
+		 		<div style="clear:both"></div>
 		 	</div>
 		</div>
 		

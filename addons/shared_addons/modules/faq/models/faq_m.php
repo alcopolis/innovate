@@ -44,17 +44,16 @@ class Faq_m extends MY_Model {
 		$this->_table = 'inn_faq';
 	}
 	
-	public function add_new($cat){
+	public function add_new($slug){
 		$this->load->model('faq_cat_m');
 		
-		$c = $this->faq_cat_m->get_category_by(array('category' => $cat),NULL,TRUE);
+		$c = $this->faq_cat_m->get_category_by(array('slug' => $slug),NULL,TRUE);
 		
 		$faq = new stdClass();
 		
-		
-	
 		$faq->id = NULL;
 		$faq->category = $c->id;
+		$faq->slug = '';
 		$faq->title = '';
 		$faq->question = '';
 		$faq->answer = '';

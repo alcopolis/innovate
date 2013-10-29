@@ -58,6 +58,11 @@ class Admin_Groups extends Admin_Controller
 		
 		if($this->form_validation->run()){
 			$data = $this->alcopolis->array_from_post(array('category'), $this->input->post());
+			
+			//create slug
+			$tmp = strtolower($this->input->post('category'));
+			$data['slug'] = str_replace(' ', '-', $tmp);
+			
 			if($this->faq_cat_m->insert_category($data)){
 				redirect('admin/faq');
 			}
@@ -69,9 +74,10 @@ class Admin_Groups extends Admin_Controller
 	}
 	
 	
-	function delete($cat){
-		$this->faq_cat_m->delete_category($cat);
-		//$this->index();
+	function delete($slug){
+		if($this->faq_cat_m->delete_category($slug)){
+			redirect('admin/faq');
+		}
 	}
 	
 }

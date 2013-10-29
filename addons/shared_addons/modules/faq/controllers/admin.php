@@ -56,7 +56,7 @@ class Admin extends Admin_Controller
 		$all_cats = $this->faq_cat_m->get_category();
 		
 		foreach($all_cats as $cat){
-			$this->faq_data[$cat->category] = $this->faq_m->get_faq_by(array('category' => $cat->id));
+			$this->faq_data[$cat->slug] = $this->faq_m->get_faq_by(array('category' => $cat->id));
 		}
 		
 		$this->render('admin/index', array('faqs'=>$this->faq_data));
@@ -77,7 +77,12 @@ class Admin extends Admin_Controller
 			//$input_post = array();
 				
 			$data = $this->alcopolis->array_from_post(array('title', 'category', 'question', 'answer'), $this->input->post());
-				
+
+			//create slug
+			$tmp = strtolower($this->input->post('title'));
+			$data['slug'] = str_replace(' ', '-', $tmp);
+			
+			
 			$new_id = $this->faq_m->insert_faq($data);
 			
 			if($this->input->post('btnAction') == 'save_exit'){
