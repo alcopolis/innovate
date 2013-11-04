@@ -35,7 +35,7 @@
 				</ul>
 				
 				<?php if($faqs != NULL){ ?>
-					<div class="faq-item left" style="position: relative; width:60%;">
+					<div class="faq-item left" style="position: relative; width:50%;">
 						<h1 class="faq-view-subject"><?php echo $faqs->title; ?></h1>
 						<div class="faq-view-content">
 							<div class="faq-q"><?php echo $faqs->question; ?></div>

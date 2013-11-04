@@ -32,7 +32,7 @@ class Faq extends Public_Controller
 	
 	
 	public function index(){
-		$faq_cat = $this->faq_cat_m->get_category(NULL, FALSE);
+		$faq_cat = $this->faq_cat_m->order_by('id', 'DESC')->get_category(NULL, FALSE);
 		$this->faq_data = $this->faq_m->order_by('category', 'ASC')->get_faq(NULL, FALSE);
 
 		$this->render('faq', array('faqs' => $this->faq_data, 'cats' => $faq_cat));
