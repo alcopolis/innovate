@@ -88,6 +88,16 @@ class Faq_m extends MY_Model {
 		}
 	}
 	
+	public function add_count($id){
+		$this->db->select('count');
+		$this->db->where('id',$id);
+		$counter = $this->get_faq_by(array('id'=>$id), 'count', TRUE);
+		
+		$newcount = intval($counter->count) + 1;
+		$data = array('count' => $newcount);
+		$this->update_faq($id, $data);
+	}
+	
 	
 	//CRUD
 	public function insert_faq($data){

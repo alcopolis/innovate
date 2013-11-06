@@ -77,7 +77,7 @@ $(function(){
 											<tr>
 												<td><a href="admin/faq/edit/<?php echo $faq->id; ?>"><?php echo $faq->title; ?></a></td>
 												<td><?php echo $faq->question; ?></td>
-												<td><?php echo substr($faq->answer, 0, 100) . ' ...'; ?></td>
+												<td><?php echo substr(strip_tags ($faq->answer), 0, 100) . ' ...'; ?></td>
 												<td class="align-center"><a href="admin/faq/edit/<?php echo $faq->id; ?>">Edit</a> | <a href="admin/faq/delete/<?php echo $faq->id; ?>">Delete</a></td>
 											</tr>
 										<?php }; ?>
