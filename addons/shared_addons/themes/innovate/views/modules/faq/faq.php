@@ -6,15 +6,6 @@
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
-	
-	<script>
-        $(document).ready(function(){
-			h = $('#item-list').innerHeight();
-			if($('#faq-side').height() < h){
-				$('#faq-side').height(h);
-			}
-        });
-	</script>
 </head>
 
 <body id="top" class="faq">
@@ -25,12 +16,12 @@
 	 		{{ theme:partial name="header" }}
 	 	</header>
 				
-		<div id="content" class="wrapper clearfix">
-			<div id="body-wrapper" style="position: relative;" class="clearfix">
+		<div id="content" class="wrapper">
+			<div id="body-wrapper" class="clearfix">
 				
-				<h3 id="page-title"><a href="faq">Frequently Asked Questions</a></h3>
+				<h3 id="page-title"><a href="faq">FAQ's</a></h3>
 				
-				<ul id="faq-side" class="left">
+				<ul id="faq-side" class="topics left">
 					<h5 style="margin-left:10px;">FAQ Topics</h5>
 					<?php foreach ($cats as $cat){ ?>
 						<?php if($cat->slug == $curr_group->slug){ ?>

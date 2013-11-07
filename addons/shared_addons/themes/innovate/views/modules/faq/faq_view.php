@@ -6,12 +6,6 @@
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
-	
-	<script>
-        $(document).ready(function(){
-            //$("#tdata").mCustomScrollbar();
-        });
-	</script>
 </head>
 
 <body id="top" class="faq">
@@ -22,20 +16,27 @@
 	 		{{ theme:partial name="header" }}
 	 	</header>
 				
-		<div id="content" class="wrapper clearfix">
-			<div id="body-wrapper" style="position: relative;" class="faq-view clearfix">
+		<div id="content" class="wrapper">
+			<div id="body-wrapper" class="clearfix">
 
-				<h3 id="page-title"><a href="faq">Frequently Asked Questions</a> &raquo; <span style="font-size:.75em;"><a href="faq/group/<?php echo $curr_group->slug?>"><?php echo $curr_group->category?></a></span></h3>
+				<h3 id="page-title"><a href="faq">FAQ's</a> &raquo; <span style="font-size:.75em;"><a href="faq/group/<?php echo $curr_group->slug?>">Topics</a></span></h3>
+				
+				<ul id="faq-side" class="faq left">
+					<h5 style="margin-left:10px;"><?php echo $curr_group->category?></h5>
+					<?php foreach ($all_faqs as $faq){ ?>
+						<li><a href="faq/view/<?php echo $faq->slug; ?>"><?php echo ucwords($faq->title); ?></a></li>								
+					<?php } ?>
+				</ul>
 				
 				<?php if($faqs != NULL){ ?>
-					<div class="faq-item left" style="position: relative; width:auto;">
-						<h1 class="faq-subject"><?php echo $faqs->title; ?></h1>
-						<div class="faq-content">
-							<div class="faq-q"><?php echo $faqs->question; ?></div>
-							<div class="faq-a"><?php echo $faqs->answer; ?></div>
+					<div id="item-list" class="left" style="border-left:3px solid #EEE;">
+						<div class="faq-item" style="border-left:none;">
+							<h1 class="faq-subject"><?php echo $faqs->title; ?></h1>
+							<div class="faq-content">
+								<div class="faq-q"><?php echo $faqs->question; ?></div>
+								<div class="faq-a"><?php echo $faqs->answer; ?></div>
+							</div>
 						</div>
-						
-						<div><?php // echo $paging; ?></div>
 					</div>
 		 		<?php } ?>
 		 	</div>

@@ -113,6 +113,10 @@ class Admin extends Admin_Controller
 			
 			$data = $this->alcopolis->array_from_post(array('title', 'category', 'question', 'answer'), $this->input->post());
 			
+			//create slug
+			$tmp = strtolower($this->input->post('title'));
+			$data['slug'] = str_replace(' ', '-', $tmp);
+			
 			if($this->faq_m->update_faq($id, $data)){
 				if($this->input->post('btnAction') == 'save_exit'){
 					redirect('admin/faq');

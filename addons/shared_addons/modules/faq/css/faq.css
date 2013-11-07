@@ -1,5 +1,6 @@
 .faq{color:#007DC3;}
 
+
 .faq a{
 	color:#0CE;
 }
@@ -20,24 +21,43 @@ h3#page-title a{color:#0CE;}
 h3#page-title a:hover{color:#FFF;}
 
 
+/* SIDE */
 #faq-side li{
 	margin-left:20px; padding-left:25px; 
-	
-	background-image:url(../img/topics.png);
 	background-size:20px 20px;
 	background-repeat:no-repeat;	
 	background-position:0 5px;
 }
 
-#faq-side li:hover a{color:#D226F9;}
+#faq-side li:hover a, #faq-side li.active a{color:#D226F9;}
 
-#faq-side li:hover, #faq-side li.active{
+#faq-side.topics li{
+	background-image:url(../img/topics.png);	
+}
+
+#faq-side.topics li:hover, #faq-side.topics li.active{
 	background-image:url(../img/topics-active.png);
 }
 
-#faq-side li.active a{
-	color:#D226F9;
+#faq-side.topics li{
+	background-image:url(../img/topics.png);	
 }
+
+#faq-side.topics li:hover, #faq-side.topics li.active{
+	background-image:url(../img/topics-active.png);
+}
+
+#faq-side.faq li{
+	background-image:url(../img/question-blue.png);	
+}
+
+#faq-side.faq li:hover, #faq-side.faq li.active{
+	background-image:url(../img/question.png);
+}
+
+
+
+
 
 #item-list{
 	position: relative; 
@@ -56,7 +76,6 @@ h3#page-title a:hover{color:#FFF;}
 
 .faq-subject{
 	font-size:1.25em;
-/* 	background:rgba(10,10,10,.85); */
 	margin:0 0 0 20px; padding:5px 0;
 	font-weight:600;
 	color:#007DC3;	
@@ -92,14 +111,6 @@ h3#page-title a:hover{color:#FFF;}
 	color:#666;	
 }
 
-.faq-content .faq-q, .faq-view-content .faq-a{
-/* 	padding-left:28px; */
-/* 	background-size:20px 20px; */
-/* 	background-repeat:no-repeat; */
-/* 	background-position:0 3px; */
-}
-
-
 
 .faq-content .faq-q{
 	padding-bottom:10px;
@@ -110,11 +121,15 @@ h3#page-title a:hover{color:#FFF;}
 	border-top:1px dotted #CCC;	
 }
 
-.faq-content .faq-a p, .faq-content .faq-a ul{
+.faq-content .faq-a p, .faq-content .faq-a ul, .faq-content .faq-a ol{
 	margin:0 0 20px 0; padding:0;
 }
 
-.faq-content .faq-a ul li{
+.faq-content .faq-a ul li, .faq-content .faq-a ol li{
 	margin-left:20px;
+}
+
+
+.faq-content .faq-a ul li{
 	list-style:square;
 }
