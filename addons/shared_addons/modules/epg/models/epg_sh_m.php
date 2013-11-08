@@ -251,11 +251,12 @@ class Epg_Sh_m extends MY_Model {
 	{
 		$data = new stdClass();
 		$method = 'result';
+
 		
 		if($fields == NULL && !$single){
 			$hari= date("Y-m-d");
 			
-			$chs = $this->db->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
+			$chs = $this->db->where('is_active', 1)->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
 			
 			foreach($chs as $ch){
 				$key = $ch->id;
@@ -290,10 +291,11 @@ class Epg_Sh_m extends MY_Model {
 		$data = new stdClass();
 		
 		if($where['cat_id'] == '0'){
-			$chs = $this->db->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
+			$chs = $this->db->where('is_active', 1)->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
 		}else{
-			$chs = $this->db->where('cat', $where['cat_id'])->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
+			$chs = $this->db->where(array('is_active'=>1, 'cat'=>$where['cat_id']))->order_by('name', 'asc')->get('inn_epg_ch_detail')->result();
 		}
+		
 			
 		foreach($chs as $ch){
 			$key = $ch->id;
