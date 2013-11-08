@@ -8,9 +8,9 @@
 		<div class="content">			
 			<?php 
 				if($page->action == 'create'){
-					echo form_open('admin/products/' . $page->action);
+					echo form_open('admin/products/' . $page->action, 'id="product-form"');
 				}else if($page->action == 'edit'){
-					echo form_open('admin/products/' . $page->action . '/' . $prod->id);
+					echo form_open('admin/products/' . $page->action . '/' . $prod->id, 'id="product-form"');
 				} 
 			?>
 			
@@ -25,6 +25,8 @@
 				</ul>
 				
 				<div class="form_inputs" id="product-content-fields">
+					<?php echo form_hidden('form_data', array('id'=>$prod->id, 'slug'=>$prod->slug , 'poster_id'=>$poster['id'])); ?>
+					
 					<fieldset>
 						<ul>
 							<li>
@@ -45,7 +47,18 @@
 												<div for="product_is_featured"><?php echo form_checkbox('is_featured', $prod->is_featured, set_value('is_featured', $prod->is_featured)); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
 											</td>
 											<td style="width:20%;">
-												<div for="product_poster">Product Poster Here</div>
+												<label for="poster">Upload Poster</label>
+												<div class="input">
+													<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+													<br/>
+													<div id="msg-ajax"></div>
+												</div>
+												
+												<div id="img-poster" style="width:100%;">
+													<?php if($poster != NULL){ ?>
+														<img style="width:300px;" src="<?php echo $poster['file'];?>" title="<?php echo $poster['name']; ?>" />
+													<?php } ?>
+												</div>
 											</td>
 										</tr>
 									</tbody>
@@ -65,12 +78,20 @@
 								<br/>
 								
 								<label for="product_tags">Tags - seperate words with ( , )</label>
-								<div class="input"><?php echo form_input('tags', set_value('tags', $prod->tags), 'maxlength="100" class="width-20"') ?></div>
-								
-								<br/>
-								
-								<label for="product_teaser">Teaser</label>
-								<div class="input"><?php echo form_textarea(array('id' => 'teaser', 'value' => set_value('teaser', $prod->teaser), 'name' => 'teaser', 'rows' => 5)) ?></div>
+								<div class="input"><?php echo form_input('tags', set_value('tags', $prod->tags), 'maxlength="100" class="width-20"') ?></div>								
+							</li>
+							
+							<li class="editor">
+								<label for="product_overview">Overview</label>
+								<div class="input small-side">
+									<?php echo form_dropdown('editor_type', array(
+										'html' => 'html',
+										'markdown' => 'markdown',
+										'wysiwyg-simple' => 'wysiwyg-simple',
+										'wysiwyg-advanced' => 'wysiwyg-advanced',
+									), 'html') ?>
+								</div>
+								<div class="edit-content"><?php echo form_textarea(array('id' => 'teaser', 'value' => set_value('teaser', $prod->teaser), 'name' => 'teaser', 'rows' => 5)) ?></div>
 							</li>
 					
 							<li class="editor">

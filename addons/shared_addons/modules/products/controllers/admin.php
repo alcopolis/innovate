@@ -32,6 +32,10 @@ class Admin extends Admin_Controller {
 		
 		$this->load->model('products_m');
 		$this->load->model('packages_m');
+		$this->load->model('files/file_folders_m');
+		
+		$this->load->library('alcopolis');
+		$this->load->library('files/files');
 		
 		$this->prod_data = new stdClass();
 		$this->pack_data = new stdClass();
@@ -95,6 +99,7 @@ class Admin extends Admin_Controller {
 	
 		if($this->form_validation->run()){
 			
+			
 		}else{
 			$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
 			$this->pack_data = $this->packages_m->get_packages_by(NULL, array('prod_id'=>$id));
@@ -107,7 +112,46 @@ class Admin extends Admin_Controller {
 	
 	
 	
+	//-------------------- Upload poster function ------------------------ //
 	
+	public function do_upload(){
+	
+		$prod_data = $this->input->post('form_data');
+		
+		if($prod_data['poster_id'] != ''){
+			if(Files::delete_file($prod_data['poster_id'])){
+				$this->products_m->update($prod_data['id'], array('poster'=>''));
+			}
+		}
+	
+		$folder_id = $this->file_folders_m->get_by('slug', 'products')->id;
+	
+		$result = Files::upload($folder_id, $prod_data['slug'], 'poster', 1920, false, true);
+		$file_data = $this->parse_file_data($result['data']);
+		//$this->products_m->update($prod_data['id'], array('poster'=>$file_data));
+		
+	
+		$respond = array(
+				'status'=>$result['status'],
+				'message'=>$result['message'],
+				'file'=>Files::$path . $result['data']['filename'],
+		);
+	
+		//Send ajax respond
+		echo json_encode($respond);
+	}
+	
+	
+	function parse_file_data($data){
+		$result = array();
+		$key = array('id', 'folder_id', 'name', 'path', 'filename');
+	
+		foreach($key as $k){
+			$result[$k] = $data[$k];
+		}
+	
+		return json_encode($result);
+	}
 	
 	
 	

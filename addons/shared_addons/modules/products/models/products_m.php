@@ -54,6 +54,7 @@ class Products_m extends MY_Model
 		$prod->css = '';
 		$prod->js = '';
 		$prod->is_featured = '';
+		$prod->poster = '';
 		$prod->tags = '';
 		
 		return $prod;
