@@ -456,7 +456,7 @@ a#fb:hover{background-image:url(../img/fb-color.png)}
 a#pinterest{background-image:url(../img/pinterest.png)}
 a#pinterest:hover{background-image:url(../img/pinterest-color.png)}
 
-#sinarmas{margin-top:0; padding:5px 10px 0 10px; border:1px solid #000; border-radius:10px; box-shadow: inset 0 0 2px rgba(255,255,255,.15);}
+#sinarmas{margin-top:0; padding:5px 10px; border:1px solid #000; border-radius:10px; box-shadow: inset 0 0 2px rgba(255,255,255,.15);}
 #copy{font-size:11px; color:#CCC; margin-top:10px}
 
 /* .footer-menu{} */

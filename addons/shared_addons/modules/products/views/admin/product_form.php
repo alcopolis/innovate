@@ -19,7 +19,10 @@
 			<div class="tabs">
 				<ul class="tab-menu">
 					<li><a href="#product-content-fields"><span>Content</span></a></li>
-					<li><a href="#product-packages-fields"><span>Packages</span></a></li>
+					<?php if($page->action == 'edit'){ ?>
+						<li><a href="#product-attachment"><span>Attachment</span></a></li>
+						<li><a href="#product-packages-fields"><span>Packages</span></a></li>
+					<?php } ?>					
 					<li><a href="#product-css-fields"><span>CSS</span></a></li>
 					<li><a href="#product-js-fields"><span>Script</span></a></li>
 				</ul>
@@ -34,42 +37,15 @@
 									<tbody>
 										<tr>
 											<td style="width:20%;">
-												<label for="category">Category <span>*</span></label><br>
+												<label for="parent">Parent Product</label><br>
 												<div class="input small-side">
-													<?php echo form_dropdown('section', array(
-														'select' => '',
-														'retail' => 'Retail',
-														'corporate' => 'Corporate'
-													), set_value('section', $prod->section)) ?>
+													<?php echo form_dropdown('parent_id', $parent, set_value('parent_id', $prod->parent_id)) ?>
 												</div>
 											</td>
 											<td style="width:20%;">
 												<div for="product_is_featured"><?php echo form_checkbox('is_featured', $prod->is_featured, set_value('is_featured', $prod->is_featured)); ?>&nbsp;&nbsp;<strong>Display in Homepage</strong></div>
 											</td>
-											<td style="width:20%;">
-												<label for="poster">Upload Poster</label>
-												<div class="input">
-													<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
-													<br/>
-													<div id="msg-ajax"></div>
-												</div>
-												
-												<div id="img-poster" style="width:100%;">
-													<?php if($poster != NULL){ ?>
-														<img style="width:300px;" src="<?php echo $poster['file'];?>" title="<?php echo $poster['name']; ?>" />
-													<?php } ?>
-												</div>
-											</td>
 										</tr>
-										
-										<tr><td colspan="3">
-											<label for="attachment">Attach Files</label>
-											<div class="input">
-												<?php echo form_upload('attachment-0','','id="attachment-0" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
-												<br/>
-												<div id="msg-ajax"></div>
-											</div>
-										</td></tr>
 									</tbody>
 								</table>
 								
@@ -81,12 +57,13 @@
 								
 								<br/>
 								
-								<label for="product_slug">Slug <span>*</span></label>
-								<div class="input"><?php echo form_input('slug', set_value('slug', $prod->slug), 'maxlength="100" class="width-20"') ?></div>
+								<?php if($page->action == 'edit'){ ?>
+									<label for="product_slug">Slug</label>
+									<div class="input"><?php echo form_input('slug', set_value('slug', $prod->slug), 'disabled="disabled" maxlength="100" class="width-20"') ?></div>
+									<br/>
+								<?php } ?>
 								
-								<br/>
-								
-								<label for="product_tags">Tags - seperate words with ( , )</label>
+								<label for="product_tags">Tags - seperate words with comma ( , )</label>
 								<div class="input"><?php echo form_input('tags', set_value('tags', $prod->tags), 'maxlength="100" class="width-20"') ?></div>								
 							</li>
 							
@@ -100,7 +77,7 @@
 										'wysiwyg-advanced' => 'wysiwyg-advanced',
 									), 'html') ?>
 								</div>
-								<div class="edit-content"><?php echo form_textarea(array('id' => 'teaser', 'value' => set_value('teaser', $prod->teaser), 'name' => 'teaser', 'rows' => 5)) ?></div>
+								<div class="edit-content"><?php echo form_textarea(array('id' => 'overview', 'value' => set_value('overview', $prod->overview), 'name' => 'overview', 'rows' => 5)) ?></div>
 							</li>
 					
 							<li class="editor">
@@ -124,10 +101,54 @@
 					</fieldset>
 				</div>
 				
-				<!-- Product package tab -->
-				<div class="form_inputs" id="product-packages-fields">
-					<?php $this->load->view('admin/partials/package_list', $pack); ?> 
-				</div>	
+				
+				<?php if($page->action == 'edit'){ ?>
+					<div class="form_inputs" id="product-attachment">
+						<fieldset>
+							<ul>
+								<li>
+									<table>
+										<tbody>
+											<tr>
+												<td style="width:20%;">
+													<div id="img-poster" style="width:100%;">
+														<?php if($poster != NULL){ ?>
+															<img style="width:300px;" src="<?php echo $poster['file'];?>" title="<?php echo $poster['name']; ?>" />
+														<?php } ?>
+													</div>
+													
+													<label for="poster">Upload Poster</label>
+													<div class="input">
+														<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+														<br/>
+														<div id="msg-ajax"></div>
+													</div>
+												</td>
+											</tr>
+											
+											<tr>
+												<td>
+													<label for="attachment">Attachment</label>
+													<div class="input">
+														<?php echo form_upload('attachment-0','','id="attachment-0" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+														<br/>
+														<div id="msg-ajax"></div>
+													</div>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+							</ul>
+						</fieldset>
+					</div>
+					
+					<!-- Product package tab -->
+					
+					<div class="form_inputs" id="product-packages-fields">
+						<?php $this->load->view('admin/partials/package_list', $pack); ?> 
+					</div>
+				<?php } ?>	
 					
 				<!-- Product CSS tab -->
 				<div class="form_inputs" id="product-css-fields">

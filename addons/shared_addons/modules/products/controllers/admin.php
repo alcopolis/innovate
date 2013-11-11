@@ -18,6 +18,10 @@ class Admin extends Admin_Controller {
 	protected $page_data;
 	protected $prod_data;
 	protected $pack_data;
+	
+	//Form and files var
+	protected $form_data;
+	protected $files;
 
 	/**
 	 * Constructor method
@@ -45,14 +49,17 @@ class Admin extends Admin_Controller {
 		$this->page_data->section = $this->section;
 		$this->page_data->editor_type = 'wysiwyg-advanced';
 		
-		
 		// Set our validation rules
 		$this->rules = $this->products_m->_rules;
 		$this->form_validation->set_rules($this->rules);
+		
+		//init var
+		$this->form_data = array();
+		$this->files = array();
 	}
 
 	
-	function render($view){
+	function render($view, $var = NULL){
 		$this->template
 			->title($this->module_details['name'])
 			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
@@ -60,6 +67,7 @@ class Admin extends Admin_Controller {
 			->set('prod', $this->prod_data)
 			->set('pack', $this->pack_data)
 			->set('page', $this->page_data)
+			->set($var)
 			->build($view);
 	}
 	
@@ -80,38 +88,115 @@ class Admin extends Admin_Controller {
 		$this->page_data->action = 'create';
 
 		if($this->form_validation->run()){
-			// Insert data
+			$parent_data;
 			
+			
+			// Prepare form data
+			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
+				
+			//create slug
+			$tmp = strtolower($this->input->post('name'));
+			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
+			
+			//set parent data if parent_id != 0
+			if($this->form_data['parent_id'] != '0'){
+				$parent_data = $this->products_m->get_product_by('slug', array('id'=>$this->form_data['parent_id']), TRUE);
+			}
+			
+			//create product folder
+			$files_tmp = array();
+			$files_tmp['folder'] = $this->get_folder($parent_data->slug, $this->form_data['slug']);
+			$this->form_data['files'] = json_encode($files_tmp);
+			
+			//insert data
+			$new_id = $this->products_m->insert_prod($this->form_data);
+
+			//redirects
+			if($this->input->post('btnAction') == 'save_exit'){
+				redirect('admin/products');
+			}else{
+				redirect('admin/products/edit/' . $new_id);
+			}
 		}else{
 			$this->prod_data = $this->products_m->add_new();
 			$this->pack_data = NULL;
 			
-			$this->render('admin/product_form');
+			//Set Parent Product
+			$tmp = $this->products_m->get_product_by('id, name', array('parent_id'=>0),FALSE);
+			
+			$parent_list[0] = 'No Parent';
+			foreach($tmp as $val){
+				$parent_list[$val->id] = $val->name;
+			}
+			
+			$this->render('admin/product_form', array('parent'=>$parent_list));
 		}
 		
 		
 	}
 
 	
+	
+	
+	
+	
+	
+	
 	public function edit($id)
 	{
 		//Setting page variable
-// 		$this->page_data->title = 'Edit Product';
-// 		$this->page_data->action = 'edit';
+		$this->page_data->title = 'Edit Product';
+		$this->page_data->action = 'edit';
+		
 	
-// 		if($this->form_validation->run()){
+		if($this->form_validation->run()){
+			$parent_data;
 			
+			// Prepare form data
+			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
 			
-// 		}else{
-// 			$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
-// 			$this->pack_data = $this->packages_m->get_packages_by(NULL, array('prod_id'=>$id));
-// 			//var_dump($this->pack_data);
+			//create slug
+			$tmp = strtolower($this->input->post('name'));
+			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
+				
+			//set parent data if parent_id != 0
+			if($this->form_data['parent_id'] != '0'){
+				$parent_data = $this->products_m->get_product_by('slug', array('id'=>$this->form_data['parent_id']), TRUE);
+			}
+				
+			//create product folder
+			$files_tmp = array();
+			$files_tmp['folder'] = $this->get_folder($parent_data->slug, $this->form_data['slug']);
+			$this->form_data['files'] = json_encode($files_tmp);
+				
+			//insert data
+			$this->products_m->update($id, $this->form_data);
 			
-// 			$this->render('admin/product_form');
-// 		}
+			if($this->input->post('btnAction') == 'save_exit'){
+				redirect('admin/products');
+			}			
+		}
+		
+		
 		
 		$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
-		echo $this->get_folder($this->prod_data->slug);
+		$this->pack_data = $this->packages_m->get_packages_by(NULL, array('prod_id'=>$id));
+		
+		
+		//Set Parent Product
+		$tmp = $this->products_m->get_product_by('id, name', array('parent_id'=>0),FALSE);
+		
+		$parent_list[0] = 'No Parent';
+		foreach($tmp as $val){
+			$parent_list[$val->id] = $val->name;
+		}
+		
+		$this->render('admin/product_form', array('parent'=>$parent_list));
+		
+			
+		
+// 		$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
+// 		echo $this->get_folder($this->prod_data->slug);
 		
 	}
 	
@@ -120,23 +205,52 @@ class Admin extends Admin_Controller {
 	
 	//-------------------- Upload function ------------------------ //
 	
-	public function get_folder($slug){
+	public function get_folder($parent, $slug){
 		//create new folder if not exist and named it with product slug 
-		$parent = $this->file_folders_m->get_by('slug', 'products')->id;
+		$par = $this->file_folders_m->get_by('slug', $parent)->id;
 		
 		if($this->file_folders_m->get_by('slug', $slug) == NULL){
-			echo "no folders found, creating a new one";
-			Files::create_folder($parent, $slug);
+			Files::create_folder($par, $slug);
 		}
 		
 		return $this->file_folders_m->get_by('slug', $slug)->id;
 	}
 	
 	
-	public function do_upload(){
+// 	public function do_upload(){
+	
+// 		$prod_data = $this->input->post('form_data');
+		
+// 		if($prod_data['poster_id'] != ''){
+// 			if(Files::delete_file($prod_data['poster_id'])){
+// 				$this->products_m->update($prod_data['id'], array('poster'=>''));
+// 			}
+// 		}
+	
+// 		$folder_id = $this->file_folders_m->get_by('slug', 'products')->id;
+	
+// 		$result = Files::upload($folder_id, $prod_data['slug'], 'poster', 1920, false, true);
+// 		$file_data = $this->parse_file_data($result['data']);
+// 		//$this->products_m->update($prod_data['id'], array('poster'=>$file_data));
+		
+	
+// 		$respond = array(
+// 				'status'=>$result['status'],
+// 				'message'=>$result['message'],
+// 				'file'=>Files::$path . $result['data']['filename'],
+// 		);
+	
+// 		//Send ajax respond
+// 		echo json_encode($respond);
+// 	}
+
+	
+	
+	
+	public function do_upload($form_id){
 	
 		$prod_data = $this->input->post('form_data');
-		
+	
 		if($prod_data['poster_id'] != ''){
 			if(Files::delete_file($prod_data['poster_id'])){
 				$this->products_m->update($prod_data['id'], array('poster'=>''));
@@ -148,7 +262,7 @@ class Admin extends Admin_Controller {
 		$result = Files::upload($folder_id, $prod_data['slug'], 'poster', 1920, false, true);
 		$file_data = $this->parse_file_data($result['data']);
 		//$this->products_m->update($prod_data['id'], array('poster'=>$file_data));
-		
+	
 	
 		$respond = array(
 				'status'=>$result['status'],
@@ -159,6 +273,8 @@ class Admin extends Admin_Controller {
 		//Send ajax respond
 		echo json_encode($respond);
 	}
+	
+	
 	
 	
 	function parse_file_data($data){
@@ -177,14 +293,14 @@ class Admin extends Admin_Controller {
 	
 	
 	
-	// -------------------- Callback Function --------------------------- //
+// 	// -------------------- Callback Function --------------------------- //
 	
-	function _checkbox($str){
+// 	function _checkbox($str){
 		
-		if($this->input->post('product_is_featured') != NULL){
-			//$this->prod_data->data->product_is_featured = 1;
-		}else{
-			//$this->prod_data->data->product_is_featured = 1;
-		}
-	}
+// 		if($this->input->post('product_is_featured') != NULL){
+// 			//$this->prod_data->data->product_is_featured = 1;
+// 		}else{
+// 			//$this->prod_data->data->product_is_featured = 1;
+// 		}
+//	}
 }

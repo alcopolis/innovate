@@ -19,15 +19,10 @@ class Products_m extends MY_Model
 					'label' => 'name',
 					'rules' => 'trim|required|max_length[100]|xss_clean'
 			),
-			'slug' => array(
-					'field' => 'slug',
-					'label' => 'slug',
-					'rules' => 'trim|required|alpha_dot_dash|max_length[200]|xss_clean'
-			),
-			'teaser' => array(
-					'field' => 'teaser',
-					'label' => 'teaser',
-					'rules' => 'max_length[200]|xss_clean'
+			'overview' => array(
+					'field' => 'overview',
+					'label' => 'overview',
+					'rules' => 'max_length[500]|xss_clean'
 			),
 			'body' => array(
 					'field' => 'body',
@@ -48,13 +43,15 @@ class Products_m extends MY_Model
 		
 		$prod->name = '';
 		$prod->slug = '';
-		$prod->teaser = '';
+		$prod->overview = '';
 		$prod->body = '';
+		
+		$prod->tags = '';
+		$prod->files = '';
+		
 		$prod->section = '';
 		$prod->css = '';
 		$prod->js = '';
-		$prod->is_featured = '';
-		$prod->tags = '';
 		
 		return $prod;
 	}
@@ -86,6 +83,13 @@ class Products_m extends MY_Model
 	}
 	
 	
+	
+	//Get Product Parent Data
+	public function get_parent(){
+		
+	}
+	
+	
 // 	public function get_packages_for_product($id){
 // 		$this->db->select('t1.*');
 		
@@ -95,5 +99,15 @@ class Products_m extends MY_Model
 
 // 		return $this->db->get()->result();
 // 	}
+
+	
+	//CRUD
+	public function insert_prod($data){
+		if($this->db->insert($this->_table, $data)){
+			return $this->db->insert_id();
+		}else{
+			return FALSE;
+		}
+	}
 
 }
