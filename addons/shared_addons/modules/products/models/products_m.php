@@ -50,11 +50,10 @@ class Products_m extends MY_Model
 		$prod->slug = '';
 		$prod->teaser = '';
 		$prod->body = '';
-		$prod->section = 'select';
+		$prod->section = '';
 		$prod->css = '';
 		$prod->js = '';
 		$prod->is_featured = '';
-		$prod->poster = '';
 		$prod->tags = '';
 		
 		return $prod;

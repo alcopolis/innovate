@@ -88,31 +88,50 @@ class Admin extends Admin_Controller {
 			
 			$this->render('admin/product_form');
 		}
+		
+		
 	}
 
 	
 	public function edit($id)
 	{
 		//Setting page variable
-		$this->page_data->title = 'Edit Product';
-		$this->page_data->action = 'edit';
+// 		$this->page_data->title = 'Edit Product';
+// 		$this->page_data->action = 'edit';
 	
-		if($this->form_validation->run()){
+// 		if($this->form_validation->run()){
 			
 			
-		}else{
-			$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
-			$this->pack_data = $this->packages_m->get_packages_by(NULL, array('prod_id'=>$id));
-			//var_dump($this->pack_data);
+// 		}else{
+// 			$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
+// 			$this->pack_data = $this->packages_m->get_packages_by(NULL, array('prod_id'=>$id));
+// 			//var_dump($this->pack_data);
 			
-			$this->render('admin/product_form');
-		}
+// 			$this->render('admin/product_form');
+// 		}
+		
+		$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
+		echo $this->get_folder($this->prod_data->slug);
+		
 	}
 	
 	
 	
 	
-	//-------------------- Upload poster function ------------------------ //
+	//-------------------- Upload function ------------------------ //
+	
+	public function get_folder($slug){
+		//create new folder if not exist and named it with product slug 
+		$parent = $this->file_folders_m->get_by('slug', 'products')->id;
+		
+		if($this->file_folders_m->get_by('slug', $slug) == NULL){
+			echo "no folders found, creating a new one";
+			Files::create_folder($parent, $slug);
+		}
+		
+		return $this->file_folders_m->get_by('slug', $slug)->id;
+	}
+	
 	
 	public function do_upload(){
 	

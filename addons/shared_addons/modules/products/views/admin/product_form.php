@@ -61,6 +61,15 @@
 												</div>
 											</td>
 										</tr>
+										
+										<tr><td colspan="3">
+											<label for="attachment">Attach Files</label>
+											<div class="input">
+												<?php echo form_upload('attachment-0','','id="attachment-0" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+												<br/>
+												<div id="msg-ajax"></div>
+											</div>
+										</td></tr>
 									</tbody>
 								</table>
 								

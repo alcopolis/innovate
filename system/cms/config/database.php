@@ -51,6 +51,7 @@ $db[PYRO_DEVELOPMENT] = array(
 		'stricton' 		=> TRUE,
 );
 
+
 /*
 $db[PYRO_DEVELOPMENT] = array(
 	'hostname'		=> 	'localhost',
@@ -70,6 +71,7 @@ $db[PYRO_DEVELOPMENT] = array(
 	'stricton' 		=> TRUE,
 );
 */
+
 
 // Staging
 /*
