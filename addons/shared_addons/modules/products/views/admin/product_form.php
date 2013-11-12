@@ -111,17 +111,19 @@
 										<tbody>
 											<tr>
 												<td style="width:20%;">
+													<label for="poster">Upload Poster</label>
+													<br/>
 													<div id="img-poster" style="width:100%;">
 														<?php if($poster != NULL){ ?>
-															<img style="width:300px;" src="<?php echo $poster['file'];?>" title="<?php echo $poster['name']; ?>" />
+															<img style="width:300px;" src="<?php echo Files::$path . $poster['filename'];?>" title="<?php echo $poster['name']; ?>" />
 														<?php } ?>
 													</div>
-													
-													<label for="poster">Upload Poster</label>
+													<br/>
 													<div class="input">
-														<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+														<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; 
+														<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
 														<br/>
-														<div id="msg-ajax"></div>
+														<div class="msg-ajax"></div>
 													</div>
 												</td>
 											</tr>
@@ -129,10 +131,17 @@
 											<tr>
 												<td>
 													<label for="attachment">Attachment</label>
+													<div style="margin:20px 0;"><a onclick="add();" class="button" style="padding:5px 10px 4px 10px;">Add</a></div>
 													<div class="input">
-														<?php echo form_upload('attachment-0','','id="attachment-0" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+														<?php echo form_upload('attch','','id="attch" style="margin:5px 0;"'); ?> &nbsp; 
+														<?php echo form_input('attchname-0', 'Rename'); ?> &nbsp;
+														<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
 														<br/>
-														<div id="msg-ajax"></div>
+														<div class="msg-ajax"></div>
+													</div>
+													
+													<div id="attch-files">
+														
 													</div>
 												</td>
 											</tr>
