@@ -1,7 +1,7 @@
 
 <div class="one_full">
 	<section class="title">
-		<h4><?php echo strtoupper($page->title) ?></h4>
+		<h4><?php echo strtoupper($page->title) . ' | ' . $prod->name; ?></h4>
 	</section>
 	
 	<section class="item">
@@ -107,46 +107,56 @@
 						<fieldset>
 							<ul>
 								<li>
-									<table>
-										<tbody>
-											<tr>
-												<td style="width:20%;">
-													<label for="poster">Upload Poster</label>
-													<br/>
-													<div id="img-poster" style="width:100%;">
-														<?php if($poster != NULL){ ?>
-															<img style="width:300px;" src="<?php echo Files::$path . $poster['filename'];?>" title="<?php echo $poster['name']; ?>" />
-														<?php } ?>
-													</div>
-													<br/>
-													<div class="input">
-														<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; 
-														<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
-														<br/>
-														<div class="msg-ajax"></div>
-													</div>
-												</td>
-											</tr>
-											
-											<tr>
-												<td>
-													<label for="attachment">Attachment</label>
-													<div style="margin:20px 0;"><a onclick="add();" class="button" style="padding:5px 10px 4px 10px;">Add</a></div>
-													<div class="input">
-														<?php echo form_upload('attch','','id="attch" style="margin:5px 0;"'); ?> &nbsp; 
-														<?php echo form_input('attchname-0', 'Rename'); ?> &nbsp;
-														<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
-														<br/>
-														<div class="msg-ajax"></div>
-													</div>
-													
-													<div id="attch-files">
-														
-													</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+									<label for="poster">Upload Poster</label>
+									<br/>
+									<div id="img-poster" style="width:100%;">
+										<?php if($poster != NULL){ ?>
+											<img style="width:300px;" src="<?php echo Files::$path . $poster['filename'];?>" title="<?php echo $poster['name']; ?>" />
+										<?php } ?>
+									</div>
+									<br/>
+									<div class="input">
+										<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; 
+										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
+										<br/>
+										<div class="msg-ajax"></div>
+									</div>
+								</li>
+								
+								<li>
+									<label for="attachment">Attachment</label>
+									
+									<div class="msg-ajax"></div>
+									
+									<div id="attch-files" style="margin:20px 0;">
+										<?php if(count($attachment) > 0){ ?>
+											<table id="attch-list">
+												<thead>
+													<th>Name</th>
+													<th>Type</th>
+													<th></th>
+												</thead>
+												<tbody>
+												<?php foreach($attachment as $attch ){ ?>
+													<tr>
+														<td><?php echo $attch->name; ?></td>
+														<td><?php echo $attch->mimetype; ?></td>
+														<td><a data-id="<?php echo $attch->id; ?>" onclick="delete_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Delete</a></td>
+													</tr>
+												<?php } ?>
+												</tbody>
+											</table>
+										<?php }else{ ?>
+											<div id="no-data">No Attachment</div>
+										<?php } ?>	
+									</div>
+									
+									<label for="attachment">Add Attachment</label>
+									<div class="input">
+										<?php echo form_upload('attch','','id="attch" style="margin:5px 0;"'); ?> &nbsp; 
+										<?php //echo form_input('attchname-0', 'Rename'); ?> &nbsp;
+										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
+									</div>
 								</li>
 							</ul>
 						</fieldset>

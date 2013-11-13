@@ -98,14 +98,19 @@ class Admin extends Admin_Controller {
 			$tmp = strtolower($this->input->post('name'));
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 			
-			//set parent data if parent_id != 0
+			//set parent data and folder if parent_id != 0
+			$files_tmp = array();
+			
 			if($this->form_data['parent_id'] != '0'){
 				$parent_data = $this->products_m->get_product_by('slug', array('id'=>$this->form_data['parent_id']), TRUE);
+				
+				//create product folder
+				$files_tmp['folder'] = $this->get_folder($parent_data->slug, $this->form_data['slug']);
+			}else{
+				//create product folder
+				$files_tmp['folder'] = $this->get_folder('products', $this->form_data['slug']);
 			}
 			
-			//create product folder
-			$files_tmp = array();
-			$files_tmp['folder'] = $this->get_folder($parent_data->slug, $this->form_data['slug']);
 			$this->form_data['files'] = json_encode($files_tmp);
 			
 			//insert data
@@ -159,17 +164,22 @@ class Admin extends Admin_Controller {
 			$tmp = strtolower($this->input->post('name'));
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 				
-			//set parent data if parent_id != 0
+			//set parent data and folder if parent_id != 0
+			$files_tmp = array();
+			
 			if($this->form_data['parent_id'] != '0'){
 				$parent_data = $this->products_m->get_product_by('slug', array('id'=>$this->form_data['parent_id']), TRUE);
-			}
 				
-			//create product folder
-			$files_tmp = array();
-			$files_tmp['folder'] = $this->get_folder($parent_data->slug, $this->form_data['slug']);
+				//create product folder
+				$files_tmp['folder'] = $this->get_folder($parent_data->slug, $this->form_data['slug']);
+			}else{
+				//create product folder
+				$files_tmp['folder'] = $this->get_folder('products', $this->form_data['slug']);
+			}
+			
 			$this->form_data['files'] = json_encode($files_tmp);
 				
-			//insert data
+			//update data
 			$this->products_m->update($id, $this->form_data);
 			
 			if($this->input->post('btnAction') == 'save_exit'){
@@ -192,19 +202,29 @@ class Admin extends Admin_Controller {
 		
 		//Parse files data from json
 		$files = json_decode($this->prod_data->files, true);
-		//var_dump($json); 
+		//$stored_attch = Files::folder_contents($files['folder']);
 		
-		$this->render('admin/product_form', array('parent'=>$parent_list, 'poster'=>$files['poster'], 'attachment'=>$files['attch']));
+		$stored_attch = array();
+		if(count($files['attch']) > 0){
+			foreach($files['attch'] as $file_id){
+				$temp = Files::get_file($file_id);
+				$stored_attch[] = $temp['data'];
+			}
+		}else{
+			$stored_attch = NULL;
+		}
 		
-// 		$this->prod_data = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
-// 		echo $this->get_folder($this->prod_data->slug);
 		
+		//var_dump($stored_attch); 
+		
+		$this->render('admin/product_form', array('parent'=>$parent_list, 'poster'=>$files['poster'], 'attachment'=>$stored_attch));
+
 	}
 	
 	
 	
 	
-	//-------------------- Upload function ------------------------ //
+	//-------------------- Attachment Files function ------------------------ //
 	
 	public function get_folder($parent, $slug){
 		//create new folder if not exist and named it with product slug 
@@ -216,34 +236,6 @@ class Admin extends Admin_Controller {
 		
 		return $this->file_folders_m->get_by('slug', $slug)->id;
 	}
-	
-	
-// 	public function do_upload(){
-	
-// 		$prod_data = $this->input->post('form_data');
-		
-// 		if($prod_data['poster_id'] != ''){
-// 			if(Files::delete_file($prod_data['poster_id'])){
-// 				$this->products_m->update($prod_data['id'], array('poster'=>''));
-// 			}
-// 		}
-	
-// 		$folder_id = $this->file_folders_m->get_by('slug', 'products')->id;
-	
-// 		$result = Files::upload($folder_id, $prod_data['slug'], 'poster', 1920, false, true);
-// 		$file_data = $this->parse_file_data($result['data']);
-// 		//$this->products_m->update($prod_data['id'], array('poster'=>$file_data));
-		
-	
-// 		$respond = array(
-// 				'status'=>$result['status'],
-// 				'message'=>$result['message'],
-// 				'file'=>Files::$path . $result['data']['filename'],
-// 		);
-	
-// 		//Send ajax respond
-// 		echo json_encode($respond);
-// 	}
 
 	
 	
@@ -251,7 +243,7 @@ class Admin extends Admin_Controller {
 	public function do_upload($form_id){
 		$upload_data;
 		$result;
-		$respond;
+		$respond = array();
 		
 		$prod_data = $this->input->post('form_data');
 		
@@ -279,25 +271,33 @@ class Admin extends Admin_Controller {
 			$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
 		}else{
 			
-			$stored_attch = count($files_data['attch']);
+			if(isset($files_data['attch'])){
+				$stored_attch = count($files_data['attch']);
+			}else{
+				$stored_attch = 0;
+			}
 			
-			$result = Files::upload($files_data['folder'], $input_name . '-' . ($stored_attch+1), $input_name);
+			$result = Files::upload($files_data['folder'], 'attachment-' . ($stored_attch+1), $input_name);
 				
 			$upload_data = $this->parse_file_data($result['data']);
 			foreach($upload_data as $key=>$val){
-				$files_data['attch'][][$key] = $val; // Start here
+				if($key == 'id'){$files_data['attch'][] = $val;} 
 			}
 				
 			$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
+			
+			
+			//append list item
+			$respond['list'] .= '<tr><td>' . $upload_data['name'] . '</td>';
+			$respond['list'] .= '<td>' . $upload_data['mimetype'] . '</td>';
+			$respond['list'] .= '<td><a onclick="delete_attch(this)" class="button" style="padding:5px 10px 4px 10px;" data-id="' . $upload_data['id'] . '">Delete</a></td>';
 		}
 
 		//Send ajax respond
-		$respond = array(
-				'status'=>$result['status'],
-				'message'=>$result['message'],
-				'type' => $input_name,
-				'file'=>Files::$path . $result['data']['filename'],
-		);
+		$respond['status'] = $result['status'];
+		$respond['message'] = $result['message'];
+		$respond['type'] = $input_name;
+		$respond['file'] = Files::$path . $result['data']['filename'];
 		
 		echo json_encode($respond);
 	}
@@ -305,9 +305,35 @@ class Admin extends Admin_Controller {
 	
 	
 	
-	function parse_file_data($data){
+	public function delete_attch($id){
+		$prod_data = $this->input->post('form_data');
+		
+		$pid = $prod_data['id'];
+		
+		//Get products files json data
+		$files_data = $this->parse_files_json($pid, true);
+		$attch_list = $files_data['attch'];
+		
+		$result = Files::delete_file($id);
+		
+		$files_data['attch'] = array_diff($attch_list, array($id));
+		
+		$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
+		
+		$respond = array(
+				'status'=>$result['status'],
+				'message'=>$result['message']
+		);
+		
+		echo json_encode($respond);
+	}
+	
+	
+
+
+
+	function parse_file_data($data, $key = array('id', 'path', 'name', 'filename', 'mimetype')){
 		$result = array();
-		$key = array('id', 'path', 'name', 'filename');
 	
 		foreach($key as $k){
 			$result[$k] = $data[$k];
