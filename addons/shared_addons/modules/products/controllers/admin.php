@@ -262,11 +262,11 @@ class Admin extends Admin_Controller {
 		//Get products files json data
 		$files_data = $this->parse_files_json($pid, true);
 		
-		if($prod_data['poster_id'] != ''){
-			if(Files::delete_file($prod_data['poster_id'])){
-				$this->products_m->update($prod_data['id'], array('poster'=>''));
-			}
-		}
+// 		if($prod_data['poster_id'] != ''){
+// 			if(Files::delete_file($prod_data['poster_id'])){
+// 				$this->products_m->update($prod_data['id'], array('poster'=>''));
+// 			}
+// 		}
 			
 		if($input_name == 'poster'){
 			$result = Files::upload($files_data['folder'], $prod_data['slug'], 'poster', 1920, false, true);
@@ -277,31 +277,28 @@ class Admin extends Admin_Controller {
 			}
 			
 			$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
-			
-			$respond = array(
-					'status'=>$result['status'],
-					'message'=>$result['message'],
-					'file'=>Files::$path . $result['data']['filename'],
-			);
 		}else{
-			$result = Files::upload($files_data['folder'], $input_name, $input_name);
+			
+			$stored_attch = count($files_data['attch']);
+			
+			$result = Files::upload($files_data['folder'], $input_name . '-' . ($stored_attch+1), $input_name);
 				
 			$upload_data = $this->parse_file_data($result['data']);
-			$counter = 0;
 			foreach($upload_data as $key=>$val){
-				$files_data['attch'][$input_name][$key] = $val; // Start here
+				$files_data['attch'][][$key] = $val; // Start here
 			}
 				
 			$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
-			
-			$respond = array(
-					'status'=>$result['status'],
-					'message'=>$result['message'],
-					'file'=>Files::$path . $result['data']['filename'],
-			);
 		}
 
 		//Send ajax respond
+		$respond = array(
+				'status'=>$result['status'],
+				'message'=>$result['message'],
+				'type' => $input_name,
+				'file'=>Files::$path . $result['data']['filename'],
+		);
+		
 		echo json_encode($respond);
 	}
 	

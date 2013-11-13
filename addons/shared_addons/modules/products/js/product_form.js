@@ -89,18 +89,22 @@ function process_attch(obj){
 		dataType: 'json',
 		success: function(respond) {
 			var msg = respond.message;
+			var URL = respond.file;
 			
 			if(respond.status){
-				var msg = respond.message;
-				var imgURL = respond.file;
-				
-				$('#msg-ajax').html(msg).fadeIn(600);
-				$('input#poster').attr('value', '')
-				
-				if($('#img-poster img').length > 0){
-					$('#img-poster img').css('display','none').attr('src', imgURL).fadeIn(600);
+				if(respond.type = 'poster'){
+					
+					$('.msg-ajax').html(msg).fadeIn(600);
+					$('input#poster').attr('value', '');
+					
+					if($('#img-poster img').length > 0){
+						$('#img-poster img').css('display','none').attr('src', URL).fadeIn(600);
+					}else{
+						$('#img-poster').html('<img style="width:300px;" src="' + URL + '" />').css('display','none').fadeIn(600);
+					}
 				}else{
-					$('#img-poster').html('<img style="width:300px;" src="' + imgURL + '" />').css('display','none').fadeIn(600);
+					$('.msg-ajax').html('<span color="green">Attachment added</span>').fadeIn(600);
+					$('input#attch').attr('value', '')
 				}
 			}else if(respond.deleted){
 				$('#img-poster img').remove();
