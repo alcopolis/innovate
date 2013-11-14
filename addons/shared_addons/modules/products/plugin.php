@@ -69,6 +69,23 @@ class Plugin_Products extends Plugin
 // 								'required' => true,// is this attribute required?		
 // 							),
 				),
+				
+				'files' => array(
+						'description' => array(// a single sentence to explain the purpose of this method
+								'en' => 'Return custom CSS',
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
+						'attributes' => array(
+								'value' => array(
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+						),
+				),
 		);
 	
 		return $info;

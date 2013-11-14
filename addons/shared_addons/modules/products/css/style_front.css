@@ -3,6 +3,40 @@
 body.product{color:#515154;}
 body.product .content-wrapper { width: 96%; margin: 80px auto 40px auto; text-align:left;}
 
+
+#overview #ov-content{
+	width:960px;
+	margin:0 auto;
+	position:relative;
+}
+
+#overview{
+	margin-top:79px;
+	min-height:500px;
+	background-position:top center;
+}
+
+#overview #ov-content #ov-text{
+	line-height:1.25em;
+	color:#007DC3;
+}
+
+
+
+#content{background-color:#007DC3; color:#FFF;}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Package Info Table */
 #package{
 	

@@ -21,9 +21,7 @@
 */
 
 // front-end
-// $route['epg(/:num)?']					= 'epg/index$1';
-// $route['epg/view_channels(/:num)?']		= 'epg/view_channels/index$1';
-// $route['epg/view_shows(/:num)?']		= 'epg/view_shows/index$1';
 
 // back-end
+$route['products/admin/edit/(:num)?']		= 'admin/edit/$1';
 $route['products/admin/packages(/:any)?']		= 'admin_packages$1';

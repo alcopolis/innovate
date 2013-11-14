@@ -35,8 +35,8 @@
 										echo '<td class="align-center">' . form_checkbox('action_to[]', $row->id) . '</td>';
 										echo '<td><a href="admin/products/edit/' . $row->id . '">' . $row->name . '</a></td>';
 										echo '<td>' . $row->slug . '</td>';
-										echo '<td>' . $row->section . '</td>';
-										echo '<td style="width:40%;">' . strip_tags(substr($row->teaser, 0, 150)) . '</td>';
+										echo '<td class="align-center" >' . $row->section . '</td>';
+										echo '<td style="width:40%;">' . strip_tags(substr($row->overview, 0, 150)) . '</td>';
 										echo '<td>' . $row->tags . '</td>';
 										echo '<td><a href="admin/products/edit/' . $row->id . '">Edit</a> &nbsp; Delete</td>';
 									?>

@@ -115,24 +115,28 @@
 										<?php } ?>
 									</div>
 									<br/>
-									<div class="input">
-										<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; 
-										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
-										<br/>
+									<div class="input" style="border:1px solid #EEE; border-radius:5px; margin-top:20px;">
 										<div class="msg-ajax"></div>
+										<?php echo form_upload('poster','','id="poster" style="margin:10px 5px 10px 10px;"'); ?> &nbsp; 
+										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
 									</div>
 								</li>
 								
-								<li>
-									<label for="attachment">Attachment</label>
-									
-									<div class="msg-ajax"></div>
+								<li>	
+									<label for="attachment">Add Attachment</label>
+									<div class="input" style="border:1px solid #EEE; border-radius:5px; margin-top:20px;">
+										<div class="msg-ajax"></div>
+										<?php echo form_upload('attch','','id="attch" style="margin:10px 5px 10px 10px;"'); ?> &nbsp; 
+										<?php echo form_input('attchname', '', 'id="attchname" placeholder="File Rename" style="margin:10px 10px 10px 5px;"'); ?> &nbsp;
+										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
+									</div>
 									
 									<div id="attch-files" style="margin:20px 0;">
 										<?php if(count($attachment) > 0){ ?>
 											<table id="attch-list">
 												<thead>
 													<th>Name</th>
+													<th>Size</th>
 													<th>Type</th>
 													<th></th>
 												</thead>
@@ -140,6 +144,15 @@
 												<?php foreach($attachment as $attch ){ ?>
 													<tr>
 														<td><?php echo $attch->name; ?></td>
+														<td><?php
+																$size = intval($attch->filesize);
+																if($size > 1024){ 
+																	echo round($size/1024) . ' MB';
+																}else{
+																	echo $size . ' KB';
+																}
+															?>
+														</td>
 														<td><?php echo $attch->mimetype; ?></td>
 														<td><a data-id="<?php echo $attch->id; ?>" onclick="delete_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Delete</a></td>
 													</tr>
@@ -149,13 +162,6 @@
 										<?php }else{ ?>
 											<div id="no-data">No Attachment</div>
 										<?php } ?>	
-									</div>
-									
-									<label for="attachment">Add Attachment</label>
-									<div class="input">
-										<?php echo form_upload('attch','','id="attch" style="margin:5px 0;"'); ?> &nbsp; 
-										<?php //echo form_input('attchname-0', 'Rename'); ?> &nbsp;
-										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
 									</div>
 								</li>
 							</ul>

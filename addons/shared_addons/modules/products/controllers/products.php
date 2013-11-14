@@ -14,32 +14,37 @@ class Products extends Public_Controller
 	{
 		parent::__construct();
 		$this->load->model('products_m');
+		$this->load->library('files/files');
 	}
 
 	
-	public function view($slug){
+	private function render($view, $var){
+		$this->template
+		->title($this->module_details['name'])
+		->append_css('module::style_front.css')
+		->set($var)
+		->build('products');
+	}
 	
-		
+	public function view($slug){
 		$this->product = $this->products_m->get_product_by(NULL, array('slug' => $slug), true);
 		
 		if($this->product != NULL){
-			$this->template
-			->title($this->module_details['name'])
-			->append_css('module::style_front.css')
-			->set('product', $this->product)
-			->build('products');
+			//Set up variable
+			$files_cont = json_decode($this->product->files, true);
+			$poster = $files_cont['poster'];
+			$files = $files_cont['attch'];
+			$data = array(
+					'product' => $this->product,
+					'poster' => $poster,
+					'files' => $files
+			);
+			
+			$this->render('products', $data);
 		}else{
 			//Redirect to Missing Page
 		}
 	}
-	
-// 	private function construct_data($slug){
-// 		$prod = new stdClass();
-// 		$prod->data = $this->products_m->inn_get('product', $slug, 'slug', true); //return object
-// 		$prod->packages = $this->products_m->inn_construct_data($prod->data->product_id);
-		
-// 		return $prod;
-// 	}
 	
 	
 }
