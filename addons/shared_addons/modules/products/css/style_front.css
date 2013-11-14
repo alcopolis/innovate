@@ -1,7 +1,11 @@
 /*Default Frontpage CSS for Products*/
 
 body.product{color:#515154;}
-body.product .content-wrapper { width: 96%; margin: 80px auto 40px auto; text-align:left;}
+body.product .content-wrapper { 
+	width: 96%; 
+	margin: 80px auto 40px auto; 
+	text-align:left;
+}
 
 
 #overview #ov-content{
@@ -23,7 +27,11 @@ body.product .content-wrapper { width: 96%; margin: 80px auto 40px auto; text-al
 
 
 
-#content{background-color:#007DC3; color:#FFF;}
+#prod-content{
+	background-color:#007DC3;
+	font-size:14px;
+	color:#FFF;
+}
 
 
 

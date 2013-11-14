@@ -30,7 +30,7 @@
 				<div id="overview">
 					<div id="ov-content"><?php echo $product->overview; ?></div>	
 				</div>
-				<div id="content">
+				<div id="prod-content">
 					<div id="body-wrapper" class="clearfix">
 						<?php echo $product->body; ?>	
 					</div>
