@@ -9,12 +9,16 @@ class Products extends Public_Controller
 {
 	
 	protected $product;
+	protected $pack;
 	
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('products_m');
+		$this->load->model('packages_m');
 		$this->load->library('files/files');
+		
+		//$this->pack = stdClass();
 	}
 
 	
@@ -26,8 +30,20 @@ class Products extends Public_Controller
 		->build('products');
 	}
 	
+	
 	public function view($slug){
 		$this->product = $this->products_m->get_product_by(NULL, array('slug' => $slug), true);
+		
+		$pack_group_id = $this->packages_m->group_by('group_id')->order_by('id', 'ASC')->get_packages_by('group_id', array('prod_id' => $this->product->id));
+		$groups = array();
+		
+		foreach($pack_group_id as $pgi){
+			//$tes = $this->packages_m->get_group_by(array('id'=>'1'), TRUE);
+			
+			$this->pack[$pgi->group_id]['data'] = $this->packages_m->get_group_by(array('name' => $pgi->group_id), TRUE);
+			$this->pack[$pgi->group_id]['pack'] = $this->packages_m->order_by('id', 'ASC')->get_packages_by(NULL, array('prod_id' => $this->product->id, 'group_id' => $pgi->group_id));
+		}
+		
 		
 		if($this->product != NULL){
 			//Set up variable
@@ -37,7 +53,8 @@ class Products extends Public_Controller
 			$data = array(
 					'product' => $this->product,
 					'poster' => $poster,
-					'files' => $files
+					'files' => $files,
+					'packages' => $this->pack
 			);
 			
 			$this->render('products', $data);

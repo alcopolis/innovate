@@ -31,8 +31,28 @@
 					<div id="ov-content"><?php echo $product->overview; ?></div>	
 				</div>
 				<div id="prod-content">
-					<div id="body-wrapper" class="clearfix">
-						<?php echo $product->body; ?>	
+					<div id="body-wrapper">
+						<div id="prod-info" class="clearfix">
+							<?php echo $product->body; ?>
+						</div>
+						<div id="package" style="color:black; text-shadow:none;">
+							<ul>
+								<?php foreach($packages as $pack){ ?>
+									<li><?php echo $pack['data']->name; ?></li>
+								<?php } ?>
+							</ul>
+							
+							<?php foreach($packages as $pack){ ?>
+								<div id="<?php echo $pack['data']->slug; ?>" class="clearfix">
+									<div class="data left" style="margin:20px; width:25%; font-size:.85em; color:#999"><?php echo $pack['data']->body; ?></div>
+									<div class="packs right" style="margin:20px; width:65%;">
+										<?php foreach($pack['pack'] as $p){ ?>
+											<p><?php echo $p->name; ?></p>
+										<?php } ?>
+									</div>
+								</div>
+							<?php } ?>
+						</div>	
 					</div>
 				</div>
 			</div>

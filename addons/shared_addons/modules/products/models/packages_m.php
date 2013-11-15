@@ -11,6 +11,7 @@
 class Packages_m extends MY_Model
 {
 	protected $_table = 'inn_products_packages';
+	protected $group_table = 'inn_products_packages_group';
 	
 	public $_rules = array(
 			'name' => array(
@@ -43,7 +44,7 @@ class Packages_m extends MY_Model
 	
 	public function __construct() {
 		parent::__construct();
-		$field_table = 'inn_products_package_field';
+		//$field_table = 'inn_products_package_field';
 	}
 	
 
@@ -88,6 +89,29 @@ class Packages_m extends MY_Model
 	
 	
 	//UTILITY FUNCTION
+	//Get package group
+	public function get_group($fields = '', $single = false){
+		$method = 'result';
+		
+		if($fields != '' || $fields != NULL){
+			$this->db->select($fields);
+		}
+	
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
+		}
+		
+		return $this->db->get($this->group_table)->$method();
+	}
+	
+	public function get_group_by($where, $single, $fields){
+		$this->db->where($where);
+		return $this->get_group($fields, $single);
+	}
+	
+	
 	
 	//Get the data ID from db insert operation
 	public function get_id(){
