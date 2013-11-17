@@ -13,6 +13,26 @@
 		$bg_image = Files::get_file($poster['id']);
 	?>
 	
+	<script>
+		$(function(){
+			//Set Packages Container Height
+			$container = $('.pack-item');
+			var highest = 0;
+			
+			$container.each(function(){
+				if($(this).children('section').height() > highest){
+					highest = $(this).children('section').height();
+				}
+			})
+
+			$container.each(function(){
+				console.log(highest);
+				$(this).children('section').height(highest);
+			})
+		})
+		
+	</script>
+	
 	<style>
 		#overview{background-image:url(<?php echo $bg_image['data']->path ; ?>);}
 	</style>
@@ -44,10 +64,14 @@
 							
 							<?php foreach($packages as $pack){ ?>
 								<div id="<?php echo $pack['data']->slug; ?>" class="clearfix">
-									<div class="data left" style="margin:20px; width:25%; font-size:.85em; color:#999"><?php echo $pack['data']->body; ?></div>
-									<div class="packs right" style="margin:20px; width:65%;">
+									<div class="data left" style="margin:20px; width:25%; font-size:.9em; color:#999"><?php echo $pack['data']->body; ?></div>
+									<div class="packs right clearfix" style="margin:20px; width:65%;">
 										<?php foreach($pack['pack'] as $p){ ?>
-											<p><?php echo $p->name; ?></p>
+											<div class="pack-item left" style="box-shadow:0 0 2px #CCC; width:192px; margin:0 10px 20px 10px; background:#EEE; border-radius:5px;">
+												<h5 style="margin:5px; text-align: center;"><?php echo $p->name; ?></h5>
+												<section style="margin:10px; text-align: center;"><?php echo $p->body; ?></section>
+												<h5 style="margin:10px; text-align: center;"><?php echo 'Rp ' . $p->price; ?></h5>
+											</div>
 										<?php } ?>
 									</div>
 								</div>

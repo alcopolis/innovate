@@ -31,7 +31,6 @@ $(function () {
 			$(this).attr('value', 0);
 		} 
 	})
-	
 })
 
 
