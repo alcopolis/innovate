@@ -25,6 +25,7 @@ class Products extends Public_Controller
 	private function render($view, $var){
 		$this->template
 		->title($this->module_details['name'])
+		->append_js('module::main.js')
 		->append_css('module::style_front.css')
 		->set($var)
 		->build('products');
