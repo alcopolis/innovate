@@ -180,8 +180,6 @@ class Admin extends Admin_Controller {
 				}
 				
 				$this->form_data['files'] = json_encode($files_tmp);
-	
-				var_dump($this->form_data['files']);
 			}
 			
 			//update data
@@ -212,9 +210,10 @@ class Admin extends Admin_Controller {
 		if($files != ''){
 			$stored_attch = array();
 			if(count($files['attch']) > 0){
-				foreach($files['attch'] as $file_id){
-					$temp = Files::get_file($file_id);
-					$stored_attch[] = $temp['data'];
+				foreach($files['attch'] as $name=>$file){
+					$temp = Files::get_file($file['id']);
+					$stored_attch[$name]['display'] = $file['display'];
+					$stored_attch[$name]['data'] = $temp['data'];
 				}
 			}else{
 				$stored_attch = NULL;
@@ -283,21 +282,27 @@ class Admin extends Admin_Controller {
 			}
 			
 			//Uploading files
-			if($this->input->post('attchname') != ''){
-				$result = Files::upload($files_data['folder'], $this->input->post('attchname'), $input_name);
-			}else{
-				$result = Files::upload($files_data['folder'], 'attachment-' . ($stored_attch+1), $input_name);
+			$rename = $this->input->post('attchname');
+			
+			if($rename == ''){
+				$rename = 'attachment-' . ($stored_attch+1);
 			}
+			$result = Files::upload($files_data['folder'], $rename, $input_name);
 			
 			
 			//If upload success, insert metadata into db
 			if($result['status']){
 				$upload_data = $this->parse_file_data($result['data']);
 				foreach($upload_data as $key=>$val){
-					if($key == 'id'){$files_data['attch'][] = $val;} 
+					if($key == 'id'){
+						$files_data['attch'][$rename]['id'] = $val;
+						$files_data['attch'][$rename]['display'] = $this->input->post('attchdisptype');
+					}
 				}
 				
 				$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
+				
+				
 				
 				//append list item
 				$size = intval($upload_data['filesize']);
@@ -311,6 +316,7 @@ class Admin extends Admin_Controller {
 				$respond['list'] .= '<tr><td>' . $upload_data['name'] . '</td>';
 				$respond['list'] .= '<td>' . $filesize . '</td>';
 				$respond['list'] .= '<td>' . $upload_data['mimetype'] . '</td>';
+				$respond['list'] .= '<td>' . $this->input->post('attchdisptype') . '</td>';
 				$respond['list'] .= '<td><a onclick="delete_attch(this)" class="button" style="padding:5px 10px 4px 10px;" data-id="' . $upload_data['id'] . '">Delete</a></td>';
 				
 				$respond['message'] = 'File has been uploaded';
@@ -331,7 +337,7 @@ class Admin extends Admin_Controller {
 	
 	
 	
-	public function delete_attch($id){
+	public function delete_attch($file_key){
 		$prod_data = $this->input->post('form_data');
 		
 		$pid = $prod_data['id'];
@@ -340,9 +346,9 @@ class Admin extends Admin_Controller {
 		$files_data = $this->parse_files_json($pid, true);
 		$attch_list = $files_data['attch'];
 		
-		$result = Files::delete_file($id);
+		$result = Files::delete_file($attch_list[$file_key]['id']);
 		
-		$files_data['attch'] = array_diff($attch_list, array($id));
+		unset($files_data['attch'][$file_key]);
 		
 		$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
 		
@@ -358,7 +364,7 @@ class Admin extends Admin_Controller {
 
 
 
-	function parse_file_data($data, $key = array('id', 'path', 'name', 'filename', 'mimetype')){
+	function parse_file_data($data, $key = array('id', 'path', 'name', 'filename', 'mimetype', 'filesize')){
 		$result = array();
 	
 		foreach($key as $k){

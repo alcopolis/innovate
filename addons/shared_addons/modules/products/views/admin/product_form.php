@@ -128,6 +128,16 @@
 										<div class="msg-ajax"></div>
 										<?php echo form_upload('attch','','id="attch" style="margin:10px 5px 10px 10px;"'); ?> &nbsp; 
 										<?php echo form_input('attchname', '', 'id="attchname" placeholder="File Rename" style="margin:10px 10px 10px 5px;"'); ?> &nbsp;
+										
+										<div class="input small-side" style="margin:20px 10px 10px 10px;">
+											<label for="attchdisptype">Attachment Display</label><br>
+											<?php echo form_dropdown('attchdisptype', array(
+												'attach' => 'Attach on Page',
+												'link' => 'URL Link',
+												'popup' => 'Pop-up Window',
+											), 'attach') ?>
+										</div>
+										<br/>
 										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
 									</div>
 									
@@ -138,14 +148,15 @@
 													<th>Name</th>
 													<th>Size</th>
 													<th>Type</th>
+													<th>Display</th>
 													<th></th>
 												</thead>
 												<tbody>
-												<?php foreach($attachment as $attch ){ ?>
+												<?php foreach($attachment as $key=>$attch ){ ?>
 													<tr>
-														<td><?php echo $attch->name; ?></td>
+														<td><?php echo $attch['data']->name; ?></td>
 														<td><?php
-																$size = intval($attch->filesize);
+																$size = intval($attch['data']->filesize);
 																if($size > 1024){ 
 																	echo round($size/1024) . ' MB';
 																}else{
@@ -153,8 +164,9 @@
 																}
 															?>
 														</td>
-														<td><?php echo $attch->mimetype; ?></td>
-														<td><a data-id="<?php echo $attch->id; ?>" onclick="delete_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Delete</a></td>
+														<td><?php echo $attch['data']->mimetype; ?></td>
+														<td><?php echo $attch['display']; ?></td>
+														<td><a data-key="<?php echo $key; ?>" onclick="delete_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Delete</a></td>
 													</tr>
 												<?php } ?>
 												</tbody>

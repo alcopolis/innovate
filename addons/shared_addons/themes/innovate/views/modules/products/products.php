@@ -36,6 +36,8 @@
 						<div id="prod-info" class="clearfix">
 							<?php echo $product->body; ?>
 						</div>
+						
+						<?php if($packages != NULL){ ?>
 						<div id="package">
 							<ul id="pack-nav" class="clearfix">
 								<?php foreach($packages as $pack){ ?>
@@ -52,14 +54,15 @@
 										<?php foreach($pack['pack'] as $p){ ?>
 											<div class="pack-item left">
 												<h5 class="pack-name"><?php echo $p->name; ?></h5>
-												<section style="margin:10px; text-align: center;"><?php echo $p->body; ?></section>
+												<section style="margin:10px; text-align: center; "><?php echo $p->body; ?></section>
 												<h6 class="pack-price"><?php echo 'Rp ' . number_format($p->price); ?></h6>
 											</div>
 										<?php } ?>
 									</div>
 								</div>
 							<?php } ?>
-						</div>	
+						</div>
+						<?php } ?>	
 					</div>
 				</div>
 			</div>
@@ -68,5 +71,7 @@
 		<footer>	
 			{{ theme:partial name="footer" }}
 		</footer>
+		
+		<div id="popup" class="hide" style="position:fixed; width:100%; height:100%; background:rgba(0,0,0,.85); top:80px;" ></div>
 </body>
 </html>

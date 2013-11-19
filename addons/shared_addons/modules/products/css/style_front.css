@@ -62,6 +62,7 @@ body.product .content-wrapper {
 #package{
 	color:black; text-shadow:none;
 	overflow:hidden;
+	line-height:1.25em;
 }
 
 
@@ -92,7 +93,7 @@ div.pack-container .data{
 }
 
 div.pack-container .data h3, div.pack-container .data p{margin-bottom:10px;}
-div.pack-container .data p{line-height:1.25em;}
+div.pack-container .data p{line-height:1.5em;}
 
 div.pack-container .packs{width:65%;margin:20px 0;}
 

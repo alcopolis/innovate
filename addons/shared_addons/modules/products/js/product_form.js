@@ -71,7 +71,7 @@ function process_attch(obj){
 					if($('table#attch-list').length > 0){
 						$('table#attch-list tbody').append(respond.list);
 					}else{
-						var tableElm = '<table id="attch-list"><thead><th>Name</th><th>Type</th><th></th></thead><tbody></tbody></table>';
+						var tableElm = '<table id="attch-list"><thead><th>Name</th><th>Size</th><th>MIME Type</th><th></th></thead><tbody></tbody></table>';
 	
 						$('#attch-files').append(tableElm);
 						$('table#attch-list tbody').append(respond.list);
@@ -97,7 +97,7 @@ function delete_attch(obj){
 	if(del){
 		$.ajax({
 			type: 'POST',
-			url: 'admin/products/delete_attch/' + $(obj).attr('data-id'),
+			url: 'admin/products/delete_attch/' + $(obj).attr('data-key'),
 			processData: false,
 		    contentType: false,
 			data:formData,

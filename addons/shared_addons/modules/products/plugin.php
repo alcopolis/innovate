@@ -72,13 +72,25 @@ class Plugin_Products extends Plugin
 				
 				'files' => array(
 						'description' => array(// a single sentence to explain the purpose of this method
-								'en' => 'Return custom CSS',
+								'en' => 'Return attachment files as links or embed',
 						),
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
 						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
 						'attributes' => array(
-								'value' => array(
+ 								'name' => array(
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+								'product' => array(
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+								'display' => array(
 										'type' => 'text',// Can be: slug, number, flag, text, array, any.
 										'flags' => '',
 										'default' => '',
@@ -137,4 +149,17 @@ class Plugin_Products extends Plugin
 		return $data;
 	}
 	
+	
+	function files(){ 
+		$key = $this->attribute('name');
+		$prod_slug = $this->attribute('product');
+		
+		
+		$temp = json_decode($this->products_m->get_product_by(NULL, array('slug'=>$prod_slug), true)->files);
+		
+		$files = FILES::get_file($temp->attch->$key->id)['data'];
+		$display = $temp->attch->$key->display;
+		
+		return '<a class="attch-' . $display . '" href="{{url:site}}uploads/default/files/' . $files->filename . '">' . $files->name . '</a>';
+	}
 }

@@ -33,9 +33,34 @@ $(function(){
 		$(this).addClass('current');
 		openTab(link);	
 	})
+	
+	
+	//Attachment click
+	$('#attachment a').click(function(e){
+		e.preventDefault();
+		
+		switch ($(this).attr('class')){
+			case 'attch-popup' :
+				showPopup($(this).attr('href'));
+				break;
+			case 'attch-link' :
+				gotoURL($(this).attr('href'));
+				break;
+		}
+	});
 })
 
 function openTab(id){
 	$(id).css('display', 'block').removeClass('hide');
 	$(id).css('display', 'block').addClass('active');	
+}
+
+
+// Attachment function
+function showPopup(url){
+	console.log(url);
+}
+
+function gotoURL(url){
+	console.log(url);
 }
