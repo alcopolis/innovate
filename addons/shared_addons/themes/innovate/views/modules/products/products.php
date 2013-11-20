@@ -9,8 +9,6 @@
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
 	
-	
-	
 	<style>
 		<?php 
 			$bg_image = Files::get_file($poster['id']);
@@ -72,6 +70,13 @@
 			{{ theme:partial name="footer" }}
 		</footer>
 		
-		<div id="popup" class="hide" style="position:fixed; width:100%; height:100%; background:rgba(0,0,0,.85); top:80px;" ></div>
+		<div id="popup" class="hide" style="position:fixed; width:100%; height:100%; background:rgba(0,0,0,.90); top:80px;" >
+			<div id="popup-wrapper" style="position:relative; top:80px; width:960px; margin:0 auto;">
+				<a class="close-btn" style="cursor:pointer; color:red;">Close</a>
+				<div id="popup-container" style="background:#FFF; padding:10px; box-shadow:0 0 30px #000;">
+					
+				</div>
+			</div>
+		</div>
 </body>
 </html>

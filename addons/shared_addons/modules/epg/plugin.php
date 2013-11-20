@@ -300,44 +300,53 @@ class Plugin_Epg extends Plugin
 		
 		shuffle($raw);
 		
-
-		$mainswitch = false;
+		//var_dump($raw);
 		
-		foreach($raw as $featured){
-			$ch = $this->epg_ch_m->get_channel($featured->channelid);
-						
-			$poster_path = $this->module_details['path'] . '/upload/shows' . $featured->poster;
+		if(count($raw) > 0){
+			$mainswitch = false;
 			
-			if(!$mainswitch){
-				$data .= '<div class="main featured-show">';
-				  	$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
-					//$data .= $featured->trailer;
-					$data .= '<div class="info">';
-					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
-					$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . '</p>';
-					$data .= '<p class="syn-id">' .  $featured->ina . '</p><hr/>';
-					$data .= '<p class="syn-en">' .  $featured->eng . '</p>';
-					$data .= '<p class="sh-detail-link"><a href="epg/show/' .  $featured->showid . '">Detail Acara &raquo</a></p>';
-				$data .= '</div></div>';
+			$data = '<div class="mod-epg featured clearfix"><h4 class="rotate">' . $this->attribute('category') . '</h4>';
+			
+			foreach($raw as $featured){
+				$ch = $this->epg_ch_m->get_channel($featured->channelid);
+							
+				$poster_path = $this->module_details['path'] . '/upload/shows' . $featured->poster;
 				
-				$mainswitch = TRUE;
-			}else{
-				$data .= '<div class="featured-show">';
-					$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
-					$data .= '<div class="info">';
-					$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . substr($featured->title, 0, 20);
-					if(strlen($featured->title) < 20){
-						$data .=  '</a></h4>';
-					}else{
-						$data .=  '...' . '</a></h4>';
-					}
- 					$data .= '<p class="subinfo">' . substr($ch->name, 0, 10) . ' | Ch. ' . $ch->num . '<br/><br/>' . date('d M y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
- 					$data .= '<p class="sh-detail-link" style="text-align:center;"><a href="epg/show/' .  $featured->showid . '">Detail Acara</a></p>';
-				$data .= '</div></div>';
-			}		
+				if(!$mainswitch){
+					$data .= '<div class="main featured-show">';
+					  	$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
+						//$data .= $featured->trailer;
+						$data .= '<div class="info">';
+						$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
+						$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . '</p>';
+						$data .= '<p class="syn-id">' .  $featured->ina . '</p><hr/>';
+						$data .= '<p class="syn-en">' .  $featured->eng . '</p>';
+						$data .= '<p class="sh-detail-link"><a href="epg/show/' .  $featured->showid . '">Detail Acara &raquo</a></p>';
+					$data .= '</div></div>';
+					
+					$mainswitch = TRUE;
+				}else{
+					$data .= '<div class="featured-show">';
+						$data .= '<div class="poster" style="background-image:url(addons/shared_addons/modules/epg/upload/shows/' . $featured->poster . ')"></div>';
+						$data .= '<div class="info">';
+						$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . substr($featured->title, 0, 20);
+						if(strlen($featured->title) < 20){
+							$data .=  '</a></h4>';
+						}else{
+							$data .=  '...' . '</a></h4>';
+						}
+	 					$data .= '<p class="subinfo">' . substr($ch->name, 0, 10) . ' | Ch. ' . $ch->num . '<br/><br/>' . date('d M y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
+	 					$data .= '<p class="sh-detail-link" style="text-align:center;"><a href="epg/show/' .  $featured->showid . '">Detail Acara</a></p>';
+					$data .= '</div></div>';
+				}		
+			}
+			
+			$data .= '</div>';
+			
+			return $data;
+		}else{
+			return false;	
 		}
-		
-		return $data;
 	}
 	
 	

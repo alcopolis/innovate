@@ -159,7 +159,12 @@ class Plugin_Products extends Plugin
 		
 		$files = FILES::get_file($temp->attch->$key->id)['data'];
 		$display = $temp->attch->$key->display;
+		$mimetype = explode('/', $files->mimetype)[1];
 		
-		return '<a class="attch-' . $display . '" href="{{url:site}}uploads/default/files/' . $files->filename . '">' . $files->name . '</a>';
+		if($display == 'popup' || $display == 'link'){
+			return '<a class="attch-' . $display . '" href="{{url:site}}uploads/default/files/' . $files->filename . '" data-mimetype="' . $mimetype . '">' . $files->name . '</a>';
+		}else{
+			
+		}
 	}
 }

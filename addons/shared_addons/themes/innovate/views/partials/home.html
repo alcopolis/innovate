@@ -10,15 +10,9 @@
 		<a href="{{ url:site }}subscribe">Register Now</a>
 	</div>
 	
-	<div class="mod-epg featured clearfix">
-		<h4 class="rotate">Big Screen Movies</h4>
-		{{ epg:featured limit="11" category="Movies" }}
-	</div>
-	
-	<div class="mod-epg featured clearfix">
-		<h4 class="rotate">Movie Series</h4>
-		{{ epg:featured limit="11" category="Movie Series" }}
-	</div>
+	{{ epg:featured limit="11" category="Movies" }}
+
+	{{ epg:featured limit="11" category="Movie Series" }}
 
 	{{ theme:partial name="home_utility" }}
 </div>
