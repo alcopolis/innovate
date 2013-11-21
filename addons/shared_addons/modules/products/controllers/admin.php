@@ -257,22 +257,27 @@ class Admin extends Admin_Controller {
 		
 		//Get products files json data
 		$files_data = $this->parse_files_json($pid, true);
-		
-		if($prod_data['poster_id'] != ''){
-			Files::delete_file($prod_data['poster_id']);
-		}
+
 			
 		if($input_name == 'poster'){
 			$result = Files::upload($files_data['folder'], $prod_data['slug'], 'poster', 1920, false, true);
 			
-			$upload_data = $this->parse_file_data($result['data']);
-			foreach($upload_data as $key=>$val){
-				$files_data['poster'][$key] = $val;
-			}
+			if($result['status']){
+				if($prod_data['poster_id'] != ''){
+					Files::delete_file($prod_data['poster_id']);
+				}
+				
+				$upload_data = $this->parse_file_data($result['data']);
+				foreach($upload_data as $key=>$val){
+					$files_data['poster'][$key] = $val;
+				}
+				
+				$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
 			
-			$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
-		
-			$respond['message'] = 'Poster has been uploaded';
+				$respond['message'] = 'Poster has been uploaded';
+			}else{
+				$respond['message'] = strip_tags($result['message']);
+			}
 		}else{
 			
 			if(isset($files_data['attch'])){
@@ -287,7 +292,9 @@ class Admin extends Admin_Controller {
 			if($rename == ''){
 				$rename = 'attachment-' . ($stored_attch+1);
 			}
+			
 			$result = Files::upload($files_data['folder'], $rename, $input_name);
+
 			
 			
 			//If upload success, insert metadata into db
@@ -301,7 +308,6 @@ class Admin extends Admin_Controller {
 				}
 				
 				$this->products_m->update($prod_data['id'], array('files'=>json_encode($files_data)));
-				
 				
 				
 				//append list item

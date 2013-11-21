@@ -38,7 +38,7 @@ $(function () {
 function process_attch(obj){
 	var formData = new FormData($('#product-form')[0]);
 	
-	$inp_elm = $(obj).parent();
+	$inp_elm = $(obj).parent('.input');
 	
 	$.ajax({
 		type: 'POST',
