@@ -29,46 +29,49 @@
 				<div id="overview">
 					<div id="ov-content"><?php echo $product->overview; ?></div>	
 				</div>
-				<div id="prod-content">
-					<div id="body-wrapper">
-						<div id="prod-info" class="clearfix">
-							<?php echo $product->body; ?>
-						</div>
-						
-						<?php if($packages != NULL){ ?>
-						<div id="package">
-							<ul id="pack-nav" class="clearfix">
-								<?php foreach($packages as $pack){ ?>
-									<li><a href="#<?php echo $pack['data']->slug; ?>"><?php echo $pack['data']->name; ?></a></li>
-								<?php } ?>
-							</ul>
+				
+				<?php if($product->body != NULL){ ?>
+					<div id="prod-content">
+						<div id="body-wrapper">
+							<div id="prod-info" class="clearfix">
+								<?php echo $product->body; ?>
+							</div>
 							
-							<?php foreach($packages as $pack){ ?>
-								<div id="<?php echo $pack['data']->slug; ?>" class="pack-container clearfix">
-									<div class="data left">
-										<?php echo $pack['data']->body; ?>
-										<div id="cs-support" style="color:#007DC3; text-align:center; border:1px solid #CCC; border-radius:5px; padding:10px 0;">
-											<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
-											<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
-											Hubungi Customer Care Kami</p>
-											<h3 style="padding:0;">[021] 3199 8600</h3>
-										</div>
-									</div>
-									<div class="packs right clearfix">
-										<?php foreach($pack['pack'] as $p){ ?>
-											<div class="pack-item left">
-												<h5 class="pack-name"><?php echo $p->name; ?></h5>
-												<section style="margin:10px; text-align: center; "><?php echo $p->body; ?></section>
-												<h6 class="pack-price"><?php echo 'Rp ' . number_format($p->price); ?></h6>
-											</div>
+							<?php if($packages != NULL){ ?>
+								<div id="package">
+									<ul id="pack-nav" class="clearfix">
+										<?php foreach($packages as $pack){ ?>
+											<li><a href="#<?php echo $pack['data']->slug; ?>"><?php echo $pack['data']->name; ?></a></li>
 										<?php } ?>
-									</div>
+									</ul>
+									
+									<?php foreach($packages as $pack){ ?>
+										<div id="<?php echo $pack['data']->slug; ?>" class="pack-container clearfix">
+											<div class="data left">
+												<?php echo $pack['data']->body; ?>
+												<div id="cs-support" style="color:#007DC3; text-align:center; border:1px solid #CCC; border-radius:5px; padding:10px 0;">
+													<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
+													<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
+													Hubungi Customer Care Kami</p>
+													<h3 style="padding:0;">[021] 3199 8600</h3>
+												</div>
+											</div>
+											<div class="packs right clearfix">
+												<?php foreach($pack['pack'] as $p){ ?>
+													<div class="pack-item left">
+														<h5 class="pack-name"><?php echo $p->name; ?></h5>
+														<section style="margin:10px; text-align: center; "><?php echo $p->body; ?></section>
+														<h6 class="pack-price"><?php echo 'Rp ' . number_format($p->price); ?></h6>
+													</div>
+												<?php } ?>
+											</div>
+										</div>
+									<?php } ?>
 								</div>
-							<?php } ?>
+							<?php } ?>	
 						</div>
-						<?php } ?>	
 					</div>
-				</div>
+				<?php } ?>
 			</div>
 		</div>
 		
