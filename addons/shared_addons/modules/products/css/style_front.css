@@ -78,11 +78,25 @@ ul#pack-nav li{
 	margin:10px 20px 10px 0;
 	font-size:1.25em;
 	font-weight:bold;
+	padding:5px;
 }
 
 ul#pack-nav li.current a{
 	color:#007CC3;
 }
+
+ul#pack-nav li.bundle-nav{
+	background:#007CC3; 
+	float:right;
+	border-radius:5px;
+}
+ul#pack-nav li.bundle-nav:hover {background:#007C20}
+ul#pack-nav li.bundle-nav a{color:#FFF; font-weight:normal;}
+
+
+
+
+
 
 div.pack-container{margin:0 40px;}
 div.pack-container .data{
@@ -103,12 +117,17 @@ div.pack-container .packs .pack-item{
 	width:30%;
 	box-shadow:0 0 2px #999; 
 	margin:0 5px 10px 5px;
-	color:#FFF; 
+	color:#222; 
+	text-shadow:0 -1px 1px #FFF;
 	background:#0bc4ee; border-radius:5px;
 }
 
-.pack-name{border-bottom:1px dotted #FFF; padding:5px 0; margin:5px; text-align: center;}
-.pack-price{border-top:1px dotted #FFF; padding:5px 0; margin:10px; text-align: center;}
+.pack-name, .pack-price{
+	padding:5px 0;
+	text-align: center;
+}
+.pack-name{border-bottom:1px dotted #FFF; margin:5px; color:#222; }
+.pack-price{border-top:1px dotted #FFF; margin:10px;}
 
 
 
@@ -143,4 +162,38 @@ table.package-list .list-footer{
 table.package-list th, table.package-list td{
 	background:#007DC3;
 	margin:10px; padding:5px 2px;
+}
+
+
+
+/* Terms */
+#toc{
+	text-shadow:none; 
+	margin-top:-20px;
+/* 	border:1px solid #CCC;  */
+	border-radius:0 0 5px 5px; 
+	padding:10px 0; 
+/* 	background:rgba(255,255,255,.85); */
+	background:#222;
+}
+
+#cs-support{text-align:center; width:30%; margin:40px 20px 20px 20px;}
+#cs-support *{color:#FFF;}
+#terms{margin:40px 20px 20px 20px; font-size:12px; width:500px; color:#FFF; float:left;}
+#terms ul{margin-left:20px;}
+#terms ul li{list-style-type:square;}
+
+
+
+
+/* Bundle Widget */
+#bundle.pack-container{
+	background:none;
+	color:#FFF;
+}
+
+#bundle.pack-container #widget-container{
+	margin:0 40px;
+	background: #0BC4EE;
+	border-radius:5px;
 }

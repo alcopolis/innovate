@@ -93,7 +93,7 @@ class Admin extends Admin_Controller {
 			
 			
 			// Prepare form data
-			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'terms', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
 				
 			//create slug
 			$tmp = strtolower($this->input->post('name'));
@@ -159,7 +159,7 @@ class Admin extends Admin_Controller {
 			$parent_data;
 			
 			// Prepare form data
-			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'terms', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
 			
 			//create slug
 			$tmp = strtolower($this->input->post('name'));

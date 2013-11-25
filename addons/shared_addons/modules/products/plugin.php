@@ -98,6 +98,23 @@ class Plugin_Products extends Plugin
 								),
 						),
 				),
+				
+				'widget' => array(
+					'description' => array(// a single sentence to explain the purpose of this method
+						'en' => ''
+					),
+					'single' => true,// will it work as a single tag?
+					'double' => false,// how about as a double tag?
+					'variables' => '',// list all variables available inside the double tag. Separate them|like|this
+					'attributes' => array(
+						'name' => array(// this is the name="World" attribute
+								'type' => 'text',// Can be: slug, number, flag, text, array, any.
+								'flags' => '',// flags are predefined values like asc|desc|random.
+								'default' => '',// this attribute defaults to this if no value is given
+								'required' => false,// is this attribute required?
+								),
+						),
+				),
 		);
 	
 		return $info;
@@ -106,9 +123,51 @@ class Plugin_Products extends Plugin
 	public function __construct()
 	{	
 		$this->load->model('products_m');
-	}	
-	
+		$this->load->model('packages_m');
+	}
 
+	
+	
+	function widget()
+	{
+		$discount = 0.1;
+		$prod_id = array(1,2);
+		$data = '<div id="bundle-pack" class="left clearfix" style="border-right:1px dotted #FFF;">';
+		
+		foreach($prod_id as $id){
+			$prod = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
+			$curr_packs = $this->packages_m->get_packages_by('id, name, slug, price', array('prod_id'=>$id, 'cat'=>'basic'));
+			
+			$data .= '<div class="left" style="margin:20px"><h6>' . $prod->name . '</h6>';
+			
+			$data .= '<div class="choice" style="margin-top:10px;">';
+			
+			foreach($curr_packs as $p){
+				$rad_data = array(
+							'id' => $p->slug,
+							'name' => $p->slug,
+							'value' => $p->price,
+						);
+						
+				$data .= form_radio($rad_data) . ' ' . $p->name . '<br/>';
+			}
+			
+			$data .= '</div></div>';
+		}
+		
+		$data .= '</div>';
+		
+		$data .= '<div class="left" style="text-align:center; padding:40px; font-size:3em; font-weight:bold;">Rp 300.000</div>';
+		
+		return $data;
+	}
+	
+	
+	
+	
+	
+	
+	
 	public function js()
 	{	
  		$prod = $this->products_m->get_product_by(NULL, array('slug'=>$this->attribute('value')), true);
@@ -164,7 +223,7 @@ class Plugin_Products extends Plugin
 		if($display == 'popup' || $display == 'link'){
 			return '<a class="attch-' . $display . '" href="{{url:site}}uploads/default/files/' . $files->filename . '" data-mimetype="' . $mimetype . '">' . $files->name . '</a>';
 		}else{
-			
+			//embed files to the page
 		}
 	}
 }

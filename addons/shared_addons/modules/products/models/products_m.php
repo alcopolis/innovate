@@ -45,6 +45,7 @@ class Products_m extends MY_Model
 		$prod->slug = '';
 		$prod->overview = '';
 		$prod->body = '';
+		$prod->terms = '';
 		
 		$prod->tags = '';
 		$prod->files = '';

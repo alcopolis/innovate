@@ -43,18 +43,14 @@
 										<?php foreach($packages as $pack){ ?>
 											<li><a href="#<?php echo $pack['data']->slug; ?>"><?php echo $pack['data']->name; ?></a></li>
 										<?php } ?>
+										
+										<li class="bundle-nav"><a href="#bundle">Bundle</a></li>
 									</ul>
 									
 									<?php foreach($packages as $pack){ ?>
 										<div id="<?php echo $pack['data']->slug; ?>" class="pack-container clearfix">
 											<div class="data left">
 												<?php echo $pack['data']->body; ?>
-												<div id="cs-support" style="color:#007DC3; text-align:center; border:1px solid #CCC; border-radius:5px; padding:10px 0;">
-													<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
-													<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
-													Hubungi Customer Care Kami</p>
-													<h3 style="padding:0;">[021] 3199 8600</h3>
-												</div>
 											</div>
 											<div class="packs right clearfix">
 												<?php foreach($pack['pack'] as $p){ ?>
@@ -67,8 +63,31 @@
 											</div>
 										</div>
 									<?php } ?>
+									
+									<div id="bundle" class="pack-container">
+										<p style="margin:0 40px; color:#717174;">Pilih layanan yang anda inginkan untuk melihat harga paket bundle</p>
+										<div id="widget-container" class="clearfix">
+											{{ products:widget }}
+										</div>
+									</div>
 								</div>
 							<?php } ?>	
+							
+							<div id="toc" class="clearfix">
+								<div id="cs-support" class="left">
+									<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
+									<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
+									Hubungi Customer Care Kami</p>
+									<h3 style="padding:0;">[021] 3199 8600</h3>
+								</div>
+								
+								<?php if($product->terms != NULL){ ?>
+									<div id="terms" class="left">
+										<h6>Syarat &amp; Ketentuan</h6>
+										<?php echo $product->terms; ?>	
+									</div>
+								<?php } ?>
+							</div>
 						</div>
 					</div>
 				<?php } ?>

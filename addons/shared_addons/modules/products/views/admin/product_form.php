@@ -97,6 +97,20 @@
 									<?php echo form_textarea(array('id' => 'body', 'value' => set_value('body', $prod->body), 'name' => 'body', 'rows' => 30, 'class' => $page->editor_type)) ?>
 								</div>
 							</li>
+							
+							<li class="editor">
+								<label for="terms">Terms &amp; Condition</label><br>
+								<div class="input small-side">
+									<?php echo form_dropdown('editor_type', array(
+										'html' => 'html',
+										'wysiwyg-simple' => 'wysiwyg-simple',
+										'wysiwyg-advanced' => 'wysiwyg-advanced',
+									), 'wysiwyg-simple') ?>
+								</div>
+								<div class="edit-content">
+									<?php echo form_textarea(array('id' => 'terms', 'value' => set_value('terms', $prod->terms), 'name' => 'terms', 'rows' => 10, 'class' => 'wysiwyg-simple')) ?>
+								</div>
+							</li>
 						</ul>
 					</fieldset>
 				</div>
