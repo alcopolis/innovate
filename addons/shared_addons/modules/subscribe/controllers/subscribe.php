@@ -38,8 +38,8 @@ class Subscribe extends Public_Controller
 		$this->form_validation->set_message('is_unique','You have been signed up with this %s');
 
 		$this->packages = new stdClass();
-		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group'=>'Super Cepat'), FALSE), 'Internet');
-		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group'=>'Starter'), FALSE), 'Televisi');
+		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id'=>'Super Cepat'), FALSE), 'Internet');
+		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id'=>'Starter'), FALSE), 'Televisi');
 	}
 	
 	private function packages_result($data, $info){

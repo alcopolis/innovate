@@ -133,31 +133,36 @@ class Plugin_Products extends Plugin
 		$discount = 0.1;
 		$prod_id = array(1,2);
 		$data = '<div id="bundle-pack" class="left clearfix" style="border-right:1px dotted #FFF;">';
+		$i = 1;
 		
 		foreach($prod_id as $id){
 			$prod = $this->products_m->get_product_by(NULL, array('id'=>$id), TRUE);
 			$curr_packs = $this->packages_m->get_packages_by('id, name, slug, price', array('prod_id'=>$id, 'cat'=>'basic'));
 			
 			$data .= '<div class="left" style="margin:20px"><h6>' . $prod->name . '</h6>';
-			
-			$data .= '<div class="choice" style="margin-top:10px;">';
+			$data .= '<div id="' . $prod->slug . '" class="choice" style="margin-top:10px;">';
 			
 			foreach($curr_packs as $p){
 				$rad_data = array(
 							'id' => $p->slug,
-							'name' => $p->slug,
-							'value' => $p->price,
+							'name' => $prod->slug,
+							'value' => $p->id,
+							'data-price' => $p->price,
 						);
 						
-				$data .= form_radio($rad_data) . ' ' . $p->name . '<br/>';
+				$data .= '<div>' . form_radio($rad_data) . ' <label for="' . $p->slug . '">' . $p->name . '</label></div>';
 			}
 			
 			$data .= '</div></div>';
+			
+			$i++;
 		}
 		
 		$data .= '</div>';
 		
-		$data .= '<div class="left" style="text-align:center; padding:40px; font-size:3em; font-weight:bold;">Rp 300.000</div>';
+		$data .= '<div id="pack-info" class="hide left" style="text-align:center; padding:40px; font-size:3em; font-weight:bold;">';
+		$data .= '<div id="price"></div>';
+		$data .= '</div>';
 		
 		return $data;
 	}
