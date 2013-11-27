@@ -94,10 +94,27 @@ class Admin extends Admin_Controller {
 			
 			// Prepare form data
 			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'terms', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
-				
+
+			
+			//set bundle data
+			$bundle = array(
+						'status' => $this->input->post('bundle_status'),
+						'type' => $this->input->post('bundle_type'),
+						'body' => $this->input->post('bundle_body'),
+					);
+			
+			$this->form_data['bundle'] = json_encode($bundle);
+			
+			
+			
+			
 			//create slug
 			$tmp = strtolower($this->input->post('name'));
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
+			
+			//Date created
+			$d = new DateTime();
+			$this->form_data['created_on'] = $d->getTimestamp();
 			
 			//set parent data and folder if parent_id != 0
 			$files_tmp = array();
@@ -164,6 +181,21 @@ class Admin extends Admin_Controller {
 			//create slug
 			$tmp = strtolower($this->input->post('name'));
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
+			
+			//Date modified
+			$d = new DateTime();
+			$this->form_data['modified_on'] = $d->getTimestamp();
+			
+			//set bundle data
+			$bundle = array(
+					'status' => $this->input->post('bundle_status'),
+					'type' => $this->input->post('bundle_type'),
+					'body' => $this->input->post('bundle_body'),
+			);
+				
+			$this->form_data['bundle'] = json_encode($bundle);
+			
+			
 				
 			//set parent data and folder if parent_id != 0
 			$files_tmp = json_decode($this->prod_data->files);
@@ -194,6 +226,8 @@ class Admin extends Admin_Controller {
 		}
 		
 		
+		//get bundle data
+		$bundle = json_decode($this->prod_data->bundle);
 		
 		
 		//Set Parent Product
@@ -220,7 +254,7 @@ class Admin extends Admin_Controller {
 			}
 		}
 		
-		$this->render('admin/product_form', array('parent'=>$parent_list, 'poster'=>$files['poster'], 'attachment'=>$stored_attch));
+		$this->render('admin/product_form', array('parent'=>$parent_list, 'poster'=>$files['poster'], 'attachment'=>$stored_attch, 'bundle'=>$bundle));
 
 	}
 	

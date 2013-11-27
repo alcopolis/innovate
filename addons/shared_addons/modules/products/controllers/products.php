@@ -51,11 +51,16 @@ class Products extends Public_Controller
 			$files_cont = json_decode($this->product->files, true);
 			$poster = $files_cont['poster'];
 			$files = $files_cont['attch'];
+			
+			//get bundle data
+			$bundle = json_decode($this->product->bundle);
+			
 			$data = array(
 					'product' => $this->product,
 					'poster' => $poster,
 					'files' => $files,
-					'packages' => $this->pack
+					'packages' => $this->pack,
+					'bundle' => $bundle
 			);
 			
 			$this->render('products', $data);

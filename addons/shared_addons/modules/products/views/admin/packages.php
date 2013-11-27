@@ -41,7 +41,7 @@
 										echo '<td class="align-center">' . $row->prod_id . '</td>';
 										echo '<td class="align-center">' . number_format(intval($row->price)) . '</td>';
 										echo '<td class="align-center">' . $row->cat . '</td>';
-										echo '<td class="align-center">' . $row->group . '</td>';
+										echo '<td class="align-center">' . $row->group_id . '</td>';
 										echo '<td class="align-center"><a class="btn blue" href="admin/products/packages/edit/' . $row->id . '">Edit</a> &nbsp; Delete</td>';
 									?>
 								</tr>

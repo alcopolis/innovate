@@ -16,10 +16,16 @@
 			
 			<!-- Render Product list  -->
 			
+			<div id="page-data" style="margin-bottom:20px;">
+				<div id="created-on">Created on: <?php echo date('d-m-Y', $prod->created_on) ?></div>
+				<div id="modified">Last Modified: <?php echo date('d-m-Y h:i:s', $prod->modified_on) ?></div>
+			</div>
+			
 			<div class="tabs">
 				<ul class="tab-menu">
 					<li><a href="#product-content-fields"><span>Content</span></a></li>
 					<?php if($page->action == 'edit'){ ?>
+						<li><a href="#product-bundle"><span>Bundle</span></a></li>
 						<li><a href="#product-attachment"><span>Attachment</span></a></li>
 						<li><a href="#product-packages-fields"><span>Packages</span></a></li>
 					<?php } ?>					
@@ -117,6 +123,36 @@
 				
 				
 				<?php if($page->action == 'edit'){ ?>
+					<div class="form_inputs" id="product-bundle">
+						<fieldset>
+							<ul>
+								<li>
+									<div><?php echo form_checkbox('bundle_status', $bundle->status, set_value('bundle_status', $bundle->status)); ?> <label for="bundle_status">Add Bundle Tab</label></div>
+									
+									<div class="input small-side clearfix" style="margin-top:10px;">
+										<label for="bundle_type">Type</label><br>
+										<?php echo form_dropdown('bundle_type', array(
+											'default' => 'Default',
+											'custom' => 'Custom',
+										), $bundle->type) ?>
+									</div>
+								</li>
+								<li>
+									<div class="input small-side">
+										<?php echo form_dropdown('editor_type', array(
+											'html' => 'html',
+											'wysiwyg-simple' => 'wysiwyg-simple',
+											'wysiwyg-advanced' => 'wysiwyg-advanced',
+										), 'wysiwyg-advanced') ?>
+									</div>
+									<div class="edit-content">
+										<?php echo form_textarea(array('id' => 'bundle_body', 'value' => set_value('bundle_body', $bundle->body), 'name' => 'bundle_body', 'rows' => 10, 'class' => 'wysiwyg-advanced')) ?>
+									</div>
+								</li>
+							</ul>
+						</fieldset>
+					</div>
+					
 					<div class="form_inputs" id="product-attachment">
 						<fieldset>
 							<ul>

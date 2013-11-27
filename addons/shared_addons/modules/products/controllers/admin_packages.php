@@ -22,7 +22,7 @@ class Admin_Packages extends Admin_Controller {
 		$this->packages_data = new stdClass();
 		$this->page_data->section = $this->section;
 		$this->page_data->post_type = 'wysiwyg-simple';
-		$this->data_filter = array('name', 'slug', 'price', 'body', 'group');
+		$this->data_filter = array('name', 'slug', 'price', 'body', 'group_id');
 	
 		$this->load->model('packages_m');
 		$this->load->model('products_m');
@@ -67,8 +67,8 @@ class Admin_Packages extends Admin_Controller {
 		
 		array_push($this->data_filter, 'prod_id');
 		
-		$this->rules['name']['rules'] = 'trim|required|is_unique[inn_products_packages_copy.name]|xss_clean';
-		$this->rules['slug']['rules'] = 'trim|required|is_unique[inn_products_packages_copy.slug]|xss_clean';
+		$this->rules['name']['rules'] = 'trim|required|is_unique[inn_products_packages.name]|xss_clean';
+		$this->rules['slug']['rules'] = 'trim|required|is_unique[inn_products_packages.slug]|xss_clean';
 		$this->form_validation->set_rules($this->rules);
 		
 		
@@ -90,7 +90,7 @@ class Admin_Packages extends Admin_Controller {
 		
 		$this->packages_data->name = '';
 		$this->packages_data->slug = '';
-		$this->packages_data->group = '';
+		$this->packages_data->group_id = '';
 		$this->packages_data->price = '';
 		$this->packages_data->body = '';
 		

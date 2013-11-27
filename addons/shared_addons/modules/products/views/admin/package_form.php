@@ -51,7 +51,7 @@
 									<br/>
 									
 									<label for="package_group">Group <span></span></label>
-									<div class="input"><?php echo form_input('group', set_value('group', $packages_data->group)) ?></div>
+									<div class="input"><?php echo form_input('group_id', set_value('group_id', $packages_data->group_id)) ?></div>
 									
 									<br/>
 									

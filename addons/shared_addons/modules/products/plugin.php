@@ -132,7 +132,7 @@ class Plugin_Products extends Plugin
 	{
 		$discount = 0.1;
 		$prod_id = array(1,2);
-		$data = '<div id="bundle-pack" class="left clearfix" style="border-right:1px dotted #FFF;">';
+		$data = '<div id="bundle-pack" class="left clearfix" style="border-right:1px dotted #FFF; width:40%;">';
 		$i = 1;
 		
 		foreach($prod_id as $id){
@@ -160,8 +160,10 @@ class Plugin_Products extends Plugin
 		
 		$data .= '</div>';
 		
-		$data .= '<div id="pack-info" class="hide left" style="text-align:center; padding:40px; font-size:3em; font-weight:bold;">';
-		$data .= '<div id="price"></div>';
+		$data .= '<div id="pack-info" class="hide left" style="margin:20px; text-align:center;; width:40%;">';
+		$data .= '<div id="title" style="font-size:1.25em;"></div>';
+		$data .= '<div id="price" style="font-size:3em; font-weight:bold; margin:20px 0 40px 0;"></div>';
+		$data .= '<div id="subscribe" class="btn" style=""><a href="subscribe" style="background:#007DC3; color:#FFF; padding:5px; border-radius:5px;">Daftar Sekarang</a></div>';
 		$data .= '</div>';
 		
 		return $data;

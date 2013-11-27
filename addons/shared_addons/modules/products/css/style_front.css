@@ -49,8 +49,8 @@ body.product .content-wrapper {
 #prod-content #body-wrapper{
 	position:relative;
 	max-width:1024px;
-	margin: 0 auto;
-	padding:40px 0;	
+	margin: 0px auto;
+/* 	padding:40px 0;	 */
 }
 
 
@@ -169,15 +169,16 @@ table.package-list th, table.package-list td{
 /* Terms */
 #toc{
 	text-shadow:none; 
-	margin-top:-20px;
+	margin:-20px auto 0 auto;
 /* 	border:1px solid #CCC;  */
 	border-radius:0 0 5px 5px; 
 	padding:10px 0; 
 /* 	background:rgba(255,255,255,.85); */
 	background:#222;
+	width:98%;
 }
 
-#cs-support{text-align:center; width:30%; margin:40px 20px 20px 20px;}
+#cs-support{text-align:center; width:25%; margin:40px 20px 20px 20px;}
 #cs-support *{color:#FFF;}
 #terms{margin:40px 20px 20px 20px; font-size:12px; width:500px; color:#FFF; float:left;}
 #terms ul{margin-left:20px;}
@@ -187,13 +188,18 @@ table.package-list th, table.package-list td{
 
 
 /* Bundle Widget */
+#prod-content #bundle{height:auto;}
 #bundle.pack-container{
 	background:none;
 	color:#FFF;
+	margin-bottom:20px;
 }
 
-#bundle.pack-container #widget-container{
+#bundle.pack-container #container{
 	margin:0 40px;
-	background: #0BC4EE;
-	border-radius:5px;
 }
+
+#bundle.pack-container #container.bundle-default{background: #0BC4EE; border-radius:5px;}
+
+
+

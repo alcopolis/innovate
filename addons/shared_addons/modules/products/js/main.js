@@ -2,6 +2,7 @@ var packPrice = new Array();
 var packCont = '';
 var net;
 var tv;
+var themeurl = 'addons/shared_addons/themes/innovate/';
 
 $(function(){
 	//Set Packages Container Height
@@ -82,12 +83,12 @@ $(function(){
 		}
 		
 		
-		if(net != 0 || tv != 0){
+		if(net != null && tv != null){
 			$('#pack-info').show();
 
 			var title = '';
-			var desc = '';
-			var add = '';
+//			var desc = '';
+//			var add = '';
 			var price = '';
 			
 			$.ajax({
@@ -95,23 +96,22 @@ $(function(){
 				url: 'subscribe/pack_info/?net=' + net + '&tv=' + tv,
 				dataType: 'json',
 				success: 
-					function(respond) {			
-
+					function(respond) {	
+						var priceFormatted = '';
+					
 						price = (Number(respond.data.net.price) + Number(respond.data.tv.price)) * 0.9;
-						console.log(price);
-						if(respond.bundle){
-							title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.name + ' & ' + respond.data.tv.name;
-							desc = 'Paket bundle layanan ' + respond.data.net.name.toLowerCase() + ' ' + respond.data.net.body.toLowerCase() + ' + ' + respond.data.tv.body.toLowerCase();
-							add = '<small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>';
-						}else{
-							title = respond.data.name;
-							desc = respond.data.body;
-							add = '';
-						}
-
-						$('#pack-info #price').html('Rp ' + price);
-						//$('#pack-info #pack-desc').html(desc);
-						//$('#pack-info #additional-info').html(add);
+						accountingjs = themeurl + 'js/accounting.min.js'
+						
+						$.getScript(accountingjs, function() {
+							if(respond.bundle){
+								title = 'Internet ' + respond.data.net.name + ' & TV Starter ' + respond.data.tv.name;
+							}else{
+								title = respond.data.name;
+							}
+							
+							$('#pack-info #title').html(title);
+							$('#pack-info #price').html(accounting.formatMoney(price, "Rp ", 0, ".", ","));
+						});
 					},
 			});
 		}else{
@@ -120,6 +120,11 @@ $(function(){
 		}
 	});
 	
+	
+//	$('#subscribe a').click(function(e){
+//		e.preventDefault;
+//		
+//	})
 })
 
 

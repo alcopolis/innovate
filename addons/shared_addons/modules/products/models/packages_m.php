@@ -27,16 +27,16 @@ class Packages_m extends MY_Model
 			'price' => array(
 					'field' => 'price',
 					'label' => 'price',
-					'rules' => 'required|numeric',
+					'rules' => 'required',
 			),
 			'body' => array(
 					'field' => 'body',
 					'label' => 'body',
 					'rules' => 'xss_clean',
 			),
-			'group' => array(
-					'field' => 'group',
-					'label' => 'group',
+			'group_id' => array(
+					'field' => 'group_id',
+					'label' => 'group_id',
 					'rules' => 'xss_clean',
 			),
 		);
