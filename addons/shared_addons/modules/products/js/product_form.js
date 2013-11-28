@@ -122,3 +122,40 @@ function delete_attch(obj){
 		return false;
 	}
 }
+
+
+
+
+// ================================ Package Group Function ====================================== //
+
+function update_group(id){
+	var formData = new FormData($('#product-form')[0]);
+//	var name = $('[name="' + slug + '"]').val();
+//	var body = $('[name="' + slug + '-body"]').val();
+//
+//	console.log(body);
+	
+	$.ajax({
+		type: 'POST',
+		url: 'admin/products/update_pack_group/' + id,
+		processData: false,
+	    contentType: false,
+		data:formData,
+		dataType: 'json',
+		success: function(respond) {			
+			if(respond.status){
+				$('ul#group-'+id).find('div.msg').html('Your changes has been saved.').animate({
+													opacity: 1,
+													}, 2000, function() {
+														$(this).animate({
+															opacity:0,
+															},800, function(){
+														});
+												});
+			}else{
+				
+			}
+			
+		},
+	});
+}

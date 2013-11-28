@@ -36,6 +36,7 @@ class Admin extends Admin_Controller {
 		
 		$this->load->model('products_m');
 		$this->load->model('packages_m');
+		$this->load->model('packages_group_m');
 		$this->load->model('files/file_folders_m');
 		
 		$this->load->library('alcopolis');
@@ -95,18 +96,6 @@ class Admin extends Admin_Controller {
 			// Prepare form data
 			$this->form_data = $this->alcopolis->array_from_post(array('parent_id', 'name', 'overview', 'body', 'terms', 'section', 'tags', 'css', 'js', 'is_featured'), $this->input->post());
 
-			
-			//set bundle data
-			$bundle = array(
-						'status' => $this->input->post('bundle_status'),
-						'type' => $this->input->post('bundle_type'),
-						'body' => $this->input->post('bundle_body'),
-					);
-			
-			$this->form_data['bundle'] = json_encode($bundle);
-			
-			
-			
 			
 			//create slug
 			$tmp = strtolower($this->input->post('name'));
@@ -230,6 +219,10 @@ class Admin extends Admin_Controller {
 		$bundle = json_decode($this->prod_data->bundle);
 		
 		
+		//Packages group
+		$pack_group = $this->packages_group_m->get_group_by(array('prod_id'=>$id));
+		
+		
 		//Set Parent Product
 		$tmp = $this->products_m->get_product_by('id, name', array('parent_id'=>0),FALSE);
 		$parent_list[0] = 'No Parent';
@@ -254,7 +247,7 @@ class Admin extends Admin_Controller {
 			}
 		}
 		
-		$this->render('admin/product_form', array('parent'=>$parent_list, 'poster'=>$files['poster'], 'attachment'=>$stored_attch, 'bundle'=>$bundle));
+		$this->render('admin/product_form', array('parent'=>$parent_list, 'poster'=>$files['poster'], 'attachment'=>$stored_attch, 'bundle'=>$bundle, 'pack_group'=>$pack_group));
 
 	}
 	
@@ -418,6 +411,30 @@ class Admin extends Admin_Controller {
 	private function parse_files_json($id, $assoc = FALSE){
 		return json_decode($this->products_m->get_product_by('files', array('id'=>$id), TRUE)->files, $assoc);
 	}
+	
+	
+	
+	
+	
+	
+	// -------------------- Package Group Function --------------------------- //
+	public function update_pack_group($id){
+		$g = $this->packages_group_m->get_group_by(array('id'=>$id), TRUE, 'slug');
+
+		//get body content		
+		$data['body'] = trim($this->input->post( $g->slug . '-body'));
+		
+		$respond = array();
+		if($this->packages_group_m->update_group($id, $data)){
+			$respond['status'] = TRUE;
+		}else{
+			$respond['status'] = FALSE;
+		}
+		
+		echo json_encode($respond);
+	}
+	
+	
 	
 	
 	

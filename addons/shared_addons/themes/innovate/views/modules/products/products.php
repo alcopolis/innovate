@@ -34,7 +34,7 @@
 					<div id="ov-content"><?php echo $product->overview; ?></div>	
 				</div>
 				
-				
+				<?php if($product->body != NULL || $packages != NULL){ ?>
 				<div id="prod-content" class="clearfix">
 					<div id="body-wrapper">
 						<?php if($product->body != NULL){ ?>
@@ -105,6 +105,7 @@
 								<h3 style="padding:0;">[021] 3199 8600</h3>
 							</div>
 						</div>
+						<?php } ?>
 					</div>
 				</div>
 					

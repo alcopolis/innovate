@@ -1,7 +1,8 @@
 
 <div class="one_full">
-	<section class="title">
-		<h4><?php echo strtoupper($page->title) . ' | ' . $prod->name; ?></h4>
+	<section class="title clearfix">
+		<h4 class="left"><?php echo strtoupper($page->title) . ' | ' . $prod->name; ?></h4>
+		<div id="modified" class="right" style="margin-right:30px; color:#999"><strong><?php echo date('d M Y | h:i', $prod->modified_on) ?></strong> <em>(Last Modified)</em></div>
 	</section>
 	
 	<section class="item">
@@ -17,8 +18,7 @@
 			<!-- Render Product list  -->
 			
 			<div id="page-data" style="margin-bottom:20px;">
-				<div id="created-on">Created on: <?php echo date('d-m-Y', $prod->created_on) ?></div>
-				<div id="modified">Last Modified: <?php echo date('d-m-Y h:i:s', $prod->modified_on) ?></div>
+				<div id="created-on">Created on : <?php echo date('d M Y', $prod->created_on) ?></div>
 			</div>
 			
 			<div class="tabs">
@@ -27,6 +27,7 @@
 					<?php if($page->action == 'edit'){ ?>
 						<li><a href="#product-bundle"><span>Bundle</span></a></li>
 						<li><a href="#product-attachment"><span>Attachment</span></a></li>
+						<li><a href="#product-packages-group"><span>Packages Group</span></a></li>
 						<li><a href="#product-packages-fields"><span>Packages</span></a></li>
 					<?php } ?>					
 					<li><a href="#product-css-fields"><span>CSS</span></a></li>
@@ -123,110 +124,19 @@
 				
 				
 				<?php if($page->action == 'edit'){ ?>
+					<!-- Product Bundle Setting -->
 					<div class="form_inputs" id="product-bundle">
-						<fieldset>
-							<ul>
-								<li>
-									<div><?php echo form_checkbox('bundle_status', $bundle->status, set_value('bundle_status', $bundle->status)); ?> <label for="bundle_status">Add Bundle Tab</label></div>
-									
-									<div class="input small-side clearfix" style="margin-top:10px;">
-										<label for="bundle_type">Type</label><br>
-										<?php echo form_dropdown('bundle_type', array(
-											'default' => 'Default',
-											'custom' => 'Custom',
-										), $bundle->type) ?>
-									</div>
-								</li>
-								<li>
-									<div class="input small-side">
-										<?php echo form_dropdown('editor_type', array(
-											'html' => 'html',
-											'wysiwyg-simple' => 'wysiwyg-simple',
-											'wysiwyg-advanced' => 'wysiwyg-advanced',
-										), 'wysiwyg-advanced') ?>
-									</div>
-									<div class="edit-content">
-										<?php echo form_textarea(array('id' => 'bundle_body', 'value' => set_value('bundle_body', $bundle->body), 'name' => 'bundle_body', 'rows' => 10, 'class' => 'wysiwyg-advanced')) ?>
-									</div>
-								</li>
-							</ul>
-						</fieldset>
+						<?php $this->load->view('admin/partials/bundle', $bundle); ?>
 					</div>
 					
+					<!-- Product Attachment Files -->
 					<div class="form_inputs" id="product-attachment">
-						<fieldset>
-							<ul>
-								<li>
-									<label for="poster">Upload Poster</label>
-									<br/>
-									<div id="img-poster" style="width:100%; margin:10px 0;">
-										<?php if($poster != NULL){ ?>
-											<img style="width:300px;" src="<?php echo Files::$path . $poster['filename'];?>" title="<?php echo $poster['name']; ?>" />
-										<?php } ?>
-									</div>
-									<br/>
-									<div class="input" style="border:1px solid #EEE; border-radius:5px;">
-										<div class="msg-ajax"></div>
-										<?php echo form_upload('poster','','id="poster" style="margin:10px 5px 10px 10px;"'); ?> &nbsp; 
-										<a onclick="process_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Upload</a>
-									</div>
-								</li>
-								
-								<li>	
-									<label for="attachment">Add Attachment</label>
-									<div class="input" style="border:1px solid #EEE; border-radius:5px; margin-top:20px;">
-										<div class="msg-ajax"></div>
-										<?php echo form_upload('attch','','id="attch" style="margin:10px 5px 10px 10px;"'); ?> &nbsp; 
-										<?php echo form_input('attchname', '', 'id="attchname" placeholder="File Rename" style="margin:10px 10px 10px 5px;"'); ?> &nbsp;
-										
-										<div class="input small-side clearfix" style="margin:10px;">
-											<label for="attchdisptype">Display</label><br>
-											<?php echo form_dropdown('attchdisptype', array(
-												'attach' => 'Attach on Page',
-												'link' => 'URL Link',
-												'popup' => 'Pop-up Window',
-											), 'attach') ?>
-										</div>
-										<a onclick="process_attch(this);" class="button" style="margin:10px; padding:5px 10px 4px 10px;">Upload</a>
-									</div>
-									
-									<div id="attch-files" style="margin:20px 0;">
-										<?php if(count($attachment) > 0){ ?>
-											<table id="attch-list">
-												<thead>
-													<th>Name</th>
-													<th>Size</th>
-													<th>Type</th>
-													<th>Display</th>
-													<th></th>
-												</thead>
-												<tbody>
-												<?php foreach($attachment as $key=>$attch ){ ?>
-													<tr>
-														<td><?php echo $attch['data']->name; ?></td>
-														<td><?php
-																$size = intval($attch['data']->filesize);
-																if($size > 1024){ 
-																	echo round($size/1024) . ' MB';
-																}else{
-																	echo $size . ' KB';
-																}
-															?>
-														</td>
-														<td><?php echo $attch['data']->mimetype; ?></td>
-														<td><?php echo $attch['display']; ?></td>
-														<td><a data-key="<?php echo $key; ?>" onclick="delete_attch(this);" class="button" style="padding:5px 10px 4px 10px;">Delete</a></td>
-													</tr>
-												<?php } ?>
-												</tbody>
-											</table>
-										<?php }else{ ?>
-											<div id="no-data">No Attachment</div>
-										<?php } ?>	
-									</div>
-								</li>
-							</ul>
-						</fieldset>
+						<?php $this->load->view('admin/partials/attachment', array($poster, $attachment)); ?>
+					</div>
+					
+					<!-- Package Group tab -->
+					<div class="form_inputs" id="product-packages-group">
+						<?php $this->load->view('admin/partials/package_group', $pack_group); ?>
 					</div>
 					
 					<!-- Product package tab -->
