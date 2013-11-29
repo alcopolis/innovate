@@ -163,7 +163,7 @@ class Plugin_Products extends Plugin
 		$data .= '<div id="pack-info" class="hide left" style="margin:20px; text-align:center;; width:40%;">';
 		$data .= '<div id="title" style="font-size:1.25em;"></div>';
 		$data .= '<div id="price" style="font-size:3em; font-weight:bold; margin:20px 0 40px 0;"></div>';
-		$data .= '<div id="subscribe" class="btn" style=""><a href="subscribe" style="background:#007DC3; color:#FFF; padding:5px; border-radius:5px;">Daftar Sekarang</a></div>';
+		$data .= '<div id="subscribe" class="btn" style=""><a href="subscribe/bundle/" style="background:#007DC3; color:#FFF; padding:5px; border-radius:5px;">Daftar Sekarang</a></div>';
 		$data .= '</div>';
 		
 		return $data;

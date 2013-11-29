@@ -73,16 +73,16 @@
 										<div class="" style="margin:20px 20px 40px 20px;">
 											<label for="packages" style="font-size:16px;"><em>Paket Layanan Innovate</em></label>
 											<br/><small>Pilih layanan internet dan televisi untuk melanjutkan proses pendaftaran.</small><br/><br/>
-											<?php echo form_dropdown('packages-net', $packages->inet, $packages->inet[0], 'class="packages"') ?>
+											<?php echo form_dropdown('packages-net', $packages->inet, $pack_config['net'], 'class="packages"') ?>
 											&nbsp; &amp; &nbsp;
-											<?php echo form_dropdown('packages-tv', $packages->tv, $packages->inet[0], 'class="packages"') ?>
+											<?php echo form_dropdown('packages-tv', $packages->tv, $pack_config['tv'], 'class="packages"') ?>
 											<div id="pack-info">
-												<div id="pack-name"></div>
-												<div id="pack-desc"></div>
-												<div id="additional-info"></div>
+												<div id="pack-name"><?php echo isset($pack_title) ? $pack_title : ''; ?></div>
+												<div id="pack-desc"><?php echo isset($pack_desc) ? $pack_desc : ''; ?></div>
+												<div id="additional-info"><?php echo isset($pack_add) ? $pack_add : ''; ?></div>
 											</div>
 										</div>
-										<div class="input" style="margin:60px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
+										<div class="input" style="margin:30px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
 									</div>
 								</li>
 							</ul>

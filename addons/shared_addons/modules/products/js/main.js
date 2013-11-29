@@ -74,21 +74,20 @@ $(function(){
 	
 	
 	//Bundle widget
+	var subscribe_btn_url = $('#pack-info #subscribe a').attr('href');
+	
 	$(':radio').click(function(){
 		
 		if($(this).attr('name') == 'internet-super-cepat'){
-			net = $(this).val();
+			net = $(this).val();		
 		}else if($(this).attr('name') == 'interactive-tv'){
 			tv = $(this).val();
 		}
-		
 		
 		if(net != null && tv != null){
 			$('#pack-info').show();
 
 			var title = '';
-//			var desc = '';
-//			var add = '';
 			var price = '';
 			
 			$.ajax({
@@ -110,7 +109,10 @@ $(function(){
 							}
 							
 							$('#pack-info #title').html(title);
-							$('#pack-info #price').html(accounting.formatMoney(price, "Rp ", 0, ".", ","));
+							$('#pack-info #price').html(accounting.formatMoney(price, "Rp ", 0, ".", ","));	
+							
+							url = subscribe_btn_url + '?net=' + net + '&tv=' + tv;
+							$('#pack-info #subscribe a').attr('href', url);
 						});
 					},
 			});
@@ -123,6 +125,7 @@ $(function(){
 	
 //	$('#subscribe a').click(function(e){
 //		e.preventDefault;
+//		url = $(this).attr('href');
 //		
 //	})
 })

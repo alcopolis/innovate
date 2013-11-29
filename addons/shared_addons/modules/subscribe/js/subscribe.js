@@ -41,4 +41,10 @@ $(document).ready(function(){
 		}
 	});
 	
+	
+	
+	if($('#pack-name').html() != '' || $('#pack-desc').html() != ''){
+		$('#pack-info').css('display', 'block');
+	}
+	
 });

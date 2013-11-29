@@ -38,33 +38,40 @@ class Subscribe extends Public_Controller
 		$this->form_validation->set_message('is_unique','You have been signed up with this %s');
 
 		$this->packages = new stdClass();
-		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id'=>'1'), FALSE), 'Internet');
-		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id'=>'2'), FALSE), 'Televisi');
+		$this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id'=>'1'), FALSE), 'Internet Super Cepat');
+		$this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id'=>'2'), FALSE), 'Televisi Starter');
 	}
 	
 	private function packages_result($data, $info){
 		$arr = array();
 		
-		$arr[0] = '- Paket ' . $info . ' -';
+		$arr[0] = '- ' . $info . ' -';
 		foreach($data as $d){
 			$arr[$d->id] = $d->name;
 		}
+		
+		//var_dump($arr);
 		return $arr;
 	}
 	
 	
-	function render($view){
+	function render($view, $var){
 		$this->template
 		->title($this->module_details['name'])
 		->append_css('module::subscribe.css')
 		->append_js('module::subscribe.js')
 		->set('subscriber', $this->subscriber)
 		->set('packages', $this->packages)
+		->set($var)
 		->build($view);
 	}
 	
 	
 	public function index(){
+		$pack_config = array(
+				'net'=>0,
+				'tv'=>0
+			);
 		
 		if($this->form_validation->run()){
 			$pack = '';
@@ -127,13 +134,38 @@ class Subscribe extends Public_Controller
 			
 		}else{
 			$this->subscriber = $this->subscribe_m->get_new();
-			$this->render('subscribe');
+			$this->render('subscribe', array('pack_config'=>$pack_config));
 		}
 	}
 	
 	
 	public function success(){
 		$this->render('success');
+	}
+	
+	
+	public function bundle(){
+		
+		$pack_config = array();
+		$packname = array();
+		$packbody = array();
+		
+		foreach ($this->input->get() as $key=>$val){
+			$pack_config[$key] = intval($val);
+			$temp = $this->packages_m->get_packages_by(NULL, array('id'=>$val), TRUE);
+			$packname[] = $temp->name;
+			$packbody[] = $temp->body;
+		}
+		
+		$var = array(
+				'pack_config' => $pack_config,
+				'pack_title' => '<span class="bundle">Bundle &raquo;</span> ' . $packname[0] . ' & ' . $packname[1],
+				'pack_desc' => 'Paket bundle layanan ' . $packname[0] . ' ' . $packbody[0] . ' & paket ' . $packname[1] . $packbody[1],
+				'pack_add' => '<small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>'
+		);
+		
+		$this->subscriber = $this->subscribe_m->get_new();
+		$this->render('subscribe', $var);
 	}
 	
 	
