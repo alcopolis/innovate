@@ -300,9 +300,7 @@ class Plugin_Epg extends Plugin
 		
 		shuffle($raw);
 		
-		//var_dump($raw);
-		
-		if(count($raw) > 0){
+		if(count($raw) >= intval($this->attribute('limit'))){
 			$mainswitch = false;
 			
 			$data = '<div class="mod-epg featured clearfix"><h4 class="rotate">' . $this->attribute('category') . '</h4>';
