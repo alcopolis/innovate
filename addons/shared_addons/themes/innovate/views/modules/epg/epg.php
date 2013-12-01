@@ -6,12 +6,6 @@
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
-	
-	<script>
-        $(document).ready(function(){
-            //$("#tdata").mCustomScrollbar();
-        });
-	</script>
 </head>
 
 <body id="top" class="epg">
@@ -62,9 +56,7 @@
 						<div id="social" class="tool">
 							<div id="addthis">
 								<!-- AddThis Button BEGIN -->
-								<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=300&amp;pubid=ra-524d3df91ec4307c"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a>
-								<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-								<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-524d3df91ec4307c"></script>
+								
 								<!-- AddThis Button END -->
 							</div>
 						</div>

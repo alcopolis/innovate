@@ -55,7 +55,7 @@ class Subscribe extends Public_Controller
 	}
 	
 	
-	function render($view, $var){
+	function render($view, $var = NULL){
 		$this->template
 		->title($this->module_details['name'])
 		->append_css('module::subscribe.css')
@@ -69,8 +69,8 @@ class Subscribe extends Public_Controller
 	
 	public function index(){
 		$pack_config = array(
-				'net'=>0,
-				'tv'=>0
+				'net'=>$this->input->post('packages-net'),
+				'tv'=>$this->input->post('packages-tv')
 			);
 		
 		if($this->form_validation->run()){
@@ -116,8 +116,8 @@ class Subscribe extends Public_Controller
 				$this->load->library('email');
 					
 				$this->email->from('admin@innovate-indonesia.com', 'Innovate Subscription System');
-				$this->email->to($this->SALES_EMAIL);
-				//$this->email->to('myseconddigitalmail@yahoo.com');
+				//$this->email->to($this->SALES_EMAIL);
+				$this->email->to('myseconddigitalmail@yahoo.com');
 				$this->email->cc('');
 				$this->email->bcc('');
 					
@@ -125,8 +125,6 @@ class Subscribe extends Public_Controller
 				$this->email->message($msg);
 					
 				$this->email->send();
-					
-				//echo $this->email->print_debugger();
 				
 				//Redirect
 				redirect('subscribe/success');

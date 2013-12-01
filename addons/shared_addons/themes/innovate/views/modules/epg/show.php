@@ -13,9 +13,11 @@
 			height:auto;:
 		}
 		
-		#background, #poster{
-			background-image:url('addons/shared_addons/modules/epg/upload/shows/<?php echo $shows->poster; ?>');
-		}
+		<?php if($shows->poster != ''){ ?>
+			#background, #poster{
+				background-image:url('addons/shared_addons/modules/epg/upload/shows/<?php echo $shows->poster; ?>');
+			}
+		<?php } ?>
 			
 		#show{
 			position: relative;
@@ -46,7 +48,9 @@
 				
 		<div id="content" class="wrapper clearfix">
 			<div id="body-wrapper">
-				<div id="background"></div>
+				<?php if($shows->poster != ''){ ?>
+					<div id="background"></div>
+				<?php } ?>
 				<div id="show">
 					<?php if($shows != NULL ){ ?>
 						<div id="head">
@@ -106,7 +110,9 @@
 										</div>
 									<?php } ?>
 									
-									<div class="ads detail" style="height:200px; background:#FFF;">Advertisment</div>
+									<?php if(isset($ads)){ ?>
+										<div class="ads detail" style="height:200px; background:#FFF;">Advertisment</div>
+									<?php } ?>
 								</div>
 					
 							</div>			

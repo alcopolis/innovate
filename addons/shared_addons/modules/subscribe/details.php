@@ -13,8 +13,10 @@ class Module_Subscribe extends Module {
 			'description' => array(
 				'en' => 'New Customer Subscription'
 			),
-			'backend' => TRUE,
-			'menu' => 'Subscription'
+			'frontend' => true,
+			'backend' => true,
+			'skip_xss' => true,
+			'menu' => 'content',
 		);
 	}
 

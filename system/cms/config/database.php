@@ -32,7 +32,7 @@
 */
 
 // Development
-
+// Local server
 $db[PYRO_DEVELOPMENT] = array(
 		'hostname'		=> 	'loker.cepat.net.id',
 		'username'		=> 	'root',
@@ -51,26 +51,25 @@ $db[PYRO_DEVELOPMENT] = array(
 		'stricton' 		=> TRUE,
 );
 
+// Hosting Server
+// $db[PYRO_DEVELOPMENT] = array(
+// 		'hostname'		=> 	'localhost',
+// 		'username'		=> 	'innovate_dbadmin',
+// 		'password'		=> 	'qu4tr02013',
+// 		'database'		=> 	'innovate_pyro',
+// 		'dbdriver' 		=> 	'mysql',
+// 		'dbprefix' 		=>	'',
+// 		'pconnect' 		=>	FALSE,
+// 		'db_debug' 		=>	TRUE,
+// 		'cache_on' 		=>	FALSE,
+// 		'char_set' 		=>	'utf8',
+// 		'dbcollat' 		=>	'utf8_unicode_ci',
+// 		'port' 	 		=>	'3306',
 
-/*
-$db[PYRO_DEVELOPMENT] = array(
-	'hostname'		=> 	'localhost',
-	'username'		=> 	'root',
-	'password'		=> 	'password',
-	'database'		=> 	'innovate',
-	'dbdriver' 		=> 	'mysqli',
-	'dbprefix' 		=>	'',
-	'pconnect' 		=>	FALSE,
-	'db_debug' 		=>	TRUE,
-	'cache_on' 		=>	FALSE,
-	'char_set' 		=>	'utf8',
-	'dbcollat' 		=>	'utf8_unicode_ci',
-	'port' 	 		=>	'3306',
+// 		// 'Tough love': Forces strict mode to test your app for best compatibility
+// 		'stricton' 		=> TRUE,
+// );
 
-	// 'Tough love': Forces strict mode to test your app for best compatibility
-	'stricton' 		=> TRUE,
-);
-*/
 
 
 // Staging
@@ -91,22 +90,6 @@ $db[PYRO_STAGING] = array(
 );
 */
 
-// Production
-/*
-$db[PYRO_PRODUCTION] = array(
-	'hostname'		=> 	'localhost',
-	'username'		=> 	'root',
-	'password'		=> 	'password',
-	'database'		=> 	'innovate',
-	'dbdriver' 		=> 	'mysqli',
-	'pconnect' 		=>	FALSE,
-	'db_debug' 		=>	FALSE,
-	'cache_on' 		=>	FALSE,
-	'char_set' 		=>	'utf8',
-	'dbcollat' 		=>	'utf8_unicode_ci',
-	'port' 	 		=>	'3306',
-);
-*/
 
 // Check the configuration group in use exists
 if ( ! array_key_exists(ENVIRONMENT, $db))

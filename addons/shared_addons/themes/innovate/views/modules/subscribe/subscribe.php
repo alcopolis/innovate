@@ -24,7 +24,7 @@
     				Innovate berhak secara sepihak menolak permohonan calon pelanggan.</p>
 				</div>
 				
-				<?php echo form_open($this->uri->uri_string(), 'id="subscriber-form" class="crud"'); ?>
+				<?php echo form_open('subscribe', 'id="subscriber-form" class="crud"'); ?>
 					<div id="form-container" class="left">
 						<h1>Pendaftaran Layanan Innovate</h1>
 						<div id="subscribe-form" class="form-input clearfix">

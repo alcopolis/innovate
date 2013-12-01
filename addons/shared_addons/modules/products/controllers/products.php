@@ -17,12 +17,10 @@ class Products extends Public_Controller
 		$this->load->model('products_m');
 		$this->load->model('packages_m');
 		$this->load->library('files/files');
-		
-		//$this->pack = stdClass();
 	}
 
 	
-	private function render($view, $var){
+	private function render($view, $var = NULL){
 		$this->template
 		->title($this->module_details['name'])
 		->append_js('module::main.js')
@@ -38,9 +36,7 @@ class Products extends Public_Controller
 		$pack_group_id = $this->packages_m->group_by('group_id')->order_by('id', 'ASC')->get_packages_by('group_id', array('prod_id' => $this->product->id));
 		$groups = array();
 		
-		foreach($pack_group_id as $pgi){
-			//$tes = $this->packages_m->get_group_by(array('id'=>'1'), TRUE);
-			
+		foreach($pack_group_id as $pgi){			
 			$this->pack[$pgi->group_id]['data'] = $this->packages_m->get_group_by(array('id' => $pgi->group_id), TRUE);
 			$this->pack[$pgi->group_id]['pack'] = $this->packages_m->order_by('id', 'ASC')->get_packages_by(NULL, array('prod_id' => $this->product->id, 'group_id' => $pgi->group_id));
 		}
