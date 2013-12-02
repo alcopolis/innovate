@@ -115,7 +115,7 @@ class Subscribe extends Public_Controller
 				
 				$this->load->library('email');
 					
-				$this->email->from('admin@innovate-indonesia.com', 'Innovate Subscription System');
+				$this->email->from('webmaster@innovate-indonesia.com', 'Innovate Subscription System');
 				//$this->email->to($this->SALES_EMAIL);
 				$this->email->to('myseconddigitalmail@yahoo.com');
 				$this->email->cc('');
@@ -199,49 +199,5 @@ class Subscribe extends Public_Controller
 		}
 		
 		echo json_encode($pack);
-	}
-		
-	
-	
-	//Validation callback
-// 	function _area_code($area){
-// 		$area = trim($area);
-// 		$match = '/^\(?[0-9]\)$/';
-// 		$replace = '/^\(?[0-9]\)$/';
-// 		$return = '$1';
-		
-// 		if (preg_match($match, $area)){
-// 			return preg_replace($replace, $return, $area);
-// 		} else {
-// 			$this->form_validation->set_message('_validate_area_code', 'Kode area tidak valid: ' . $area);
-// 			return false;
-// 		}
-// 	}
-	
-	
-// 	function _validate_phone_number($value){		
-// 		$value = trim($value);
-		
-// 		if(strlen($value) == 10){
-// 			$match = '/^\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{3}$/';
-// 			$replace = '/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/';
-// 		}elseif (strlen($value) == 11){
-// 			$match = '/^\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/';
-// 			$replace = '/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/';
-// 		}elseif (strlen($value) == 13){
-// 			$match = '/^\(?[0-9]{4}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{5}$/';
-// 			$replace = '/^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/';
-// 		}
-		
-// 		$return = '($1) $2$3';
-		
-// 		if (preg_match($match, $value)){
-// 			return preg_replace($replace, $return, $value);
-// 		} else {
-// 			$this->form_validation->set_message('_validate_phone_number', 'Format nomor telepon yang anda masukkan tidak valid: ' . $value);
-// 			return false;
-// 		}
-// 	}
-
-	
+	}	
 }

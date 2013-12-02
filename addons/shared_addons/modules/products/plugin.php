@@ -223,9 +223,12 @@ class Plugin_Products extends Plugin
 		
 		$temp = json_decode($this->products_m->get_product_by(NULL, array('slug'=>$prod_slug), true)->files);
 		
-		$files = FILES::get_file($temp->attch->$key->id)['data'];
+		$tmp = FILES::get_file($temp->attch->$key->id);
+		$files = $tmp['data'];
+		
 		$display = $temp->attch->$key->display;
-		$mimetype = explode('/', $files->mimetype)[1];
+		$tmp = explode('/', $files->mimetype);
+		$mimetype = $tmp[1];
 		
 		if($display == 'popup' || $display == 'link'){
 			return '<a class="attch-' . $display . '" href="{{url:site}}uploads/default/files/' . $files->filename . '" data-mimetype="' . $mimetype . '">' . $files->name . '</a>';
