@@ -228,7 +228,7 @@ class Plugin_Contact extends Plugin
 		$template           = $this->attribute('template', 'contact');
 		$autoreply_template = $this->attribute('auto-reply', false);
 		$lang               = $this->attribute('lang', Settings::get('site_lang'));
-		//$to               = $this->attribute('to', Settings::get('contact_email'));		
+		$to               	= $this->attribute('to', Settings::get('contact_email'));		
 		$from               = $this->attribute('from', Settings::get('server_email'));
 		$reply_to           = $this->attribute('reply-to');
 		$max_size           = $this->attribute('max-size', 10000);
@@ -244,7 +244,7 @@ class Plugin_Contact extends Plugin
 			$field_list['template'],
 			$field_list['auto-reply'],
 			$field_list['lang'],
-// 			$field_list['to'],
+ 			$field_list['to'],
 			$field_list['from'],
 			$field_list['reply-to'],
 			$field_list['max-size'],

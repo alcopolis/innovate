@@ -27,9 +27,9 @@ class Module_Subscribe extends Module {
 
 		$subscribe_table = array(
                         'id' => array(
-									  'type' => 'INT',
-									  'constraint' => '11',
-									  'auto_increment' => FALSE
+							  'type' => 'INT',
+							  'constraint' => '11',
+							  'auto_increment' => FALSE
 						),
 						'first_name' => array(
 								'type' => 'VARCHAR',
