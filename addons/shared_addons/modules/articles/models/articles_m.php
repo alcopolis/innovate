@@ -2,7 +2,7 @@
 
 class Articles_m extends MY_Model {
 	
-	protected $_table = 'inn_articles';
+	protected $_table = 'default_inn_articles';
 	
 	public $rules = array(
 			'title' => array(
@@ -50,11 +50,26 @@ class Articles_m extends MY_Model {
 	}
 	
 	
-	public function get_articles($fields = '', $single = FALSE){
+	public function get_articles($fields = NULL, $single = FALSE){
 		
+		if(isset($fields)){
+			$this->db->select($fields);
+		}
+		
+		$method = 'result';
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
+		}
+		
+		return $this->db->get($this->_table)->$method();
 	}
 	
 	public function get_articles_by($where = NULL, $fields, $single){
+		if(isset($where)){
+			$this->db->where($where);
+		}
 		$this->get_articles($fields, $single);
 	}
 }

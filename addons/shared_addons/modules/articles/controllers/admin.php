@@ -36,8 +36,13 @@ class Admin extends Admin_Controller
 	 * List all articles
 	 */
 	public function index()
-	{		
+	{	
+		$limit = 10;
 		
+		$pagination = create_pagination('admin/articles/index', $this->db->count_all('inn_articles'), $limit,4);
+		$arts = $this->articles_m->order_by('id','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
+		
+		$this->render('index', array('articles' => $arts, 'pagination' => $pagination));
 	}
 	
 	public function create()
@@ -56,6 +61,8 @@ class Admin extends Admin_Controller
 		}else{
 				
 		}
+		
+		$this->render('article_form', array('art' => $art, 'pagination' => $pagination));
 	}
 	
 	public function delete($id)
