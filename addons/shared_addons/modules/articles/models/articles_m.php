@@ -5,11 +5,11 @@ class Articles_m extends MY_Model {
 	protected $_table = 'default_inn_articles';
 	
 	public $_rules = array(
-			'title' => array(
-					'field' => 'title',
-					'label' => 'Title',
-					'rules' => 'trim|xss_clean|required|max_length[100]'
-			),
+// 			'title' => array(
+// 					'field' => 'title',
+// 					'label' => 'Title',
+// 					'rules' => 'trim|xss_clean|required|max_length[100]'
+// 			),
 			'teaser' => array(
 					'field' => 'teaser',
 					'label' => 'Teaser',

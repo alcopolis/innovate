@@ -51,6 +51,8 @@ $db[PYRO_DEVELOPMENT] = array(
 		'stricton' 		=> TRUE,
 );
 
+
+
 // Hosting Server
 // $db[PYRO_DEVELOPMENT] = array(
 // 		'hostname'		=> 	'localhost',

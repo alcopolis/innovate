@@ -63,6 +63,15 @@ class Admin extends Admin_Controller
 		$this->page_data->action = 'create';
 		$this->page_data->title = 'Add New Article';
 		
+		//Add Title field into validation rules
+		$this->articles_m->_rules['title'] = array(
+													'field' => 'title',
+													'label' => 'Title',
+													'rules' => 'trim|xss_clean|required|max_length[100]'
+											);
+		
+		$this->form_validation->set_rules($this->articles_m->_rules);
+		
 		if($this->form_validation->run()){			
 			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'teaser', 'body'), $this->input->post());
 			
@@ -105,10 +114,6 @@ class Admin extends Admin_Controller
 		
 		if($this->form_validation->run()){			
 			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'teaser', 'body'), $this->input->post());
-			
-			//create slug
-			$tmp = strtolower($this->input->post('title'));
-			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 			
 			//Date modified
 			$d = new DateTime();

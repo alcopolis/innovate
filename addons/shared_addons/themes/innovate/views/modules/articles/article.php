@@ -30,21 +30,25 @@
 				<?php if($art != NULL){ ?>
 					<div id="art-content">
 						<div id="body-wrapper" class="clearfix">
+							<section id="arts-section">
+								<?php echo $page->section; ?>
+							</section>
+							
 							<div id="arts-list" class="left" style="width:70%;">
-								<div class="article <?php echo $art->slug?>">
-									<div class="art art-title"><h1><?php echo $art->title; ?></h1></div>
-									<div class="art art-meta">
+								<article id="<?php echo $art->slug?>" class="full clearfix">
+									<div class="art-property art-title"><h1><?php echo $art->title; ?></h1></div>
+									<div class="art-property art-meta">
 										<small>
 											In <?php echo '<a href="articles/category/' . $art->category . '">' . ucfirst($art->category) . '</a>'?> Category | 
-											On <?php echo date('\<\a\ \h\r\e\f\=\"\a\r\t\i\c\l\e\s\/\a\r\c\h\i\v\e\d\/F\"\>F\<\/\a\>, jS Y', $art->created_on); ?>
+											<?php echo date('\<\a\ \h\r\e\f\=\"\a\r\t\i\c\l\e\s\/\a\r\c\h\i\v\e\d\/F\"\>F\<\/\a\>, jS Y', $art->created_on); ?>
 										</small>
 									</div>
 									
-									<div class="art art-teaser"><?php //echo $art->teaser; ?></div>
+									<img src=""/>									
 									
-									<div class="art art-content"><?php echo $art->body; ?></div>
+									<div class="art-property art-content"><?php echo $art->body; ?></div>
 									
-									<div class="art art-meta">
+									<div class="art-property art-meta">
 										<p>
 											<small>
 											<?php
@@ -61,10 +65,12 @@
 								</div>
 								
 								<div id="arts-pagination"><?php //echo $pagination['links']; ?></div>
-							</div>
+							</article>
 							
-							<div id="arts-side" class="right" style="width:25%; height:360px; background:#666;">
-							
+							<div id="arts-side" class="right" style="">
+								<div class="advertisement side" style="height:120px;">Advertisement</div>
+								<div id="events" class="side">Events</div>
+								<div id="archived" class="side">Archived</div>
 							</div>
 						</div>
 					</div>

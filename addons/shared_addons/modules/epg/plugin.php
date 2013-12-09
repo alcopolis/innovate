@@ -304,7 +304,7 @@ class Plugin_Epg extends Plugin
 			$mainswitch = false;
 			
 			$data = '<div class="mod-epg featured clearfix"><h4 class="rotate">' . $this->attribute('category') . '</h4>';
-			
+						
 			foreach($raw as $featured){
 				$ch = $this->epg_ch_m->get_channel($featured->channelid);
 							

@@ -7,7 +7,7 @@
  */
 class Articles extends Public_Controller
 {
-	
+	protected $page_data;
 	protected $articles;
 	
 	public function __construct()
@@ -15,40 +15,35 @@ class Articles extends Public_Controller
 		parent::__construct();
 		$this->load->model('articles_m');
 		
+		$this->page_data = new stdClass();
 		$this->articles = new stdClass();
 	}
 
 	
-	private function render($view, $var = NULL){
+	private function render($view, $page_title = 'Articles', $var = NULL){
 		$this->template
-		->title($this->module_details['name'])
+		->title($page_title)
 // 		->append_js('module::main.js')
-// 		->append_css('module::style_front.css')
+		->append_css('module::style_front.css')
+		->set('page', $this->page_data)
 		->set($var)
 		->build($view);
 	}
 	
 	public function index($slug = NULL){
-// 		$this->articles = $this->articles_m->get_articles();
-// 		$this->render('index', array('arts' => $this->articles));
-		
-		if(isset($slug)){
-			if(preg_match("/(\A[0-9]?\z)/", $slug)){
-				$limit = 2;
-				$pagination = create_pagination('articles/index', $this->db->count_all('inn_articles'), $limit,3);
-				$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
-	
-				$this->render('index', array('arts' => $this->articles, 'pagination' => $pagination));
-			}else{
-				$this->articles = $this->articles_m->get_articles_by(array('slug'=>$slug), NULL, TRUE);			
-				$this->render('article', array('art' => $this->articles));
-			}
+		if(isset($slug) && preg_match("/(\A[0-9]?\z)/", $slug) == FALSE){
+			$this->page_data->section = '<a href="articles">&laquo Recent News</a>';
+			
+			$this->articles = $this->articles_m->get_articles_by(array('slug'=>$slug), NULL, TRUE);
+			$this->render('article', $this->articles->title, array('art' => $this->articles));
 		}else{
 			$limit = 2;
-			$pagination = create_pagination('articles/index', $this->db->count_all('inn_articles'), $limit,3);
-			$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
+			$this->page_data->section = 'Recent News';
+			$pagination = create_pagination('articles', $this->db->count_all('inn_articles'), $limit,2);
 			
-			$this->render('index', array('arts' => $this->articles, 'pagination' => $pagination));
+			$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
+	
+			$this->render('index', $this->page_data->section, array('arts' => $this->articles, 'pagination' => $pagination));
 		}
 	}
 	

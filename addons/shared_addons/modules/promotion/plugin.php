@@ -49,15 +49,17 @@ class Plugin_Promotion extends Plugin
 	
 	function featured(){
 		$data = '';
-	
-		$raw = $this->promotion_m->get_promo();
 
+		$this->load->library('asset');
+		$this->asset->in_build();
+		
+		$raw = $this->promotion_m->get_promo();
+	
 		foreach($raw as $featured){
 			$poster = json_decode($featured->poster, true);
 
 			$data .= '<div class="promo" style="background:#FFF url(' . $poster['path'] . ') no-repeat top center">';
 			$data .= $featured->body;
-			//$data .= '<a href="promotion/view/' . $featured->slug . '">Learn more &raquo;</a>';
 			$data .= '</div>';
 		}
 		
