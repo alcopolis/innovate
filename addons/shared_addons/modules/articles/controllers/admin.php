@@ -11,6 +11,9 @@
 class Admin extends Admin_Controller
 {
 	protected $section = 'items';
+	
+	protected $page_data;
+	protected $form_data = array();
 
 	public function __construct()
 	{
@@ -18,14 +21,23 @@ class Admin extends Admin_Controller
 
 		// Load all the required classes
 		$this->load->model('articles_m');
-		
+		$this->load->library('alcopolis');
 		$this->load->library('form_validation');
+		
+		// Set our validation rules
+		$this->form_validation->set_rules($this->articles_m->_rules);
+		
+		//Init var
+		$this->page_data = new stdClass();
 	}
 	
 	
 	private function render($view, $var = NULL){
 		$this->template
 			->title($this->module_details['name'])
+			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+			->append_js('module::article_form.js')
+			->append_css('module::style.css')
 			->set($var)
 			->build($view);
 	}
@@ -45,24 +57,83 @@ class Admin extends Admin_Controller
 		$this->render('index', array('articles' => $arts, 'pagination' => $pagination));
 	}
 	
+	
 	public function create()
 	{
-		if($this->form_validation->run()){
+		$this->page_data->action = 'create';
+		$this->page_data->title = 'Add New Article';
+		
+		if($this->form_validation->run()){			
+			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'teaser', 'body'), $this->input->post());
 			
-		}else{
+			//create slug
+			$tmp = strtolower($this->input->post('title'));
+			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 			
+			//Date modified
+			$d = new DateTime();
+			$date = $d->getTimestamp();
+			$this->form_data['created_on'] = $date;
+			$this->form_data['modified_on'] = $date;
+			
+			
+			//insert data
+			$new_id = $this->articles_m->insert_art($this->form_data);
+			
+			if($this->input->post('btnAction') == 'save'){
+				redirect('admin/articles/edit/' . $new_id);
+			}elseif($this->input->post('btnAction') == 'save_exit'){
+				redirect('admin/articles');
+			}
 		}
+		
+		$art = $this->articles_m->add_new();
+		
+		$var = array(
+				'page' => $this->page_data,
+				'art' => $art,
+		);
+		
+		$this->render('article_form', $var);
 	}
 	
 	public function edit($id)
 	{
-		if($this->form_validation->run()){
-				
-		}else{
-				
+		$this->page_data->action = 'edit';
+		$this->page_data->title = 'Edit Article';
+		
+		
+		if($this->form_validation->run()){			
+			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'teaser', 'body'), $this->input->post());
+			
+			//create slug
+			$tmp = strtolower($this->input->post('title'));
+			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
+			
+			//Date modified
+			$d = new DateTime();
+			$this->form_data['modified_on'] = $d->getTimestamp();
+			
+			
+			//update data
+			$this->articles_m->update($id, $this->form_data);
+			
+			if($this->input->post('btnAction') == 'save_exit'){
+				redirect('admin/articles');
+			}
 		}
 		
-		$this->render('article_form', array('art' => $art, 'pagination' => $pagination));
+		
+		
+		$art = $this->articles_m->get_articles_by(array('id'=>$id), NULL, TRUE);
+		
+		$var = array(
+				'page' => $this->page_data,
+				'art' => $art, 
+			);
+		
+		$this->render('article_form', $var);
+		
 	}
 	
 	public function delete($id)

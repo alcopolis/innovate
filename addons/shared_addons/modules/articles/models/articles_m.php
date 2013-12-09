@@ -4,16 +4,16 @@ class Articles_m extends MY_Model {
 	
 	protected $_table = 'default_inn_articles';
 	
-	public $rules = array(
+	public $_rules = array(
 			'title' => array(
 					'field' => 'title',
 					'label' => 'Title',
 					'rules' => 'trim|xss_clean|required|max_length[100]'
 			),
-			'intro' => array(
-					'field' => 'intro',
-					'label' => 'Intro',
-					'rules' => 'trim|xss_clean|required|max_length[200]'
+			'teaser' => array(
+					'field' => 'teaser',
+					'label' => 'Teaser',
+					'rules' => 'trim|xss_clean|required|max_length[140]'
 			),
 			'body' => array(
 					'field' => 'body',
@@ -42,6 +42,7 @@ class Articles_m extends MY_Model {
 		$data = new stdClass();
 		
 		$data->title = '';
+		$data->teaser = '';
 		$data->body = '';
 		$data->created_on = '';
 		$data->modified_on = '';
@@ -51,7 +52,6 @@ class Articles_m extends MY_Model {
 	
 	
 	public function get_articles($fields = NULL, $single = FALSE){
-		
 		if(isset($fields)){
 			$this->db->select($fields);
 		}
@@ -66,10 +66,25 @@ class Articles_m extends MY_Model {
 		return $this->db->get($this->_table)->$method();
 	}
 	
-	public function get_articles_by($where = NULL, $fields, $single){
+	
+	public function get_articles_by($where = NULL, $fields = NULL, $single = NULL){
+		
 		if(isset($where)){
 			$this->db->where($where);
 		}
-		$this->get_articles($fields, $single);
+		
+		return $this->get_articles($fields, $single);
 	}
+	
+	
+	
+	//CRUD
+	public function insert_art($data){
+		if($this->db->insert($this->_table, $data)){
+			return $this->db->insert_id();
+		}else{
+			return FALSE;
+		}
+	}
+	
 }
