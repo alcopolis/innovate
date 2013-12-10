@@ -31,13 +31,14 @@ class Articles extends Public_Controller
 	}
 	
 	public function index($slug = NULL){
-		if(isset($slug) && preg_match("/(\A[0-9]?\z)/", $slug) == FALSE){
+		if(isset($slug) && preg_match("/(\A[0-9]+?\z)/", $slug) == FALSE){
 			$this->page_data->section = '<a href="articles">&laquo Recent News</a>';
 			
 			$this->articles = $this->articles_m->get_articles_by(array('slug'=>$slug), NULL, TRUE);
+			
 			$this->render('article', $this->articles->title, array('art' => $this->articles));
 		}else{
-			$limit = 2;
+			$limit = 3;
 			$this->page_data->section = 'Recent News';
 			$pagination = create_pagination('articles', $this->db->count_all('inn_articles'), $limit,2);
 			

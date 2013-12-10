@@ -28,3 +28,43 @@ $(function () {
 		} 
 	})
 })
+
+
+function addCategory(obj){
+	$('#new-cat-div').removeClass('hide');
+	//$('#new-cat-div input[type="button"]').click(function(){processCat($('#new-cat-div input[name="new_category"]').val())});
+	
+	var selectID = '#' + $(obj).siblings('select').attr('id');	
+	;
+	$('#new-cat-div input[type="button"]').click(function(){
+											word = $('#new-cat-div input[name="new_category"]').val();
+											processCat(word, selectID)
+										});
+}
+
+function processCat(word, container){
+	
+	selectOri = $(container);
+	//selectPyro = $(container + '_chzn');
+	selectPyro = $('.chzn-container .chzn-drop .chzn-results');
+
+	
+	
+	$.ajax({
+		type: 'GET',
+		url: 'admin/articles/add_category/',
+		processData: false,
+	    contentType: false,
+		data:'word=' + word,
+		dataType: 'json',
+		success: function(respond) {
+					console.log($(selectOri).length);
+					$(selectOri).append('<option>' + word + '</option>');
+					
+					tag = '<li class="active-result" id="">' + word + '</li>';
+					$(selectPyro).append(tag);
+					
+					//console.log($(selectPyro).length);
+				}
+	});
+}

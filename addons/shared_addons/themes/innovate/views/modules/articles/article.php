@@ -34,7 +34,7 @@
 								<?php echo $page->section; ?>
 							</section>
 							
-							<div id="arts-list" class="left" style="width:70%;">
+							<div id="arts-body" class="left">
 								<article id="<?php echo $art->slug?>" class="full clearfix">
 									<div class="art-property art-title"><h1><?php echo $art->title; ?></h1></div>
 									<div class="art-property art-meta">
@@ -42,9 +42,7 @@
 											In <?php echo '<a href="articles/category/' . $art->category . '">' . ucfirst($art->category) . '</a>'?> Category | 
 											<?php echo date('\<\a\ \h\r\e\f\=\"\a\r\t\i\c\l\e\s\/\a\r\c\h\i\v\e\d\/F\"\>F\<\/\a\>, jS Y', $art->created_on); ?>
 										</small>
-									</div>
-									
-									<img src=""/>									
+									</div>									
 									
 									<div class="art-property art-content"><?php echo $art->body; ?></div>
 									
@@ -67,7 +65,7 @@
 								<div id="arts-pagination"><?php //echo $pagination['links']; ?></div>
 							</article>
 							
-							<div id="arts-side" class="right" style="">
+							<div id="arts-side" class="right">
 								<div class="advertisement side" style="height:120px;">Advertisement</div>
 								<div id="events" class="side">Events</div>
 								<div id="archived" class="side">Archived</div>

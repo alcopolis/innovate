@@ -9,9 +9,7 @@
  */
 
 class Admin extends Admin_Controller
-{
-	protected $section = 'items';
-	
+{	
 	protected $page_data;
 	protected $form_data = array();
 
@@ -21,6 +19,7 @@ class Admin extends Admin_Controller
 
 		// Load all the required classes
 		$this->load->model('articles_m');
+		$this->load->model('articles_category_m');
 		$this->load->library('alcopolis');
 		$this->load->library('form_validation');
 		
@@ -129,12 +128,21 @@ class Admin extends Admin_Controller
 		}
 		
 		
-		
 		$art = $this->articles_m->get_articles_by(array('id'=>$id), NULL, TRUE);
+		
+		//Get category
+		$tmp = $this->articles_category_m->get_category();
+		$cats = array();
+		$cats[0] = '- Select Category -';
+		foreach($tmp as $cat){
+			$cats[] = $cat->name;
+		}
+		
 		
 		$var = array(
 				'page' => $this->page_data,
-				'art' => $art, 
+				'art' => $art,
+				'cats' => $cats, 
 			);
 		
 		$this->render('article_form', $var);
@@ -144,5 +152,15 @@ class Admin extends Admin_Controller
 	public function delete($id)
 	{
 		$this->articles_m->delete($id);
+	}
+	
+	
+	
+	//Tools
+	public function add_category(){
+		$term = $this->input->get('word');	
+		$respond['status'] = TRUE;
+		
+		echo json_encode($respond);
 	}
 }

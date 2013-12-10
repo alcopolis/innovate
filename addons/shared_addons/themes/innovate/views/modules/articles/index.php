@@ -28,7 +28,7 @@
 								<?php echo $page->section; ?>
 							</section>
 							
-							<div id="arts-list" class="left" style="width:70%;">
+							<div id="arts-body" class="left">
 								<?php foreach($arts as $art){ ?>
 									<article id="<?php echo $art->slug?>" class="clearfix">
 										<img class="left"/>
