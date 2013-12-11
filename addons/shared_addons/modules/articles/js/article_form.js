@@ -44,10 +44,23 @@ function addCategory(obj){
 
 function processCat(word, container){
 	
+	var delimiter = '_', start = 0, 
+    
+	
+	
 	selectOri = $(container);
-	//selectPyro = $(container + '_chzn');
-	selectPyro = $('.chzn-container .chzn-drop .chzn-results');
-
+	
+	container += '_chzn';
+	selectPyro = $(container);
+	
+	//Get Select Input List ID
+		itemID = $(selectPyro).find('li:last-child').attr('id');
+		tokens = itemID.split(delimiter).slice(start);
+		tokens.pop();
+		MasterID = tokens.join(delimiter) + '_';
+		
+		itemCounter = parseInt(itemID.slice(-1)) + 1;
+		//console.log(itemCounter, MasterID);
 	
 	
 	$.ajax({
@@ -58,11 +71,14 @@ function processCat(word, container){
 		data:'word=' + word,
 		dataType: 'json',
 		success: function(respond) {
-					console.log($(selectOri).length);
-					$(selectOri).append('<option>' + word + '</option>');
+					//console.log($(selectOri).length);
+					$(selectOri).find('option').attr('selected', false);
+					$(selectOri).append('<option selected="selected" value="' + itemCounter + '">' + word + '</option>');
 					
-					tag = '<li class="active-result" id="">' + word + '</li>';
-					$(selectPyro).append(tag);
+					$(selectPyro).find('li').removeClass('result-selected');
+					$(selectPyro).find('a.chzn-single span').html(word);
+					tag = '<li class="active-result result-selected" id="' + MasterID + itemCounter + '">' + word + '</li>';
+					$(selectPyro).find('ul').append(tag);
 					
 					//console.log($(selectPyro).length);
 				}
