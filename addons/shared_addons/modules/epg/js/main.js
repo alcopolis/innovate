@@ -90,7 +90,7 @@ $(document).ready(function(){
 	
 	if($('#epg').length > 0){
 		$('.channel').each(function(){
-			var temp = $(this).html().truncate(10, false, 'right', '');
+			var temp = $(this).html().truncate(15, false, 'right', '');
 			$(this).html(temp);
 		});
 		

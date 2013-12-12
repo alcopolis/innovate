@@ -25,7 +25,25 @@ $(document).ready(function() {
 			 captionAnimation: 'fade', 		 
 			 captionAnimationSpeed: 800, 	 
 			 bullets: true,			 
-			 bulletThumbs: false,
+			 bulletThumbs: true,
 			 fluid:true
 		});
+		
+		centerOrbitNav();
 });
+
+
+$(window).resize(function(){
+	centerOrbitNav();
+})
+
+
+function centerOrbitNav(){
+	//Centering orbit bullets position
+	winW = $(window).width();
+	bulW = $('.orbit-bullets').width();
+	
+	var bulLeft = (winW - bulW)/2 + 'px';
+	$('.orbit-bullets').css({'left': bulLeft, 'margin':'0'});
+	//console.log(bulLeft);
+}

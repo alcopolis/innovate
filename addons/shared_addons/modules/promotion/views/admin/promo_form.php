@@ -17,6 +17,7 @@
 				<div class="tabs">
 					<ul class="tab-menu">
 						<li><a href="#promo-content-fields"><span>Content</span></a></li>
+						<?php if($page->action == 'edit'){ ?><li><a href="#featured"><span>Featured Settings</span></a></li><?php } ?>
 						<li><a href="#category"><span>Category</span></a></li>
 						<li><a href="#promo-css-fields"><span>CSS</span></a></li>
 						<li><a href="#promo-js-fields"><span>Script</span></a></li>
@@ -54,22 +55,7 @@
 										
 										<label for="ended">End Date</label>
 										<div class="input"><?php echo form_input('ended', set_value('publish', $promos->ended), 'class="datepicker" maxlength="20"'); ?></div>
-										
-										<br/>
-										
-										<label for="poster">Upload Poster</label>
-										<div class="input">
-											<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
-											<br/>
-											<div id="msg-ajax"></div>
-										</div>
-										
-										<div id="img-poster" style="width:100%;">
-											<?php if($poster != NULL){ ?>
-												<img style="width:300px;" src="<?php echo $poster['file'];?>" title="<?php echo $poster['name']; ?>" />
-											<?php } ?>
-										</div>
-										
+																				
 										<?php echo form_hidden('form_data', array('id'=>$promos->id, 'slug'=>$promos->slug , 'poster_id'=>$poster['id'])); ?>
 									</div>
 								</li>
@@ -94,6 +80,40 @@
 							</ul>
 						</fieldset>
 					</div>
+					
+					<?php if($page->action == 'edit'){ ?>
+						<div class="form_inputs" id="featured">
+							<fieldset>
+								<ul>
+									<li class="editor">
+										<?php echo form_checkbox('featured', $promos->featured, set_value('featured', $promos->featured));?><label for="featured">Set as featured</label>
+										
+										<br/><br/>
+										
+										<label for="poster">Featured Poster</label>
+										<div class="input">
+											<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+											<br/>
+											<div id="msg-ajax"></div>
+										</div>
+									
+										<div id="img-poster" style="width:100%;">
+											<?php if($poster != NULL){ ?>
+												<img style="width:500px; border:1px solid #CCC; padding:5px;" src="<?php echo $poster['file'];?>" title="<?php echo $poster['name']; ?>" />
+											<?php } ?>
+										</div>	
+									</li>
+									
+									<li class="editor">
+										<label for="body">Featured Copy</label><br>
+										<div class="edit-content">
+											<?php echo form_textarea(array('id' => 'featured_copy', 'name' => 'featured_copy', 'value' => $promos->featured_copy, 'rows' => 10)) ?>
+										</div>
+									</li>
+								</ul>
+							</fieldset>
+						</div>
+					<?php } ?>
 					
 					<div class="form_inputs" id="category">
 						<fieldset>

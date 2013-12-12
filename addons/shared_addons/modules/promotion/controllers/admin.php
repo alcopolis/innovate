@@ -107,6 +107,23 @@ class Admin extends Admin_Controller {
 	
 	public function edit($id)
 	{
+						
+		if($this->form_validation->run()){
+			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'featured_copy', 'publish', 'ended', 'css', 'js');
+
+			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
+
+			//Set featured status
+			$data['featured'] = $this->input->post('featured') == NULL ? 0 : 1;
+			
+			$data['author'] = $this->session->userdata('id');
+			
+			if($this->promotion_m->update($id, $data)){
+				//redirect('admin/promotion/edit/' + $id);
+			}
+		}	
+		
+		
 		$this->page_data->title = 'Edit Promotion';
 		$this->page_data->action = 'edit';
 		
@@ -115,26 +132,15 @@ class Admin extends Admin_Controller {
 		if($this->promo_data->poster != ''){
 			$poster = json_decode($this->promo_data->poster);
 			$this->poster_data = array(
-							'id' => $poster->id,
-							'name' => $poster->name,
-							'file' => Files::$path . $poster->filename,
-							'description' => $poster->description,
-							'keywords' => $poster->keywords,
-							'alt_attr' => $poster->alt_attribute,
-							'mimetype' => $poster->mimetype,
-						);
+					'id' => $poster->id,
+					'name' => $poster->name,
+					'file' => Files::$path . $poster->filename,
+					'description' => $poster->description,
+					'keywords' => $poster->keywords,
+					'alt_attr' => $poster->alt_attribute,
+					'mimetype' => $poster->mimetype,
+			);
 		}
-				
-		if($this->form_validation->run()){
-			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'publish', 'ended', 'css', 'js');
-			
-			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
-			$data['author'] = $this->session->userdata('id');
-			
-			if($this->promotion_m->update($id, $data)){
-				//redirect('admin/promotion');
-			}
-		}	
 		
 		$this->render('admin/promo_form');
 	}
@@ -164,8 +170,6 @@ class Admin extends Admin_Controller {
 	public function do_upload(){
 		
 		$promo_data = $this->input->post('form_data');
-		
-		//var_dump($promo_data);
 
 		if($promo_data['poster_id'] != ''){
 			if(Files::delete_file($promo_data['poster_id'])){
@@ -178,8 +182,8 @@ class Admin extends Admin_Controller {
 		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 1920, false, true);
 		
 		//if($result['status']){
-			$file_data = $this->parse_file_data($result['data']);
-			$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
+		$file_data = $this->parse_file_data($result['data']);
+		$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
 		//}
 		
 		$respond = array(
