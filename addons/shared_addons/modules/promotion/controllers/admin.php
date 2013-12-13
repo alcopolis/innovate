@@ -119,7 +119,9 @@ class Admin extends Admin_Controller {
 			$data['author'] = $this->session->userdata('id');
 			
 			if($this->promotion_m->update($id, $data)){
-				//redirect('admin/promotion/edit/' + $id);
+				if($this->input->post('btnAction') == 'save_exit'){
+					redirect('admin/promotion');
+				}
 			}
 		}	
 		

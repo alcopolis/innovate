@@ -11,7 +11,7 @@ class Module_Articles extends Module {
 				'en' => 'Articles'
 			),
 			'description' => array(
-				'en' => 'Articles'
+				'en' => 'Articles Admin'
 			),
 			'frontend' => true,
 			'backend' => true,
@@ -23,23 +23,12 @@ class Module_Articles extends Module {
 							'name' => 'Articles',
 							'uri' => 'admin/articles',
 							'shortcuts' => array(
-									'create' => array(
-											'name' 	=> lang('articles:create'),
+									array(
+											'name' 	=> 'Add',
 											'uri' 	=> 'admin/articles/create',
-											'class' => 'add'
-									)
-							)
-					),
-					'categories' => array(
-							'name' => 'Categories',
-							'uri' => 'admin/articles/categories',
-							'shortcuts' => array(
-									'create' => array(
-											'name' 	=> lang('articles:create'),
-											'uri' 	=> 'admin/articles/categories/create',
-											'class' => 'add'
-									)
-							)
+											'class' => 'add',
+									),
+							),
 					),
 			),
 		);

@@ -53,13 +53,16 @@ class Plugin_Promotion extends Plugin
 		$this->load->library('asset');
 		$this->asset->in_build();
 		
-		$raw = $this->promotion_m->order_by('cat','ASC')->limit(5)->get_promo();
+		$today = new DateTime();
+		$now = date('Y-m-d', $today->getTimestamp());
+		$this->promotion_m->where('ended >' , $now);
+		$this->promotion_m->where('cat' , '0');
+		$raw = $this->promotion_m->order_by('id','DESC')->limit(5)->get_promo();
 	
 		foreach($raw as $featured){
 			$poster = json_decode($featured->poster, true);
 
-			$data .= '<div class="promo" style="background:#FFF url(' . $poster['path'] . ') no-repeat top center">';
-			//$data .= $featured->body;
+			$data .= '<div class="promo" style="background:#FFF url(' . $poster['path'] . ') no-repeat top center; cursor:pointer;">';
 			$data .= '<div style="width:960px; margin:0 auto; position:relative;">';
 			$data .= $featured->featured_copy;
 			

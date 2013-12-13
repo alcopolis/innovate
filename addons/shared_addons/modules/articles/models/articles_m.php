@@ -57,6 +57,7 @@ class Articles_m extends MY_Model {
 		}
 		
 		$method = 'result';
+		
 		if($single){
 			$method = 'row';
 		}else{
