@@ -29,13 +29,15 @@ class Plugin_Promotion extends Plugin
 						),
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
-// 						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
-// 							'section' => array(
-// 								'type' => 'text',// Can be: slug, number, flag, text, array, any.
-// 								'flags' => '',// flags are predefined values like asc|desc|random.
-// 								'default' => '',// this attribute defaults to this if no value is given
-// 								'required' => true,// is this attribute required?		
-// 							),
+						'variables' => '', // list all variables available inside the double tag. Separate them|like|this
+						'attributes' => array(
+							'cat' => array(// this is the name="World" attribute
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',// flags are predefined values like asc|desc|random.
+										'default' => '0',// this attribute defaults to this if no value is given
+										'required' => false,// is this attribute required?
+									),
+							),
 				),
 		);
 	
@@ -45,8 +47,8 @@ class Plugin_Promotion extends Plugin
 	public function __construct()
 	{	
 		$this->load->model('promotion_m');
-	}	
-	
+	}
+
 	function featured(){
 		$data = '';
 
@@ -55,8 +57,14 @@ class Plugin_Promotion extends Plugin
 		
 		$today = new DateTime();
 		$now = date('Y-m-d', $today->getTimestamp());
-		$this->promotion_m->where('ended >' , $now);
-		$this->promotion_m->where('cat' , '0');
+		
+		$data_filter = array(
+				'status' => 'published',
+				'featured' => '1',
+				'cat' => $this->attribute('category', 0),
+				'ended >' => $now,
+		);
+		$this->promotion_m->where($data_filter);
 		$raw = $this->promotion_m->order_by('id','DESC')->limit(5)->get_promo();
 	
 		foreach($raw as $featured){

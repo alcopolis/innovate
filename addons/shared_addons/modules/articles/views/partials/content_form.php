@@ -16,7 +16,7 @@
 		<li class="editor">
 			<label for="title">Category</label><br><br>
 			<div class="edit-content">
-				<a class="add-form-item" href="javascript:void(0)" onClick="addCategory(this)">+ Add Category</a><br/><br/>
+				<a class="add-form-item" href="javascript:void(0)" onClick="addCategory()">+ Add Category</a><br/><br/>
 				<div id="new-cat-div" class="edit-content hide"><?php echo form_input('new_category', '', 'size="50"') . '<input id="new-cat-btn" type="button" value="Add New" />'; ?></div>
 				<?php echo form_dropdown('category', $cats, set_value('category', $art->category)); ?>
 			</div>

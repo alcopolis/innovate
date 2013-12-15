@@ -42,8 +42,11 @@ class Articles_m extends MY_Model {
 		$data = new stdClass();
 		
 		$data->title = '';
+		$data->category = 0;
 		$data->teaser = '';
 		$data->body = '';
+		$data->js = '';
+		$data->css = '';
 		$data->created_on = '';
 		$data->modified_on = '';
 		

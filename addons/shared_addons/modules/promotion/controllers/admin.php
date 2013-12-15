@@ -158,7 +158,7 @@ class Admin extends Admin_Controller {
 		//Set Publish
 		$publish = $this->promotion_m->get_promo_by('id, status', array('publish'=>$hari), false);
 		foreach ($publish as $pub){
-			$this->promotion_m->update($pub->id, array('status'=>'publish'));
+			$this->promotion_m->update($pub->id, array('status'=>'published'));
 		}
 		
 		//Set Archived

@@ -17,7 +17,7 @@ class Plugin_Products extends Plugin
 	);
 	
 	public $description = array(
-			'en'	=> 'Tes plugin'
+			'en'	=> 'Products plugin'
 	);
 	
 	public function _self_doc()
@@ -25,8 +25,8 @@ class Plugin_Products extends Plugin
 		$info = array(
 				'js' => array(
 						'description' => array(// a single sentence to explain the purpose of this method
-								'en' => 'Return custom JS',
-						),
+											'en' => 'Return custom JS',
+										),
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
 						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
@@ -61,7 +61,7 @@ class Plugin_Products extends Plugin
 						),
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
-// 						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
+// 						'attributes' => '',// list all variables available inside the double tag. Separate them|like|this
 // 							'section' => array(
 // 								'type' => 'text',// Can be: slug, number, flag, text, array, any.
 // 								'flags' => '',// flags are predefined values like asc|desc|random.
@@ -128,7 +128,7 @@ class Plugin_Products extends Plugin
 
 	
 	
-	function widget()
+	public function widget()
 	{
 		$discount = 0.1;
 		$prod_id = array(1,2);
@@ -192,7 +192,7 @@ class Plugin_Products extends Plugin
 		return '<style type="text/css">' . $css . '</style>';
 	}
 	
-	function featured(){
+	public function featured(){
 		$data = '';
 		//$key = $this->attribute('section');
 	

@@ -49,9 +49,11 @@
 				</div>
 				
 				<!-- Attachment tab -->
-				<div class="form_inputs" id="article-attachment">
-					<?php $this->load->view('partials/attachment_form', $art); ?>	
-				</div>
+				<?php if($page->action == 'edit'){ ?>
+					<div class="form_inputs" id="article-attachment">
+						<?php $this->load->view('partials/attachment_form', $art); ?>	
+					</div>
+				<?php } ?>
 					
 				
 				
@@ -88,7 +90,17 @@
 			<div class="buttons align-right padding-top">
 				<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel') )) ?>
 			</div>
-			<?php echo form_close() ?>
+			<?php echo form_close() ?>			
 		</div>
 	</section>
+</div>
+
+<div id="category-add" class="popup hide" style="position:fixed; top:0; left:0; background:rgba(0,0,0,.9);z-index:10000; width:100%; height:100%">
+	<?php echo form_open('admin/articles/category/add', 'id="category-form"'); ?>
+		<div class="">
+			<h4>Add New Category</h4>
+			<?php echo form_input('category'); ?>
+		</div>
+	
+	<?php echo form_close(); ?>
 </div>

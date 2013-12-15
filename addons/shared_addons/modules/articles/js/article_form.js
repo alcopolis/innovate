@@ -30,24 +30,14 @@ $(function () {
 })
 
 
-function addCategory(obj){
-	$('#new-cat-div').removeClass('hide');
-	//$('#new-cat-div input[type="button"]').click(function(){processCat($('#new-cat-div input[name="new_category"]').val())});
-	
-	var selectID = '#' + $(obj).siblings('select').attr('id');	
-	;
-	$('#new-cat-div input[type="button"]').click(function(){
-											word = $('#new-cat-div input[name="new_category"]').val();
-											processCat(word, selectID)
-										});
+function addCategory(){
+	$('#category-add').removeClass('hide');
 }
 
 function processCat(word, container){
 	
 	var delimiter = '_', start = 0, 
-    
-	
-	
+    	
 	selectOri = $(container);
 	
 	container += '_chzn';

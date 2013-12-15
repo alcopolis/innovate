@@ -21,14 +21,25 @@ class Module_Promotion extends Module {
 						'promotion' => array(
 								'name' => 'Promotion',
 								'uri' => 'admin/promotion',
-									'shortcuts' => array(
-											'create' => array(
-													'name' 	=> 'Add',
-													'uri' 	=> 'admin/promotion/create',
-													'class' => 'add'
-											)
+								'shortcuts' => array(
+									'create' => array(
+											'name' 	=> 'Add',
+											'uri' 	=> 'admin/promotion/create',
+											'class' => 'add'
 									)
+								)
 						),
+						'category' => array(
+								'name' => 'Category',
+								'uri' => 'admin/promotion/category',
+								'shortcuts' => array(
+									'create' => array(
+										'name' => 'Add',
+										'uri' => 'admin/promotion/category/add',
+										'class' => 'add'
+									)
+								)
+						)
 				)
 		);
 	}

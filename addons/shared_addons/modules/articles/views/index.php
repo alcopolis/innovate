@@ -1,8 +1,10 @@
 <div class="one_full">
-	<section class="title">
-		<h4><?php echo 'Articles' ?></h4>
-	</section>
+	<div style="margin:0 0 20px 0; text-align:right;"><a class="btn blue" href="admin/articles/create">Add Article</a></div>
 	
+	<section class="title">
+		<h4>Articles</h4>
+	</section>
+		
 	<section class="item">
 		<div class="content">
 	        <?php if(!empty($articles)){ ?>

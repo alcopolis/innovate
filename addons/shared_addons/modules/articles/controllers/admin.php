@@ -97,10 +97,19 @@ class Admin extends Admin_Controller
 		
 		$art = $this->articles_m->add_new();
 		
+		//Get category
+		$tmp = $this->articles_category_m->get_category();
+		$cats = array();
+		$cats[0] = '- Select Category -';
+		foreach($tmp as $cat){
+			$cats[] = $cat->name;
+		}
+		
 		$var = array(
 				'page' => $this->page_data,
 				'art' => $art,
-		);
+				'cats' => $cats, 
+			);
 		
 		$this->render('article_form', $var);
 	}
