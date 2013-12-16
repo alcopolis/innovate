@@ -95,12 +95,14 @@
 	</section>
 </div>
 
-<div id="category-add" class="popup hide" style="position:fixed; top:0; left:0; background:rgba(0,0,0,.9);z-index:10000; width:100%; height:100%">
+<div id="category-add" class="popup overlay hide" style="position:fixed; top:0; left:0; background:rgba(0,0,0,.9);z-index:10000; width:100%; height:100%">
 	<?php echo form_open('admin/articles/category/add', 'id="category-form"'); ?>
-		<div class="">
+		<div class="popupbox" style="border:5px solid #000; background:#FFF; overflow:hidden; width:480px; padding:20px; top:120px; position:fixed; border-radius:10px; box-shadow:0 0 10px #000;">
 			<h4>Add New Category</h4>
-			<?php echo form_input('category'); ?>
-		</div>
-	
+			<?php echo form_input('new_category'); ?><br/>
+			<?php echo form_hidden('hidden_data', array('curr_uri'=>$uri)); ?><br/>
+			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save') )) ?>
+			<div id="cboxClose" style="float: left; margin:0 10px 10px 0">close</div>
+		</div>	
 	<?php echo form_close(); ?>
 </div>

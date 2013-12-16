@@ -54,9 +54,8 @@ class Plugin_Promotion extends Plugin
 
 		$this->load->library('asset');
 		$this->asset->in_build();
-		
-		$today = new DateTime();
-		$now = date('Y-m-d', $today->getTimestamp());
+				
+		$now = date('Y-m-d', time());
 		
 		$data_filter = array(
 				'status' => 'published',

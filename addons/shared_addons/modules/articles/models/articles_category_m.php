@@ -52,14 +52,15 @@ class Articles_Category_m extends MY_Model {
 	}
 	
 	
-	public function get_category_by($where = NULL, $fields = NULL, $single = NULL){
+	public function get_category_by($where = NULL, $fields = NULL, $single = FALSE){
 		
 		if(isset($where)){
 			$this->db->where($where);
 		}
-		
-		return $this->get_articles($fields, $single);
+				
+		return $this->get_category($fields, $single);
 	}
+	
 	
 	
 	

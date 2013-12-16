@@ -72,7 +72,7 @@ class Admin extends Admin_Controller
 		$this->form_validation->set_rules($this->articles_m->_rules);
 		
 		if($this->form_validation->run()){			
-			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'teaser', 'body'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'category', 'teaser', 'body'), $this->input->post());
 			
 			//create slug
 			$tmp = strtolower($this->input->post('title'));
@@ -108,7 +108,8 @@ class Admin extends Admin_Controller
 		$var = array(
 				'page' => $this->page_data,
 				'art' => $art,
-				'cats' => $cats, 
+				'cats' => $cats,
+				'uri' => 'admin/articles/create', 
 			);
 		
 		$this->render('article_form', $var);
@@ -121,7 +122,7 @@ class Admin extends Admin_Controller
 		
 		
 		if($this->form_validation->run()){			
-			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'teaser', 'body'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'category', 'teaser', 'body'), $this->input->post());
 			
 			//Date modified
 			$d = new DateTime();
@@ -151,7 +152,8 @@ class Admin extends Admin_Controller
 		$var = array(
 				'page' => $this->page_data,
 				'art' => $art,
-				'cats' => $cats, 
+				'cats' => $cats,
+				'uri' => 'admin/articles/edit/' . $id,
 			);
 		
 		$this->render('article_form', $var);
@@ -163,13 +165,4 @@ class Admin extends Admin_Controller
 		$this->articles_m->delete($id);
 	}
 	
-	
-	
-	//Tools
-	public function add_category(){
-		$term = $this->input->get('word');	
-		$respond['status'] = TRUE;
-		
-		echo json_encode($respond);
-	}
 }

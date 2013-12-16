@@ -69,10 +69,14 @@ class Plugin_Alcopolis extends Plugin
 	
 	function site_status()
 	{
-		if ( ! $this->settings->frontend_enabled && (empty($this->current_user) or $this->current_user->group != 'admin')){
-			return FALSE;
+		if(!$this->settings->frontend_enabled){
+			if($this->current_user != NULL && $this->current_user->group == 'admin'){
+				return true;
+			}else{
+				return false;
+			}
 		}else{
-			return TRUE;
+			return true;
 		}
 	}
 	

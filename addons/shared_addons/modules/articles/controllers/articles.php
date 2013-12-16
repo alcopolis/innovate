@@ -14,6 +14,7 @@ class Articles extends Public_Controller
 	{
 		parent::__construct();
 		$this->load->model('articles_m');
+		$this->load->model('articles_category_m');
 		
 		$this->page_data = new stdClass();
 		$this->articles = new stdClass();
@@ -52,8 +53,13 @@ class Articles extends Public_Controller
 		echo 'Archived month : ' . $month;
 	}
 	
-	public function category($word){
-		echo 'Category : ' . $word;
+	public function category($cat_id){		
+		$temp = $this->articles_category_m->get_category_by(array('id'=>$cat_id), 'name', TRUE);
+		$cat_name = $temp->name;
+		$this->page_data->section = $cat_name;
+		
+		$this->articles = $this->articles_m->order_by('created_on','DESC')->get_articles_by(array('category'=>$cat_id), NULL);
+		$this->render('index', $this->page_data->section, array('arts' => $this->articles, 'pagination' => NULL));
 	}
 	
 	public function tags($word){

@@ -35,7 +35,7 @@
 										<div class="art-property art-title"><h1><?php echo anchor('articles/' . $art->slug, $art->title); ?></h1></div>
 										<div class="art-property art-meta">
 											<small>
-												In <?php echo '<a href="articles/category/' . $art->category . '">' . ucfirst($art->category) . '</a>'?> Category | 
+												In <?php echo '<a href="articles/category/' . $art->category . '">{{ articles:get_category id="' . $art->category . '" }}</a>'?> | 
 												<?php echo date('\<\a\ \h\r\e\f\=\"\a\r\t\i\c\l\e\s\/\a\r\c\h\i\v\e\d\/F\"\>F\<\/\a\>, jS Y', $art->created_on); ?>
 											</small>
 										</div>

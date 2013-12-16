@@ -27,50 +27,16 @@ $(function () {
 			$(this).attr('value', 0);
 		} 
 	})
+	
+	$('.overlay, #cboxClose').click(function(){
+		$('#category-add').addClass('hide');
+	})
 })
 
 
 function addCategory(){
 	$('#category-add').removeClass('hide');
-}
-
-function processCat(word, container){
 	
-	var delimiter = '_', start = 0, 
-    	
-	selectOri = $(container);
-	
-	container += '_chzn';
-	selectPyro = $(container);
-	
-	//Get Select Input List ID
-		itemID = $(selectPyro).find('li:last-child').attr('id');
-		tokens = itemID.split(delimiter).slice(start);
-		tokens.pop();
-		MasterID = tokens.join(delimiter) + '_';
-		
-		itemCounter = parseInt(itemID.slice(-1)) + 1;
-		//console.log(itemCounter, MasterID);
-	
-	
-	$.ajax({
-		type: 'GET',
-		url: 'admin/articles/add_category/',
-		processData: false,
-	    contentType: false,
-		data:'word=' + word,
-		dataType: 'json',
-		success: function(respond) {
-					//console.log($(selectOri).length);
-					$(selectOri).find('option').attr('selected', false);
-					$(selectOri).append('<option selected="selected" value="' + itemCounter + '">' + word + '</option>');
-					
-					$(selectPyro).find('li').removeClass('result-selected');
-					$(selectPyro).find('a.chzn-single span').html(word);
-					tag = '<li class="active-result result-selected" id="' + MasterID + itemCounter + '">' + word + '</li>';
-					$(selectPyro).find('ul').append(tag);
-					
-					//console.log($(selectPyro).length);
-				}
-	});
+	var boxLeft = ($(window).width() - $('.popupbox').width())/2;
+	$('.popupbox').css({'left':boxLeft});
 }

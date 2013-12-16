@@ -19,7 +19,7 @@ $(document).ready(function() {
 			 animation: 'fade',  
 			 animationSpeed: 800,   
 			 timer: true, 			
-			 advanceSpeed: 5000, 		
+			 advanceSpeed: 8000, 		
 			 directionalNav: false, 		 
 			 captions: true, 			 
 			 captionAnimation: 'fade', 		 
