@@ -30,8 +30,8 @@ class Plugin_Articles extends Plugin
 						'single' => true,// will it work as a single tag?
 						'double' => false,// how about as a double tag?
 						'attributes' => array(
-							'id' => array(
-									'type' => 'number',// Can be: slug, number, flag, text, array, any.
+							'slug' => array(
+									'type' => 'text',// Can be: slug, number, flag, text, array, any.
 									'flags' => '',
 									'default' => '',
 									'required' => true,
@@ -50,9 +50,10 @@ class Plugin_Articles extends Plugin
 	
 	
 	function get_category(){
-		$cat_id = $this->attribute('id');
+		$cat_slug = $this->attribute('slug');
 		
-		$temp = $this->articles_category_m->get_category_by(array('id'=>$cat_id), 'name', TRUE);
+		$temp = $this->articles_category_m->get_category_by(array('slug'=>$cat_slug), NULL, TRUE);
+			
 		return $temp->name;
 	}
 	

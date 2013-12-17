@@ -33,19 +33,28 @@ class Articles extends Public_Controller
 	
 	public function index($slug = NULL){
 		if(isset($slug) && preg_match("/(\A[0-9]+?\z)/", $slug) == FALSE){
-			$this->page_data->section = '<a href="articles">&laquo Recent News</a>';
-			
 			$this->articles = $this->articles_m->get_articles_by(array('slug'=>$slug), NULL, TRUE);
 			
-			$this->render('article', $this->articles->title, array('art' => $this->articles));
+			$cat = $this->articles_category_m->get_category_by(array('id' => $this->articles->id), NULL, TRUE); 
+			$this->page_data->section = '<a href="articles/category/' . $cat->slug . '">&laquo ' . $cat->name . '</a>';
+			
+			$this->render('article', $this->articles->title, array('art' => $this->articles, 'cat' => $cat));
 		}else{
 			$limit = 3;
-			$this->page_data->section = 'Recent News';
 			$pagination = create_pagination('articles', $this->db->count_all('inn_articles'), $limit,2);
 			
-			$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
-	
+// 			$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
+			
+// 			$this->page_data->section = 'Berita Terbaru';
+			
+// 			$this->render('index', $this->page_data->section, array('arts' => $this->articles, 'pagination' => $pagination));
+
+			
+			
+			$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($limit)->get_recent();
+			$this->page_data->section = 'Berita Terbaru';
 			$this->render('index', $this->page_data->section, array('arts' => $this->articles, 'pagination' => $pagination));
+			//var_dump($this->articles);
 		}
 	}
 	
@@ -53,14 +62,25 @@ class Articles extends Public_Controller
 		echo 'Archived month : ' . $month;
 	}
 	
-	public function category($cat_id){		
-		$temp = $this->articles_category_m->get_category_by(array('id'=>$cat_id), 'name', TRUE);
-		$cat_name = $temp->name;
-		$this->page_data->section = $cat_name;
+// 	public function category($cat_id){		
+// 		$temp = $this->articles_category_m->get_category_by(array('id'=>$cat_id), 'name', TRUE);
+// 		$cat_name = $temp->name;
+// 		$this->page_data->section = $cat_name;
 		
-		$this->articles = $this->articles_m->order_by('created_on','DESC')->get_articles_by(array('category'=>$cat_id), NULL);
+// 		$this->articles = $this->articles_m->order_by('created_on','DESC')->get_articles_by(array('category'=>$cat_id), NULL);
+// 		$this->render('index', $this->page_data->section, array('arts' => $this->articles, 'pagination' => NULL));
+// 	}
+
+	
+	public function category($slug){
+		$temp = $this->articles_category_m->get_category_by(array('slug'=>$slug), NULL, TRUE);
+		$this->page_data->section = $temp->name;
+	
+		$this->articles = $this->articles_m->order_by('created_on','DESC')->get_articles_by(array('category'=>$temp->id), NULL);
 		$this->render('index', $this->page_data->section, array('arts' => $this->articles, 'pagination' => NULL));
 	}
+	
+	
 	
 	public function tags($word){
 		echo 'Tag : ' . $word;

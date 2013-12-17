@@ -30,12 +30,12 @@
 							
 							<div id="arts-body" class="left">
 								<?php foreach($arts as $art){ ?>
-									<article id="<?php echo $art->slug?>" class="clearfix">
+									<article id="<?php echo $art->art_slug?>" class="clearfix">
 										<img class="left"/>
-										<div class="art-property art-title"><h1><?php echo anchor('articles/' . $art->slug, $art->title); ?></h1></div>
+										<div class="art-property art-title"><h1><?php echo anchor('articles/' . $art->art_slug, $art->title); ?></h1></div>
 										<div class="art-property art-meta">
 											<small>
-												In <?php echo '<a href="articles/category/' . $art->category . '">{{ articles:get_category id="' . $art->category . '" }}</a>'?> | 
+												In <?php echo '<a href="articles/category/' . $art->cat_slug . '">{{ articles:get_category slug="' . $art->cat_slug . '" }}</a>'?> | 
 												<?php echo date('\<\a\ \h\r\e\f\=\"\a\r\t\i\c\l\e\s\/\a\r\c\h\i\v\e\d\/F\"\>F\<\/\a\>, jS Y', $art->created_on); ?>
 											</small>
 										</div>
@@ -65,9 +65,9 @@
 							</div>
 							
 							<div id="arts-side" class="right" style="">
+								<div id="events" class="side">Category</div>
+								<div id="archived" class="side">Archives</div>
 								<div class="advertisement side" style="height:120px;">Advertisement</div>
-								<div id="events" class="side">Events</div>
-								<div id="archived" class="side">Archived</div>
 							</div>
 						</div>
 					</div>

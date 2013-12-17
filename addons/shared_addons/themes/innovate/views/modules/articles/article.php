@@ -39,7 +39,7 @@
 									<div class="art-property art-title"><h1><?php echo $art->title; ?></h1></div>
 									<div class="art-property art-meta">
 										<small>
-											In <?php echo '<a href="articles/category/' . $art->category . '">{{ articles:get_category id="' . $art->category . '" }}</a>'?> Category | 
+											In <?php echo '<a href="articles/category/' . $cat->slug . '">{{ articles:get_category id="' . $art->category . '" }}</a>'?> Category | 
 											<?php echo date('\<\a\ \h\r\e\f\=\"\a\r\t\i\c\l\e\s\/\a\r\c\h\i\v\e\d\/F\"\>F\<\/\a\>, jS Y', $art->created_on); ?>
 										</small>
 									</div>									
@@ -66,9 +66,9 @@
 							</article>
 							
 							<div id="arts-side" class="right">
+								<div id="archived" class="side">Archives</div>
 								<div class="advertisement side" style="height:120px;">Advertisement</div>
-								<div id="events" class="side">Events</div>
-								<div id="archived" class="side">Archived</div>
+<!-- 								<div id="events" class="side">Events</div> -->
 							</div>
 						</div>
 					</div>
