@@ -21,7 +21,7 @@
 */
 
 // front-end
-$route['articles/([a-z0-9?_-]+)?']		= 'articles/index/$1';
+$route['articles/([a-z0-9?_-]+)?'] = 'articles/index/$1';
 
 // back-end
 $route['articles/admin/edit/(:num)?']		= 'admin/edit/$1';

@@ -16,6 +16,9 @@ class Admin_Category extends Admin_Controller
 		parent::__construct();
 		
 		$this->load->model('articles_category_m');
+		
+		// Set our validation rules
+		$this->form_validation->set_rules($this->articles_category_m->_rules);
 	}
 	
 	
@@ -44,13 +47,15 @@ class Admin_Category extends Admin_Controller
 	{
 		$hidden = $this->input->post('hidden_data');
 		
-		$data['name'] = ucwords($this->input->post('new_category'));
+		$data['name'] = ucwords($this->input->post('name'));
 		
 		//create slug
-		$tmp = strtolower($this->input->post('new_category'));
+		$tmp = strtolower($this->input->post('name'));
 		$data['slug'] = str_replace(' ', '-', $tmp);
 		
-		$this->articles_category_m->insert($data);
+		if($this->form_validation->run()){
+			$this->articles_category_m->insert($data);
+		}
 		
 		redirect(base_url() . $hidden['curr_uri']);
 	}

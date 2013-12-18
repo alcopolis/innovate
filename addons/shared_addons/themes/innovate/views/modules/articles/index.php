@@ -21,17 +21,19 @@
 				
 		<div id="content" class="wrapper clearfix">
 			<div id="body-theme">
-				<?php if($arts != NULL){ ?>
-					<div id="art-content">
-						<div id="body-wrapper" class="clearfix">
-							<section id="arts-section">
-								<?php echo $page->section; ?>
-							</section>
-							
-							<div id="arts-body" class="left">
+				<div id="art-content">
+					<div id="body-wrapper" class="clearfix">
+						<section id="arts-section">
+							<?php 
+								echo $page->section;
+							?>
+						</section>
+						
+						<div id="arts-body" class="left">
+							<?php if($arts != NULL){ ?>
 								<?php foreach($arts as $art){ ?>
 									<article id="<?php echo $art->art_slug?>" class="clearfix">
-										<img class="left"/>
+										<img class="left" src="" />
 										<div class="art-property art-title"><h1><?php echo anchor('articles/' . $art->art_slug, $art->title); ?></h1></div>
 										<div class="art-property art-meta">
 											<small>
@@ -60,18 +62,20 @@
 										</div>
 									</article>
 								<?php } ?>
-								
-								<?php echo $pagination['links']; ?>
-							</div>
 							
-							<div id="arts-side" class="right" style="">
-								<div id="events" class="side">Category</div>
-								<div id="archived" class="side">Archives</div>
-								<div class="advertisement side" style="height:120px;">Advertisement</div>
-							</div>
+								<?php echo $pagination['links']; ?>
+							<?php }else{ ?>
+								<p>Tidak ada artikel untuk kategori ini.</p>
+							<?php } ?>
+						</div>
+						
+						<div id="arts-side" class="right" style="">
+							<div id="events" class="side">Category</div>
+							<div id="archived" class="side">Archives</div>
+							<div class="advertisement side" style="height:120px;">Advertisement</div>
 						</div>
 					</div>
-				<?php } ?>
+				</div>
 			</div>
 		</div>
 		

@@ -22,8 +22,8 @@ class Articles_m extends MY_Model {
 			),
 			'keywords' => array(
 					'field' => 'keywords',
-					'label' => 'Tags',
-					'rules' => 'trim|xss_clean|max_length[20]'
+					'label' => 'Keywords',
+					'rules' => 'trim|xss_clean'
 			),
 	);
 	
@@ -43,6 +43,7 @@ class Articles_m extends MY_Model {
 		
 		$data->title = '';
 		$data->category = 0;
+		$data->keywords = '';
 		$data->teaser = '';
 		$data->body = '';
 		$data->js = '';
@@ -54,10 +55,33 @@ class Articles_m extends MY_Model {
 	}
 	
 	
-	public function get_articles($fields = NULL, $single = FALSE){
-		if(isset($fields)){
-			$this->db->select($fields);
+	public function get_articles($fields = NULL, $single = FALSE, $args = NULL){
+		if($fields != NULL or $fields != ''){
+			$fields_array = explode(',', $fields);
+			$selected_fields = '';
+			
+			foreach($fields_array as $f){
+				if($f == 'id' or $f == 'slug'){
+					$selected_fields .= 't0.' . trim($f) .' as art_' . trim($f) . ',';
+				}else{
+					$selected_fields .= 't0.' . trim($f) .',';
+				}
+			}
+			
+			$selected_fields .= 't1.id as cat_id, t1.slug as cat_slug, t1.name';
+		}else{
+			$selected_fields = 't0.id as art_id, t0.title, t0.slug as art_slug, t0.teaser, t0.body, t0.category, t0.keywords, t0.files, t0.js, t0.css, t0.created_on, t0.modified_on, t0.status,
+				                t1.id as cat_id, t1.slug as cat_slug, t1.name';
 		}
+		
+
+		$this->db->select($selected_fields);
+		$this->db->from('default_inn_articles t0');
+		$this->db->join('default_inn_articles_category t1' ,'t1.id = t0.category');
+		if($args != NULL){
+			$this->db->where($args);
+		}
+		
 		
 		$method = 'result';
 		
@@ -67,17 +91,21 @@ class Articles_m extends MY_Model {
 			$method = 'result';
 		}
 		
-		return $this->db->get($this->_table)->$method();
+		
+		return $this->db->get()->$method();
 	}
 	
 	
-	public function get_articles_by($where = NULL, $fields = NULL, $single = NULL){
+	public function get_articles_by($where = NULL, $fields = NULL, $single = FALSE){
 		
 		if(isset($where)){
-			$this->db->where($where);
+			$data = array();
+			foreach($where as $field=>$val){
+				$data['t0.' . $field] = $val;
+			}
 		}
 		
-		return $this->get_articles($fields, $single);
+		return $this->get_articles($fields, $single, $data);
 	}
 	
 	
@@ -89,11 +117,17 @@ class Articles_m extends MY_Model {
 		$this->db->select($fields);
 		$this->db->from('default_inn_articles t0');
 		$this->db->join('default_inn_articles_category t1' ,'t1.id = t0.category');
+		$this->db->where('status', 1);
 			
-		//var_dump($this->db->get()->result());
 		return $this->db->get()->result();
 	}
 	
+	public function count_articles_by_category($slug){
+		$temp = $this->db->select('id')->where('slug', $slug)->get('default_inn_articles_category')->row();
+		
+		$this->db->where('category',$temp->id);
+		return $this->db->from($this->_table)->count_all_results();
+	}
 	
 	//CRUD
 	public function insert_art($data){

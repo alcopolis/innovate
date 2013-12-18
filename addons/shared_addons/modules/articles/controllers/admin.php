@@ -51,7 +51,7 @@ class Admin extends Admin_Controller
 		$limit = 10;
 		
 		$pagination = create_pagination('admin/articles/index', $this->db->count_all('inn_articles'), $limit,4);
-		$arts = $this->articles_m->order_by('id','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
+		$arts = $this->articles_m->order_by('art_id','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
 		
 		$this->render('index', array('articles' => $arts, 'pagination' => $pagination));
 	}
@@ -72,7 +72,10 @@ class Admin extends Admin_Controller
 		$this->form_validation->set_rules($this->articles_m->_rules);
 		
 		if($this->form_validation->run()){			
-			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'category', 'teaser', 'body'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('category', 'keywords', 'teaser', 'body', 'js', 'css'), $this->input->post());
+			
+			//Refining title
+			$this->form_data['title'] = ucwords($this->input->post('title'));
 			
 			//create slug
 			$tmp = strtolower($this->input->post('title'));
@@ -83,6 +86,8 @@ class Admin extends Admin_Controller
 			$date = $d->getTimestamp();
 			$this->form_data['created_on'] = $date;
 			$this->form_data['modified_on'] = $date;
+			
+			//var_dump($this->form_data['category']);
 			
 			
 			//insert data
@@ -122,7 +127,7 @@ class Admin extends Admin_Controller
 		
 		
 		if($this->form_validation->run()){			
-			$this->form_data = $this->alcopolis->array_from_post(array('id', 'title', 'category', 'teaser', 'body'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('category', 'keywords', 'teaser', 'body', 'js', 'css'), $this->input->post());
 			
 			//Date modified
 			$d = new DateTime();
@@ -162,7 +167,9 @@ class Admin extends Admin_Controller
 	
 	public function delete($id)
 	{
-		$this->articles_m->delete($id);
+		if($this->articles_m->delete($id)){
+			redirect('admin/articles');
+		}
 	}
 	
 }

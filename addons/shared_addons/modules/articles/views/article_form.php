@@ -19,7 +19,7 @@
 				if($page->action == 'create'){
 					echo form_open('admin/articles/' . $page->action, 'id="article-form"');
 				}else if($page->action == 'edit'){
-					echo form_open('admin/articles/' . $page->action . '/' . $art->id, 'id="article-form"');
+					echo form_open('admin/articles/' . $page->action . '/' . $art->art_id, 'id="article-form"');
 				} 
 			?>
 			
@@ -99,7 +99,7 @@
 	<?php echo form_open('admin/articles/category/add', 'id="category-form"'); ?>
 		<div class="popupbox" style="border:5px solid #000; background:#FFF; overflow:hidden; width:480px; padding:20px; top:120px; position:fixed; border-radius:10px; box-shadow:0 0 10px #000;">
 			<h4>Add New Category</h4>
-			<?php echo form_input('new_category'); ?><br/>
+			<?php echo form_input('name'); ?><br/>
 			<?php echo form_hidden('hidden_data', array('curr_uri'=>$uri)); ?><br/>
 			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save') )) ?>
 			<div id="cboxClose" style="float: left; margin:0 10px 10px 0">close</div>

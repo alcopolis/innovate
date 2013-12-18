@@ -53,7 +53,7 @@ class Plugin_Articles extends Plugin
 		$cat_slug = $this->attribute('slug');
 		
 		$temp = $this->articles_category_m->get_category_by(array('slug'=>$cat_slug), NULL, TRUE);
-			
+		//var_dump($temp);
 		return $temp->name;
 	}
 	

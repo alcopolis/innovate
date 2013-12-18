@@ -16,9 +16,13 @@
 		<li class="editor">
 			<label for="title">Category</label><br><br>
 			<div class="edit-content">
-				<a class="add-form-item" href="javascript:void(0)" onClick="addCategory()">+ Add Category</a><br/><br/>
-				<div id="new-cat-div" class="edit-content hide"><?php echo form_input('new_category', '', 'size="50"') . '<input id="new-cat-btn" type="button" value="Add New" />'; ?></div>
+				<a class="add-form-item" href="javascript:void(0)" onClick="addCategory()">+ Add Category</a><br/>
 				<?php echo form_dropdown('category', $cats, set_value('category', $art->category)); ?>
+			</div>
+			<br>
+			<label for="title">Keywords <span style="color:#333; font-weight:normal;">(seperate words with , )</span></span></label>
+			<div class="edit-content">
+				<?php echo form_input('keywords', set_value('keywords', $art->keywords), 'size="50"'); ?>
 			</div>
 		</li>
 		

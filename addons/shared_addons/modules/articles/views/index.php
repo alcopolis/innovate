@@ -15,8 +15,8 @@
 							<th style="width:25%;">Title</th>
 							<th style="width:45%;">Teaser</th>
 							<th class="align-center" style="width:10%;">Category</th>
-							<th class="align-center" style="width:10%;">Status</th>
-							<th class="align-center" style="width:10%;">Action</th>
+							<th class="align-center" style="width:5%;">Status</th>
+							<th class="align-center" style="width:15%;">Action</th>
 	        			</thead>
 	        			
 	        			<tfoot>
@@ -30,12 +30,15 @@
 	        			<tbody>
 	        				<?php foreach($articles as $a) { ?>
 	        					<tr>
-	        						<td><?php echo form_checkbox('action_to[]', $a->id); ?></td>
-	        						<td><a href="admin/articles/edit/<?php echo $a->id; ?>"><?php echo $a->title; ?></a></td>
+	        						<td><?php echo form_checkbox('action_to[]', $a->art_id); ?></td>
+	        						<td><a href="admin/articles/edit/<?php echo $a->art_id; ?>"><?php echo $a->title; ?></a></td>
 	        						<td><?php echo $a->teaser; ?></td>
-	        						<td class="align-center"><?php echo $a->category; ?></td>
+	        						<td class="align-center"><?php echo $a->name; ?></td>
 	        						<td class="align-center"><?php echo $a->status; ?></td>
-	        						<td class="align-center"><a href="admin/articles/edit/<?php echo $a->id; ?>">Edit</a></td>
+	        						<td class="align-center">
+	        							<a class="btn blue" href="admin/articles/edit/<?php echo $a->art_id; ?>">Edit</a>
+	        							<a class="btn red" href="admin/articles/delete/<?php echo $a->art_id; ?>">Delete</a>
+	        						</td>
 	        					</tr>
 	        				<?php } ?>	
 	        			</tbody>

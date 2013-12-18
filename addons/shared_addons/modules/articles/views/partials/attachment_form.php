@@ -8,7 +8,7 @@
 			</div>
 			
 			<div id="gallery-files" style="background:#EEE;">
-			
+				belum berfungsi
 			</div>
 		</li>
 	</ul>

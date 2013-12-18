@@ -6,9 +6,9 @@ class Articles_Category_m extends MY_Model {
 	
 	public $_rules = array(
 			'name' => array(
-					'field' => 'title',
-					'label' => 'Title',
-					'rules' => 'trim|xss_clean|required|is_unique[default_inn_articles_category.name]|max_length[100]'
+					'field' => 'name',
+					'label' => 'Name',
+					'rules' => 'trim|required|is_unique[default_inn_articles_category.name]'
 			)
 	);
 	
@@ -53,7 +53,6 @@ class Articles_Category_m extends MY_Model {
 	
 	
 	public function get_category_by($where = NULL, $fields = NULL, $single = FALSE){
-		
 		if(isset($where)){
 			$this->db->where($where);
 		}

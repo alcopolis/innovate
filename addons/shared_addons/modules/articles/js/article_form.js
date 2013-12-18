@@ -28,7 +28,8 @@ $(function () {
 		} 
 	})
 	
-	$('.overlay, #cboxClose').click(function(){
+	$('.overlay, #cboxClose').click(function(e){
+		if(e.target != this) return;
 		$('#category-add').addClass('hide');
 	})
 })
