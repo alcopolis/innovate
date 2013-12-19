@@ -46,6 +46,7 @@
 										
 										<div class="art-property art-content"><?php //echo $art->body; ?></div>
 										
+										<?php /*
 										<div class="art-property art-meta">
 											<p>
 												<small>
@@ -60,6 +61,7 @@
 												</small>
 											</p>
 										</div>
+										*/ ?>
 									</article>
 								<?php } ?>
 							
