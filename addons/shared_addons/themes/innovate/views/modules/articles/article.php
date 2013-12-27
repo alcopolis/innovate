@@ -33,7 +33,7 @@
 								<?php echo $page->section; ?>
 							</section>
 							
-							<div id="arts-body" style="width:90%; padding:0 5%;">
+							<div id="arts-body" class="left">
 								<article id="<?php echo $art->art_slug?>" class="full clearfix">
 									<div class="art-property art-title"><h1><?php echo $art->title; ?></h1></div>
 									<div class="art-property art-meta">
@@ -64,11 +64,15 @@
 								<div id="arts-pagination"><?php //echo $pagination['links']; ?></div>
 							</article>
 							
-						<!--<div id="arts-side" class="right">
-								<div id="archived" class="side">Archives</div>
-								<div class="advertisement side" style="height:120px;">Advertisement</div>
- 								<div id="events" class="side">Events</div> 
-							</div>-->
+							<div id="arts-side" class="right">
+								<div id="related" class="side">
+									<h6>Related</h6>
+									{{ articles:get_related category="<?php echo $art->cat_slug; ?>" }}
+								</div>
+<!-- 								<div id="archived" class="side">Archives</div> -->
+<!-- 								<div class="advertisement side" style="height:120px;">Advertisement</div> -->
+<!--  								<div id="events" class="side">Events</div>  -->
+							</div>
 						</div>
 					</div>
 				<?php } ?>

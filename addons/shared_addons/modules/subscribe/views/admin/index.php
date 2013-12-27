@@ -34,7 +34,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="9">
-								<div class="inner"><?php $this->load->view('admin/partials/pagination'); ?></div>
+								<div class="inner"><?php echo $pagination['links']; ?></div>
 							</td>
 						</tr>
 					</tfoot>

@@ -23,15 +23,36 @@ class Plugin_Articles extends Plugin
 	public function _self_doc()
 	{
 		$info = array(	
-				'get_category' => array(
-						'description' => array(// a single sentence to explain the purpose of this method
+				'get_related' => array(
+						'description' => array(
 								'en' => ''
 						),
-						'single' => true,// will it work as a single tag?
-						'double' => false,// how about as a double tag?
+						'single' => true,
+						'double' => false,
+						'attributes' => array(
+								'category' => array(
+										'type' => 'text',
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+								'limit' => array(
+										'type' => 'number',
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+						),
+				),
+				'get_category' => array(
+						'description' => array(
+								'en' => ''
+						),
+						'single' => true,
+						'double' => false,
 						'attributes' => array(
 							'slug' => array(
-									'type' => 'text',// Can be: slug, number, flag, text, array, any.
+									'type' => 'text',
 									'flags' => '',
 									'default' => '',
 									'required' => true,
@@ -45,9 +66,28 @@ class Plugin_Articles extends Plugin
 	
 	public function __construct()
 	{	
+		$this->load->model('articles_m');
 		$this->load->model('articles_category_m');
 	}	
 	
+	
+	function get_related(){
+		$cat = $this->attribute('category');
+		$limit = $this->attribute('limit', NULL);
+		
+		$c = $this->articles_category_m->get_category_by(array('slug'=>$cat), NULL, TRUE);
+		$cat_id = $c->id;
+	
+		$arts = $this->articles_m->limit($limit)->get_articles_by(array('category'=>$cat_id), NULL, FALSE);
+		
+		$data = '<ul>';
+		foreach ($arts as $a){
+			$data .= '<li style="list-style:disc;"><a href="articles/' . $a->art_slug . '">' . $a->title . '</a></li>';
+		}
+		$data .= '</ul>';
+		
+		return $data;
+	}
 	
 	function get_category(){
 		$cat_slug = $this->attribute('slug');
