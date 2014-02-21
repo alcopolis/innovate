@@ -24,11 +24,11 @@ class Promotion_m extends MY_Model
 					'label' => 'Slug',
 					'rules' => 'trim|required|alpha_dot_dash|max_length[200]|xss_clean'
 			),
-// 			'body' => array(
-// 					'field' => 'body',
-// 					'label' => 'Body',
-// 					'rules' => 'required'
-// 			),
+			'featured_uri' => array(
+					'field' => 'featured_uri',
+					'label' => 'Feature Link',
+					'rules' => 'trim'
+			),
 		);
 	
 	public function __construct() {

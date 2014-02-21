@@ -24,7 +24,7 @@
 		</div>	
 		
 		<div class="buttons align-right padding-top">
-			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel') )) ?>
+			<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save_exit', 'cancel') )) ?>
 		</div>
 		
 		<?php echo form_close(); ?>

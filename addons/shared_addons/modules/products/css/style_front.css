@@ -39,8 +39,8 @@ body.product .content-wrapper {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a71d1', endColorstr='#0ba0ed',GradientType=0 ); /* IE6-9 */
 	
 /* 	background-color:#007DC3; */
-	font-size:14px;
-	line-height:20px;
+	font-size:12px;
+	line-height:auto;
 	text-shadow:0 -1px 2px #666;
 	color:#FFF;
 	border-top:1px solid #2797ff;
@@ -50,7 +50,7 @@ body.product .content-wrapper {
 	position:relative;
 	max-width:1024px;
 	margin: 0px auto;
-/* 	padding:40px 0;	 */
+	padding:40px 0;	
 }
 
 

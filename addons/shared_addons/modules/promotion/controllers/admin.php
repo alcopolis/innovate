@@ -89,11 +89,14 @@ class Admin extends Admin_Controller {
 		$this->page_data->action = 'create';
 		
 		if($this->form_validation->run()){
-			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'publish', 'ended', 'css', 'js');
+			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'publish', 'css', 'js');
 				
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
 
 			$data['author'] = $this->session->userdata('id');
+			
+			//Publish Ended
+			$data['ended'] = $this->input->post('ended') == '' ? NULL : $this->input->post('ended');
 				
 			if($this->promotion_m->insert($data)){
 				redirect('admin/promotion');
@@ -109,7 +112,7 @@ class Admin extends Admin_Controller {
 	{
 						
 		if($this->form_validation->run()){
-			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'featured_copy', 'publish', 'ended', 'css', 'js');
+			$db_fields = array('cat', 'name', 'slug', 'body', 'tags', 'featured_copy', 'featured_uri', 'publish', 'css', 'js');
 
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
 
@@ -117,6 +120,9 @@ class Admin extends Admin_Controller {
 			$data['featured'] = $this->input->post('featured') == NULL ? 0 : 1;
 			
 			$data['author'] = $this->session->userdata('id');
+			
+			//Publish Ended
+			$data['ended'] = $this->input->post('ended') == '' ? NULL : $this->input->post('ended');
 			
 			if($this->promotion_m->update($id, $data)){
 				if($this->input->post('btnAction') == 'save_exit'){

@@ -15,7 +15,7 @@
 			<div id="promo-list">
 			<?php if (!empty($subscribes)): ?>
 				
-				<div id="record-counter" style="margin:30px 0 10px 0; font-weight:bold; background:#EEE; padding:10px; border-radius:3px;"><?php echo count($subscribes)?> Subscribers</div>
+				<div id="record-counter" style="margin:30px 0 10px 0; font-weight:bold; background:#EEE; padding:10px; border-radius:3px;">Total : <?php echo $total; ?> Subscribers</div>
 				
 				<table>
 					<thead>

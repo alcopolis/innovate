@@ -65,7 +65,6 @@ class Admin extends Admin_Controller
 	
 	function create($c){
 		$this->page_data->action = 'create';
-		$this->faq_data = $this->faq_m->add_new($c);
 		$cat = array();
 
 		$temp_cat = $this->faq_cat_m->get_category();
@@ -91,6 +90,9 @@ class Admin extends Admin_Controller
 				$this->edit($new_id);
 			}			
 		}else{
+			
+			$this->faq_data = $this->faq_m->add_new($c);
+			
 			$this->template->append_js('module::faq_form.js');
 			$this->page_data->title = strtoupper($this->section) . ' | ' . ucwords($c);
 			$this->render('admin/form', array('faqs'=>$this->faq_data, 'cat'=>$cat, 'page'=>$this->page_data));

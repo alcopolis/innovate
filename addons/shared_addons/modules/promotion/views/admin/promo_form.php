@@ -85,6 +85,14 @@
 						<div class="form_inputs" id="featured">
 							<fieldset>
 								<ul>
+									<li class="editor">										
+										<label for="poster">Featured URI</label>
+										<div class="input">
+											<?php echo form_input('featured_uri', set_value('featured_uri')); ?>
+			
+										</div>
+									</li>
+									
 									<li class="editor">
 										<?php echo form_checkbox('featured', $promos->featured, set_value('featured', $promos->featured));?><label for="featured">Set as featured</label>
 										

@@ -44,7 +44,7 @@ class Faq extends Public_Controller
 		
 		$faq_cat = $this->faq_cat_m->order_by('id', 'DESC')->get_category(NULL, FALSE);
 		$selected_cat = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
-		$this->faq_data = $this->faq_m->order_by('count', 'DESC')->get_faq_by(array('category'=>$selected_cat->id), NULL, FALSE);
+		$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$selected_cat->id), NULL, FALSE);
 		
 		$curr_group = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
 		$this->render('faq', array('faqs' => $this->faq_data, 'cats' => $faq_cat, 'curr_group'=>$curr_group));

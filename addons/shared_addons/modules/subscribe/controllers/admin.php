@@ -137,7 +137,7 @@ class Admin extends Admin_Controller
 		
 		
 		$this->subscribes_data = $this->subscribe_m->limit($pagination['limit'], $pagination['offset'])->get_subscriber();
-		$this->render('admin/index', array('pagination' => $pagination));
+		$this->render('admin/index', array('pagination' => $pagination, 'total' => $this->db->where(array('closing_flag'=>0))->from('inn_subscribe')->count_all_results()));
 	}
 	
 
