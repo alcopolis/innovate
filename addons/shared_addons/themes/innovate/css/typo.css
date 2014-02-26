@@ -3,12 +3,12 @@
 h1, h2, h3, h4, h5, h6 { font-family: "Titillium Web", Helvetica Neue, Helvetica, Tahoma, sans-serif; font-weight: bold; }
 div, a, a:link, p, .post, ul, ol, dl, dd, li{font-family: "Titillium Web", Helvetica Neue, Helvetica, Tahoma, sans-serif; -webkit-text-stroke: 0}
 
-h1 { font-size: 30px; }
-h2 { font-size: 28px; }
-h3 { font-size: 24px; }
-h4 { font-size: 22px; }
-h5 { font-size: 20px; }
-h6 { font-size: 18px; }
+h1 { font-size: 22px; }
+h2 { font-size: 18px; }
+h3 { font-size: 16px; }
+h4 { font-size: 16px; }
+h5 { font-size: 16px; }
+h6 { font-size: 14px; }
 
 a, a:link, p, .post, ul, ol, dl, dd, li { letter-spacing: 0.2px; }
 a, a:link { color: #717174; text-decoration: none;}

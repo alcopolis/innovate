@@ -15,6 +15,8 @@ class Admin extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$this->load->model('covarage_m');
 
 		// Load all the required classes
 	}
@@ -27,5 +29,6 @@ class Admin extends Admin_Controller
 		$this->template
 			->title($this->module_details['name'])
 			->build('admin/index');
+		
 	}
 }

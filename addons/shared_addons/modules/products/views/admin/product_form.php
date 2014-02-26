@@ -46,7 +46,7 @@
 											<td style="width:20%;">
 												<label for="parent">Parent Product</label><br>
 												<div class="input small-side">
-													<?php echo form_dropdown('parent_id', $parent, set_value('parent_id', $prod->parent_id)) ?>
+													<?php echo form_dropdown('parent_id', $parent, set_value('parent_id', $prod->parent_id)); ?>
 												</div>
 											</td>
 											<td style="width:20%;">
