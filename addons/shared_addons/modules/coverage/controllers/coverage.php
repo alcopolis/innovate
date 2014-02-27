@@ -38,18 +38,24 @@ class Coverage extends Public_Controller
 		$this->render('index', array('cities'=>$cities));
 	}
 	
-	public function get_area($city){
+	public function get_area(){
+// 		$limit = 10;
+// 		$pagination = create_pagination('admin/coverage/get_area', $this->db->count_all('inn_subscribe'), $limit);
+		
+		
+		$city = $this->input->get('city');
+		
+		$this->db->where(array('city'=>$city));
+		$this->db->from('inn_coverage');
+ 		$count = $this->db->count_all_results();
+ 		var_dump($count);
+		
+		
 		$area = $this->coverage_m->get_area($city);	
 		
-		$data = '<ul>';
-		foreach($area as $a){
-			$data .= '<li>' . $a . '</li>';
-		}
-		$data .= '</ul>';
+		$respond['data'] = $area;
 		
-		$respond['data'] = $data;
-		
-		echo json_encode($respond);
+		//echo json_encode($respond);
 	}
 	
 	
