@@ -30,6 +30,10 @@
 				<div id="cov-result" style="outline:1px solid #CCC; padding:10px; margin:10px; float:left; width:70%;">
 					It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here
 				</div>
+				
+				<div class="pagination">
+					<ul></ul>
+				</div>
 		 	</div>
 		</div>
 		

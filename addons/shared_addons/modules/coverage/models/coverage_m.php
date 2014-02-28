@@ -74,8 +74,8 @@ class Coverage_M extends MY_Model {
 		return $city;
 	}
 	
-	public function get_area($city){
-		$temp = $this->db->select('area')->where('city', $city)->get($this->_table)->result();
+	public function get_area($city, $limit=10, $offset){
+		$temp = $this->db->select('area')->where('city', $city)->limit($limit, $offset)->get($this->_table)->result();
 		
 		$area = array();
 		foreach($temp as $t){
