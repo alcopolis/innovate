@@ -26,7 +26,7 @@ class Coverage extends Public_Controller
 		$this->template
 			->title($this->module_details['name'])
 			->append_js('module::main.js')
-			//->append_css('module::style.css')
+			->append_css('module::style-front.css')
 			->set($var)
 			->build($view);
 	}
@@ -40,11 +40,12 @@ class Coverage extends Public_Controller
 	
 	public function get_area(){
 		if ($this->input->is_ajax_request()) {
-	 		$limit = 10;
+	 		$limit = 20;
 			
 			//Variabel setup
 			$city = $this->input->get('city');
 			$page = $this->input->get('page');
+			$respond['currentPage'] = $page;
 			
 			//Count query result
 			$this->db->select('area');

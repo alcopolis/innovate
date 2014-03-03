@@ -49,30 +49,22 @@ function get_area(c = '', p = null){
 				$('#cov-result').html('');				
 				$('#cov-result').html(processedData('area', respond.data));
 
-				console.log(respond.numdata);
-				if(p == null && respond.numdata > 10){
-					$('div.pagination ul').html('')
-					pagesTot = Math.ceil(respond.pageTotal);
-					
-					$paging = '';
-					for(i=0; i<=pagesTot; i++){
-						if(i == 0 || i == 1){
-							$paging += '<li class="active">1</li>';
-							i++;
-						}else{
-							$paging += '<li>' + i + '</li>';
-						}
+				if(p == null){					
+					if(respond.numdata > 10){
+						pagesTot = Math.ceil(respond.pageTotal);
+						
+						$('div.pagination ul').html(processedPagination(pagesTot));
+						
+						$('div.pagination > ul li').bind('click', function(){
+							if(!$(this).hasClass('active')){
+								get_area(city, $(this).html());
+								$(this).parent().find('li.active').removeClass('active');
+								$(this).addClass('active');
+							}
+						});
+					}else{
+						$('div.pagination ul').html('');
 					}
-					
-					$('div.pagination ul').html($paging);
-					
-					$('div.pagination > ul li').bind('click', function(){
-						if(!$(this).hasClass('active')){
-							get_area(city, $(this).html());
-							$(this).parent().find('li.active').removeClass('active');
-							$(this).addClass('active');
-						}
-					});
 				}
 			}
 		});
@@ -87,9 +79,9 @@ function processedData(field, data){
 	if(field != ''){
 		switch(field){
 			case 'area' :
-				procData = '<div class="area" style="font-size:13px; -moz-column-count:2; -moz-column-gap:20px;">';
+				procData = '<div id="area-list">';
 				data.forEach(function(entry){
-					procData += '<span style="display block">' + entry + '</span><br/>';
+					procData += '<span class="area">' + entry + '</span>';
 				});
 				procData += '</div>';
 				
@@ -101,6 +93,16 @@ function processedData(field, data){
 }
 
 
-function processedPagination(current){
+function processedPagination(pagesTot){	
+	var paging = '';
+	for(i=0; i<=pagesTot; i++){
+		if(i == 0 || i == 1){
+			paging += '<li class="active">1</li>';
+			i++;
+		}else{
+			paging += '<li>' + i + '</li>';
+		}
+	}
 	
+	return paging;
 }

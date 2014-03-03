@@ -1,0 +1,42 @@
+body.coverage #content{padding-top:80px;}
+
+#cov-filter{padding:10px; margin:10px; float:left; width:20%;}
+input, select, textarea{
+	border:1px solid #CCC;
+	padding:5px;
+	color:#333;
+}
+
+#cov-content{padding:0 10px; margin:10px; float:left; width:70%;}
+#cov-result{margin:20px 0;}
+
+#area-list{font-size:14px; -moz-column-count:2; -moz-column-gap:20px;}
+#area-list .area{
+	color:#027EC3;
+	display:block;
+	margin:0 0 5px 0;
+	box-shadow: 0 1px 1px #CCC;
+	padding:5px 5px 5px 30px;
+	border-radius:5px;
+	text-shadow:0 -1px 1px #FFF;
+	cursor:default;
+
+	background-color:#EEE;
+	background-image:url(place.png);
+	background-repeat:no-repeat;
+	background-position:5px center;
+}
+
+.pagination ul{
+	font-size:13px;
+	color:#007DC3;
+	margin-top:20px;
+}
+
+.pagination ul li{
+	float:left; margin:0 2px; background:#DDD; padding:0 5px; cursor:pointer;
+}
+
+.pagination ul li.active{
+	color:#FFF; background:#007DC3;
+}
