@@ -21,7 +21,7 @@
                         echo '<div class="section-title reg-header " data-animation="fadeInDown"><p style="text-align: center;"><strong>' . $success . '</strong></p></div>';
                     } else {
                         ?>
-                        <?php echo form_open('innovateGo'); ?>
+                        <?php echo form_open('ott_registrasi'); ?>
                         <div class="section-title reg-header " data-animation="fadeInDown">
                             <h3>Get your InnovateGo Account Here </h3>
 

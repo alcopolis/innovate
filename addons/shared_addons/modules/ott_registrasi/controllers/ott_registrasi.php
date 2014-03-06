@@ -11,15 +11,15 @@ if (!defined('BASEPATH'))
  * @package 	PyroCMS
  * @subpackage 	Subscriber Module
  */
-class InnovateGo extends Public_Controller {
+class Ott_registrasi extends Public_Controller {
 
     public function __construct() {
         parent::__construct();
         $this->load->library('session');
-        $this->innovateGo = 0;
+        $this->ott_registrasi = 0;
         $this->ADMIN_PATH = base_url() . 'admin';
 
-        $this->load->model('innovateGo_m');
+        $this->load->model('ott_registrasi_m');
 //        $this->packages_m = $this->load->model('products/packages_m');
 
         $this->load->helper('form');
@@ -27,7 +27,7 @@ class InnovateGo extends Public_Controller {
         $this->load->library('alcopolis');
 
         // Set our validation rules
-        $this->rules = $this->innovateGo_m->_rules;
+        $this->rules = $this->ott_registrasi_m->_rules;
         $this->form_validation->set_rules($this->rules);
         $this->form_validation->set_error_delimiters('<small style="color:red;">', '</small>');
         $this->form_validation->set_message('is_unique', 'You have been signed up with this %s');
@@ -49,7 +49,7 @@ class InnovateGo extends Public_Controller {
                 ->append_js('module::placeholders.min.js')
                 ->append_js('module::waypoints.min.js')
                 ->append_js('module::jquery.panelSnap.js')
-                ->set('innovateGo', $this->innovateGo)
+                ->set('ott_registrasi', $this->ott_registrasi)
                 ->set('packages', $this->packages)
                 ->set($var)
                 ->build($view);
@@ -68,11 +68,11 @@ class InnovateGo extends Public_Controller {
                 'subscriberID' => $this->input->post('username'),
                 'created' => $nowadate
             );
-            $id_user = $this->innovateGo_m->save_innovateGo($id = NULL, $user);
+            $id_user = $this->ott_registrasi_m->save_ott_registrasi($id = NULL, $user);
             if ($id_user) {
-                $this->innovateGo_m->send_email_activation($id_user);
+                $this->ott_registrasi_m->send_email_activation($id_user);
             }
-            redirect('innovateGo/success');
+            redirect('ott_registrasi/success');
         } else {
             $this->render('go');
         }
@@ -86,8 +86,8 @@ class InnovateGo extends Public_Controller {
     public function email_activation() {
         $id = $this->uri->segment(3);
         $email_key = $this->uri->segment(4);
-        if ($this->innovateGo_m->activate_user($id, $email_key)) {
-            $this->innovateGo_m->send_to_product($id);
+        if ($this->ott_registrasi_m->activate_user($id, $email_key)) {
+            $this->ott_registrasi_m->send_to_product($id);
             $data['success'] = 'Terima Kasih! Account Innovate Go anda telah aktif';
             $this->render('go', $data);
         } else {

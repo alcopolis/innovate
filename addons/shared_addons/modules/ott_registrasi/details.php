@@ -2,17 +2,17 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Module_InnovateGo extends Module {
+class Module_ott_registrasi extends Module {
 
     public $version = '1.0';
 
     public function info() {
         return array(
             'name' => array(
-                'en' => 'InnovateGo'
+                'en' => 'OTT Registrasi'
             ),
             'description' => array(
-                'en' => 'InnovateGo'
+                'en' => 'Registrasi Mobile OTT'
             ),
             'frontend' => true,
             'backend' => true,
@@ -22,18 +22,18 @@ class Module_InnovateGo extends Module {
     }
 
     public function install() {
-        $this->dbforge->drop_table('inn_innovateGo');
+        $this->dbforge->drop_table('inn_ott_registrasi');
         //$this->db->delete('settings', array('module' => 'sample'));    //Maybe usefull for future projects
 
-        $innovateGo_table = array(
+        $ott_registrasi_table = array(
             'id' => array(
                 'type' => 'INT',
                 'constraint' => '11',
                 'auto_increment' => TRUE
             ),
-            'custName' => array(
+            'subscriberID' => array(
                 'type' => 'VARCHAR',
-                'constraint' => '100'
+                'constraint' => '60'
             ),
             'custPhone' => array(
                 'type' => 'VARCHAR',
@@ -43,13 +43,17 @@ class Module_InnovateGo extends Module {
                 'type' => 'VARCHAR',
                 'constraint' => '100'
             ),
+            'email_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255'
+            ),
+            'custName' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100'
+            ),
             'password' => array(
                 'type' => 'VARCHAR',
-                'constraint' => '20'
-            ),
-            'subscriberID' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '60'
+                'constraint' => '255'
             ),
             'username' => array(
                 'type' => 'VARCHAR',
@@ -61,17 +65,17 @@ class Module_InnovateGo extends Module {
                 'null' => FALSE,
                 'default' => 0
             ),
-            'activated' => array(
+            'created' => array(
                 'type' => 'DATETIME',
                 'null' => FALSE,
                 'default' => '0000-00-00 00:00:00'
             ),
         );
 
-        $this->dbforge->add_field($innovateGo_table);
+        $this->dbforge->add_field($ott_registrasi_table);
         $this->dbforge->add_key('id', TRUE);
 
-        if ($this->dbforge->create_table('inn_innovateGo')) {
+        if ($this->dbforge->create_table('inn_ott_registrasi')) {
             return TRUE;
         }
     }
