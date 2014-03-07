@@ -1,14 +1,22 @@
-body.coverage #content{padding-top:80px;}
+body.coverage #content{padding-top:40px;}
 
 #cov-filter{padding:10px; margin:10px; float:left; width:20%;}
-input, select, textarea{
+
+.cov-filter{margin:20px 0;}
+
+.cov-filter label{color:#999; font-size:12px}
+
+.cov-filter input, .cov-filter select, textarea{
 	border:1px solid #CCC;
 	padding:5px;
 	color:#333;
+	font-size:13px;
+	min-width:160px;
+	border-radius:5px;
 }
 
 #cov-content{padding:0 10px; margin:10px; float:left; width:70%;}
-#cov-result{margin:20px 0;}
+#cov-result{margin:20px 0; color:#666;}
 
 #area-list{font-size:14px; -moz-column-count:2; -moz-column-gap:20px;}
 #area-list .area{
@@ -40,3 +48,6 @@ input, select, textarea{
 .pagination ul li.active{
 	color:#FFF; background:#007DC3;
 }
+
+
+h1#page-title{color:#007DC3; font-size:16px; line-height:1em;}
