@@ -11,7 +11,16 @@ $(document).ready(function() {
 		$('ul#main-menu > li').mouseleave(function(){
 			$(this).children('ul.dropdown').slideUp(150)
 		})
-	
+		
+		
+		$(document).scroll(function(){
+			console.log($(this).scrollTop());
+			if($(this).scrollTop() > 60){
+				$('header').css('box-shadow', '0 1px 10px #999');	
+			}else{
+				$('header').css('box-shadow', 'none');	
+			}
+		})
 		
 	// ====================================== Orbit Slider ======================================= //
 		

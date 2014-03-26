@@ -116,9 +116,9 @@ class Subscribe extends Public_Controller
 				$this->load->library('email');
 					
 				$this->email->from('webmaster@innovate-indonesia.com', 'Innovate Subscription System');
-				//$this->email->to($this->SALES_EMAIL);
-				$this->email->to('myseconddigitalmail@yahoo.com');
-				$this->email->cc('');
+				$this->email->to($this->SALES_EMAIL);
+				//$this->email->cc('myseconddigitalmail@yahoo.com');
+				//$this->email->cc('');
 				$this->email->bcc('');
 					
 				$this->email->subject('[ #' . $ticketid . ' ] Permohonan Berlangganan Innovate');
@@ -158,7 +158,7 @@ class Subscribe extends Public_Controller
 		$var = array(
 				'pack_config' => $pack_config,
 				'pack_title' => '<span class="bundle">Bundle &raquo;</span> ' . $packname[0] . ' & ' . $packname[1],
-				'pack_desc' => 'Paket bundle layanan ' . $packname[0] . ' ' . $packbody[0] . ' & paket ' . $packname[1] . $packbody[1],
+				'pack_desc' => '<h1>Layanan Internet</h1> Paket bundle layanan ' . $packname[0] . ' ' . $packbody[0] . '<br/><br/><h1>Layanan TV Kabel</h1>' . $packbody[1],
 				'pack_add' => '<small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>'
 		);
 		

@@ -57,15 +57,15 @@
 								</li>
 								
 								<li class="<?php echo alternator('', 'even'); ?>">
-									<label for="area_code">Kode Area</label>
-									<div class="input"><?php echo form_input('area_code', set_value('area_code', $subscriber->area_code), 'style="width:30px"'); ?><?php echo form_error('area_code'); ?></div>
+									<label for="area_code">Kode Area Telepon</label>
+									<div class="input"><?php echo form_input('area_code', set_value('area_code', $subscriber->area_code), 'style="width:80px" maxlength="4"'); ?><?php echo form_error('area_code'); ?><small>ex: 021</small></div>
 									<label for="phone">No. Telepon <span>*</span></label>
-									<div class="input"><?php echo form_input('phone', set_value('phone', $subscriber->phone), 'class="width-15"'); ?><?php echo form_error('phone'); ?></div>
+									<div class="input"><?php echo form_input('phone', set_value('phone', $subscriber->phone), 'class="width-15"'); ?><?php echo form_error('phone'); ?> <small>ex: 31998600</small></div>
 								</li>
 								
 								<li class="<?php echo alternator('', 'even'); ?>">
 									<label for="mobile">No. Ponsel</label>
-									<div class="input"><?php echo form_input('mobile', set_value('mobile', $subscriber->mobile), 'class="width-15"'); ?><?php echo form_error('mobile'); ?></div>
+									<div class="input"><?php echo form_input('mobile', set_value('mobile', $subscriber->mobile), 'class="width-15"'); ?><?php echo form_error('mobile'); ?> <small>ex: 0812345676</small></div>
 								</li>
 								
 								<li class="<?php echo alternator('', 'even'); ?>" style="border-top:1px dotted #CCC;">

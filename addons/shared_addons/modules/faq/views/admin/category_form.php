@@ -9,7 +9,7 @@
 				echo form_open_multipart('admin/faq/groups/create/');
 			}else{
 				echo form_open_multipart('admin/faq/groups/edit/' . $cat->category);
-			}
+			}			
 		?>
 			
 		<div class="form_inputs">

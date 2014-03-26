@@ -1,4 +1,9 @@
-body.coverage #content{padding-top:40px;}
+body.coverage #content{
+	padding-top:40px;
+	background:url(../img/connect.jpg) right top no-repeat;
+	background-size:auto 620px;
+	min-height:550px; 
+}
 
 #cov-filter{padding:10px; margin:10px; float:left; width:20%;}
 
@@ -23,13 +28,13 @@ body.coverage #content{padding-top:40px;}
 	color:#027EC3;
 	display:block;
 	margin:0 0 5px 0;
-	box-shadow: 0 1px 1px #CCC;
+	box-shadow: 0 0 1px #CCC;
 	padding:5px 5px 5px 30px;
 	border-radius:5px;
 	text-shadow:0 -1px 1px #FFF;
 	cursor:default;
 
-	background-color:#EEE;
+	background-color:rgba(255,255,255,.9);
 	background-image:url(place.png);
 	background-repeat:no-repeat;
 	background-position:5px center;

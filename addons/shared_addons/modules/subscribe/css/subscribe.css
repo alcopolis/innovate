@@ -47,6 +47,11 @@ div.input .error{
 	font-weight:normal;
 }
 
+div.input small{
+	color:#999;
+	
+}
+
 #pack-info{
 	display:none;
 	padding:20px 0;

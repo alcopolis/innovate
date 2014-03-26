@@ -2,11 +2,11 @@
 
 
 .faq a{
-	color:#0CE;
+	color:#0964BD;
 }
 
 .faq a:hover{
-	color:#D226F9;
+	color:#777;
 }
 
 .faq #body-wrapper{margin:40px auto 40px auto;}
@@ -29,7 +29,7 @@ h3#page-title a:hover{color:#FFF;}
 	background-position:0 5px;
 }
 
-#faq-side li:hover a, #faq-side li.active a{color:#D226F9;}
+#faq-side li:hover a, #faq-side li.active a{color:#777;}
 
 #faq-side.topics li{
 	background-image:url(../img/topics.png);	

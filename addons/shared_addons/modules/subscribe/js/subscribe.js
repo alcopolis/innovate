@@ -22,7 +22,8 @@ $(document).ready(function(){
 					function(respond) {							
 						if(respond.bundle){
 							title = '<span class="bundle">Bundle &raquo;</span> ' + respond.data.net.name + ' & ' + respond.data.tv.name;
-							desc = 'Paket bundle layanan ' + respond.data.net.name.toLowerCase() + ' ' + respond.data.net.body.toLowerCase() + ' + ' + respond.data.tv.body.toLowerCase();
+							desc = '<h1>Layanan Internet</h1>' + 'Paket bundle layanan ' + respond.data.net.name.toLowerCase() + ' ' + respond.data.net.body.toLowerCase() + '<br/><br/>';
+							desc += '<h1>Layanan TV Kabel</h1>' + respond.data.tv.body.toLowerCase();
 							add = '<small style="color:#C00"><strong>Diskon 10% selama masa promosi.</strong></small>';
 						}else{
 							title = respond.data.name;

@@ -33,6 +33,7 @@ class Admin_Groups extends Admin_Controller
 		$this->load->library('form_validation');
 		$this->load->library('upload');
 		$this->load->library('alcopolis');
+		
 	}
 	
 	

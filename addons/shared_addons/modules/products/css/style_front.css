@@ -39,7 +39,7 @@ body.product .content-wrapper {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a71d1', endColorstr='#0ba0ed',GradientType=0 ); /* IE6-9 */
 	
 /* 	background-color:#007DC3; */
-	font-size:12px;
+	font-size:13px;
 	line-height:auto;
 	text-shadow:0 -1px 2px #666;
 	color:#FFF;
@@ -50,7 +50,7 @@ body.product .content-wrapper {
 	position:relative;
 	max-width:1024px;
 	margin: 0px auto;
-	padding:40px 0;	
+/* 	padding:40px 0;	 */
 }
 
 
@@ -103,7 +103,7 @@ div.pack-container .data{
 	margin:20px 0;
 	width:30%;
 	font-size:.9em;
-	color:#999;
+	color:#222;
 }
 
 div.pack-container .data h3, div.pack-container .data p{margin-bottom:10px;}
@@ -115,19 +115,24 @@ div.pack-container .packs .pack-item{
 	min-width: 160px;
 	max-width:192px; 
 	width:30%;
-	box-shadow:0 0 2px #999; 
+	box-shadow:0 0 1px #999; 
 	margin:0 5px 10px 5px;
 	color:#222; 
-	text-shadow:0 -1px 1px #FFF;
-	background:#0bc4ee; border-radius:5px;
+	/* text-shadow:0 -1px 1px #FFF; */
+	
+	background: #EDEDED; /* Old browsers */
+	border-radius:5px;
 }
+
+div.pack-container .packs .pack-item .total{color:#125DBA}
+.pack-item p{padding:15px 0;}
 
 .pack-name, .pack-price{
 	padding:5px 0;
 	text-align: center;
 }
-.pack-name{border-bottom:1px dotted #FFF; margin:5px; color:#222; }
-.pack-price{border-top:1px dotted #FFF; margin:10px;}
+.pack-name{border-bottom:1px dotted #999; margin:5px; color:#222; }
+.pack-price{border-top:1px dotted #999; margin:10px;}
 
 
 
