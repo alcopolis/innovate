@@ -14,6 +14,7 @@ class Admin_Groups extends Admin_Controller
 	
 	protected $cat_data;
 	protected $page_data;
+	protected $cat_tree;
 	
 	public function __construct()
 	{
@@ -34,6 +35,15 @@ class Admin_Groups extends Admin_Controller
 		$this->load->library('upload');
 		$this->load->library('alcopolis');
 		
+		
+		
+		//Get Category Tree
+		$result = $this->db->where('parent_id', 0)->order_by('id', 'ASC')->get('default_inn_faq_category')->result();
+		
+		foreach($result as $cat){
+			echo '<h4>' . $cat->category . '</h4>';
+			$this->getTree($cat->id,0);
+		}
 	}
 	
 	
@@ -43,6 +53,7 @@ class Admin_Groups extends Admin_Controller
 		->title($this->module_details['name'])
 		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
 		->append_js('module::faq.js')
+		->set('cat_tree', $this->cat_tree)
 		->set($var)
 		->build($view);
 	}
@@ -53,9 +64,32 @@ class Admin_Groups extends Admin_Controller
 	
 	
 	function create(){
-
 		$this->page_data->title = 'Add New Group';
 		$this->page_data->action = 'create';
+		
+// 		$this->cat_tree = array(
+// 					'top-level' => 'Top Level',
+// 					'other' => 'Other',
+// 					'payment' => array(
+// 							'cara-bayar' => 'Cara Bayar',
+// 							'mandiri-power-bills' => 'Mandiri Power Bills',
+// 							'transfer-atm' => 'Transfer ATM',
+// 							'billing' => 'Billing'
+// 						)
+// 				);
+
+		
+		$this->cat_tree = array(
+					'0' => array('level' => 0, 'parent' => NULL, 'slug' => '', 'cat' => 'No Parent'),
+					'1' => array('level' => 0, 'parent' => 0, 'slug' => 'other', 'cat' => 'Other'),
+					'2' => array('level' => 2, 'parent' => 11, 'slug' => 'billing', 'cat' => 'Billing'),
+					'6' => array('level' => 1, 'parent' => 11, 'slug' => 'mandiri-power-bills', 'cat' => 'Mandiri Power Bills'),
+					'11' => array('level' => 0, 'parent' => NULL, 'slug' => 'payment', 'cat' => 'Payment')
+				);
+		
+		
+		
+		
 		
 		if($this->form_validation->run()){
 			$data = $this->alcopolis->array_from_post(array('category'), $this->input->post());
@@ -78,6 +112,17 @@ class Admin_Groups extends Admin_Controller
 	function delete($slug){
 		if($this->faq_cat_m->delete_category($slug)){
 			redirect('admin/faq');
+		}
+	}
+	
+	
+	private function getTree($parent, $level){
+		$result = $this->db->where('parent_id', $parent)->get('default_inn_faq_category')->result();
+		
+		foreach($result as $row){
+			echo $level > 0 ? '&nbsp;&nbsp;&raquo;' : '| ';
+			echo str_repeat('&nbsp;&nbsp;',$level) . $row->category . "</br>";
+			$this->getTree($row->id, $level+1);
 		}
 	}
 	
