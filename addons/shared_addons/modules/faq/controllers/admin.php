@@ -15,6 +15,7 @@ class Admin extends Admin_Controller
 	
 	protected $faq_data;
 	protected $page_data;
+	protected $cat_tree;
 	
 	public function __construct()
 	{
@@ -36,6 +37,10 @@ class Admin extends Admin_Controller
 		$this->load->library('upload');
 		$this->load->library('image_lib');
 		$this->load->library('alcopolis');
+		
+		
+		//Get category tree
+		$this->cat_tree = $this->faq_cat_m->getTree();
 	}
 	
 	
@@ -45,6 +50,7 @@ class Admin extends Admin_Controller
 		->title($this->module_details['name'])
 		->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
 		->append_js('module::faq.js')
+		->set('cat_tree', $this->cat_tree)
 		->set($var)
 		->build($view);
 	}

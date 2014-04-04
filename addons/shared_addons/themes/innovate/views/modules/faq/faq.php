@@ -20,16 +20,10 @@
 			<div id="body-wrapper" class="clearfix">
 				
 				<h3 id="page-title"><a href="faq">FAQ's</a></h3>
-				
+								
 				<ul id="faq-side" class="topics left">
 					<h5 style="margin-left:10px;">FAQ Topics</h5>
-					<?php foreach ($cats as $cat){ ?>
-						<?php if($cat->slug == $curr_group->slug){ ?>
-							<li class="active"><a href="faq/group/<?php echo $cat->slug; ?>"><?php echo ucwords($cat->category); ?></a></li>				
-						<?php }else{ ?>
-							<li><a href="faq/group/<?php echo $cat->slug; ?>"><?php echo ucwords($cat->category); ?></a></li>
-						<?php } ?>				
-					<?php } ?>
+					<?php echo $cat_tree; ?>
 				</ul>
 				
 				<div id="item-list" class="left">

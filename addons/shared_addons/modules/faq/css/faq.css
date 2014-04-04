@@ -22,38 +22,46 @@ h3#page-title a:hover{color:#FFF;}
 
 
 /* SIDE */
-#faq-side li{
-	margin-left:20px; padding-left:25px; 
-	background-size:20px 20px;
-	background-repeat:no-repeat;	
-	background-position:0 5px;
+/* #faq-side li{ */
+/* 	margin-left:20px; padding-left:25px;  */
+/* 	background-size:20px 20px; */
+/* 	background-repeat:no-repeat;	 */
+/* 	background-position:0 5px; */
+/* } */
+
+/* #faq-side li:hover a, #faq-side li.active a{color:#777;} */
+
+/* #faq-side.topics li{ */
+/* 	background-image:url(../img/topics.png);	 */
+/* } */
+
+/* #faq-side.topics li:hover, #faq-side.topics li.active{ */
+/* 	background-image:url(../img/topics-active.png); */
+/* } */
+
+/* #faq-side.topics li{ */
+/* 	background-image:url(../img/topics.png);	 */
+/* } */
+
+/* #faq-side.topics li:hover, #faq-side.topics li.active{ */
+/* 	background-image:url(../img/topics-active.png); */
+/* } */
+
+/* #faq-side.faq li{ */
+/* 	background-image:url(../img/question-blue.png);	 */
+/* } */
+
+/* #faq-side.faq li:hover, #faq-side.faq li.active{ */
+/* 	background-image:url(../img/question.png); */
+/* } */
+
+#faq-side > ul > li{
+	padding-left:25px; background-size:20px 20px; background-repeat:no-repeat; background-position:0 5px;
+	background-image:url(../img/topics.png);
 }
 
-#faq-side li:hover a, #faq-side li.active a{color:#777;}
 
-#faq-side.topics li{
-	background-image:url(../img/topics.png);	
-}
 
-#faq-side.topics li:hover, #faq-side.topics li.active{
-	background-image:url(../img/topics-active.png);
-}
-
-#faq-side.topics li{
-	background-image:url(../img/topics.png);	
-}
-
-#faq-side.topics li:hover, #faq-side.topics li.active{
-	background-image:url(../img/topics-active.png);
-}
-
-#faq-side.faq li{
-	background-image:url(../img/question-blue.png);	
-}
-
-#faq-side.faq li:hover, #faq-side.faq li.active{
-	background-image:url(../img/question.png);
-}
 
 
 

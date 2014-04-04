@@ -18,19 +18,21 @@
 				
 		<div id="content" class="wrapper">
 			<div id="body-wrapper" class="clearfix">
-
-				<h3 id="page-title">FAQ's</h3>
 				
+				<h3 id="page-title"><a href="faq">FAQ's</a></h3>
+								
 				<ul id="faq-side" class="topics left">
 					<h5 style="margin-left:10px;">FAQ Topics</h5>
-					<?php echo $cat_tree; ?>
+					<?php foreach ($cats as $cat){ ?>
+						<?php if($cat->slug == $curr_group->slug){ ?>
+							<li class="active"><a href="faq/group/<?php echo $cat->slug; ?>"><?php echo ucwords($cat->category); ?></a></li>				
+						<?php }else{ ?>
+							<li><a href="faq/group/<?php echo $cat->slug; ?>"><?php echo ucwords($cat->category); ?></a></li>
+						<?php } ?>				
+					<?php } ?>
 				</ul>
 				
 				<div id="item-list" class="left">
-					<p>Temukan jawaban dari pertanyaan-pertanyaan Anda yang sering juga ditanyakan oleh pelanggan lainnya.
-					Hubungi Customer Care Innovate bila pertanyaan Anda belum terjawab oleh FAQ ini.</p>
-					
-					<h4 style="color:#333; text-shadow:0 -1px 1px #999; font-size:2em; margin-top:30px;">Popular FAQs</h4>
 					<?php if($faqs != NULL){ ?>
 						<?php foreach ($faqs as $faq){ ?>
 							<div class="faq-item">
@@ -43,6 +45,8 @@
 						<?php } ?>
 			 		<?php } ?>
 		 		</div>
+		 		
+		 		<div style="clear:both"></div>
 		 	</div>
 		</div>
 		

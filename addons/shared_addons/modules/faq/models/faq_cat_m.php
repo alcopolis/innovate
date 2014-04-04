@@ -68,6 +68,57 @@ class Faq_Cat_m extends MY_Model {
 	}
 	
 	
+	
+	//Category tree
+	protected $temp = array();
+	
+	public function getTree($parent = NULL, $level = 0){
+		$result = $this->db->where('parent_id', $parent)->get($this->_table)->result();
+	
+		foreach($result as $row){
+			$this->temp[$row->id] = $row;
+			$this->getTree($row->id, $level+1);
+		}
+	
+		$tree = $this->temp;
+	
+		return $tree;
+	}
+	
+	
+	public function catTree(){
+		$raw = $this->db->where('parent_id', NULL)->get($this->_table)->result();
+		$child = array();
+		
+		foreach ($raw as $c){
+			$child[$c->id] = $c;
+			$child[$c->id]->child = $this->getChild(intval($c->id));
+		}
+		
+		return $child;
+	}
+	
+	public function getChild($id = NULL){
+		$result = array();
+		
+		if($id != NULL){
+			$childsRaw = $this->db->where('parent_id', $id)->get($this->_table)->result();
+			
+			foreach ($childsRaw as $chr){
+				$result[$chr->id] = $chr;
+				
+				if($chr->parent_id != NULL){
+					$result[$chr->id]->child = $this->getChild(intval($chr->id));
+				}
+			}
+		}else{
+			$result[$chr->id] = $chr;
+		}
+		
+		return $result;
+	}
+	
+	
 	//CRUD
 	public function insert_category($data){
 		if($this->db->insert($this->_table, $data)){
@@ -92,6 +143,5 @@ class Faq_Cat_m extends MY_Model {
 		}else{
 			return FALSE;
 		}
-		
 	}	
 }

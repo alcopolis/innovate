@@ -22,37 +22,45 @@
 					
 					<li>
 						<label for="title">Group Parent <span>*</span></label>
-						<div class="input">
-							<?php // echo form_dropdown('cat_tree', $cat_tree); ?>
-							
-							<select name="cat_tree">
-							<?php 
-								
-								$level = 0;
-								$spacer = '--';
-								
-								foreach ($cat_tree as $id=>$branch){
-									if($branch['parent'] == NULL){
-										echo '<option value="' . $id . '">' . $branch['cat'] . '</option>';
-									}else{
-										echo '<option value="' . $id . '">' . str_repeat($spacer, $branch['level']) . '&nbsp;' . $branch['cat'] . '</option>';
+						<div class="input">							
+							<select name="parent_id">
+								<option value="0">No Parent</option>
+								<?php 
+									
+									$level = 0;
+									$spacer = '- ';
+									
+									foreach ($cat_tree as $id=>$branch){
+										
+										$level = 0;
+										
+										if($branch->parent_id == NULL){
+											echo '<option value="' . $id . '">' . $branch->category . '</option>';
+										}else{	
+											$has_parent = true;
+											$pid = NULL;
+											$level = 1;
+											
+											while($has_parent == true){
+												if($pid == NULL){
+													$parent_id = $this->db->select('parent_id')->where('id', $branch->parent_id)->get('default_inn_faq_category')->row();
+												}else{
+													$parent_id = $this->db->select('parent_id')->where('id', $pid)->get('default_inn_faq_category')->row();
+												}
+																							
+	 											if($parent_id->parent_id != NULL){
+	 												$level++;
+	 												$pid = $parent_id->parent_id;
+	 											}else{
+	 												$has_parent = false;
+	 											}
+											}
+											
+											echo '<option value="' . $id . '">&nbsp;&nbsp;' . str_repeat($spacer, $level) . $branch->category . '</option>';
+										}
 									}
-								}
-							?>
+								?>
 							</select>
-							
-<!-- 							<select name="cat_tree"> -->
-<!-- 								<option value="top-level">Top Level</option> -->
-<!-- 								<option value="other">Other</option> -->
-<!-- 								<optgroup label="payment"> -->
-<!-- 									<option value="cara-bayar">Cara Bayar</option> -->
-<!-- 									<option value="mandiri-power-bills">Mandiri Power Bills</option> -->
-<!-- 									<option value="transfer-atm">Transfer ATM</option> -->
-<!-- 									<optgroup label="Billing"> -->
-<!-- 										<option value="apcc">APCC</option> -->
-<!-- 									</optgroup> -->
-<!-- 								</optgroup> -->
-<!-- 							</select> -->
 						</div>
 					</li>
 				</ul>

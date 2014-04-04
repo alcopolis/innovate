@@ -11,6 +11,7 @@ class Faq extends Public_Controller
 {
 	
 	protected $faq_data;
+	protected $cat_tree;
 	
 	public function __construct()
 	{
@@ -18,6 +19,10 @@ class Faq extends Public_Controller
 		
 		$this->load->model('faq_m');
 		$this->load->model('faq_cat_m');
+		
+		
+		//Get category tree
+		$this->cat_tree = $this->menu(0,$h="");
 	}
 	
 	
@@ -26,6 +31,7 @@ class Faq extends Public_Controller
 		->title($this->module_details['name'])
 		->append_css('module::faq.css')
 		->append_js('module::faq.js')
+		->set('cat_tree', $this->cat_tree)
 		->set($var)
 		->build($view);
 	}
@@ -39,6 +45,38 @@ class Faq extends Public_Controller
 
 		$this->render('index', array('faqs' => $this->faq_data, 'cats' => $faq_cat, 'curr_group' => NULL));
 	}
+	
+	
+	private function menu($parent=0,$hasil){
+ 		$w = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $parent . '"');
+
+ 		
+		if(($w->num_rows())>0)
+		{
+			$hasil .= '<ul>';
+		}
+		foreach($w->result() as $h)
+		{
+			
+			$c = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $h->id . '"');
+			
+			if(($c->num_rows()) > 0){
+				$hasil .= '<li class="has-children">' .$h->category;
+				$hasil = $this->menu($h->id,$hasil);
+			}else{
+				$hasil .= '<li><a href="faq/group/' . $h->slug . '">' . $h->category . '</a></li>';
+			}
+			
+			$hasil .= '</li>';
+		}
+		if(($w->num_rows)>0)
+		{
+			$hasil .= '</ul>';
+		}
+		return $hasil;
+	}
+	
+	
 	
 	public function group($group = NULL){
 		if($group != NULL){
