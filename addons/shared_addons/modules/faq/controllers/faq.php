@@ -53,7 +53,7 @@ class Faq extends Public_Controller
  		
 		if(($w->num_rows())>0)
 		{
-			$hasil .= '<ul>';
+			$hasil .= '<ul class="dropdown">';
 		}
 		foreach($w->result() as $h)
 		{

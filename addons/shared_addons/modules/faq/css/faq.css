@@ -55,11 +55,41 @@ h3#page-title a:hover{color:#FFF;}
 /* 	background-image:url(../img/question.png); */
 /* } */
 
-#faq-side > ul > li{
-	padding-left:25px; background-size:20px 20px; background-repeat:no-repeat; background-position:0 5px;
-	background-image:url(../img/topics.png);
-}
 
+#faq-side li{cursor:default; margin-left:20px !important;}
+#faq-side li.has-children ul{display:none;}
+
+
+/* #faq-side > ul > li{ */
+/* 	padding-left:30px; background-size:20px 20px; background-repeat:no-repeat; background-position:0 5px; */
+/* 	background-image:url(../img/topics.png); */
+/* } */
+
+/* #faq-side > ul > li > ul{ */
+/* 	margin-left:10px; */
+/* } */
+
+/* #faq-side > ul > li > ul > li > ul{ */
+/* 	margin-left:10px; */
+/* } */
+
+/* #faq-side > ul > li.has-children ul{ */
+/* 	display:none; */
+/* } */
+
+/* #faq-side > ul > li.has-children:hover > ul{ */
+/* 	display:block; */
+/* 	padding:0 10px 10px 10px; */
+/* } */
+
+/* #faq-side > ul > li.has-children:hover > ul li{ */
+/* 	margin: 0; */
+/* } */
+
+/* #faq-side > ul > li.has-children:hover > ul > li.has-children:hover > ul{ */
+/* 	display:block; */
+/* 	margin-left:10px; */
+/* } */
 
 
 

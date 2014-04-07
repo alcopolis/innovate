@@ -7,4 +7,12 @@ $(function(){
 	}else{
 		$('#item-list').height(sideH);
 	}
+	
+	$('#faq-side li.has-children').mouseover(function(){
+		$(this).children('ul.dropdown').show().addClass('opened');
+	});
+	
+	$('#faq-side li.has-children').mouseout(function(){
+		$(this).children('ul.dropdown').hide();
+	});
 })
