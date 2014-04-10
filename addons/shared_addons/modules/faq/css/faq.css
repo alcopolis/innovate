@@ -6,7 +6,7 @@
 }
 
 .faq a:hover{
-	color:#777;
+	color:#333;
 }
 
 .faq #body-wrapper{margin:40px auto 40px auto;}
@@ -22,74 +22,34 @@ h3#page-title a:hover{color:#FFF;}
 
 
 /* SIDE */
-/* #faq-side li{ */
-/* 	margin-left:20px; padding-left:25px;  */
-/* 	background-size:20px 20px; */
-/* 	background-repeat:no-repeat;	 */
-/* 	background-position:0 5px; */
-/* } */
-
-/* #faq-side li:hover a, #faq-side li.active a{color:#777;} */
-
-/* #faq-side.topics li{ */
-/* 	background-image:url(../img/topics.png);	 */
-/* } */
-
-/* #faq-side.topics li:hover, #faq-side.topics li.active{ */
-/* 	background-image:url(../img/topics-active.png); */
-/* } */
-
-/* #faq-side.topics li{ */
-/* 	background-image:url(../img/topics.png);	 */
-/* } */
-
-/* #faq-side.topics li:hover, #faq-side.topics li.active{ */
-/* 	background-image:url(../img/topics-active.png); */
-/* } */
-
-/* #faq-side.faq li{ */
-/* 	background-image:url(../img/question-blue.png);	 */
-/* } */
-
-/* #faq-side.faq li:hover, #faq-side.faq li.active{ */
-/* 	background-image:url(../img/question.png); */
-/* } */
 
 
-#faq-side li{cursor:default; margin-left:20px !important;}
-#faq-side li.has-children ul{display:none;}
+
+/* #faq-side li{cursor:default; margin-left:20px;} */
+/* #faq-side li.has-children{color:#0964BD;} */
+/* #faq-side li.has-children:hover{color:#777;} */
+/* #faq-side li.has-children ul{display:none; position:relative; margin:10px 0 0 0;} */
+/* #faq-side li.has-children ul > li{margin:0 0 2px 0; padding:5px 10px; background:#EEE; width:160px; font-size:13px;} */
+/* #faq-side li.has-children ul > li.has-children:after{content:" >>"; text-aling:right; display:block; float:right;} */
+/* #faq-side li.has-children ul > li > ul {display:none; position:absolute; top:0; left:182px; z-index:9999;} */
 
 
-/* #faq-side > ul > li{ */
-/* 	padding-left:30px; background-size:20px 20px; background-repeat:no-repeat; background-position:0 5px; */
-/* 	background-image:url(../img/topics.png); */
-/* } */
+#faq-side li{cursor:default; margin-left:20px;}
+#faq-side li.has-children{color:#0964BD;}
+#faq-side li.has-children:hover{color:#333;}
 
-/* #faq-side > ul > li > ul{ */
-/* 	margin-left:10px; */
-/* } */
+#faq-side li.has-children ul{display:none; position:relative; margin:0 0 0 0;}
+#faq-side li.has-children ul > li{margin:0 0 1px 0; padding:5px 10px; background:#0964BD; width:160px; font-size:13px;}
 
-/* #faq-side > ul > li > ul > li > ul{ */
-/* 	margin-left:10px; */
-/* } */
+#faq-side li.has-children ul > li:hover{background:#333;}
+#faq-side li.has-children ul > li a, #faq-side li.has-children ul > li.has-children{color:#FFF;}
 
-/* #faq-side > ul > li.has-children ul{ */
-/* 	display:none; */
-/* } */
+#faq-side li.has-children ul > li.has-children:after{content:" >>"; text-aling:right; display:block; float:right;}
+#faq-side li.has-children ul > li > ul {display:none; position:absolute; top:0; left:181px; z-index:9999; margin:0;}
 
-/* #faq-side > ul > li.has-children:hover > ul{ */
-/* 	display:block; */
-/* 	padding:0 10px 10px 10px; */
-/* } */
 
-/* #faq-side > ul > li.has-children:hover > ul li{ */
-/* 	margin: 0; */
-/* } */
 
-/* #faq-side > ul > li.has-children:hover > ul > li.has-children:hover > ul{ */
-/* 	display:block; */
-/* 	margin-left:10px; */
-/* } */
+
 
 
 
