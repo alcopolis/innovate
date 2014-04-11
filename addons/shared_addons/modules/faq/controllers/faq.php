@@ -78,18 +78,52 @@ class Faq extends Public_Controller
 	
 	
 	
+	
+	
+	
+	
+	
+// 	public function group($group = NULL){
+// 		if($group != NULL){
+// 			$faq_cat = $this->faq_cat_m->order_by('id', 'DESC')->get_category(NULL, FALSE);
+// 			$selected_cat = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
+// 			$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$selected_cat->id), NULL, FALSE);
+			
+// 			$curr_group = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
+// 			$this->render('faq', array('faqs' => $this->faq_data, 'cats' => $faq_cat, 'curr_group'=>$curr_group));
+// 		}else{
+// 			redirect('faq');
+// 		}
+// 	}
+
+	
 	public function group($group = NULL){
 		if($group != NULL){
-			$faq_cat = $this->faq_cat_m->order_by('id', 'DESC')->get_category(NULL, FALSE);
-			$selected_cat = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
-			$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$selected_cat->id), NULL, FALSE);
-			
 			$curr_group = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
-			$this->render('faq', array('faqs' => $this->faq_data, 'cats' => $faq_cat, 'curr_group'=>$curr_group));
+			$grp_child = $this->faq_cat_m->get_category_by(array('parent_id'=>$curr_group->id), NULL, FALSE);
+			
+			$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$curr_group->id), NULL, FALSE);
+			
+			if(count($grp_child) > 0){
+				foreach($grp_child as $child){
+					$name = $child->id;
+					//$this->faq_data->$name = $child;
+					//var_dump($child);
+				}
+			}
+			
+			var_dump($grp_child);
 		}else{
 			redirect('faq');
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public function view($slug = NULL){
