@@ -85,30 +85,33 @@ class Admin_Groups extends Admin_Controller
 	}
 	
 	
+	function edit($slug){
+		$this->page_data->title = 'Edit Group';
+		$this->page_data->action = 'edit';
+		
+		$this->cat_data = $this->faq_cat_m->get_category_by(array('slug'=>$slug), NULL, TRUE);
+		
+		if($this->form_validation->run()){
+			$data = $this->alcopolis->array_from_post(array('parent_id'), $this->input->post());
+			
+			if($this->faq_cat_m->update_category($this->cat_data->id, $data)){				
+				$this->cat_data = $this->faq_cat_m->get_category_by(array('slug'=>$slug), NULL, TRUE);
+				
+				if($this->input->post('btnAction') == 'save_exit'){
+					redirect('admin/faq');
+				}
+			}
+		}
+			
+		$this->render('admin/category_form', array('cat'=>$this->cat_data, 'page'=>$this->page_data, 'parent_cat'=>$this->cat_data->parent_id));
+		
+	}
+	
 	
 	function delete($slug){
 		if($this->faq_cat_m->delete_category($slug)){
 			redirect('admin/faq');
 		}
 	}
-	
-	
-	
-// 	protected $temp = array();
-	
-// 	private function getTree($parent = NULL, $level = 0){
-// 		$result = $this->db->where('parent_id', $parent)->get('default_inn_faq_category')->result();
-		
-		
-// 		foreach($result as $row){
-// 			$this->temp[$row->id] = $row;
-			
-// 			$this->getTree($row->id, $level+1);
-// 		}
-		
-// 		$tree = $this->temp;
-		
-// 		return $tree;
-// 	}
 	
 }

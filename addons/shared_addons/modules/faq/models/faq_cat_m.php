@@ -72,7 +72,7 @@ class Faq_Cat_m extends MY_Model {
 	//Category tree
 	protected $temp = array();
 	
-	public function getTree($parent = NULL, $level = 0){
+	public function getTree($parent = 0, $level = 0){
 		$result = $this->db->where('parent_id', $parent)->get($this->_table)->result();
 	
 		foreach($result as $row){
@@ -128,11 +128,16 @@ class Faq_Cat_m extends MY_Model {
 		}
 	}
 	
-	public function update_category(){}
+	public function update_category($id, $data){
+		if($this->db->where('id', $id)->update($this->_table, $data)){
+			return TRUE;
+		}
+		
+		return FALSE;
+	}
 	
 	public function delete_category($slug){
-		$this->db->where('slug', $slug);
-		$cat_data = $this->db->get($this->_table)->row();
+		$cat_data = $this->db->where('slug', $slug)->get($this->_table)->row();
 
 		if($this->db->delete($this->_table, array('id' => $cat_data->id))){
 			if($this->db->delete('inn_faq', array('category' => $cat_data->id))){

@@ -55,6 +55,7 @@ $(function(){
 						</li>
 						<li>
 							<?php echo anchor('admin/faq/groups/delete/'.$key, 'Delete Group', 'rel="'.$key.'" class="tooltip-e confirm btn button red"'); ?>
+							<?php echo anchor('admin/faq/groups/edit/'.$key, 'Edit Group', 'rel="'.$key.'" class="tooltip-e btn button blue"'); ?>
 						</li>
 					</ul>
 				</section>

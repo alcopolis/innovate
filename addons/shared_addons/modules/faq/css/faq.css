@@ -1,4 +1,4 @@
-.faq{color:#007DC3;}
+.faq{color:#0964BD;}
 
 
 .faq a{
@@ -9,7 +9,7 @@
 	color:#333;
 }
 
-.faq #body-wrapper{margin:40px auto 40px auto;}
+.faq #body-wrapper, .faq-view #body-wrapper{margin:40px auto 40px auto;}
 
 #faq-side{
 	position: relative; 
@@ -23,18 +23,7 @@ h3#page-title a:hover{color:#FFF;}
 
 /* SIDE */
 
-
-
-/* #faq-side li{cursor:default; margin-left:20px;} */
-/* #faq-side li.has-children{color:#0964BD;} */
-/* #faq-side li.has-children:hover{color:#777;} */
-/* #faq-side li.has-children ul{display:none; position:relative; margin:10px 0 0 0;} */
-/* #faq-side li.has-children ul > li{margin:0 0 2px 0; padding:5px 10px; background:#EEE; width:160px; font-size:13px;} */
-/* #faq-side li.has-children ul > li.has-children:after{content:" >>"; text-aling:right; display:block; float:right;} */
-/* #faq-side li.has-children ul > li > ul {display:none; position:absolute; top:0; left:182px; z-index:9999;} */
-
-
-#faq-side li{cursor:default; margin-left:20px;}
+#faq-side li{cursor:default; margin-left:10px;}
 #faq-side li.has-children{color:#0964BD;}
 #faq-side li.has-children:hover{color:#333;}
 
@@ -63,11 +52,23 @@ h3#page-title a:hover{color:#FFF;}
 	margin-left:20px;
 }
 
+#item-list h1{
+	font-size:30px;
+	color:#333;
+}
+
 .faq-item{
 	width:100%;
 	margin:20px 0; padding:0;
-	border-left:3px solid #EEE;
+	border-left:2px solid #CCC;
 }
+
+.faq-view .faq-item{
+	margin:0; padding:0;
+}
+
+.faq-view #item-list{border-left:2px solid #CCC;}
+
 
 .faq-item:first-child{border-top:none;}
 .faq-item:last-child{border-bottom:none;}
@@ -76,18 +77,19 @@ h3#page-title a:hover{color:#FFF;}
 	font-size:1.25em;
 	margin:0 0 0 20px; padding:5px 0;
 	font-weight:600;
-	color:#007DC3;	
+	color:#0964BD;	
 }
 
 .faq-content{
 	margin:0;
 	line-height:1.2em;
+	width:95%;
 }
 
 .faq-q, .faq-a{
-	margin:0px 20px; padding:5px 10px;
+	margin:0px 20px 0 10px; padding:5px 10px;
 	font-size:.85em;
-	color:#007DC3;	
+	color:#0964BD;	
 		
 	padding-left:28px;
 	background-size:20px 20px;
@@ -115,8 +117,9 @@ h3#page-title a:hover{color:#FFF;}
 }
 
 .faq-content .faq-a {
-	margin-bottom:20px;padding-top:10px;
-	border-top:1px dotted #CCC;	
+	margin-bottom:20px;
+	padding-top:10px;
+	border-top:1px dotted #CCC;
 }
 
 .faq-content .faq-a p, .faq-content .faq-a ul, .faq-content .faq-a ol{
@@ -130,4 +133,50 @@ h3#page-title a:hover{color:#FFF;}
 
 .faq-content .faq-a ul li{
 	list-style:square;
+}
+
+
+span.more a{
+	font-size:11px;
+	color:#FFF;
+	background:#0964BD;
+	padding:2px 10px;
+}
+
+span.more a:hover{
+	background:#333;	
+	color:#FFF;
+}
+
+
+/* ----------------------- SUBGROUP ------------------------- */
+
+.faq-item.sub-group{
+	margin:20px 0;
+	padding:0 0 10px 0;
+	border:none;
+}
+
+.sub-group h3{
+	border-bottom:1px dotted #CCC;
+	color:#333;
+	font-weight:bold;
+	padding:3px 10px;
+}
+
+.sub-group ul{
+	margin:10px;
+	-webkit-column-count:3; /* Chrome, Safari, Opera */
+	-moz-column-count:3; /* Firefox */
+	column-count:3;
+
+	-webkit-column-gap:40px; /* Chrome, Safari, Opera */
+	-moz-column-gap:40px; /* Firefox */
+	column-gap:40px;
+}
+
+.sub-group ul li{	
+	font-size:12px;
+	margin-left:20px;
+	list-style-type:square;
 }

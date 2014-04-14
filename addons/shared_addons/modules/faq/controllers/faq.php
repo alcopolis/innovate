@@ -47,82 +47,32 @@ class Faq extends Public_Controller
 	}
 	
 	
-	private function menu($parent=0,$hasil){
- 		$w = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $parent . '"');
-
- 		
-		if(($w->num_rows())>0)
-		{
-			$hasil .= '<ul class="dropdown">';
-		}
-		foreach($w->result() as $h)
-		{
-			
-			$c = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $h->id . '"');
-			
-			if(($c->num_rows()) > 0){
-				$hasil .= '<li class="has-children">' .$h->category;
-				$hasil = $this->menu($h->id,$hasil);
-			}else{
-				$hasil .= '<li><a href="faq/group/' . $h->slug . '">' . $h->category . '</a></li>';
-			}
-			
-			$hasil .= '</li>';
-		}
-		if(($w->num_rows)>0)
-		{
-			$hasil .= '</ul>';
-		}
-		return $hasil;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-// 	public function group($group = NULL){
-// 		if($group != NULL){
-// 			$faq_cat = $this->faq_cat_m->order_by('id', 'DESC')->get_category(NULL, FALSE);
-// 			$selected_cat = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
-// 			$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$selected_cat->id), NULL, FALSE);
-			
-// 			$curr_group = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
-// 			$this->render('faq', array('faqs' => $this->faq_data, 'cats' => $faq_cat, 'curr_group'=>$curr_group));
-// 		}else{
-// 			redirect('faq');
-// 		}
-// 	}
-
-	
 	public function group($group = NULL){
+		$childs = new stdClass();
+		
 		if($group != NULL){
 			$curr_group = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
 			$grp_child = $this->faq_cat_m->get_category_by(array('parent_id'=>$curr_group->id), NULL, FALSE);
 			
-			$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$curr_group->id), NULL, FALSE);
 			
 			if(count($grp_child) > 0){
-				foreach($grp_child as $child){
-					$name = $child->id;
-					//$this->faq_data->$name = $child;
-					//var_dump($child);
+				//Show sub group
+				
+				foreach($grp_child as $id=>$child){
+					$childs->$id = $child;
+					$childs->$id->sub_faqs = $this->faq_m->select('title,slug')->get_faq_by(array('category'=>$child->id), NULL, FALSE);
 				}
+				
+				$this->render('faq_sub', array('faqs' => $childs, 'curr_group'=>$curr_group));
+			}else{
+				//Show faqs
+				$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$curr_group->id), NULL, FALSE);
+				$this->render('faq', array('faqs' => $this->faq_data, 'curr_group'=>$curr_group));
 			}
-			
-			var_dump($grp_child);
 		}else{
 			redirect('faq');
 		}
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -140,5 +90,41 @@ class Faq extends Public_Controller
 		}else{
 			redirect('faq');
 		}
+	}
+	
+	
+	
+	
+	
+	// Utility
+	
+	private function menu($parent=0,$hasil){
+		$w = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $parent . '"');
+	
+		if(($w->num_rows())>0)
+		{
+			$hasil .= '<ul class="dropdown">';
+		}
+	
+		foreach($w->result() as $h)
+		{
+			$c = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $h->id . '"');
+				
+			if(($c->num_rows()) > 0){
+				$hasil .= '<li class="has-children"><a href="faq/group/' . $h->slug . '">' .$h->category . '</a>';
+				$hasil = $this->menu($h->id,$hasil);
+			}else{
+				$hasil .= '<li><a href="faq/group/' . $h->slug . '">' . $h->category . '</a></li>';
+			}
+				
+			$hasil .= '</li>';
+		}
+	
+		if(($w->num_rows)>0)
+		{
+			$hasil .= '</ul>';
+		}
+	
+		return $hasil;
 	}
 }

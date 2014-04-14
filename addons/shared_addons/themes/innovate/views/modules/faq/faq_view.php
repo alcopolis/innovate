@@ -8,7 +8,7 @@
 	{{ endif }}
 </head>
 
-<body id="top" class="faq">
+<body id="top" class="faq-view">
 	
 		{{ integration:analytics }}
 	
@@ -19,7 +19,7 @@
 		<div id="content" class="wrapper">
 			<div id="body-wrapper" class="clearfix">
 
-				<h3 id="page-title"><a href="faq">FAQ's</a> &raquo; <span style="font-size:.75em;"><a href="faq/group/<?php echo $curr_group->slug?>">Topics</a></span></h3>
+				<h3 id="page-title"><a href="faq">FAQ's</a> &raquo; <span style="font-size:.85em;"><a href="faq/group/<?php echo $curr_group->slug?>"><?php echo $curr_group->category?></a></span></h3>
 				
 				<ul id="faq-side" class="faq left">
 					<h5 style="margin-left:10px;"><?php echo $curr_group->category?></h5>
@@ -29,7 +29,7 @@
 				</ul>
 				
 				<?php if($faqs != NULL){ ?>
-					<div id="item-list" class="left" style="border-left:3px solid #EEE;">
+					<div id="item-list" class="left">
 						<div class="faq-item" style="border-left:none;">
 							<h1 class="faq-subject"><?php echo $faqs->title; ?></h1>
 							<div class="faq-content">

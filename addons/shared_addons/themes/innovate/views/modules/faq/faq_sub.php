@@ -22,25 +22,23 @@
 				<h3 id="page-title"><a href="faq">FAQ's</a></h3>
 								
 				<ul id="faq-side" class="topics left">
-					<h5 style="margin-left:10px;"></h5>
 					<?php echo $cat_tree; ?>
 				</ul>
 				
 				<div id="item-list" class="left">
-					<h1><?php echo $curr_group->category; ?></h1>
-					<?php if($faqs != NULL){ ?>
-						<?php foreach ($faqs as $faq){ ?>
-							<div class="faq-item">
-								<div class="faq-subject"><a href="faq/view/<?php echo $faq->slug; ?>"><?php echo $faq->title; ?></a></div>
-								<div class="faq-content">
-									<div class="faq-q"><?php echo $faq->question; ?></div>
-									<div class="faq-a">
-										<?php echo substr(strip_tags ($faq->answer), 0, 200) . '...'; ?><br/><br/>
-										<span class="more"><a href="faq/view/<?php echo $faq->slug;?>">Baca Selengkapnya &raquo;</a></span>
-									</div>
-								</div>
+					<?php if($faqs != NULL){ ?>	
+						<h1><?php echo $curr_group->category; ?></h1>					
+						<?php foreach ($faqs as $id=>$faq){ ?>
+							<div class="faq-item sub-group">
+								<h3>&raquo; <?php echo $faq->category; ?></h3>
+								<ul>
+									<?php foreach ($faq->sub_faqs as $sub){ ?>
+										<li><a href="faq/view/<?php echo $sub->slug; ?>"><?php echo $sub->title; ?></a></li>
+									<?php } ?>
+								</ul>
 							</div>
 						<?php } ?>
+						
 			 		<?php } ?>
 		 		</div>
 		 		
