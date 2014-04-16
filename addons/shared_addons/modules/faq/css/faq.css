@@ -1,11 +1,11 @@
 .faq{color:#0964BD;}
 
 
-.faq a{
+.faq a, .faq-view a{
 	color:#0964BD;
 }
 
-.faq a:hover{
+.faq a:hover, .faq-view a:hover{
 	color:#333;
 }
 
@@ -22,8 +22,9 @@ h3#page-title a:hover{color:#FFF;}
 
 
 /* SIDE */
-
-#faq-side li{cursor:default; margin-left:10px;}
+#faq-side {width:25%; position:relative; padding:0; margin:0;}
+#faq-side ul{margin-left:10px;}
+#faq-side li{cursor:default;}
 #faq-side li.has-children{color:#0964BD;}
 #faq-side li.has-children:hover{color:#333;}
 
@@ -75,7 +76,7 @@ h3#page-title a:hover{color:#FFF;}
 
 .faq-subject{
 	font-size:1.25em;
-	margin:0 0 0 20px; padding:5px 0;
+	margin:0 0 0 10px; padding:5px 0;
 	font-weight:600;
 	color:#0964BD;	
 }

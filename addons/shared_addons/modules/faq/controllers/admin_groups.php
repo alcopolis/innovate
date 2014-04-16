@@ -67,7 +67,7 @@ class Admin_Groups extends Admin_Controller
 			$data = $this->alcopolis->array_from_post(array('category', 'parent_id'), $this->input->post());
 
 			if($data['parent_id'] == '0'){
-				$data['parent_id'] = NULL;
+				$data['parent_id'] = 0;
 			}
 			
 			//create slug

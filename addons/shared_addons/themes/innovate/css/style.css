@@ -72,6 +72,12 @@ header{
 	position:fixed; top:0; left:0;
 	height:80px;
 	z-index:99999;
+	
+	-moz-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+    -webkit-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+    -ms-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+    -o-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+	transition: box-shadow .75s ease-out, background-color 1s ease-out;
 }
 
 /* Site Logo */

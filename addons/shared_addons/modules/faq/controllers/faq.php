@@ -111,10 +111,10 @@ class Faq extends Public_Controller
 			$c = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $h->id . '"');
 				
 			if(($c->num_rows()) > 0){
-				$hasil .= '<li class="has-children"><a href="faq/group/' . $h->slug . '">' .$h->category . '</a>';
+				$hasil .= '<li class="has-children"><a href="faq/category/' . $h->slug . '">' .$h->category . '</a>';
 				$hasil = $this->menu($h->id,$hasil);
 			}else{
-				$hasil .= '<li><a href="faq/group/' . $h->slug . '">' . $h->category . '</a></li>';
+				$hasil .= '<li><a href="faq/category/' . $h->slug . '">' . $h->category . '</a></li>';
 			}
 				
 			$hasil .= '</li>';

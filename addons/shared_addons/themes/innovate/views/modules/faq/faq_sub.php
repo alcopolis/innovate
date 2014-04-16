@@ -19,11 +19,11 @@
 		<div id="content" class="wrapper">
 			<div id="body-wrapper" class="clearfix">
 				
-				<h3 id="page-title"><a href="faq">FAQ's</a></h3>
+				<h3 id="page-title"><a href="faq">Frequently Asked Questions</a></h3>
 								
-				<ul id="faq-side" class="topics left">
+				<div id="faq-side" class="left">
 					<?php echo $cat_tree; ?>
-				</ul>
+				</div>
 				
 				<div id="item-list" class="left">
 					<?php if($faqs != NULL){ ?>	
@@ -41,12 +41,10 @@
 						
 			 		<?php } ?>
 		 		</div>
-		 		
 		 		<div style="clear:both"></div>
 		 	</div>
 		</div>
 		
-
 		<footer>
 	    	{{ theme:partial name="footer" }}
 	    </footer> 

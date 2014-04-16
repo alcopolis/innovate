@@ -19,14 +19,15 @@
 		<div id="content" class="wrapper">
 			<div id="body-wrapper" class="clearfix">
 
-				<h3 id="page-title"><a href="faq">FAQ's</a> &raquo; <span style="font-size:.85em;"><a href="faq/group/<?php echo $curr_group->slug?>"><?php echo $curr_group->category?></a></span></h3>
+				<h3 id="page-title"><a href="faq">FAQ's</a> &raquo; <span style="font-size:.85em;"><a href="faq/category/<?php echo $curr_group->slug?>"><?php echo $curr_group->category?></a></span></h3>
 				
-				<ul id="faq-side" class="faq left">
-					<h5 style="margin-left:10px;"><?php echo $curr_group->category?></h5>
-					<?php foreach ($all_faqs as $faq){ ?>
-						<li><a href="faq/view/<?php echo $faq->slug; ?>"><?php echo ucwords($faq->title); ?></a></li>								
-					<?php } ?>
-				</ul>
+				<div id="faq-side"  class="left">
+					<ul class="topics">
+						<?php foreach ($all_faqs as $faq){ ?>
+							<li><a href="faq/view/<?php echo $faq->slug; ?>"><?php echo ucwords($faq->title); ?></a></li>								
+						<?php } ?>
+					</ul>
+				</div>
 				
 				<?php if($faqs != NULL){ ?>
 					<div id="item-list" class="left">

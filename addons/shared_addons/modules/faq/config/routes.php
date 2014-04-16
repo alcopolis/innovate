@@ -21,8 +21,8 @@
 */
 
 // front-end
-// $route['faq/index(/:any)?']					= 'index$1';
-// $route['faq/view(/:any)?']				= 'view$1';
+$route['faq/index(/:any)?']				= 'index$1';
+$route['faq/category(/:any)?']			= 'group$1';
 
 // back-end
 $route['admin/faq(/:any)?']				= 'admin$1';
