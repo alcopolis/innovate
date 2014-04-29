@@ -24,8 +24,8 @@ $(function(){
 	//Set tab data
 	$('.pack-container').addClass('hide');
 	$('#pack-nav li:first').addClass('current');
-	$('#package').children('.pack-container:first').removeClass('hide');
-	$('#package').children('.pack-container:first').addClass('active');
+	$('.package').children('.pack-container:first').removeClass('hide');
+	$('.package').children('.pack-container:first').addClass('active');
 	
 	//Tab click
 	$('#pack-nav li').click(function(e){

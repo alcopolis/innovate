@@ -98,7 +98,14 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 #navigation #menu ul#main-menu{
 	position:relative;
 	list-style: none outside none
-	margin:0; padding:0;	
+	margin:0; padding:0;
+	border-bottom:1px dotted #b3b3b3;
+
+	-moz-transition: border-bottom .75s ease-out;
+    -webkit-transition: border-bottom .75s ease-out;
+    -ms-transition: border-bottom .75s ease-out;
+    -o-transition: border-bottom .75s ease-out;
+	transition: border-bottom .75s ease-out;
 }
 
 #navigation #menu ul#main-menu > li{
@@ -161,6 +168,10 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 	background: linear-gradient(to bottom,  #005099 0%,#2989d8 15%,#51a3cc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005099', endColorstr='#51a3cc',GradientType=0 ); /* IE6-9 */
 		
+}
+
+#navigation #menu ul#main-menu li.has_children:last-child > ul.dropdown{
+	right:0;
 }
 
 #navigation #menu ul#main-menu li.has_children:hover > ul.dropdown{

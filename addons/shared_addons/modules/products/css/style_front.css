@@ -41,7 +41,7 @@ body.product .content-wrapper {
 /* 	background-color:#007DC3; */
 	font-size:13px;
 	line-height:auto;
-	text-shadow:0 -1px 2px #666;
+/* 	text-shadow:0 -1px 2px #666; */
 	color:#FFF;
 	border-top:1px solid #2797ff;
 }
@@ -59,12 +59,11 @@ body.product .content-wrapper {
 
 
 /*Packages Nav and container*/
-#package{
+.package{
 	color:black; text-shadow:none;
 	overflow:hidden;
-	line-height:1.25em;
+	line-height:1.5em;
 }
-
 
 ul#pack-nav{
 	clear:both;
@@ -81,15 +80,32 @@ ul#pack-nav li{
 	padding:5px;
 }
 
-ul#pack-nav li.current a{
+.package a{
 	color:#007CC3;
 }
+
+
+
+ul#pack-nav li a{
+	color:#007CC3;
+}
+
+ul#pack-nav li a:hover{
+	color:#0BC4EE;
+}
+
+ul#pack-nav li.current a{
+	color:#717172;
+}
+
+
 
 ul#pack-nav li.bundle-nav{
 	background:#007CC3; 
 	float:right;
 	border-radius:5px;
 }
+
 ul#pack-nav li.bundle-nav:hover {background:#007C20}
 ul#pack-nav li.bundle-nav a{color:#FFF; font-weight:normal;}
 
@@ -131,7 +147,7 @@ div.pack-container .packs .pack-item .total{color:#125DBA}
 	padding:5px 0;
 	text-align: center;
 }
-.pack-name{border-bottom:1px dotted #999; margin:5px; color:#222; }
+.pack-name{border-bottom:1px dotted #999; margin:5px; color:#0071CE; }
 .pack-price{border-top:1px dotted #999; margin:10px;}
 
 
@@ -142,7 +158,7 @@ div.pack-container .packs .pack-item .total{color:#125DBA}
 
 
 /* Package Info Table */
-#package{
+.package{
 	position:relative;
 	
 	width:100%;
@@ -174,7 +190,7 @@ table.package-list th, table.package-list td{
 /* Terms */
 #toc{
 	text-shadow:none; 
-	margin:-20px auto 0 auto;
+	margin:0px auto 0 auto;
 /* 	border:1px solid #CCC;  */
 	border-radius:0 0 5px 5px; 
 	padding:10px 0; 

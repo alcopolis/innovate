@@ -33,7 +33,7 @@ class Products extends Public_Controller
 	public function view($slug){
 		$this->product = $this->products_m->get_product_by(NULL, array('slug' => $slug), true);
 		
-		$pack_group_id = $this->packages_m->group_by('group_id')->order_by('id', 'ASC')->get_packages_by('group_id', array('prod_id' => $this->product->id));
+		$pack_group_id = $this->packages_m->group_by('group_id')->order_by('id', 'DESC')->get_packages_by('group_id', array('prod_id' => $this->product->id));
 		$groups = array();
 		
 		foreach($pack_group_id as $pgi){			

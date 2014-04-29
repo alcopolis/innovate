@@ -6,21 +6,26 @@ $(document).ready(function() {
 		
 		$('ul#main-menu > li').mouseenter(function(){
 			$(this).children('ul.dropdown').slideDown(400)
-		})
+		});
 		
 		$('ul#main-menu > li').mouseleave(function(){
 			$(this).children('ul.dropdown').slideUp(150)
-		})
+		});
 		
+		
+		$('ul#main-menu li.no-click > a').click(function(e){
+			e.preventDefault();
+		});
 		
 		$(document).scroll(function(){
-			console.log($(this).scrollTop());
 			if($(this).scrollTop() > 60){
-				$('header').css('box-shadow', '0 1px 10px #999');	
+				$('header').css('box-shadow', '0 1px 10px #999');
+				$('#navigation #menu ul#main-menu').css('border-bottom', 'none')
 			}else{
+				$('#navigation #menu ul#main-menu').css('border-bottom', '1px dotted #b3b3b3')
 				$('header').css('box-shadow', 'none');	
 			}
-		})
+		});
 		
 	// ====================================== Orbit Slider ======================================= //
 		
