@@ -24,4 +24,4 @@
 
 // back-end
 $route['products/admin/edit(/:num)?']		= 'admin/edit$1';
-$route['products/admin/packages(/:any)?']		= 'admin_packages$1';
+$route['products/admin/packages(/:any)?']	= 'admin_packages$1';
