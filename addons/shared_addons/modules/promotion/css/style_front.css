@@ -8,9 +8,11 @@ body.promo{
 body.promo ul {}
 body.promo ul li{list-style-type:square; margin-left:20px}
 
-#promo-content #poster{margin:20px 0;}
+#content{width:90%; margin:0 auto}
+#promo-content{padding-top:40px;}
+#promo-content #poster{margin:0 0 20px 0;}
 #promo-content article{
-	width:75%; 
+	width:73%; 
 	float:left; 
 	padding:0 1% 40px 1%;
 }
