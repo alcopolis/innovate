@@ -115,12 +115,14 @@ class Admin_Channels extends Admin_Controller
 				if($upload_result['status']){
 					$data['logo'] = $upload_result['uri'];
 				}
-				
-				
-				if($this->epg_ch_m->update_channel($id, $data)){
-					if($this->input->post('btnAction') == 'save_exit'){
-						redirect('admin/epg/channels');
-					}
+			}
+			
+//			var_dump($data['is_active'], $data['hd']);
+			if($this->epg_ch_m->update_channel($id, $data)){
+				if($this->input->post('btnAction') == 'save_exit'){
+					redirect('admin/epg/channels');
+				}else{
+					$this->ch_data = $this->epg_ch_m->get_channel($id);
 				}
 			}
 		}

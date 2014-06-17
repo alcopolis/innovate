@@ -48,11 +48,14 @@
 									<br/>
 									
 									<div class="input">
-										<?php echo form_checkbox('is_active', $ch->is_active, $ch->is_active == 1 ? TRUE : FALSE, 'style="min-width:0 !important"'); ?>&nbsp;&nbsp;<strong>Is Active</strong>
-										<input type='hidden' value='<?php echo $ch->is_active; ?>' name="is_active">
-										&nbsp;&nbsp;&nbsp;&nbsp;
-										<?php echo form_checkbox('hd', $ch->hd, $ch->hd == 1 ? TRUE : FALSE, 'style="min-width:0 !important"'); ?>&nbsp;&nbsp;<strong>HD</strong>
-										<input type='hidden' value='<?php echo $ch->hd; ?>' name="hd">
+										<div>
+											<?php echo form_checkbox('is_active', $ch->is_active, $ch->is_active == 1 ? TRUE : FALSE, 'style="min-width:0 !important"'); ?>&nbsp;&nbsp;<strong>Is Active</strong>
+											<input type='hidden' value='<?php echo $ch->is_active; ?>' name="is_active">
+										</div>
+										<div>
+											<?php echo form_checkbox('hd', $ch->hd, $ch->hd == 1 ? TRUE : FALSE, 'style="min-width:0 !important"'); ?>&nbsp;&nbsp;<strong>HD</strong>
+											<input type='hidden' value='<?php echo $ch->hd; ?>' name="hd">
+										</div>
 									</div>
 																	
 									<br/>
