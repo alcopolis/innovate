@@ -69,8 +69,6 @@ class Epg_Ch_m extends MY_Model {
 		
 		if($fields != ''){
 			$this->db->select(fields);
-		}else{
-			$this->db->select('*');
 		}
 		
 		$this->db->where($where);
@@ -87,10 +85,8 @@ class Epg_Ch_m extends MY_Model {
 		
 		if($this->db->update($this->_table, $data)){
 			return TRUE;
-			echo 'TRUE';
 		}else{
 			return FALSE;
-			echo 'FALSE';
 		}
 	}
 	

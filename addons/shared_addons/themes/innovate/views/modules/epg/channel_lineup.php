@@ -24,6 +24,7 @@
 		$(document).ready(function(){
 			$('.ch').click(function(){
 				$('#ch-detail').removeClass('hide');
+				$('img#logo').attr('src', $(this).attr('data-logo'));
 				$('#cat').html($(this).attr('data-cat'));
 				$('#name').html($(this).attr('data-name'));
 				$('#num').html($(this).attr('data-num'));
@@ -77,7 +78,7 @@
 					</div>
 					<div id="side" class="left">
 						<div id="ch-detail" class="side-item hide clearfix">
-							<img id="logo" src="{{theme:image_path}}themes/default-icon.jpg" style="float:left; width:96px; height:96px; background:#CCC; margin-right:10px;" />
+							<img id="logo" src="" style="float:left; width:96px; height:96px; background:#CCC; margin-right:10px;" />
 							<h6 id="name"></h6>
 							<div>Ch: <span id="num"></span></div>
 							<div id="cat">Category: <?php echo $category; ?></div>

@@ -6,7 +6,7 @@
 
 .input-div input{margin:0}
 
-.input, .input label{margin:0 !important;}
+.input input, .input label{margin:0 !important;}
 
 .poster{
 	margin-right:20px;
@@ -29,9 +29,10 @@ span#ch{
 	color:#999;
 }
 
-
-
-
+#channel-content-fields table{width:400px;}
+#channel-content-fields table, #channel-content-fields tr, #channel-content-fields td{background:none; border:none;}
+#channel-content-fields td{padding:0;}
+#channel-content-fields table tr td label span{color:#F00 !important;}
 
 
 /* ====================================================== Frontend Show Page ======================================================= */

@@ -243,7 +243,7 @@ class Plugin_Epg extends Plugin
 			}else{
 				$desc = 'No Description';
 			}
-			
+						
 			if($ch->logo != ''){
 				$logo = $ch->logo;
 			}else{
@@ -253,7 +253,7 @@ class Plugin_Epg extends Plugin
 			$ch_cat = $this->epg_ch_m->get_category_by(array('id' => $ch->cat), TRUE);
 			//var_dump($ch_cat);
 			
-			$data .= '<div class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $ch_cat->cat . '" data-logo="' . $logo . '" data-desc="' . $desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';	
+			$data .= '<div style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $ch_cat->cat . '" data-logo="' . $logo . '" data-desc="' . $desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';	
 		}
 		
 		return $data;
