@@ -260,6 +260,35 @@ class Plugin_Epg extends Plugin
 	}
 	
 	
+	function ch_lineup_list(){
+		// 		Channel Category
+		// 		0	Uncategorized
+		// 		1	National FTA
+		// 		2	International FTA
+		// 		3	Movies
+		// 		4	Entertainment
+		// 		5	Knowledge
+		// 		6	Life Style
+		// 		7	Sports
+		// 		8	Kids And Toddler
+		// 		9	News
+		
+		$data;
+		
+		if($this->attribute('category') == ''){
+			$data = $this->epg_ch_m->get_categories();
+		}else{
+			$data = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), FALSE);
+		}
+		
+		foreach($data as $key=>$val){
+			$data[$key]->list = $this->epg_ch_m->get_channel_by(array('cat' => $data[$key]->id, 'is_active'=>1), '', FALSE);
+		}
+		
+		return $data;
+	}
+	
+	
 	
 	
 	

@@ -1,12 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * This is a sample module for PyroCMS
- *
- * @author 		Jerel Unruh - PyroCMS Dev Team
- * @website		http://unruhdesigns.com
- * @package 	PyroCMS
- * @subpackage 	Sample Module
- */
+
+
 class Epg_Ch_m extends MY_Model {
 	
 	/** @var array The validation rules */
