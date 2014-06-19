@@ -23,6 +23,7 @@ class Admin extends Admin_Controller
 		$this->lang->load('epg');
 	}
 
+	
 	/**
 	 * List all items
 	 */

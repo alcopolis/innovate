@@ -38,6 +38,12 @@ class Admin_Upload extends Admin_Controller
 		->append_css('module::style.css')
 		->build('admin/upload_form');
 	}
-
 	
+
+	public function do_import(){
+		//$this->alcopolis->upload_file();
+		$result = $this->alcopolis->import_csv('csvdata');
+		
+		var_dump($result);
+	}
 }
