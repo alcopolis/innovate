@@ -123,6 +123,14 @@ $(function(){
 	});
 	
 	
+	
+	//View Ch List by Packages
+	$('a.view-list-ch').click(function(e){
+		var pack = $(this).attr('data-ch-list');
+		console.log(pack);
+	});
+
+	
 //	$('#subscribe a').click(function(e){
 //		e.preventDefault;
 //		url = $(this).attr('href');
@@ -195,6 +203,12 @@ function showPopup(url, mime){
 	}
 }
 
+
 function gotoURL(url){
 	console.log(url);
+}
+
+
+function getList(){
+	
 }

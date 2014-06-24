@@ -52,6 +52,49 @@ class Admin extends Admin_Controller
 	 */
 	public function index()
 	{
+// 		$this->filter =  new stdClass();
+		
+// 		if($this->input->post() == NULL){
+			
+// 			$this->filter->search_key = '';
+// 			$this->filter->search_term = '';
+// 			$this->filter->status = '';
+// 			$this->filter->sort = '';
+				
+// 			$this->subscribe_m->order_by('date', 'desc');
+			
+// 		}else{
+// 			if($this->input->post('status') != 'no_entry'){
+// 				$this->subscribe_m->where(array('closing_flag'=>$this->input->post('status')));
+// 			}
+				
+// 			if($this->input->post('search_key') != 'no_entry' && $this->input->post('search_term') != ''){
+			
+// 				//if search by date, reformat date input into mysql format
+// 				if($this->input->post('search_key') == 'date'){
+// 					$d = strtotime($this->input->post('search_term'));
+// 					$this->subscribe_m->like($this->input->post('search_key'), date('Y-m-d', $d), 'both');
+// 				}else{
+// 					$this->subscribe_m->like($this->input->post('search_key'), $this->input->post('search_term'), 'both');
+// 				}
+// 			}
+				
+// 			if($this->input->post('sort') != 'no_entry'){
+// 				$this->subscribe_m->order_by($this->input->post('sort'), 'asc');
+// 			}
+				
+// 			$this->filter->search_key = $this->input->post('search_key');
+// 			$this->filter->search_term = $this->input->post('search_term');
+// 			$this->filter->status = $this->input->post('status');
+// 			$this->filter->sort = $this->input->post('sort');
+// 		}
+
+		
+// 	 	$this->subscribes_data = $this->subscribe_m->get_all();
+// 	 	$this->render('admin/index');
+
+		
+		
 		$limit = 30;
 		$pagination = create_pagination('admin/subscribe/index', $this->db->count_all('inn_subscribe'), $limit);
 		

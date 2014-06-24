@@ -6,7 +6,7 @@
 
 .input-div input{margin:0}
 
-.input input, .input label{margin:0 !important;}
+.input, .input label{margin:0 !important;}
 
 .poster{
 	margin-right:20px;
@@ -29,10 +29,9 @@ span#ch{
 	color:#999;
 }
 
-#channel-content-fields table{width:400px;}
-#channel-content-fields table, #channel-content-fields tr, #channel-content-fields td{background:none; border:none;}
-#channel-content-fields td{padding:0;}
-#channel-content-fields table tr td label span{color:#F00 !important;}
+
+
+
 
 
 /* ====================================================== Frontend Show Page ======================================================= */
@@ -248,7 +247,7 @@ span#ch{
 	#tcol #ch-col{width:100%; cursor:pointer;}
 	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#333; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
 	
-	#tdata .sh-row{margin-bottom:3px;clear:both; width:9000px;} /* 24hrs x 240px */
+	#tdata .sh-row{margin-bottom:3px;clear:both; width:7500px;} /* 24hrs x 240px */
 	#tdata .sh-row:last-child{margin-bottom:0;}
 	#tdata .sh-row .show{
 		float:left; cursor:pointer; border-radius:5px; outline:1px solid #333; 

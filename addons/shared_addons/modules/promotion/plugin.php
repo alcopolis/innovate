@@ -104,14 +104,16 @@ class Plugin_Promotion extends Plugin
 		$data_filter = array(
 				'status' => 'published',
 				'featured' => '1',
-				'cat' => $this->attribute('category', 0),
+		//		'cat' => $this->attribute('category', 0),
 				'ended >' => $now,
 		);
+		
+		
+		$this->promotion_m->where_in('id', array(15, 14, 11, 9, 1)); //1, 4)); //, 3));	
+		//$this->promotion_m->where($data_filter);
+		//$this->promotion_m->or_where('ended', NULL);
 	
-		$this->promotion_m->where($data_filter);
-		$this->promotion_m->or_where('ended', NULL);
-	
-		$raw = $this->promotion_m->order_by('cat','ASC')->limit(5)->get_promo();
+		$raw = $this->promotion_m->order_by('id', 'DESC')->limit(5)->get_promo();
 	
 		foreach($raw as $featured){
 			$poster = json_decode($featured->poster, true);

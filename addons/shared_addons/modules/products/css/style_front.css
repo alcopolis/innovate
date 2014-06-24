@@ -39,7 +39,7 @@ body.product .content-wrapper {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a71d1', endColorstr='#0ba0ed',GradientType=0 ); /* IE6-9 */
 	
 /* 	background-color:#007DC3; */
-	font-size:13px;
+	
 	line-height:auto;
 /* 	text-shadow:0 -1px 2px #666; */
 	color:#FFF;
@@ -54,6 +54,7 @@ body.product .content-wrapper {
 }
 
 
+#prod-info{font-size:16px; margin:0 0 20px 20px;}
 
 
 
@@ -118,7 +119,7 @@ div.pack-container{margin:0 40px;}
 div.pack-container .data{
 	margin:20px 0;
 	width:30%;
-	font-size:.9em;
+	font-size:.85em;
 	color:#222;
 }
 
@@ -133,7 +134,7 @@ div.pack-container .packs .pack-item{
 	width:30%;
 	box-shadow:0 0 1px #999; 
 	margin:0 5px 10px 5px;
-	color:#222; 
+	color:#777; 
 	/* text-shadow:0 -1px 1px #FFF; */
 	
 	background: #EDEDED; /* Old browsers */
@@ -141,7 +142,7 @@ div.pack-container .packs .pack-item{
 }
 
 div.pack-container .packs .pack-item .total{color:#125DBA}
-.pack-item p{padding:15px 0;}
+.pack-item p{/*padding:15px 0;*/}
 
 .pack-name, .pack-price{
 	padding:5px 0;
@@ -201,9 +202,9 @@ table.package-list th, table.package-list td{
 
 #cs-support{text-align:center; width:25%; margin:40px 20px 20px 20px;}
 #cs-support *{color:#FFF;}
-#terms{margin:40px 20px 20px 20px; font-size:12px; width:500px; color:#FFF; float:left;}
+#terms{margin:40px 20px 20px 20px; width:500px; color:#FFF; float:left;}
 #terms ul{margin-left:20px;}
-#terms ul li{list-style-type:square;}
+#terms ul li{list-style-type:square; font-size:12px;}
 
 
 
@@ -222,5 +223,5 @@ table.package-list th, table.package-list td{
 
 #bundle.pack-container #container.bundle-default{background: #0BC4EE; border-radius:5px;}
 
-
+a.view-list-ch{font-size:12px;}
 

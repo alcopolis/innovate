@@ -140,10 +140,11 @@ class Ott_registrasi_m extends MY_Model {
         $user = $this->get_ott_registrasi_detail($id_user);
         $msg = $this->generate_msg_email_activation($user);
         $this->load->library('email');
+        $this->email->set_newline("\r\n");
         $this->email->from('webmaster@innovate-indonesia.com', 'Innovate OTT Email Activation');
         $this->email->to($user[0]->email);
         $this->email->cc('');
-        $this->email->bcc('product@cepat.net.id');
+        $this->email->bcc('');
         $this->email->subject('Email Aktivasi');
         $this->email->message($msg);
         $this->email->send();
@@ -160,7 +161,7 @@ class Ott_registrasi_m extends MY_Model {
  
             Please click this link to activate your account: 
  
-            http://localhost/innovate/ott_registrasi/email_activation/' . $user[0]->email . '/' . $user[0]->email_key;
+            ' . site_url('ott_registrasi/email_activation/'. $user[0]->id . '/' . $user[0]->email_key);
         return $msg;
     }
 
@@ -187,11 +188,16 @@ class Ott_registrasi_m extends MY_Model {
     public function send_to_product($id_user) {
         $user = $this->get_ott_registrasi_detail($id_user);
         $msg = $this->generate_msg_to_product($user);
+		$config['mailtype'] = 'html';
+		$config['charset'] = 'utf-8';
+		$config['wordwrap'] = 'true';
+		$config['priority'] = '1';
+		$this->email->initialize($config);
         $this->load->library('email');
-        $this->email->from('webmaster@innovate-indonesia.com', 'Innovate OTT Email Activation');
-        $this->email->to($user[0]->email);
+        $this->email->from('webmaster@innovate-indonesia.com', 'Innovate OTT Email Registration');
+        $this->email->to('product@cepat.net.id');
         $this->email->cc('');
-        $this->email->bcc('product@cepat.net.id');
+        $this->email->bcc('');
         $this->email->subject('Permohonan Berlangganan Innovate');
         $this->email->message($msg);
         $this->email->send();
@@ -199,12 +205,14 @@ class Ott_registrasi_m extends MY_Model {
 
     public function generate_msg_to_product($data) {
         //send notification email to sales team
-        $msg = '<p><strong>' . $data[0]->custName . '</strong> telah mengajukan permohonan berlangganan InnovateGO. Mohon segera di follow up calon pelanggan ini dengan data berikut:</p>';
+        $msg = '<p><strong>' . $data[0]->custName . '</strong> telah mengajukan permohonan berlangganan InnovateGO.</p>';
+        $msg .= '<p>Mohon segera di follow up calon pelanggan ini dengan data berikut:</p>';
         $msg .= '<table><tr><td>Nama</td><td>: ' . $data[0]->custName . '</td></tr>';
         $msg .= '<tr><td>Subscriber ID</td><td>: ' . $data[0]->username . '</td></tr>';
         $msg .= '<tr><td>Telepon</td><td>: ' . $data[0]->custPhone . '</td></tr>';
         $msg .= '<tr><td>Email</td><td>: ' . $data[0]->email . '</td></tr></table>';
         //$msg .= '<p>Silahkan masuk ke <a href="' . $this->ADMIN_PATH . '">Admin Panel</a> untuk memproses permohonan ini.<br/><br/><br/><br/>Terima kasih.</p>';
+		return $msg;
     }
 
 }

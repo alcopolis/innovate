@@ -10,7 +10,16 @@
 class Subscribe extends Public_Controller
 {
 	protected $ADMIN_PATH;
-	protected $SALES_EMAIL = 'sales@innovate-indonesia.com';
+	protected $SALES_EMAIL = 'sales@innovate-indonesia.com,
+								candra@cepat.net.id,
+								Hendry.ramos@cepat.net.id,
+								Devi.anton@cepat.net.id,
+								Kris.ardianto@innovate-indonesia.com,
+								Rani.kusumadewi@cepat.net.id,
+								Hendrik.kurniawan@cepat.net.id,
+								Syakieb.sungkar@innovate-indonesia.com,
+								mukhlasudin@cepat.net.id,
+								edwin@innovate-indonesia.com';
 	protected $TICKET_PREFIX = '10';
 	
 	protected $subscriber;
@@ -79,17 +88,19 @@ class Subscribe extends Public_Controller
 			$db_fields = array('name', 'email', 'address', 'area_code', 'phone', 'mobile');
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
 			
-			if($this->input->post('packages-net') != '0' and $this->input->post('packages-tv') != '0'){
-				$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name . ' & ' . $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
-			}else{
-				if($this->input->post('packages-net') != '0'){
-					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name;
-				}elseif($this->input->post('packages-tv') != '0'){
-					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
-				}
-			}
+//			if($this->input->post('packages-net') != '0' and $this->input->post('packages-tv') != '0'){
+//				$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name . ' & ' . $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
+//			}else{
+//				if($this->input->post('packages-net') != '0'){
+//					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name;
+//				}elseif($this->input->post('packages-tv') != '0'){
+//					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
+//				}
+//			}
 			
 			$data['packages'] = $pack;
+			
+			
 			$data['date'] = date('Y-m-d');
 			
 			

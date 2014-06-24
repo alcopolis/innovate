@@ -290,7 +290,7 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 
 /* Utility in Homepage */
 #utils{padding:0; margin:40px auto 0 auto; width:85%; line-height:1em;}
-#utils .util-item{float:left; width:25%; text-align:center; background-size:100% auto; display: block; cursor:pointer}
+#utils .util-item{float:left; width:33%; text-align:center; background-size:100% auto; display: block; cursor:pointer}
 #utils .util-item.last{border-right:none;}
 #utils .util-item img{width:120px; height:120px;}
 

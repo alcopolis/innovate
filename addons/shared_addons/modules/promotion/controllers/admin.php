@@ -1,12 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
 /**
- * Admin Promotion controller
+ * Pages controller
  *
- * @author 		Adriant Rivano
- * @package 	Addons\Shared_Addons\Modules\Promotion\Controllers
+ * @author 		PyroCMS Dev Team
+ * @package 	PyroCMS\Core\Modules\Products\Controllers
  */
-
 class Admin extends Admin_Controller {
 	
 	protected $section = 'promotion';
@@ -29,11 +27,13 @@ class Admin extends Admin_Controller {
 		$this->load->library('upload');
 		$this->load->library('image_lib');
 		$this->load->library('alcopolis');
-		$this->load->library('promotion');
+		$this->load->library('files/files');
 		
 		$this->page_data = new stdClass();
 		$this->user_data = new stdClass();
 		$this->promo_data = new stdClass();
+		//$this->poster_data = new stdClass();
+		//$this->cat_data = new stdClass();
 		
 		$this->page_data->section = $this->section;
 		$this->page_data->editor_type = 'wysiwyg-advanced';
@@ -139,17 +139,14 @@ class Admin extends Admin_Controller {
 		
 		if($this->promo_data->poster != ''){
 			$poster = json_decode($this->promo_data->poster);
-			
-			print_r($poster);
-			
 			$this->poster_data = array(
 					'id' => $poster->id,
 					'name' => $poster->name,
-					'file' => $poster->path,
-					//'description' => $poster->description,
-					//'keywords' => $poster->keywords,
-					//'alt_attr' => $poster->alt_attribute,
-					//'mimetype' => $poster->mimetype,
+					'file' => Files::$path . $poster->filename,
+					'description' => $poster->description,
+					'keywords' => $poster->keywords,
+					'alt_attr' => $poster->alt_attribute,
+					'mimetype' => $poster->mimetype,
 			);
 		}
 		
@@ -178,39 +175,45 @@ class Admin extends Admin_Controller {
 	}
 	
 	
-// 	public function do_upload(){
-		
-// 		$promo_data = $this->input->post('form_data');
-
-// 		if($promo_data['poster_id'] != ''){
-// 			if(Files::delete_file($promo_data['poster_id'])){
-// 				$this->promotion_m->update($promo_data['id'], array('poster'=>''));
-// 			}
-// 		}
-		
-// 		$folder_id = $this->file_folders_m->get_by('slug', 'promotion')->id;
-		
-// 		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 1920, false, true);
-		
-// 		//if($result['status']){
-// 		$file_data = $this->parse_file_data($result['data']);
-// 		$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
-// 		//}
-		
-// 		$respond = array(
-// 				'status'=>$result['status'],
-// 				'message'=>$result['message'],
-// 				'file'=>Files::$path . $result['data']['filename'],
-// 		);
-		
-// 		//Send ajax respond
-// 		echo json_encode($respond);
-// 	}
-	
-	
 	public function do_upload(){
-		$result = Promotion::upload('poster', NULL, 1366, 400, TRUE, 'crop');
-		echo json_encode($result);
+		
+		$promo_data = $this->input->post('form_data');
+
+		if($promo_data['poster_id'] != ''){
+			if(Files::delete_file($promo_data['poster_id'])){
+				$this->promotion_m->update($promo_data['id'], array('poster'=>''));
+			}
+		}
+		
+		$folder_id = $this->file_folders_m->get_by('slug', 'promotion')->id;
+		
+		$result = Files::upload($folder_id, $promo_data['slug'], 'poster', 1920, false, true);
+		
+		//if($result['status']){
+		$file_data = $this->parse_file_data($result['data']);
+		$this->promotion_m->update($promo_data['id'], array('poster'=>$file_data));
+		//}
+		
+		$respond = array(
+				'status'=>$result['status'],
+				'message'=>$result['message'],
+				'file'=>Files::$path . $result['data']['filename'],
+		);
+		
+		//Send ajax respond
+		echo json_encode($respond);
+	}
+	
+	
+	function parse_file_data($data){
+		$result = array();
+		$key = array('id', 'folder_id', 'name', 'path', 'filename');
+		
+		foreach($key as $k){
+			$result[$k] = $data[$k];
+		}
+		
+		return json_encode($result);
 	}
 	
 }

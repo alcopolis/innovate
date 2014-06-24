@@ -5,7 +5,6 @@
 	<meta content="Innovate Product <?php echo $product->name; ?>" name="description">
 	{{ if alcopolis:site_status }}
 		{{ theme:partial name="metadata" }}
-		{{ products:js value="<?php echo $product->slug; ?>" }}
 		{{ products:css value="<?php echo $product->slug; ?>" }}
 	{{ else }}
 		{{ theme:partial name="maintenance" }}

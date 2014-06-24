@@ -24,21 +24,23 @@
 				<div id="promo-content" class="clearfix">
 					<div id="body-wrapper">
 						
+						<div id="poster">
+							<img src="<?php echo $poster->path; ?>" style="width:100%;"/>
+						</div>
+						
 						<article>
-							<div id="poster">
-								<img src="<?php echo $poster->path; ?>" style="width:100%;"/>
-							</div>
 							<?php echo $data->body; ?>
 						</article>
 						
-						<aside style="width:22%; float:left; border-left:1px solid #CCC; padding:0 1%; background:#EEE;">
+						<!-- 
+						<aside style="width:20%; float:left; border-left:1px solid #CCC; padding:0 1%;">
 							<h1>asdfasdfasdfasdfasdf</h1>
 							<h1>asdfasdfasdfasdfasdf</h1>
 							<h1>asdfasdfasdfasdfasdf</h1>
 							<h1>asdfasdfasdfasdfasdf</h1>
 							<h1>asdfasdfasdfasdfasdf</h1>
 						</aside>
-						
+						-->
 					</div>
 				</div>				
 			</div>

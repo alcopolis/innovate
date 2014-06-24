@@ -83,6 +83,7 @@ function process_attch(obj){
 				}
 			}
 			
+
 			$inp_elm.children('.msg-ajax').html(msg).fadeIn(600);
 		},
 	});

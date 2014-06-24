@@ -85,7 +85,7 @@ class Admin extends Admin_Controller {
 	}
 
 	//Create New Product
-	public function create(){
+	public function create(){	
 		$this->page_data->title = 'Add Product';
 		$this->page_data->action = 'create';
 
@@ -102,8 +102,8 @@ class Admin extends Admin_Controller {
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 			
 			//Date created
-			$d = new DateTime();
-			$this->form_data['created_on'] = $d->getTimestamp();
+			//$d = new DateTime();
+			//$this->form_data['created_on'] = $d->getTimestamp();
 			
 			//set parent data and folder if parent_id != 0
 			$files_tmp = array();
@@ -172,8 +172,8 @@ class Admin extends Admin_Controller {
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 			
 			//Date modified
-			$d = new DateTime();
-			$this->form_data['modified_on'] = $d->getTimestamp();
+			//$d = new DateTime();
+			//$this->form_data['modified_on'] = $d->getTimestamp();
 			
 			//set bundle data
 			$bundle = array(

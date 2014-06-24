@@ -1,11 +1,11 @@
 
 <div id="footer-theme" class="theme">
-    <div class="footer-menu">
-        <h4>NEWS</h4>
-        <ul>
-			{{ navigation:links group="news" }}
-        </ul>
-    </div>
+<!--     <div class="footer-menu"> -->
+<!--         <h4>NEWS</h4> -->
+<!--         <ul> -->
+<!-- 			{{ navigation:links group="news" }} -->
+<!--         </ul> -->
+<!--     </div> -->
     <div class="footer-menu">
         <h4>FAQ</h4>
         <ul>
@@ -30,7 +30,7 @@
     	</div>
 		<div id="sinarmas" class="right"><img src="{{ theme:image_path }}sinarmas-logo.png" style="width:130px" /></div>
     	<div class="clear"></div>
-    	<div id="copy" class="right">Copyright &copy; 2013 Innovate Indonesia. All Rights Reserved</div>	
+    	<div id="copy" class="right">Copyright <?php echo date('Y'); ?> Innovate Indonesia. All Rights Reserved</div>	
     </div>
     
     <div class="clear"></div>
@@ -39,8 +39,4 @@
 
 <!-- Begin scripts -->	
 	{{ theme:js file="main.js" }}
-	
-	<!-- Module Metadata -->
-		{{ epg:metadata }}
-	<!-- End Module Metadata -->
 <!-- End scripts -->

@@ -48,58 +48,31 @@ class Module_Promotion extends Module {
 	
 	public function install()
 	{
-		//$this->dbforge->drop_table('inn_promotion_category');
-		//$this->dbforge->drop_table('inn_promotion');
+		$this->dbforge->drop_table('inn_promotion');
 
 		$promo = array(
 				'id' => array('type' => 'INT','constraint' => '11','auto_increment' => TRUE, 'primary' => TRUE),
-				'cat' => array('type'=>'INT', 'constraint' => '11'),
-				'name' => array('type' => 'VARCHAR','constraint' => '100'),
 				'slug' => array('type' => 'VARCHAR','constraint' => '100'),
 				'body' => array('type' => 'TEXT'),
-				'tags' => array('type' => 'VARCHAR','constraint' => '100', 'null' => TRUE),
-				'status' => array('type' => 'VARCHAR', 'constraint' => '20', 'null' => TRUE),
-				'featured' => array('type' => 'TINYINT', 'constraint' => '1'),
-				'featured_uri' => array('type' => 'VARCHAR', 'constraint' => '255', 'null' => TRUE),
-				'featured_copy' => array('type' => 'TEXT', 'null' => TRUE),
-				'poster' => array('type' => 'TEXT', 'null' => TRUE),
-				'publish' => array('type' => 'DATE', 'null' => TRUE),
-				'ended' => array('type' => 'DATE', 'null' => TRUE),
-				'author' => array('type' => 'INT', 'constraint' => '11' ),
-				'css' => array('type' => 'TEXT', 'null' => TRUE),
-				'js' => array('type' => 'TEXT', 'null' => TRUE)
+				'category' => array('type' => 'VARCHAR','constraint' => '100'),
+				'tags' => array('type' => 'VARCHAR','constraint' => '100'),
+				'publish' => array('type' => 'DATE'),
+				'ended' => array('type' => 'DATE'),
+				'poster' => array('type' => 'VARCHAR', 'constraint' => '100')
 		);
 
-		$promo_cat = array(
-				'id' => array('type' => 'INT','constraint' => '11','auto_increment' => TRUE, 'primary' => TRUE),
-				'cat' => array('type'=>'VARCHAR', 'constraint' => '20'),
-				'description' => array('type' => 'VARCHAR','constraint' => '255')
-		);
-		
 		$this->dbforge->add_field($promo);
 		$this->dbforge->add_key('id', TRUE);
 				
-	if($this->dbforge->create_table('inn_promotion'))
+		if($this->dbforge->create_table('inn_promotion'))
 		{
-			$this->dbforge->add_field($promo_cat);
-			$this->dbforge->add_key('id', TRUE);
-			
-			if($this->dbforge->create_table('inn_promotion_category'))
-			{
-				return TRUE;
-			}
-		}else{
-			return FALSE;
+			return TRUE;
 		}
 	}
 	
 	public function uninstall()
 	{
-		if($this->dbforge->drop_table('inn_promotion') && $this->dbforge->drop_table('inn_promotion_category')){
-			return TRUE;
-		}else{
-			return FALSE;
-		}
+		return TRUE;
 	}
 	
 	public function upgrade($old_version)

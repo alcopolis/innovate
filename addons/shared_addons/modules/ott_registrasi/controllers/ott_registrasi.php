@@ -20,7 +20,6 @@ class Ott_registrasi extends Public_Controller {
         $this->ADMIN_PATH = base_url() . 'admin';
 
         $this->load->model('ott_registrasi_m');
-//        $this->packages_m = $this->load->model('products/packages_m');
 
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -33,8 +32,6 @@ class Ott_registrasi extends Public_Controller {
         $this->form_validation->set_message('is_unique', 'You have been signed up with this %s');
 
         $this->packages = new stdClass();
-//        $this->packages->inet = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id' => '1'), FALSE), 'Internet Super Cepat');
-//        $this->packages->tv = $this->packages_result($this->packages_m->get_packages_by(NULL, array('group_id' => '2'), FALSE), 'Televisi Starter');
     }
 
     function render($view, $var = NULL) {

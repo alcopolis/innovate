@@ -21,8 +21,6 @@
 */
 
 // front-end
-//$route['promotion/promo(/:any)?']	= 'promotion/index$1';
-//$route['promotion(/:any)?']	= 'index$1';
 
 // back-end
-$route['promotion/admin/category(/:any)?']	= 'admin_category$1';
+$route['promotion/admin/category(/:any)?']		= 'admin_category$1';

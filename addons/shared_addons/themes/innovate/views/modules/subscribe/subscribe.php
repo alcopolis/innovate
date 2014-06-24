@@ -68,24 +68,12 @@
 									<div class="input"><?php echo form_input('mobile', set_value('mobile', $subscriber->mobile), 'class="width-15"'); ?><?php echo form_error('mobile'); ?> <small>ex: 0812345676</small></div>
 								</li>
 								
-								<li class="<?php echo alternator('', 'even'); ?>" style="border-top:1px dotted #CCC;">
-									<div class="input clearfix">
-										<div class="" style="margin:20px 20px 40px 20px;">
-											<label for="packages" style="font-size:16px;"><em>Paket Layanan Innovate</em></label>
-											<br/><small>Pilih layanan internet dan televisi untuk melanjutkan proses pendaftaran.</small><br/><br/>
-											<?php echo form_dropdown('packages-net', $packages->inet, $pack_config['net'], 'class="packages"') ?>
-											&nbsp; &amp; &nbsp;
-											<?php echo form_dropdown('packages-tv', $packages->tv, $pack_config['tv'], 'class="packages"') ?>
-											<div id="pack-info">
-												<div id="pack-name"><?php echo isset($pack_title) ? $pack_title : ''; ?></div>
-												<div id="pack-desc"><?php echo isset($pack_desc) ? $pack_desc : ''; ?></div>
-												<div id="additional-info"><?php echo isset($pack_add) ? $pack_add : ''; ?></div>
-											</div>
-										</div>
-										<div class="input" style="margin:30px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
-									</div>
+								<li class="<?php echo alternator('', 'even'); ?>">
+									<div class="input" style="margin:30px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
 								</li>
 							</ul>
+							
+							
 						</div>	
 						
 					</div>

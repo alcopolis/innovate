@@ -28,10 +28,9 @@ $(document).ready(function(){
 	})
 	
 	$('#datepicker, .datepicker').datepicker({dateFormat: 'yy-mm-dd'});
-
+	
+	
 	$('#content-bg').height($('#content').innerHeight() + 16);
-	
-	
 	
 	
 	// ========================== TV Guide Function ========================//
@@ -106,12 +105,12 @@ $(document).ready(function(){
 
 		var blockDataWidth = 240;
 		var blockDataMargin = 3;
-
+		
 		var showContW = (blockDataWidth + blockDataMargin) * 26;
 
 		$('#tdata').width(epgContW + 16);
 		$('#tdata').height(epgContH + 16);
-		$('#tdata .sh-row').width(showContW);
+		//$('#tdata .sh-row').width(showContW);
 	}
 })
 
