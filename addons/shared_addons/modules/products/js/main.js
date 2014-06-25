@@ -58,7 +58,8 @@ $(function(){
 	
 	//Pop-up close button
 	$('.close-btn').click(function(){
-		$('#popup').addClass('hide')
+		$('#popup').addClass('hide');
+		$('#popup-container').html('');
 	});
 	
 	$('#popup').click(function(e){
@@ -126,8 +127,10 @@ $(function(){
 	
 	//View Ch List by Packages
 	$('a.view-list-ch').click(function(e){
+		e.preventDefault();
 		var pack = $(this).attr('data-ch-list');
-		console.log(pack);
+
+		showPopup(pack, 'image/jpeg');
 	});
 
 	
@@ -178,30 +181,67 @@ function openTab(id){
 
 
 // Attachment function
+//function showPopup(url, mime){
+//	$('#popup').removeClass('hide');
+//	
+//	if(mime == 'x-shockwave-flash'){
+//		$('#popup-container').append('<p style="text-align:center">You browser does not support flash.</p>')
+//		$('#popup-container').flash(
+//			{	
+//				swf: url,
+//				width: 940,
+//				height: 480,
+//			});
+//	}else if(mime == 'mp4' || mime == 'ogg' || mime == 'webm'){
+//		 // create player
+//		$('#popup-container').append('<video id="player" src="' + url + '" width="940" height="480" controls="controls" preload="none"></video>');
+//		
+//		
+//		$('#player').mediaelementplayer({
+//	        // add desired features in order
+//	        features: ['playpause','current','progress','duration', 'fullscreen', 'volume', 'backlight'],
+//	        // the time in milliseconds between re-drawing the light
+//	        //backlightTimeout: 100
+//	    });
+//	}
+//}
+
+
 function showPopup(url, mime){
-	$('#popup').removeClass('hide');
 	
-	if(mime == 'x-shockwave-flash'){
-		$('#popup-container').append('<p style="text-align:center">You browser does not support flash.</p>')
-		$('#popup-container').flash(
-			{	
-				swf: url,
-				width: 940,
-				height: 480,
-			});
-	}else if(mime == 'mp4' || mime == 'ogg' || mime == 'webm'){
-		 // create player
-		$('#popup-container').append('<video id="player" src="' + url + '" width="940" height="480" controls="controls" preload="none"></video>');
-		
-		
-		$('#player').mediaelementplayer({
-	        // add desired features in order
-	        features: ['playpause','current','progress','duration', 'fullscreen', 'volume', 'backlight'],
-	        // the time in milliseconds between re-drawing the light
-	        //backlightTimeout: 100
-	    });
+	switch(mime){
+		case 'x-shockwave-flash':
+			$('#popup-container').append('<p style="text-align:center">You browser does not support flash.</p>')
+			$('#popup-container').flash(
+				{	
+					swf: url,
+					width: 940,
+					height: 480,
+				});
+			
+			break;
+			
+		case 'mp4' || mime == 'ogg' || mime == 'webm' :
+			$('#popup-container').append('<video id="player" src="' + url + '" width="940" height="480" controls="controls" preload="none"></video>');
+			$('#player').mediaelementplayer({
+		        // add desired features in order
+		        features: ['playpause','current','progress','duration', 'fullscreen', 'volume', 'backlight'],
+		        // the time in milliseconds between re-drawing the light
+		        //backlightTimeout: 100
+		    });
+			
+			break;
+			
+		case 'image/jpeg' ||  'image/png':
+			$('#popup-container').append('<img src="' + url + '" />');
+			break;
 	}
+	
+	console.log($('#popup').innerHeight());
+	$('#popup').removeClass('hide');
 }
+
+
 
 
 function gotoURL(url){
