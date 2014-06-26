@@ -71,11 +71,10 @@
 								<li class="<?php echo alternator('', 'even'); ?>">
 									<div class="input" style="margin:30px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
 								</li>
-							</ul>
-							
-							
-						</div>	
+							</ul>	
 						
+                        	<div>Prod Pack {{subscribe:select_pack product-slug="duo-play"}}</div>
+						</div>
 					</div>
 				<?php echo form_close(); ?>	
 			</div>

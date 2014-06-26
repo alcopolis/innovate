@@ -1,33 +1,57 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * This is a sample module for PyroCMS
- *
- * @author 		Jerel Unruh - PyroCMS Dev Team
- * @website		http://unruhdesigns.com
- * @package 	PyroCMS
- * @subpackage 	Sample Module
- */
-class Plugin_Sample extends Plugin
+
+
+
+class Plugin_Subscribe extends Plugin
 {
-	/**
-	 * Item List
-	 * Usage:
-	 * 
-	 * {{ sample:items limit="5" order="asc" }}
-	 *      {{ id }} {{ name }} {{ slug }}
-	 * {{ /sample:items }}
-	 *
-	 * @return	array
-	 */
-	function items()
+	
+	public $version = '1.0.0';
+	
+	public $name = array(
+			'en'	=> 'Subscribe'
+	);
+	
+	public $description = array(
+			'en'	=> 'Subscribe plugin'
+	);
+	
+	public function _self_doc()
 	{
-		$limit = $this->attribute('limit');
-		$order = $this->attribute('order');
+		$info = array(
+			'select_pack' => array(
+						'description' => array(// a single sentence to explain the purpose of this method
+								'en' => 'Return Packages List',
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+						'variables' => '',// list all variables available inside the double tag. Separate them|like|this
+						'attributes' => array(
+								'product-slug' => array(
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => '',
+										'required' => true,
+								),
+						),
+				),
+		);
 		
-		return $this->db->order_by('name', $order)
-						->limit($limit)
-						->get('sample_items')
-						->result_array();
+		return $info;
+	}
+	
+	
+	public function __construct()
+	{	
+		$this->load->model('products_m');
+		$this->load->model('packages_m');
+	}
+	
+	
+	function select_pack()
+	{
+		print_r($this->attribute('product-slug'));
+		$pid = $this->products_m->get_product_by('id', array('slug'=>$this->attribute('product-slug')), TRUE);
+		return $pid;
 	}
 }
 

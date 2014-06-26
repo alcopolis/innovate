@@ -59,7 +59,7 @@ $(function(){
 	//Pop-up close button
 	$('.close-btn').click(function(){
 		$('#popup').addClass('hide');
-		$('#popup-container').html('');
+		$('#popup-container  *').not('a.close-btn').remove();
 	});
 	
 	$('#popup').click(function(e){
@@ -69,7 +69,7 @@ $(function(){
 		
 		if($('#popup-container *').length > 0){
 			$('#popup-container').flash().remove();
-			$('#popup-container').html('');
+			$('#popup-container  *').not('a.close-btn').remove();
 		}
 	});
 	
