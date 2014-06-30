@@ -11,13 +11,13 @@ class Subscribe extends Public_Controller
 {
 	protected $ADMIN_PATH;
 	protected $SALES_EMAIL = 'sales@innovate-indonesia.com,
+								Syakieb.sungkar@innovate-indonesia.com,
 								candra@cepat.net.id,
 								Hendry.ramos@cepat.net.id,
 								Devi.anton@cepat.net.id,
 								Kris.ardianto@innovate-indonesia.com,
 								Rani.kusumadewi@cepat.net.id,
 								Hendrik.kurniawan@cepat.net.id,
-								Syakieb.sungkar@innovate-indonesia.com,
 								mukhlasudin@cepat.net.id,
 								edwin@innovate-indonesia.com';
 	protected $TICKET_PREFIX = '10';
@@ -74,32 +74,30 @@ class Subscribe extends Public_Controller
 		->set($var)
 		->build($view);
 	}
-	
+		
 	
 	public function index(){
-		$pack_config = array(
-				'net'=>$this->input->post('packages-net'),
-				'tv'=>$this->input->post('packages-tv')
+		$pack_data = array(
+				'basic'=>$this->input->post('pack-basic'),
+				'additional'=>$this->input->post('pack-additional')
 			);
 		
 		if($this->form_validation->run()){
-			$pack = '';
+			$pack_str = '';
 			
 			$db_fields = array('name', 'email', 'address', 'area_code', 'phone', 'mobile');
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
 			
-//			if($this->input->post('packages-net') != '0' and $this->input->post('packages-tv') != '0'){
-//				$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name . ' & ' . $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
-//			}else{
-//				if($this->input->post('packages-net') != '0'){
-//					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-net')), TRUE)->name;
-//				}elseif($this->input->post('packages-tv') != '0'){
-//					$pack = $this->packages_m->get_packages_by('name', array('id' => $this->input->post('packages-tv')), TRUE)->name;
-//				}
-//			}
+			if($pack_data['basic'] != ''){
+				$pack_str .= $pack_data['basic'];
+				
+				if($pack_data['additional'] != ''){
+					$pack_str .= ' + ';
+					$pack_str .= $pack_data['additional'];
+				}
+			}
 			
-			$data['packages'] = $pack;
-			
+			$data['packages'] = $pack_str;
 			
 			$data['date'] = date('Y-m-d');
 			
@@ -121,29 +119,32 @@ class Subscribe extends Public_Controller
 				$msg .= '<table><tr><td>Nama</td><td>: ' . $data['name'] . '</td></tr>';
 				$msg .= '<tr><td>Alamat</td><td>: ' . $data['address'] . '</td></tr>';
 				$msg .= '<tr><td>Telepon</td><td>: ' . $data['area_code'] . ' ' . $data['phone'] . '</td></tr>';
-				$msg .= '<tr><td>Ponsel</td><td>: ' . $data['mobile'] . '</td></tr></table>';
+				$msg .= '<tr><td>Ponsel</td><td>: ' . $data['mobile'] . '</td></tr>';
+				$msg .= '<tr><td>Layanan</td><td>: ' . $data['packages'] . '</td></tr></table>';
 				$msg .= '<p>Silahkan masuk ke <a href="' . $this->ADMIN_PATH . '">Admin Panel</a> untuk memproses permohonan ini.<br/><br/><br/><br/>Terima kasih.</p>';
 				
 				$this->load->library('email');
 					
 				$this->email->from('webmaster@innovate-indonesia.com', 'Innovate Subscription System');
 				$this->email->to($this->SALES_EMAIL);
-				//$this->email->cc('myseconddigitalmail@yahoo.com');
+				$this->email->cc('adriant.rivano@cepat.net.id');
 				//$this->email->cc('');
-				$this->email->bcc('');
+				//$this->email->bcc('');
 					
 				$this->email->subject('[ #' . $ticketid . ' ] Permohonan Berlangganan Innovate');
 				$this->email->message($msg);
 					
-				$this->email->send();
-				
-				//Redirect
-				redirect('subscribe/success');
+				if($this->email->send()){
+					//Redirect
+					redirect('subscribe/success');
+				}else{
+					$this->render('subscribe');
+				}
 			}
 			
 		}else{
 			$this->subscriber = $this->subscribe_m->get_new();
-			$this->render('subscribe', array('pack_config'=>$pack_config));
+			$this->render('subscribe');
 		}
 	}
 	
@@ -186,6 +187,7 @@ class Subscribe extends Public_Controller
 		$pack = array();
 
 		if($net_id != '0' and $tv_id != '0'){
+			
 			$net = $this->packages_m->get_packages_by(NULL, array('id' => $net_id), TRUE);
 			$tv = $this->packages_m->get_packages_by(NULL, array('id' => $tv_id), TRUE);
 			
@@ -196,6 +198,7 @@ class Subscribe extends Public_Controller
 					'tv' => $tv
 				)	
 			);
+			
 		}else{
 			
 			if($net_id != '0' && $tv_id == '0'){

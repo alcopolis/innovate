@@ -6,6 +6,20 @@
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
+    
+    <script type="text/javascript">
+		$(document).ready(function(){
+			if($('select#basic').length > 0){
+				$('select#basic').change(function(){
+					if($(this).val() != ''){
+						$(this).siblings('select.packs').removeAttr('disabled');
+					}else{
+						$(this).siblings('select.packs').attr('disabled', 'disabled');
+					}
+				});
+			}
+		})
+	</script>
 </head>
 <body id="top" class="subscribe">
 
@@ -68,12 +82,18 @@
 									<div class="input"><?php echo form_input('mobile', set_value('mobile', $subscriber->mobile), 'class="width-15"'); ?><?php echo form_error('mobile'); ?> <small>ex: 0812345676</small></div>
 								</li>
 								
+                                <li class="<?php echo alternator('', 'even'); ?>">
+                                	<div class="input" style="margin:20px 0 0 0; padding:20px 0; border-top:1px solid #CCC;">
+                                    	<p>Pilih paket layanan yang Anda inginkan.</p>
+                                    	{{subscribe:select_pack product-slug="duo-play" packages-group="duo-play|ala-carte" }}
+                                        <div id="pack-msg"></div>
+                                    </div>
+                                </li>
+                                
 								<li class="<?php echo alternator('', 'even'); ?>">
-									<div class="input" style="margin:30px 20px 20px 20px;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
+									<div class="input" style="margin:30px 20px 20px 0;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
 								</li>
 							</ul>	
-						
-                        	<div>Prod Pack {{subscribe:select_pack product-slug="duo-play"}}</div>
 						</div>
 					</div>
 				<?php echo form_close(); ?>	

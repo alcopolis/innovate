@@ -167,7 +167,7 @@ div.pack-container .packs .pack-item .total{color:#125DBA}
 #popup-wrapper{
 	position:relative;
 	width:960px;
-	margin:40px auto;
+	margin:80px auto;
 	border-radius:5px;
 	overflow:hidden;
 }
@@ -259,5 +259,4 @@ table.package-list th, table.package-list td{
 
 #bundle.pack-container #container.bundle-default{background: #0BC4EE; border-radius:5px;}
 
-a.view-list-ch{font-size:11px; color:#FFF; background:#007DC3; padding:1px 5px; cursor:pointer; border-radius:5px;}
-
+a.view-list-ch{font-size:11px; color:#FFF; background:#007DC3; margin-top:10px; padding:1px 5px; cursor:pointer; border-radius:5px;}

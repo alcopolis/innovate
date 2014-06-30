@@ -59,17 +59,17 @@ $(function(){
 	//Pop-up close button
 	$('.close-btn').click(function(){
 		$('#popup').addClass('hide');
-		$('#popup-container  *').not('a.close-btn').remove();
-	});
-	
-	$('#popup').click(function(e){
+		$('#popup-container *').not('a.close-btn').remove();
+		});
+		
+		$('#popup').click(function(e){
 		if (e.target !== this) return;
 		
 		$(this).addClass('hide')
 		
 		if($('#popup-container *').length > 0){
-			$('#popup-container').flash().remove();
-			$('#popup-container  *').not('a.close-btn').remove();
+		$('#popup-container').flash().remove();
+		$('#popup-container *').not('a.close-btn').remove();
 		}
 	});
 	
@@ -124,30 +124,25 @@ $(function(){
 	});
 	
 	
-	
 	//View Ch List by Packages
 	$('a.view-list-ch').click(function(e){
 		e.preventDefault();
 		var pack = $(this).attr('data-ch-list');
-
+		var desc = $(this).attr('data-pack-desc');
+		
 		showPopup(pack, 'image/jpeg');
 	});
-
 	
-//	$('#subscribe a').click(function(e){
-//		e.preventDefault;
-//		url = $(this).attr('href');
-//		
-//	})
+	
 })
 
 
 
 //Bundle widget
-function countBundle(pack){
-	packCont = $(pack).parent().parent().attr('id');
-	packPrice[packCont] = Number($(pack).val());
-	radio = $(pack).parent().parent().children('div');
+//function countBundle(pack){
+//	packCont = $(pack).parent().parent().attr('id');
+//	packPrice[packCont] = Number($(pack).val());
+//	radio = $(pack).parent().parent().children('div');
 	
 //	radio.each(function(){
 //		$(this).children('input[type="radio"]').attr('checked',false);
@@ -170,7 +165,7 @@ function countBundle(pack){
 	
 	
 	//console.log(price);
-}
+//}
 
 
 
@@ -181,34 +176,7 @@ function openTab(id){
 
 
 // Attachment function
-//function showPopup(url, mime){
-//	$('#popup').removeClass('hide');
-//	
-//	if(mime == 'x-shockwave-flash'){
-//		$('#popup-container').append('<p style="text-align:center">You browser does not support flash.</p>')
-//		$('#popup-container').flash(
-//			{	
-//				swf: url,
-//				width: 940,
-//				height: 480,
-//			});
-//	}else if(mime == 'mp4' || mime == 'ogg' || mime == 'webm'){
-//		 // create player
-//		$('#popup-container').append('<video id="player" src="' + url + '" width="940" height="480" controls="controls" preload="none"></video>');
-//		
-//		
-//		$('#player').mediaelementplayer({
-//	        // add desired features in order
-//	        features: ['playpause','current','progress','duration', 'fullscreen', 'volume', 'backlight'],
-//	        // the time in milliseconds between re-drawing the light
-//	        //backlightTimeout: 100
-//	    });
-//	}
-//}
-
-
 function showPopup(url, mime){
-	
 	switch(mime){
 		case 'x-shockwave-flash':
 			$('#popup-container').append('<p style="text-align:center">You browser does not support flash.</p>')
@@ -237,18 +205,10 @@ function showPopup(url, mime){
 			break;
 	}
 	
-	console.log($('#popup').innerHeight());
 	$('#popup').removeClass('hide');
 }
 
 
-
-
-function gotoURL(url){
-	console.log(url);
-}
-
-
-function getList(){
-	
-}
+//function gotoURL(url){
+//	console.log(url);
+//}

@@ -40,7 +40,7 @@
 								<?php if($packages != NULL){ ?>
 								<div id="prod-info" class="clearfix">
 								<?php }else{ ?>
-								<div style="color:#0B5EBA; text-shadow:none; padding:40px 0 0 0;" class="package clearfix">
+								<div style="color:#0B5EBA; text-shadow:none; padding:40px 0;" class="package clearfix">
 								<?php } ?>
 								
 									<?php echo $product->body; ?>
