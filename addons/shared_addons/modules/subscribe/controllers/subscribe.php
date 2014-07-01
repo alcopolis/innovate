@@ -115,8 +115,9 @@ class Subscribe extends Public_Controller
 				}
 				
 				//send notification email to sales team
-				$msg = '<p><strong>' . $data['name'] . '</strong> telah mengajukan permohonan berlangganan Innovate. Mohon segera di follow up calon pelanggan ini dengan data berikut:</p>';
-				$msg .= '<table><tr><td>Nama</td><td>: ' . $data['name'] . '</td></tr>';
+				$msg = '<style type="text/css">p{padding-bottom:15px} table{margin:10px 0;} </style>';
+				$msg .= '<p style="padding-bottom:15px;"><strong>' . $data['name'] . '</strong> telah mengajukan permohonan berlangganan Innovate. Mohon segera di follow up calon pelanggan ini dengan data berikut:</p>';
+				$msg .= '<table cellpadding="3"><tr><td>Nama</td><td>: ' . $data['name'] . '</td></tr>';
 				$msg .= '<tr><td>Alamat</td><td>: ' . $data['address'] . '</td></tr>';
 				$msg .= '<tr><td>Telepon</td><td>: ' . $data['area_code'] . ' ' . $data['phone'] . '</td></tr>';
 				$msg .= '<tr><td>Ponsel</td><td>: ' . $data['mobile'] . '</td></tr>';
