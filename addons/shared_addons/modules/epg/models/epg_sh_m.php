@@ -64,29 +64,24 @@ class Epg_Sh_m extends MY_Model {
 	}
 	
 	
-	public function get_show($fields = NULL, $single = FALSE)
-	{
-		$hari= date("Y-m-d");
-	
-		if($fields != NULL){
-			$this->db->select($fields);
+	public function get_show($fields = NULL, $single = FALSE)
+	{
+		if($fields != NULL){
+			$this->db->select($fields);
 		}
-	
-		if($single){
-			$method = 'row';
-		}else{
-			$method = 'result';
+		if($single){
+			$method = 'row';
+		}else{
+			$method = 'result';
 		}
-	
-		$this->db->where('date >=', $hari);
-	
-		return $this->db->get($this->_table)->$method();
+		return $this->db->get($this->_table)->$method();				//return $this->db->last_query();
 	}
 	
 	
-	public function get_show_by($fields, $where, $single = FALSE){
-		$this->db->where($where);
-		return $this->get_show($fields, $single);
+	public function get_show_by($fields, $where = NULL, $single = FALSE){
+		if($where){			$this->db->where($where);		}else{			$hari= date("Y-m-d");			
+			$this->db->where('date >=', $hari);		}		
+		return $this->get_show($fields, $single);
 	}
 	
 	public function get_show_detail($id){

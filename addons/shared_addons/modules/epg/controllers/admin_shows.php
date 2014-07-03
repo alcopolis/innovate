@@ -77,15 +77,15 @@ class Admin_Shows extends Admin_Controller
 			$cond = array();
 			foreach($post_input as $key=>$val){
 				if($key != 'title' && ($val != NULL || $val != '')){
-					$cond[$key] = $val;
+					$cond[$key] = (string)$val;
 				}elseif($key == 'title' && $val != ''){
-					$this->epg_sh_m->like('title', $val, 'both');
+					$this->epg_sh_m->like('title', (string)$val, 'both');
 				}
 			}
 			$this->sh_data = $this->epg_sh_m->get_show_by(NULL, $cond, FALSE);
 			$ch_info = $this->epg_ch_m->get_channel($post_input['cid']);
 			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data, 'ch_info'=>$ch_info));
-		}else{
+		//			var_dump($this->epg_sh_m->get_show_by(NULL, $cond, FALSE));		}else{
 			$this->page_data->view = 'featured';
 			$this->sh_data = $this->epg_sh_m->featured_list();				
 			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data, 'sh_cat'=>$this->sh_cat));
@@ -195,38 +195,16 @@ class Admin_Shows extends Admin_Controller
 	}
 		public function import_csv(){
 	
-		//return self::$path;
-	
-			}			private function upload(){		ci()->load->library('upload');
-		
-		$data;
-		
-		$upload_config = array(
-				'upload_path'	=> UPLOAD_PATH.'temp/',
-				//'encrypt_name'	=> $name != NULL ? TRUE : FALSE,
-				'file_name'	=> md5(now()),
-				'allowed_types'   => "csv",
-		);
-		
-		
-		ci()->upload->initialize($upload_config);
-		
-		
-		if (ci()->upload->do_upload($field))
+		$this->load->library('upload');				$data;				$upload_config = array(				'upload_path'	=> UPLOAD_PATH.'temp/',				//'encrypt_name'	=> $name != NULL ? TRUE : FALSE,				'file_name'	=> md5(now()),				'allowed_types'   => "csv",		);						$this->upload->initialize($upload_config);						if ($this->upload->do_upload('csvdata'))		{			$file = $this->upload->data();					$data = array(					'name'			=> $file['orig_name'],					'full_path'		=> $file['full_path'],					'filename'		=> $file['file_name'],					'filesize'		=> $file['file_size'],					'date_added'	=> now()			);					$this->parse_csv($data['full_path'], ',');		}
+			}			private function parse_csv($file, $delimiter){				if(!file_exists($file) || !is_readable($file))
+			return FALSE;				$header = NULL;		$query = NULL;
+		$data = array();		
+		if (($handle = fopen($file, 'r')) !== FALSE)
 		{
-			$file = ci()->upload->data();
-		
-			$data = array(
-					'name'			=> $name ? $name : $file['orig_name'],
-					'full_path'		=> $file['full_path'],
-					'filename'		=> $file['file_name'],
-					'filesize'		=> $file['file_size'],
-					'width'			=> (int) $file['image_width'],
-					'height'		=> (int) $file['image_height'],
-					'date_added'	=> now()
-			);
-		
-			return $data;
-		}	}	
+			while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+			{				$data[] = array(							'cid' 		=> $row[1],							'cat_id' 	=> $row[2],							'title' 	=> $row[3],							'date' 		=> $row[4],							'time' 		=> $row[5],							'duration' 	=> $row[6],							'syn_id' 	=> $row[7],							'syn_en' 	=> $row[8]						);
+			}			
+			fclose($handle);
+		}				$this->db->insert_batch('default_inn_epg_show_detail', $data);		//return $data;	}	
 	//public function delete($id = 0){echo $id;}
 }

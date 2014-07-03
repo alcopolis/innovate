@@ -105,7 +105,7 @@
 							<ul>
 								<li>
 									<label for="csvdata">Upload CSV</label>
-									<div class="input"><?php echo form_upload('csvdata'); ?></div>
+									<div class="input"><?php echo form_upload('csvdata'); ?><?php echo form_submit('import', 'import'); ?></div>
 								</li>
 							</ul>
 						</fieldset>
