@@ -84,15 +84,13 @@ class Admin_Shows extends Admin_Controller
 			}
 			$this->sh_data = $this->epg_sh_m->get_show_by(NULL, $cond, FALSE);
 			$ch_info = $this->epg_ch_m->get_channel($post_input['cid']);
-			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data, 'ch_info'=>$ch_info));
-		//			var_dump($this->epg_sh_m->get_show_by(NULL, $cond, FALSE));		}else{
+			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data, 'ch_info'=>$ch_info));		}else{
 			$this->page_data->view = 'featured';
-			$this->sh_data = $this->epg_sh_m->featured_list();				
+			$this->sh_data = $this->epg_sh_m->featured_list();
 			$this->render('admin/shows', array('page'=>$this->page_data, 'ch'=>$ch, 'sh'=>$this->sh_data, 'sh_cat'=>$this->sh_cat));
 		}
 	}
 
-	
 	public function edit($id){
 		$this->page_data->title = 'Edit Show';
 		$this->sh_data = $this->epg_sh_m->get_show_by(NULL, array('id'=>$id), TRUE);
