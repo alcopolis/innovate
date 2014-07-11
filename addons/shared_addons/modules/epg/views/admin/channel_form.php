@@ -13,9 +13,9 @@
 		<div class="content">			
 			<?php 
 				if($page->action == 'create'){
-					echo form_open('admin/epg/channels/' . $page->action);
+					echo form_open('admin/epg/channels/' . $page->action, 'id="channel-form"');
 				}else if($page->action == 'edit'){
-					echo form_open('admin/epg/channels/' . $page->action . '/' . $ch->id);
+					echo form_open('admin/epg/channels/' . $page->action . '/' . $ch->id, 'id="channel-form"');
 				} 
 			?>
 

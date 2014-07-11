@@ -87,5 +87,5 @@ class Admin_Channels extends Admin_Controller
 			}
 			$this->render('admin/channel_form', array('page'=>$this->page_data, 'ch'=>$this->ch_data));
 		}
-	}
+	}			public function do_upload(){		echo 'tes';	}
 }
