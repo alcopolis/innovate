@@ -63,14 +63,13 @@ class Admin_Shows extends Admin_Controller
 	}
 
 	public function index()
-	{
+	{
 		// get channel
 		$temp = $this->epg_ch_m->get_all_channel();
 		$ch[0] = 'Select';
 				foreach($temp as $v){
 			$ch[$v->id] = $v->name;
-		}
-		
+		}		
 		if($this->form_validation->run()){
 			$this->page_data->view = 'filter';
 			$post_input = $this->alcopolis->array_from_post(array('cid', 'date', 'title'), $this->input->post());				

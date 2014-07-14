@@ -12,7 +12,7 @@ class Admin_Channels extends Admin_Controller
 {
 	protected $section = 'channels';
 	protected $page_data;
-	protected $ch_data;
+	protected $ch_data;	protected $logo_path;
 	public function __construct()
 	{
 		parent::__construct();
@@ -23,7 +23,7 @@ class Admin_Channels extends Admin_Controller
 		$this->lang->load('epg');
 		//variables
 		$this->ch_data = new stdClass();
-		$this->page_data = new stdClass();
+		$this->page_data = new stdClass();		$this->logo_path = $this->module_details['path'] . '/upload/logo';		
 		$this->page_data->section = $this->section;
 		$this->page_data->editor_type = 'html';
 		
@@ -87,5 +87,7 @@ class Admin_Channels extends Admin_Controller
 			}
 			$this->render('admin/channel_form', array('page'=>$this->page_data, 'ch'=>$this->ch_data));
 		}
-	}			public function do_upload(){		echo 'tes';	}
+	}			public function do_upload($rename){		//Upload image config		$var = '';		$this->upload_config = array(			'allowed_types' => 'jpg|jpeg|png',			'upload_path' => $this->logo_path,			'max_size' => 100,			'overwrite' => true,			'file_name' => $rename,		);		
+		$this->load->library('upload');
+		$this->load->library('image_lib');				$this->upload->initialize($this->upload_config);		if($this->upload->do_upload('poster')){			$upload_data = $this->upload->data();			$var = $upload_data['file_name'];			$image_width = $upload_data['image_width'];			$image_height = $upload_data['image_height'];			$axis_x = 0;			$axis_y = 0;			if($image_width > 240){				$axis_x = ($image_width - 240)/2;			}			if($image_height > 240){				$axis_y = ($image_height - 240)/2;			}			// Resize			$resize_config = array(				'source_image' => $upload_data['full_path'],				'maintain_ration' => true,				'width' => 240,				'height' =>240,				'master_dim' => 'auto',			);						$this->image_lib->clear();			$this->image_lib->initialize($resize_config);			if ($this->image_lib->resize())			{				$crop_config = array(					'source_image' => $upload_data['full_path'],					'new_image' => $this->img_path . '/square',					'x_axis' => $axis_x,					'y_axis' => 0,					'width' => 240,					'height' => 240,					'maintain_ratio' => false                                   				);				$this->image_lib->clear();				$this->image_lib->initialize($crop_config);				if (!$this->image_lib->crop())				{					echo $this->image_lib->display_errors();				}			}else{				echo $this->image_lib->display_errors();			}		}else{			$upload_data = $this->upload->display_errors();		}		return $var;	}
 }
