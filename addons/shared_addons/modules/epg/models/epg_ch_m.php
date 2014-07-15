@@ -14,7 +14,7 @@ class Epg_Ch_m extends MY_Model {
 
 	/** @var array The validation rules */
 
-	public $rules = array(
+	public $rules = array(			
 			'name' => array(
 					'field' => 'name',
 					'label' => 'Channel Name',

@@ -24,7 +24,7 @@
 					<div class="form_inputs" id="channel-content-fields">
 						<fieldset>
 							<ul>
-								<li>
+								<li style="padding-bottom:40px;">
 									<div id="ch-logo" style="width:240px; height: 240px; background:#07E; float:left; margin-right:20px;">
 										<input type="file" name="logo" style="width:240px; height: 240px; opacity:0; margin:0; padding:0; cursor:pointer;" />
 									</div>
@@ -78,11 +78,8 @@
 					</div>
 			<?php } ?>	
 
-			<div class="buttons">
-				<?php 
-					echo form_submit('submit', 'Save'); 
-					echo '<a href="admin/epg/channels" class="button" style="padding:5px 10px 4px 10px;">Cancel</a>';
-				?>
+			<div class="buttons align-right padding-top">
+				<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel') )) ?>
 			</div>
 			
 			<?php echo form_close() ?>
