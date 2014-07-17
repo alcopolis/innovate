@@ -33,6 +33,9 @@ $(document).ready(function(){
 	$('#content-bg').height($('#content').innerHeight() + 16);
 	
 	
+	
+	
+	
 	// ========================== TV Guide Function ========================//
 	
 	var t;

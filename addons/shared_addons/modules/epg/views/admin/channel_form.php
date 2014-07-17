@@ -1,6 +1,8 @@
 <style type="text/css">
 	#ch-logo{
-		background-image:url();
+		<?php if($ch->logo != ''){ ?>
+			background: url(<?php echo $ch->logo; ?>) no-repeat;
+		<?php } ?>
 	}
 </style>
 
@@ -21,11 +23,11 @@
 
 			
 			<?php if(!empty($ch)){ ?>	
-					<div class="form_inputs" id="channel-content-fields">
+					<div class="form_inputs" id="channel-content-fields" data-id="<?php echo $ch->id?>">
 						<fieldset>
 							<ul>
 								<li style="padding-bottom:40px;">
-									<div id="ch-logo" style="width:240px; height: 240px; background:#07E; float:left; margin-right:20px;">
+									<div id="ch-logo" style="width:240px; height: 240px; float:left; margin-right:20px; outline:1px solid #CCC;">
 										<input type="file" name="logo" style="width:240px; height: 240px; opacity:0; margin:0; padding:0; cursor:pointer;" />
 									</div>
 
