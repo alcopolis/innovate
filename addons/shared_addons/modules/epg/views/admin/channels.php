@@ -14,17 +14,6 @@
 
 			<?php echo $this->load->view('admin/partials/channel_filters') ?>
 
-			
-
-			<ul>
-
-				<li>Add channel</li>
-
-				<li>Edit channel</li>
-
-				<li>Add channel logo</li>
-
-			</ul>
 
 	          <?php
 
@@ -86,7 +75,7 @@
 
 	        						<td><?php echo form_checkbox('action_to[]', $ch->id); ?></td>
 
-	        						<td><a href="admin/epg/channels/edit/<?php echo $ch->id; ?>"><?php echo $ch->name; ?></a></td>
+	        						<td><a href="admin/epg/channels/edit/<?php echo $ch->id; ?>" style="background:url(<?php echo $ch->logo; ?>) no-repeat left center; background-size:auto 100%; padding-left:30px;"><?php echo $ch->name; ?></a></td>
 
 	        						<td class="align-center"><?php echo $ch->num; ?></td>
                                     

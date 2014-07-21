@@ -106,14 +106,14 @@ span#ch{
 
 /* ========================================= Frontend EPG =======================================*/
 	body.epg{
-		background: #207cca; /* Old browsers */
-		background: -moz-linear-gradient(45deg,  #207cca 0%, #a0e6f7 54%, #00ccee 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#207cca), color-stop(54%,#a0e6f7), color-stop(100%,#00ccee)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); /* IE10+ */
-		background: linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#207cca', endColorstr='#00ccee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */			
+		background: #FFF; /* Old browsers */
+/* 		background: -moz-linear-gradient(45deg,  #207cca 0%, #a0e6f7 54%, #00ccee 100%); FF3.6+ */
+/* 		background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#207cca), color-stop(54%,#a0e6f7), color-stop(100%,#00ccee)); Chrome,Safari4+ */
+/* 		background: -webkit-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); Chrome10+,Safari5.1+ */
+/* 		background: -o-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); Opera 11.10+ */
+/* 		background: -ms-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); IE10+ */
+/* 		background: linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); W3C */
+/* 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#207cca', endColorstr='#00ccee',GradientType=1 ); IE6-9 fallback on horizontal gradient			 */
 	}
 
 	
@@ -132,28 +132,34 @@ span#ch{
 	#ch-lineup {
 	    font-family: "Arial",Helvetica,Tahoma,sans-serif;
 	    font-size: 12px;
-	    margin: 0 auto;
-	    width: 960px;
+	    margin: 120px auto 0 auto;
+	    width: 90%;
 	}
 	
 	.ch{
-		width:61px; height:61px;
-		border:2px solid #FFF;			
+		width:64px; height:64px;
+		border:1px solid #CCC;			
 		font-size:1em;
 		text-align:center;
-		margin:0 5px 5px 0; padding:5px;
+		margin:5px; padding:5px;
 		float:left;
-		border-radius:5px;
 		color:rgba(32,120,200,.85);
 		background:rgba(255,255,255,.85);
 		cursor:pointer;
 	}
 	
+	
 	.ch:hover, .ch.selected{
-		border:2px solid rgba(32,120,200,.85);
+		border:1px solid rgba(32,120,200,.1);
 	}
 	
-	#list{width:60%;}
+	#list{}
+	.accordion{width:100%;}
+	.accordion h3{background:#999; padding:5px 0; border-radius:0; border:none; margin-bottom:2px;}
+	.accordion h3.ui-state-active{margin-bottom:0px;}
+	.accordion h3:hover, .accordion h3.ui-state-active{background:#000; color:#FFF; border:none;}
+
+	.accordion > div{border:none; background:#EFEFEF; border-radius:0; margin-bottom:2px; padding:20px;}
 	
 	#ch-detail{color:#007DC3}
 	#ch-detail #name{font-size:14px;}
@@ -164,13 +170,11 @@ span#ch{
 	
 /* ======================== Side ===========================*/	
 	
-	#side{width:40%;}
+	#side{width:280px; float:right}
 	#side .side-item{
-		background:rgba(255,255,255,.85);
+		background:rgba(32,32,32,.85);
 		padding:20px;
 		margin-bottom:20px;
-		border-radius:5px;
-		border:2px solid #FFF;
 	}
 	
 /* ======================== Tools ===========================*/

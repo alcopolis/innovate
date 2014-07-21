@@ -212,49 +212,80 @@ class Plugin_Epg extends Plugin
 		return $meta;
 	}
 	
-	function ch_lineup(){
-//		Channel Category
-// 		0	Uncategorized
-// 		1	National FTA
-// 		2	International FTA
-// 		3	Movies
-// 		4	Entertainment
-// 		5	Knowledge
-// 		6	Life Style
-// 		7	Sports
-// 		8	Kids And Toddler
-// 		9	News
+// 	function ch_lineup(){
+// //		Channel Category
+// // 		0	Uncategorized
+// // 		1	National FTA
+// // 		2	International FTA
+// // 		3	Movies
+// // 		4	Entertainment
+// // 		5	Knowledge
+// // 		6	Life Style
+// // 		7	Sports
+// // 		8	Kids And Toddler
+// // 		9	News
 		
 		
-		if($this->attribute('category') == 'All Categories'){
-			$raw = $this->epg_ch_m->order_by('cat', 'ASC')->get_channel_by(array('is_active'=>'1'), '');
-		}else{
-			$cat = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), TRUE);
-			$raw = $this->epg_ch_m->get_channel_by(array('cat' => $cat->id, 'is_active'=>'1'), '');
-		}
+// 		if($this->attribute('category') == 'All Categories'){
+// 			$raw = $this->epg_ch_m->order_by('cat', 'ASC')->get_channel_by(array('is_active'=>'1'), '');
+// 		}else{
+// 			$cat = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), TRUE);
+// 			$raw = $this->epg_ch_m->get_channel_by(array('cat' => $cat->id, 'is_active'=>'1'), '');
+// 		}
 		
 		
 		
-		$data = '';
+// 		$data = '';
 		
-		foreach($raw as $ch){
-			if($ch->desc != ''){
-				$desc = $ch->desc;	
-			}else{
-				$desc = 'No Description';
-			}
+// 		foreach($raw as $ch){
+// 			if($ch->desc != ''){
+// 				$desc = $ch->desc;	
+// 			}else{
+// 				$desc = 'No Description';
+// 			}
 						
-			if($ch->logo != ''){
-				$logo = $ch->logo;
-			}else{
-				$logo = '{{theme:image_path}}/theme/default-icon.jpg';
+// 			if($ch->logo != ''){
+// 				$logo = $ch->logo;
+// 			}else{
+// 				$logo = '/addons/shared_addons/themes/innovate/img/themes/default-icon.jpg';
+// 			}
+			
+// 			$ch_cat = $this->epg_ch_m->get_category_by(array('id' => $ch->cat), TRUE);
+// 			//var_dump($ch_cat);
+			
+// 			$data .= '<div title="' . $ch->name . '" style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%; text-indent:-9999px; background-color:#FFF;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $ch_cat->cat . '" data-logo="' . $logo . '" data-desc="' . $desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';	
+// 		}
+		
+// 		return $data;
+// 	}
+	
+	
+	function ch_lineup(){
+		$data = '<div class="accordion">';
+		
+		$cats = $this->epg_ch_m->order_by('cat', 'ASC')->get_categories();
+		foreach($cats as $cat){
+			
+			$ch_data = $this->epg_ch_m->get_channel_by(array('is_active'=>'1', 'cat'=>$cat->id), '');
+			//var_dump($ch_data);
+			
+			if(count($ch_data) > 0){
+				$data .= '<h3 class="clear">' . $cat->cat . '</h3>';
+				$data .= '<div class="clearfix">';
+				foreach($ch_data as $ch){
+					if($ch->logo != ''){
+						$logo = $ch->logo;
+					}else{
+						$logo = '/addons/shared_addons/themes/innovate/img/themes/default-icon.jpg';
+					}
+					
+					$data .= '<div title="' . $ch->name . '" style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%; text-indent:-9999px; background-color:#FFF;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $cat->cat . '" data-logo="' . $logo . '" data-desc="' . $ch->desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';
+				}
+				$data .= '</div>';
 			}
-			
-			$ch_cat = $this->epg_ch_m->get_category_by(array('id' => $ch->cat), TRUE);
-			//var_dump($ch_cat);
-			
-			$data .= '<div style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $ch_cat->cat . '" data-logo="' . $logo . '" data-desc="' . $desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';	
 		}
+		
+		$data .= '</div>';
 		
 		return $data;
 	}
