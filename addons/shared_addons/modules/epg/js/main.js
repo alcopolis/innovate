@@ -29,7 +29,6 @@ $(document).ready(function(){
 	
 	$('#datepicker, .datepicker').datepicker({dateFormat: 'yy-mm-dd'});
 	
-	
 	$('#content-bg').height($('#content').innerHeight() + 16);
 	
 	

@@ -84,5 +84,5 @@ class Epg extends Public_Controller
 			$c = $cat[intval($this->input->post('cat_id'))];
 		}
 		$this->render('channel_lineup', array('cat'=>$cat, 'category'=>$c));
-	}
+	}				// ======================== AJAX Function ================================== //		public function today_sched(){		//$today = now('Y-m-d');		$cid = $this->input->get('cid');		$raw_sched;				if($cid){			$raw_sched = $this->epg_sh_m->get_show_by('', array('cid'=>$cid, 'date'=>'2014-04-02'), FALSE);			foreach($raw_sched as $r){				var_dump($raw_sched, $cid);			}		}else{			echo 'false';			}	}
 }

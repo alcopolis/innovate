@@ -20,11 +20,11 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){			var sideW = $('#side').width();			var listW = $('#ch-lineup').width() - sideW - 20;			$('#list').width(listW);						$( ".accordion" ).accordion();			
-			$('.ch').click(function(){				if($(this).attr('data-logo') != ''){ $('img#logo').attr('src', $(this).attr('data-logo')) };
+			$('.ch').click(function(){				var cID = $(this).attr('data-id');								if($(this).attr('data-logo') != ''){ $('img#logo').attr('src', $(this).attr('data-logo')) };
 				if($(this).attr('data-cat') != ''){ $('#cat').html($(this).attr('data-cat')) };
 				if($(this).attr('data-name')){ $('#name').html($(this).attr('data-name')) };
 				if($(this).attr('data-num')){ $('#num').html($(this).attr('data-num')) };
-				if($(this).attr('data-desc')){ $('#ch-desc').html($(this).attr('data-desc')) };
+				if($(this).attr('data-desc')){ $('#ch-desc').html($(this).attr('data-desc')) };				$.ajax({					type: 'GET',					url: 'epg/today_sched/',					data: cID,					processData: false,				    contentType: false,					dataType: 'json',					success: function(respond) {													},				});
 			})
 		});
 	</script>

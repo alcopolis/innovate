@@ -279,7 +279,7 @@ class Plugin_Epg extends Plugin
 						$logo = '/addons/shared_addons/themes/innovate/img/themes/default-icon.jpg';
 					}
 					
-					$data .= '<div title="' . $ch->name . '" style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%; text-indent:-9999px; background-color:#FFF;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $cat->cat . '" data-logo="' . $logo . '" data-desc="' . $ch->desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';
+					$data .= '<div title="' . $ch->name . '" style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%; text-indent:-9999px; background-color:#FFF;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $cat->cat . '" data-logo="' . $logo . '" data-desc="' . $ch->desc . '" data-id="' . $ch->id . '">' . $ch->name . '</div>';
 				}
 				$data .= '</div>';
 			}
