@@ -172,10 +172,15 @@ span#ch{
 	
 	#side{width:280px; float:right}
 	#side .side-item{
-		background:rgba(32,32,32,.85);
-		padding:20px;
+		/*background:rgba(113, 113, 116,0.85);*/
+		padding:0;
 		margin-bottom:20px;
 	}
+	
+	.ch-info{padding:10px 0;}
+	#today-sch{margin:20px 10px;}
+	#today-sch table{}
+	#today-sch table td{padding-right:5px;font-size:13px;}
 	
 /* ======================== Tools ===========================*/
 /* 	#tools{ */

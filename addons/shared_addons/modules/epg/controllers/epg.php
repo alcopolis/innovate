@@ -84,5 +84,9 @@ class Epg extends Public_Controller
 			$c = $cat[intval($this->input->post('cat_id'))];
 		}
 		$this->render('channel_lineup', array('cat'=>$cat, 'category'=>$c));
-	}				// ======================== AJAX Function ================================== //		public function today_sched(){		//$today = now('Y-m-d');		$cid = $this->input->get('cid');		$raw_sched;				if($cid){			$raw_sched = $this->epg_sh_m->get_show_by('', array('cid'=>$cid, 'date'=>'2014-04-02'), FALSE);			foreach($raw_sched as $r){				var_dump($raw_sched, $cid);			}		}else{			echo 'false';			}	}
+	}				// ======================== AJAX Function ================================== //		public function today_sched($id){		$respond = array();		$cid = $id;		$raw_sched;				if($cid){			$this->load->library('table');						$raw_sched = $this->epg_sh_m->get_show_by('time, title', array('cid'=>$cid, 'date'=>'2014-04-02'), FALSE);						if(count($raw_sched) > 0){				
+				$tmpl = array (							'table_open'  => '<table border="0" cellpadding="2" cellspacing="1">',							'row_start'           => '<tr>',							
+							'row_alt_start'       => '<tr class="alt">',						);
+				$this->table->set_template($tmpl);								foreach($raw_sched as $r){					$time = date_create($r->time);					$this->table->add_row(date_format($time, 'H:i'), $r->title);				}								$respond['status'] = TRUE;				$respond['schedule'] = $this->table->generate();			}else{				$respond['status'] = TRUE;
+				$respond['schedule'] = 'No data';			}					}else{			$respond['status'] = FALSE;		}				echo json_encode($respond);	}
 }
