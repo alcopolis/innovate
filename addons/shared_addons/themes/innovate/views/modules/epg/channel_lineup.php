@@ -21,10 +21,10 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){			var sideW = $('#side').width();			var listW = $('#ch-lineup').width() - sideW - 20;			$('#list').width(listW);						$( ".accordion" ).accordion();			
-			$('.ch').click(function(){				var cID = $(this).attr('data-id');								if($(this).attr('data-logo') != ''){ $('img#logo').attr('src', $(this).attr('data-logo')) };
+			$('.ch').click(function(){				var cID = $(this).attr('data-id');								if($(this).attr('data-logo') != ''){ $('img#ch-logo').attr('src', $(this).attr('data-logo')) };
 				if($(this).attr('data-cat') != ''){ $('#cat').html($(this).attr('data-cat')) };
 				if($(this).attr('data-name')){ $('#name').html($(this).attr('data-name')) };
-				if($(this).attr('data-num')){ $('#num').html('Saluran ' + $(this).attr('data-num')) };
+				if($(this).attr('data-num')){ $('#num').html('Ch ' + $(this).attr('data-num')) };
 				if($(this).attr('data-desc')){ $('#ch-desc').html($(this).attr('data-desc')) };				$.ajax({					type: 'GET',					url: 'epg/today_sched/' + cID,					//data: cID,					processData: false,				    contentType: false,					dataType: 'json',					success: function(respond) {						if(respond.status){									$('#today-sch').html(respond.schedule);						}					},				});
 			})
 		});
@@ -43,8 +43,8 @@
 						{{ epg:ch_lineup category="<?php echo $category; ?>" }}
 					</div>
 					<div id="side" class="right">
-						<div id="ch-detail" class="side-item clearfix">							<section style="text-align:center;">
-								<img id="logo" src="{{theme:image_path}}themes/default-icon.jpg" style="box-shadow:0 0 5px #999; width:200px; height:auto; background:#CCC; margin-bottom:10px;" />														<div class="ch-info">									<span id="num"></span><span id="cat"></span>								</div>							</section>														<div>								<h6 style="color:#CCC;">Today | <?php echo date('d F Y'); ?></h6>	 							<div id="today-sch"></div> 							</div>
+						<div id="ch-detail" class="side-item clearfix">							<section style="text-align:center;">								<div class="ch-info clearfix">									<span id="num" class="ch-attr left"></span>									<span id="cat" class="ch-attr left"></span>								</div>
+								<img id="ch-logo" src="{{theme:image_path}}themes/default-icon.jpg" />													</section>														<div id="sch">								<h6>Today, <?php echo date('d F Y'); ?></h6>	 							<div id="today-sch"></div> 							</div>
 						</div>
 						<?php if(isset($ads)){ ?>
 							<div class="ads side-item">
