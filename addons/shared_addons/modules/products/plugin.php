@@ -220,7 +220,6 @@ class Plugin_Products extends Plugin
 		$key = $this->attribute('name');
 		$prod_slug = $this->attribute('product');
 		
-		
 		$temp = json_decode($this->products_m->get_product_by(NULL, array('slug'=>$prod_slug), true)->files);
 		
 		$tmp = FILES::get_file($temp->attch->$key->id);

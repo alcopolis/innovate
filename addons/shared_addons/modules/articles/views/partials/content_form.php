@@ -1,7 +1,14 @@
 <fieldset>
 	<ul>
 		<li class="editor">
-			<label for="title">Title</label><br>
+			<label for="title">Status</label>
+			<div class="edit-content">
+				<?php echo form_dropdown('status', array('0'=>'Draft', '1'=>'Published', '2'=>'Archived'), set_value('status', $art->status)); ?>
+			</div>
+		</li>
+		
+		<li class="editor">
+			<label for="title">Title</label>
 			<div class="edit-content">
 				<?php
 					if($page->action == 'edit'){
@@ -11,15 +18,14 @@
 					} 
 				?>
 			</div>
-		</li>
-		
-		<li class="editor">
-			<label for="title">Category</label><br><br>
+			
+			<br/>
+			
+			<label for="title">Category</label>
 			<div class="edit-content">
 				<a class="add-form-item" href="javascript:void(0)" onClick="addCategory()">+ Add Category</a><br/>
 				<?php echo form_dropdown('category', $cats, set_value('category', $art->category)); ?>
 			</div>
-			<br>
 			<label for="title">Keywords <span style="color:#333; font-weight:normal;">(seperate words with , )</span></span></label>
 			<div class="edit-content">
 				<?php echo form_input('keywords', set_value('keywords', $art->keywords), 'size="50"'); ?>

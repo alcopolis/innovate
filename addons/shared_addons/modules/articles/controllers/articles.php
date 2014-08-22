@@ -127,13 +127,13 @@ class Articles extends Public_Controller
 
 	public function category($slug = NULL){
 		
-		$limit = 2;
+		$limit = 5;
 		$paging = create_pagination('articles/category/' . $slug, $this->articles_m->count_articles_by_category($slug), $limit);
 	
 		if($slug != NULL or $slug != ''){
 			$category = $this->articles_category_m->get_category_by(array('slug'=>$slug), NULL, TRUE);
 				
-			$this->page_data->section = $category->name;
+			$this->page_data->section = 'Berita - ' . $category->name;
 				
 			$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($paging['limit'], $paging['offset'])->get_articles_by(array('category'=>$category->id, 'status'=>'1'));
 	

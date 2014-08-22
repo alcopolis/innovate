@@ -50,6 +50,7 @@ class Articles_m extends MY_Model {
 		$data->css = '';
 		$data->created_on = '';
 		$data->modified_on = '';
+		$data->status = 0;
 		
 		return $data;
 	}

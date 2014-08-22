@@ -74,7 +74,7 @@ class Admin extends Admin_Controller
 		$this->form_validation->set_rules($this->articles_m->_rules);
 		
 		if($this->form_validation->run()){			
-			$this->form_data = $this->alcopolis->array_from_post(array('category', 'keywords', 'teaser', 'body', 'js', 'css'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('status', 'category', 'keywords', 'teaser', 'body', 'js', 'css'), $this->input->post());
 			
 			//Refining title
 			$this->form_data['title'] = ucwords($this->input->post('title'));
@@ -129,7 +129,7 @@ class Admin extends Admin_Controller
 		
 		
 		if($this->form_validation->run()){			
-			$this->form_data = $this->alcopolis->array_from_post(array('category', 'keywords', 'teaser', 'body', 'js', 'css'), $this->input->post());
+			$this->form_data = $this->alcopolis->array_from_post(array('status', 'category', 'keywords', 'teaser', 'body', 'js', 'css'), $this->input->post());
 			
 			//Date modified
 			$d = new DateTime();
