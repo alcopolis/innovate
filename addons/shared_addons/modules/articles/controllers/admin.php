@@ -174,4 +174,65 @@ class Admin extends Admin_Controller
 		}
 	}
 	
+	
+	private function is_folder_exist($name=''){
+		if($name != ''){
+			$this->load->library('files');
+			$result = Files::search($name);
+			
+			if(count($result) > 0){
+				return TRUE; 
+			}else{
+				return FALSE;
+			}
+		}
+	}
+	
+	// --------------- AJAX --------------------- //
+	
+	public function do_upload(){
+	
+		$article_data = $this->input->post('form_data');
+	
+		if($article_data['attch'] != ''){
+			echo $article_data['attch'];	
+		}
+	
+		if(!$this->is_folder_exist('articles')){
+			//create virtual folder
+			Files::create_folder(1, 'articles');
+		}
+		
+		//Get articles folder ID
+		$folder_id = $this->file_folders_m->get_by('slug', 'articles')->id;
+		
+		//Upload file and get upload data
+		$result = Files::upload($folder_id, $article_data['slug'], 'attch', 480, false, true);
+		
+		$file_data = $this->parse_file_data($result['data']);
+		$this->articles_m->update($article_data['id'], array('files'=>$file_data));
+		
+		//Setup respond data
+		$respond = array(
+				'status'=>$result['status'],
+				'message'=>$result['message'],
+				'file'=>Files::$path . $result['data']['filename'],
+		);
+		
+		//Send ajax respond
+		echo json_encode($respond);
+	}
+	
+	
+	function parse_file_data($data){
+		$result = array();
+		$key = array('id', 'folder_id', 'name', 'path', 'filename');
+	
+		foreach($key as $k){
+			$result[$k] = $data[$k];
+		}
+	
+		return json_encode($result);
+	}
+	
 }
