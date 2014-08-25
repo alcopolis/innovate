@@ -35,6 +35,7 @@ class Admin extends Admin_Controller
 		$this->template
 			->title($this->module_details['name'])
 			->append_metadata($this->load->view('fragments/wysiwyg', array(), TRUE))
+			->append_js('module::main.js')
 			->append_js('module::article_form.js')
 			->append_css('module::style.css')
 			->set($var)
@@ -159,6 +160,7 @@ class Admin extends Admin_Controller
 		$var = array(
 				'page' => $this->page_data,
 				'art' => $art,
+				'files' => json_decode($art->files),
 				'cats' => $cats,
 				'uri' => 'admin/articles/edit/' . $id,
 			);
@@ -177,21 +179,20 @@ class Admin extends Admin_Controller
 	
 	private function is_folder_exist($name=''){
 		if($name != ''){
-			$this->load->library('files');
+			$this->load->library('files/files');
 			$result = Files::search($name);
 			
-			if(count($result) > 0){
-				return TRUE; 
-			}else{
-				return FALSE;
-			}
+			return $result['status'];
 		}
 	}
 	
 	// --------------- AJAX --------------------- //
 	
 	public function do_upload(){
-	
+		$this->load->library('files/files');
+		$this->load->model('files/file_folders_m');
+		
+		
 		$article_data = $this->input->post('form_data');
 	
 		if($article_data['attch'] != ''){
@@ -207,10 +208,11 @@ class Admin extends Admin_Controller
 		$folder_id = $this->file_folders_m->get_by('slug', 'articles')->id;
 		
 		//Upload file and get upload data
-		$result = Files::upload($folder_id, $article_data['slug'], 'attch', 480, false, true);
+		$result = Files::upload($folder_id, $article_data['slug'], 'attch', 640, false, true);
 		
 		$file_data = $this->parse_file_data($result['data']);
 		$this->articles_m->update($article_data['id'], array('files'=>$file_data));
+				
 		
 		//Setup respond data
 		$respond = array(

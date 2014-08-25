@@ -20,6 +20,7 @@
 					echo form_open('admin/articles/' . $page->action, 'id="article-form"');
 				}else if($page->action == 'edit'){
 					echo form_open('admin/articles/' . $page->action . '/' . $art->art_id, 'id="article-form"');
+					echo form_hidden('form_data', array('id'=>$art->art_id, 'slug'=>$art->art_slug));
 				} 
 			?>
 			

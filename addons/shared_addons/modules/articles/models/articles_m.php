@@ -35,6 +35,7 @@ class Articles_m extends MY_Model {
 	public function __construct()
 	{		
 		parent::__construct();
+		$this->_table = 'inn_articles';
 	}
 	
 	
@@ -129,6 +130,7 @@ class Articles_m extends MY_Model {
 		$this->db->where('category',$temp->id);
 		return $this->db->from($this->_table)->count_all_results();
 	}
+	
 	
 	//CRUD
 	public function insert_art($data){

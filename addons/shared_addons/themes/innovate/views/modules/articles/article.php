@@ -13,10 +13,12 @@
 	<style>
 		.article{margin:0 0 20px 0; background:#EEE;}
 		.art{margin:0 10px 10px 10px;}
+		
+		<?php echo $art->css; ?>
 	</style>
 </head>
 
-<body id="top" class="articles">
+<body id="top" class="article">
 
 		{{ integration:analytics }}
 		
@@ -24,7 +26,7 @@
 			{{ theme:partial name="header" }}
 		</header>
 				
-		<div id="content" class="wrapper clearfix">
+		<div id="content" class="wrapper">
 			<div id="body-theme">
 				<?php if($art != NULL){ ?>
 					<div id="art-content">
@@ -33,8 +35,8 @@
 								<?php echo $page->section; ?>
 							</section>
 							
-							<div id="arts-body" class="left">
-								<article id="<?php echo $art->art_slug?>" class="full clearfix">
+							<div id="arts-body">
+								<article id="<?php echo $art->art_slug?>" class="full">
 									<div class="art-property art-title"><h1><?php echo $art->title; ?></h1></div>
 									<div class="art-property art-meta">
 										<small>
@@ -43,9 +45,9 @@
 										</small>
 									</div>									
 									
-									<div class="art-property art-content"><?php echo $art->body; ?></div>
+									<div class="art-property art-content clearfix"><?php echo $art->body; ?></div>
 									
-									<div class="art-property art-meta">
+									<div id="tags" class="art-property art-meta">
 										<p>
 											<small>
 											<?php
@@ -65,10 +67,10 @@
 							</article>
 							
 							<div id="arts-side" class="right">
-								<div id="related" class="side">
+<!-- 							<div id="related" class="side">
 									<h6>Related</h6>
 									{{ articles:get_related category="<?php echo $art->cat_slug; ?>" }}
-								</div>
+								</div> -->
 <!-- 								<div id="archived" class="side">Archives</div> -->
 <!-- 								<div class="advertisement side" style="height:120px;">Advertisement</div> -->
 <!--  								<div id="events" class="side">Events</div>  -->

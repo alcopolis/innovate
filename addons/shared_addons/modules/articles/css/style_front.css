@@ -2,14 +2,14 @@ body.articles #body-wrapper{
 	padding:120px 0 40px 0;
 	width:80%;
 	color:#6F6F6F;
-	font-size:14px;
+	font-size:12px;
 	line-height:20px;
 /* 	background:#EEE; */	
 }
 
-body.articles a{color:#007DC3;}
-body.articles a:hover{color:#0033C3;}
-body.articles h2{font-size:24px; line-height:48px;}
+body.articles a, body.article a{color:#007DC3;}
+body.articles a:hover, body.article a:hover{color:#0033C3;}
+body.articles h2, body.articles h2{font-size:24px; line-height:48px;}
 
 
 /* Articel Page */
@@ -23,33 +23,51 @@ section#arts-section{
 }
 
 
+/* Article General Prop */
 
-
-/* Article */
-
-
-#arts-body{width:65%; border:1px solid #EEE;}
 article{
-	padding:10px;
-	border-bottom:1px solid #EFEFEF;
+	padding:1.25%;
+	color:#333;
+}
+
+#arts-body{width:90%; margin:0 auto;}
+
+
+
+
+
+/* Article List */
+
+body.articles article{
+	width:22.5%;
+	margin:0;
 }
 
 article img{
 	border:none;
 	margin:0 20px 0 0; 
-	width:40%; 
-	height:200px; 
+	width:100%; 
 	box-shadow:0 1px 2px #666;
 	-moz-box-shadow:0 1px 2px #666;
 	-webkit-box-shadow:0 1px 2px #666;
 }
 
-.art-property{margin:0 10px 10px 10px;}
-.art-title h1{font-size:26px; line-height:30px}
+.art-property{margin:0 10px 10px 0;}
+.art-teaser{font-size:12px; line-height:14px;}
+
+.art-title{margin:5px 0;}
+.art-title h1 a{font-size:18px;}
+
+
+
 
 
 
 /* Full Article */
+
+body.article article{width:75%; margin:0 auto;}
+#tags{display:none;}
+
 article.full img{
 	margin:0 0 10px 0; 
 	width:100%; 
@@ -60,8 +78,8 @@ article.full img{
 
 /* Article Side */
 #arts-side{
-	width:30%;
 	padding:20px 0;
+	background:#CCC;
 }
 
 #arts-side .side{
