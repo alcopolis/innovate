@@ -136,7 +136,33 @@ class Plugin_Epg extends Plugin
 
 	function metadata(){
 		$meta = '<style type="text/css">
-					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
+						.mod-epg{
+							padding:0;
+							width:99%;
+							margin:-20px 0 0 0;
+						}
+						
+						.mod-epg.uncategorized{
+							margin:40px 0 !important;
+						}
+						
+						.mod-epg>h4{
+							font-size:18px;
+							font-weight:normal;
+							margin:20px 0 5px 10px;
+							width:160px;
+							color:#FFF;
+							text-shadow:0 -1px 1px rgba(51,51,51,.5);
+							background:#007DC3;
+							position: relative;
+							top:112px; left:-108px;
+							text-align:center;
+							
+							padding:3px 5px;
+							border-radius:5px 5px 0 0;
+						}
+						
+					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden; outline:1px solid #EEE;}
 					  .featured-show .poster{
 							width:100%; height:100%; outline:3px solid #FFF;
 							background-repeat:no-repeat;
@@ -144,25 +170,29 @@ class Plugin_Epg extends Plugin
 							background-position:center center;
 						}
 					  .featured-show .poster img{width:100%; height:auto;}
-		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(0,120,180,.95); left:0; width:100%; opacity:0;}
+		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(51,51,51,.9); left:0; width:100%; opacity:0;}
 					  .featured-show .info h4 {font-size:14px; font-weight:600; line-height:14px; text-align:center; margin:15px 10px}
 				
-					  .featured-show .info p.subinfo{font-weight:normal; margin:5px 10px; background:#FFF; font-size:12px; color:#111; padding:10px; border-radius:5px;}
+					  .featured-show .info p.subinfo{font-weight:normal; margin:5px 10px; background:#FFF; font-size:12px; color:#111; padding:10px; border-radius:0;}
 					  .featured-show .info p.subinfo{text-align:center;}
 				      .main.featured-show p.subinfo {text-align:left;}
+				      .main.featured-show p.subinfo span {text-align:right; font-size:inherit;}
 					  
-					  .featured-show .info p, .featured-show .info .sh-detail-link, .main.featured-show hr, .main.featured-show .sh-detail-link{margin:5px 20px;}
+				      .main.featured-show p.syn-id, .main.featured-show p.syn-en{padding:10px 0;} 
+				      
+					  .featured-show .info p, .main.featured-show hr {margin:5px 20px;}
 				
 		              .featured-show .info p {font-size:12px; line-height:13px; width:auto; color:#FFF; padding:0px;}
 					  .featured-show .info a {text-shadow:none; color:#FFF; font-weight:800;}
 					  .featured-show .info a:hover {color:#9CF;}
-				
+						
+					  .sh-detail-link {padding:5px 5px 5px 0; margin:10px !important;}
+					  .sh-detail-link a{font-size:12px !important; color:#FFF !important; font-weight:normal !important;} 
+					  .sh-detail-link a:hover{color:#9CF;}
+					  
 					  .main{}
 					  .main.featured-show .info h4 {font-size:18px; margin:20px 10px; text-align:left;}
-					  .main.featured-show .sh-detail-link {font-size:14px; padding:5px 5px 5px 0;}
-					  .main.featured-show .sh-detail-link a{color:#FFF;font-weight:800;} 
-					  .main.featured-show .sh-detail-link a:hover {color:#9CF;}
-					  .main.featured-show hr{border-style:dashed; border-color:#CCC;}
+					  .main.featured-show hr{border:1px solid #CCC;}
 				  </style>
 	
 				  <script type="text/javascript">
@@ -363,7 +393,12 @@ class Plugin_Epg extends Plugin
 		if(count($raw) >= intval($this->attribute('limit'))){
 			$mainswitch = false;
 			
-			$data = '<div class="mod-epg featured clearfix"><h4 class="rotate">' . $this->attribute('category') . '</h4>';
+			if($this->attribute('category') == NULL){
+				$data = '<div class="mod-epg featured uncategorized clearfix">';
+			}else{
+				$data = '<div class="mod-epg featured clearfix"><h4 class="rotate">' . $this->attribute('category') . '</h4>';
+			}
+			
 						
 			foreach($raw as $featured){
 				$ch = $this->epg_ch_m->get_channel($featured->channelid);
@@ -376,9 +411,21 @@ class Plugin_Epg extends Plugin
 						//$data .= $featured->trailer;
 						$data .= '<div class="info">';
 						$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
-						$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . '</p>';
-						$data .= '<p class="syn-id">' .  $featured->ina . '</p><hr/>';
-						$data .= '<p class="syn-en">' .  $featured->eng . '</p>';
+						//$data .= '<p class="subinfo left">' . $ch->name . ' | Ch. ' . $ch->num . '</p>';
+						$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . ' <span class="right">' . date('d M Y', strtotime($featured->tanggal)) . ' | ' . date('H:i a', strtotime($featured->jam)) . '</span></p>';
+						
+						if($featured->ina != '' && $featured->eng != ''){
+							$data .= '<p class="syn-id">' .  substr($featured->ina,0,100) . '</p>';
+							$data .= '<hr/>';
+							$data .= '<p class="syn-en">' .  substr($featured->eng,0,100) . '</p>';
+						}elseif($featured->ina == '' || $featured->eng == ''){
+							if($featured->ina == '' && $featured->eng != ''){
+								$data .= '<p class="syn-id">' .  substr($featured->ina,0,100) . '</p>';
+							}elseif($featured->eng == '' && $featured->ina != ''){
+								$data .= '<p class="syn-id">' .  substr($featured->eng,0,100) . '</p>';
+							}
+						}
+						
 						$data .= '<p class="sh-detail-link"><a href="epg/show/' .  $featured->showid . '">Detail Acara &raquo</a></p>';
 					$data .= '</div></div>';
 					
@@ -393,7 +440,7 @@ class Plugin_Epg extends Plugin
 						}else{
 							$data .=  '...' . '</a></h4>';
 						}
-	 					$data .= '<p class="subinfo">' . substr($ch->name, 0, 10) . ' | Ch. ' . $ch->num . '<br/><br/>' . date('d M y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
+	 					$data .= '<p class="subinfo">' . substr($ch->name, 0, 20) . '<br/>' . date('d M Y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
 	 					$data .= '<p class="sh-detail-link" style="text-align:center;"><a href="epg/show/' .  $featured->showid . '">Detail Acara</a></p>';
 					$data .= '</div></div>';
 				}		

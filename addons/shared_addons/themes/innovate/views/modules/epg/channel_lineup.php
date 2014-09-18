@@ -7,7 +7,7 @@
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}	
 	
-	<style type="text/css">		
+	<style type="text/css">			body{background:#FFF !important;}	
 		body.epg #content{margin-top:80px; min-height:390px;}
 		body.epg #body-wrapper{
 			width:100%;
@@ -16,8 +16,7 @@
 			z-index:9000;
 			padding-top:0;
 			float:none;
-		}						
-}
+		}
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function(){			var sideW = $('#side').width();			var listW = $('#ch-lineup').width() - sideW - 20;			$('#list').width(listW);						$( ".accordion" ).accordion();			
@@ -31,12 +30,12 @@
 	</script>
 </head>
 
-<body id="top" class="epg">
+<body id="top" id="ch-lineup" class="epg">
 		{{ integration:analytics }}
 		<header class="wrapper">			
 			{{ theme:partial name="header" }}
 		</header>
-		<div id="content" class="wrapper clearfix">
+		<div id="content" class="wrapper clearfix">
 		 	<div id="body-wrapper" style="position: relative;">
 				<div id="ch-lineup" class="clearfix">					<h1>Channel Lineup</h1>					
 					<div id="list" class="left">	

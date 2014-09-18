@@ -1,0 +1,93 @@
+/* ====================================================== Frontend Show Page ======================================================= */
+
+
+#background, #poster{	
+	background-repeat:no-repeat;
+}
+
+#background{
+	filter:alpha(opacity=100);
+    -moz-opacity:1; 
+	opacity: 1;  
+    position: absolute;
+	
+	background-position:top center;
+	background-size:cover;	
+	
+	width:100%;	
+	top:0; left:0;
+}
+
+#show #body #poster{float:left; margin-right:10px; padding:0; width:55%; box-shadow:0 0 5px #333; background-position:center center; background-size:cover;}
+
+
+
+#show{/*background:#FFF;*/  margin-bottom:40px}
+#show #head{width:100%; margin-bottom:0;}
+#show #head h1{margin-left:100px; color:rgba(255,255,255,.95); text-shadow:0 -1px 0 #333; font-size:2.5em; font-weight:800;}
+
+#show #body{width:100%;}
+#show #body #side{width:90px; float:left; text-align:center; margin:0; color:#007DC3; font-size:.85em;}
+#show #body #side .item{width:100%; margin-bottom:5px; padding: 10px 0; background:rgba(255,255,255,.85); cursor:default;}
+
+#show #body #side #epg{background:#007DC3; cursor:pointer}
+#show #body #side #epg a{color:#FFF;}
+#show #body #side #epg:hover{background:#00CDFF}
+#show #body #side #epg:hover a{color:#111;}
+
+
+
+#related{margin:0 auto;}
+.related-show{width:15%; margin:0 .5%; float:left; text-align:center;}
+.related-show .poster{width:120px; height:120px; background-size:100% auto;}
+
+
+#show #body #details{width:30%; float:left; margin:0 10px; color:#FFF;}
+#show #body #details:after{}
+
+.detail{
+	width:100%;
+	font-size:.75em;
+	font-weight:none;
+	color:#007DC3;
+	margin:0 10px 10px 0;
+	background:rgba(255,255,255,.95);
+	padding:10px;
+}
+
+#show-info .epg-info{margin-bottom:20px;}
+#show-info .epg-info hr{border:1px dotted #999; font-size:.85em;}
+
+#show-info .epg-info h4{text-shadow:0 -1px 0 #333;}
+#show-info .epg-info sup{font-size:small;}
+#show-info .epg-info table{width:100%;}
+#show-info .epg-info table tr td{background:rgba(255,255,255,.9); padding:5px 10px;}
+
+
+
+
+
+
+
+/* ========================================= Frontend EPG =======================================*/
+	body.epg{
+		background: #333; /* Old browsers */
+/* 		background: -moz-linear-gradient(45deg,  #207cca 0%, #a0e6f7 54%, #00ccee 100%); FF3.6+ */
+/* 		background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#207cca), color-stop(54%,#a0e6f7), color-stop(100%,#00ccee)); Chrome,Safari4+ */
+/* 		background: -webkit-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); Chrome10+,Safari5.1+ */
+/* 		background: -o-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); Opera 11.10+ */
+/* 		background: -ms-linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); IE10+ */
+/* 		background: linear-gradient(45deg,  #207cca 0%,#a0e6f7 54%,#00ccee 100%); W3C */
+/* 		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#207cca', endColorstr='#00ccee',GradientType=1 ); IE6-9 fallback on horizontal gradient			 */
+	}
+
+	
+	
+	#body-wrapper{width:100%; float:left;}
+	
+	#featured{
+		height:500px; width:30%; float:left;
+		margin-top: 125px; margin-left:20px;
+		background:rgba(255,255,255,.9);
+	}
+	

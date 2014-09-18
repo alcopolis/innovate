@@ -109,7 +109,7 @@ class Plugin_Promotion extends Plugin
 		);
 		
 		
-		$this->promotion_m->where_in('id', array(15, 14, 11, 9, 1)); //1, 4)); //, 3));	
+		$this->promotion_m->where_in('id', array(16, 15, 14, 11, 9, 1)); //1, 4)); //, 3));	
 		//$this->promotion_m->where($data_filter);
 		//$this->promotion_m->or_where('ended', NULL);
 	

@@ -49,8 +49,6 @@ class Admin extends Admin_Controller
 	 */
 	public function index()
 	{	
-		//Tes
-		
 		$limit = 10;
 		
 		$pagination = create_pagination('admin/articles/index', $this->db->count_all('inn_articles'), $limit,4);
@@ -85,7 +83,7 @@ class Admin extends Admin_Controller
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 			
 			//Date modified
-			$d = new DateTime();
+			$d = new DateTime('now');
 			$date = $d->getTimestamp();
 			$this->form_data['created_on'] = $date;
 			$this->form_data['modified_on'] = $date;

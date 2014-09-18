@@ -20,9 +20,9 @@ $(document).ready(function() {
 		$(document).scroll(function(){
 			if($(this).scrollTop() > 60){
 				$('header').css('box-shadow', '0 1px 10px #999');
-				$('#navigation #menu ul#main-menu').css('border-bottom', 'none')
+				//$('#navigation #menu ul#main-menu').css('border-bottom', 'none')
 			}else{
-				$('#navigation #menu ul#main-menu').css('border-bottom', '1px dotted #b3b3b3')
+				//$('#navigation #menu ul#main-menu').css('border-bottom', '1px dotted #b3b3b3')
 				$('header').css('box-shadow', 'none');	
 			}
 		});

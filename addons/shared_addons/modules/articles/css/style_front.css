@@ -1,107 +1,57 @@
-body.articles #body-wrapper{
-	padding:120px 0 40px 0;
-	width:80%;
-	color:#6F6F6F;
+/* -------- General ---------- */
+
+body{
+	color:#444;
 	font-size:12px;
 	line-height:20px;
-/* 	background:#EEE; */	
 }
 
-body.articles a, body.article a{color:#007DC3;}
-body.articles a:hover, body.article a:hover{color:#0033C3;}
-body.articles h2, body.articles h2{font-size:24px; line-height:48px;}
+body a{color:#007DC3;}
+body a:hover{color:#CCC;}
 
+#content{margin:120px auto 80px auto;}
 
-/* Articel Page */
-section#arts-section{
-	font-size:24px;
-	border-bottom:2px solid #007DC3;
+#art-section{
+	font-size:18px;
+	font-weight:bold;
+	border-bottom:1px solid #CCC;
 	margin-bottom:20px;
 	padding-bottom:5px;
-	color:#007DC3;
-	line-height:30px;
 }
 
+#art-section a{font-size:14px;}
 
-/* Article General Prop */
-
-article{
-	padding:1.25%;
-	color:#333;
+#art-content{
+	margin:0 auto;
 }
 
-#arts-body{width:90%; margin:0 auto;}
+.art-property{margin:10px 0;}
 
 
 
 
 
-/* Article List */
+/* -------- Article List ------------- */
+
+body.articles #content{
+	width:90%;
+	height:auto;
+}
+
 
 body.articles article{
 	width:22.5%;
-	margin:0;
+	margin:0 1.25%;
 }
 
-article img{
-	border:none;
-	margin:0 20px 0 0; 
-	width:100%; 
-	box-shadow:0 1px 2px #666;
-	-moz-box-shadow:0 1px 2px #666;
-	-webkit-box-shadow:0 1px 2px #666;
+#art-content .cover-container{
+	width:100%;
+	height:120px;
+	overflow:hidden;
+	text-align:center;
+	box-shadow:0 0 2px #666;
 }
 
-.art-property{margin:0 10px 10px 0;}
-.art-teaser{font-size:12px; line-height:14px;}
-
-.art-title{margin:5px 0;}
-.art-title h1 a{font-size:18px;}
-
-
-
-
-
-
-/* Full Article */
-
-body.article article{width:75%; margin:0 auto;}
-#tags{display:none;}
-
-article.full img{
-	margin:0 0 10px 0; 
-	width:100%; 
-	height:auto; 
-	background:#999;
-}
-
-
-/* Article Side */
-#arts-side{
-	padding:20px 0;
-	background:#CCC;
-}
-
-#arts-side .side{
-	margin-bottom:20px;
-	height:200px;
-}
-
-#arts-side .side h6{
-	
-}
-
-#arts-side .side ul{
-	margin:10px 0 10px 15px;
-}
-
-
-
-
-/* Pagination */
-.pagination{
-	float:right;	
-}
-.pagination ul li{
-	display:inline-block;
+#art-content .cover-container img{
+	width:100%;
 }

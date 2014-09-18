@@ -25,14 +25,14 @@ class Epg extends Public_Controller
 
 	function render($view, $var = NULL){		
 		$this->template
-			->title($this->module_details['name'])
+			//->title($this->module_details['name'])
 			->append_js('module::main.js')
-			->append_css('module::style.css')
+			->append_css('module::style.css')			->append_css('module::front.css')
 			->set($var)
 			->build($view);
 	}
 	public function index()
-	{
+	{
 		$channels = $this->epg_ch_m->get_all_channel();
 		foreach($channels as $c){
 			$ch[$c->id] = $c->name;
@@ -45,7 +45,6 @@ class Epg extends Public_Controller
 				$cat[$ct->id] = $ct->cat;
 			}
 		}
-		
 		$tgl = '';
 		if($this->form_validation->run()){			$cond = array(
 				'date' => $this->input->post('date'),
@@ -55,19 +54,19 @@ class Epg extends Public_Controller
 		}else{
 			$sh = $this->epg_sh_m->get_epg();
 			$tgl = date('Y-m-d');
-		}
+		}		$this->template->title('TV Guide');
 		$this->render('epg', array('shows'=>$sh, 'ch'=>$ch, 'cat'=>$cat, 'tgl'=>$tgl));
 	}
-	public function show($id = NULL){
-		if($id == NULL){
-			$this->render('show_home');
-		}else{
+	public function show($id = NULL){		if($id != NULL){
 			$sh = $this->epg_sh_m->get_show_detail($id);
 			$title = $sh->title;
 			$cid = $sh->cid;
-			$date = $sh->date;
-			$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration', 5);			$this->render('show', array('shows'=>$sh, 'similar'=>$similar));
-		}		
+			$date = $sh->date;
+		
+			$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration', 5);
+			$this->template->title($title);
+			$this->render('show', array('shows'=>$sh, 'similar'=>$similar));
+		}else{			redirect('404');		}
 	}
 	
 	public function channel_lineup(){

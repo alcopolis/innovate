@@ -37,13 +37,13 @@ span#ch{
 /* ====================================================== Frontend Show Page ======================================================= */
 
 #background, #poster{	
-	background-repeat:no-repeat;
+	background-repeat:no-repeat; 
 }
 
 #background{
-	filter:alpha(opacity=100);
-    -moz-opacity:1; 
-	opacity: 1;  
+	filter:alpha(opacity=75);
+    -moz-opacity:.75; 
+	opacity: .75;  
     position: absolute;
 	
 	background-position:top center;
