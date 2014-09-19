@@ -44,14 +44,11 @@
 
 		<div id="content" class="wrapper clearfix">
 			<div id="body-wrapper">
-				<div class="mod-epg featured clearfix">
-					<h4 class="rotate">Big Screen Movies</h4>
-					{{ epg:featured limit="11" category="Movies" }}
-				</div>
-				<div class="mod-epg featured clearfix">
-					<h4 class="rotate">Movie Series</h4>
-					{{ epg:featured limit="11" category="Movie Series" }}
-				</div>
+				{{ epg:metadata }}
+				{{ epg:featured limit="3" category="Knowledge"}}
+				{{ epg:featured limit="3" category="Knowledge"}}
+				{{ epg:featured limit="3" category="Knowledge"}}
+				{{ epg:featured limit="3" category="Knowledge"}}
 			</div>
 		</div>
 		<footer>			

@@ -66,7 +66,7 @@ class Epg extends Public_Controller
 			$similar = $this->epg_sh_m->similar_show(array('title'=>$title, 'cid'=>$cid, 'date > '=>$date), 'id, date, time, duration', 5);
 			$this->template->title($title);
 			$this->render('show', array('shows'=>$sh, 'similar'=>$similar));
-		}else{			redirect('404');		}
+		}else{			$this->template->title('Show Highlights');			$this->render('show_home');		}
 	}
 	
 	public function channel_lineup(){
@@ -83,9 +83,9 @@ class Epg extends Public_Controller
 			$c = $cat[intval($this->input->post('cat_id'))];
 		}
 		$this->render('channel_lineup', array('cat'=>$cat, 'category'=>$c));
-	}				// ======================== AJAX Function ================================== //		public function today_sched($id){		$respond = array();		$cid = $id;		$raw_sched;				if($cid){			$this->load->library('table');						$raw_sched = $this->epg_sh_m->get_show_by('time, title', array('cid'=>$cid, 'date'=>'2014-04-02'), FALSE);						if(count($raw_sched) > 0){				
-				$tmpl = array (							'table_open'  => '<table border="0" cellpadding="2" cellspacing="1">',							'row_start'           => '<tr>',							
+	}				// ======================== AJAX Function ================================== //		public function today_sched($id){		$respond = array();		$no_sch_data = 'Jadwal acara tidak tersedia.';		$cid = $id;		$raw_sched;		$today = date('Y-m-d');				if($cid){			$this->load->library('table');						$raw_sched = $this->epg_sh_m->get_show_by('time, title', array('cid'=>$cid, 'date'=>'2014-10-01'), FALSE);						if(count($raw_sched) > 0){				
+				$tmpl = array (							'table_open'  => '<table border="0" cellpadding="0" cellspacing="0">',							'row_start'           => '<tr>',							
 							'row_alt_start'       => '<tr class="alt">',						);
 				$this->table->set_template($tmpl);								foreach($raw_sched as $r){					$time = date_create($r->time);					$this->table->add_row(date_format($time, 'H:i'), $r->title);				}								$respond['status'] = TRUE;				$respond['schedule'] = $this->table->generate();			}else{				$respond['status'] = TRUE;
-				$respond['schedule'] = 'No data';			}					}else{			$respond['status'] = FALSE;		}				echo json_encode($respond);	}
+				$respond['schedule'] = $no_sch_data;			}					}else{			$respond['status'] = FALSE;		}				echo json_encode($respond);	}
 }

@@ -161,7 +161,7 @@ span#ch{
 
 	.accordion > div{border:none; background:#EFEFEF; border-radius:0; margin-bottom:2px; padding:20px;}
 	
-	#ch-detail{color:#007DC3}
+	#ch-detail{color:#007DC3; display:none;}
 	#ch-detail #name{font-size:14px;}
 	#ch-detail #sch-link{margin:10px}
 	#ch-detail #sch-link a{background:#007DC3; color:#FFF; padding:5px 10px;}
@@ -177,16 +177,18 @@ span#ch{
 		margin-bottom:20px;
 	}
 	
-	.ch-info{}
-	.ch-info .ch-attr{display:block; background:#007DC3; width:80px; margin:0 5px 0 0; border-radius:5px 5px 0 0; color:#FFF;}
+	#ch-logo{border:1px solid #999; width:25%; height:auto; background:#CCC; margin:0 10px 10px 0; float:left;}
+	.ch-attr{display:block; margin:0;}
 	
-	#ch-logo{box-shadow:0 0 1px #999; width:100%; height:auto; background:#CCC; margin:0 0 10px 0;}
 	
-	#sch{border:1px solid #CCC;}
-	#sch h6{margin:0 10px; padding:10px 0; border-bottom:1px dotted #CCC;}
+	#sch{border:1px solid #CCC; width:260px; margin-left:5%; margin-top:5px;}
+	#sch #curr-date{margin:0; padding:5px 0; border-bottom:1px dotted #CCC;}
 	#today-sch{margin:0 0 0 10px; padding:10px 0;}
-	#today-sch table{}
-	#today-sch table td{padding-right:5px;font-size:13px;}
+	
+	#today-sch table{width:95%;}
+	#today-sch table tr:nth-child(even) {background: #EFEFEF}
+	#today-sch table tr:nth-child(odd) {background: #FFF}
+	#today-sch table td{padding:3px;font-size:13px;}
 	
 /* ======================== Tools ===========================*/
 /* 	#tools{ */
@@ -200,21 +202,15 @@ span#ch{
 	
 
 	#tools{
-		width:100%; margin-bottom:40px;
-		border-top:1px solid rgba(0,0,0,.15);
-		background:#00CCEE;
-		border-radius:0 0 5px 5px;
-		box-shadow:0 0 2px #666;
+		margin:20px auto 10px auto;
 		overflow:hidden;	
+		width: 920px;
 	}	
 	
-	#tools .tool{
-		float:left;
-		height:80px;
-	}
-	
-	
-	
+	.tool{float:right;}
+	.filter{float:left; margin:0 0 0 10px;}
+	.filter label{color:#333; text-shadow:none;}
+
 	
 	.tool div, .tool h3, .tool h4, .tool p, .tool legend{margin:10px; color:#FFF; text-shadow:0 -1px 1px #666;}
 	.tool legend{margin:10px 0 0 10px; font-size:13px; color:#FFF;}
@@ -252,7 +248,7 @@ span#ch{
 	#origin{width:94px;}
 	#theader{box-shadow:-1px -1px 2px #666; width:850px; height:98%; overflow:hidden; padding:1% 0; border-radius:5px; background:rgba(51,51,51,.85);}
 	#tcol{width:94px; height:558px; overflow: hidden;}
-	#tdata{width:850px; height:558px; overflow: auto; background:#333; border-radius:0 5px 5px 0;}
+	#tdata{width:835px; height:400px; overflow: auto; background:#333; border-radius:0 5px 5px 0;}
 	
 	#theader #time-row {width:9000px; height:98%;}
 	#theader #time-row .time{width:240px; float:left; border-radius:5px; background:#FFF; color:#333; text-shadow:0 1px 1px #999}
@@ -260,7 +256,7 @@ span#ch{
 	#origin, #tcol {margin-right:0}
 	
 	#tcol #ch-col{width:100%; cursor:pointer;}
-	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#333; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
+	#tcol #ch-col .channel{width:100%; text-align:center; color:#FFF; background:#007DC3; margin-bottom:3px; padding:20px 0; border-radius:5px 0 0 5px; overflow:hidden}
 	
 	#tdata .sh-row{margin-bottom:3px;clear:both; width:7500px;} /* 24hrs x 240px */
 	#tdata .sh-row:last-child{margin-bottom:0;}
@@ -274,6 +270,6 @@ span#ch{
 	#tdata .sh-row .show.active{background:#39F; color:#FFF}
 	
 	#detail-container{position:absolute; width:300px; background:#333; color:#FFF; box-shadow:0 0 3px #000; border-radius:5px; opacity:0; display:block;}
-	#detail-container p#title{font-size:14px; font-weight:400;color:#00CCEE;}
+	#detail-container p#title{font-size:12px; font-weight:400;color:#00CCEE;}
 	#detail-container p#title a{color:#00CCEE;}
-	#detail-container p{margin:10px !important; padding:0; white-space:normal;color:#FFF;}
+	#detail-container p{margin:10px !important; padding:0; white-space:normal;color:#FFF;font-size:12px; line-height:14px;}
