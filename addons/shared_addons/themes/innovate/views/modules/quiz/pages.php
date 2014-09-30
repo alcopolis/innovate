@@ -43,7 +43,7 @@
 						{{ endif }}
 					</div>
 					
-					<?php echo form_open('quiz/' . $quiz->slug); ?>
+					<?php echo form_open('quiz/check/' . $quiz->slug); ?>
 					<ol id="quiz-content">
 						<?php 
 							$i=0;
