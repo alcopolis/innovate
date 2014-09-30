@@ -108,7 +108,7 @@ class Quiz extends Public_Controller
 	}
 	
 	function check($slug=''){
-		var_dump($this->session->all_userdata());
 		var_dump($this->input->post());
+		var_dump($this->session->all_userdata());
 	}
 }

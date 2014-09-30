@@ -3,4 +3,6 @@
 	<buildpathentry kind="con" path="com.zend.php.phpunit.CONTAINER"/>
 	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
 	<buildpathentry kind="src" path=""/>
+	<buildpathentry kind="con" path="org.eclipse.dltk.USER_LIBRARY/PHPUnit"/>
+	<buildpathentry kind="con" path="org.zend.php.framework.CONTAINER"/>
 </buildpath>
