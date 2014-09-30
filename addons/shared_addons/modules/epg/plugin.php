@@ -420,9 +420,9 @@ class Plugin_Epg extends Plugin
 							$data .= '<p class="syn-en">' .  substr($featured->eng,0,100) . '</p>';
 						}elseif($featured->ina == '' || $featured->eng == ''){
 							if($featured->ina == '' && $featured->eng != ''){
-								$data .= '<p class="syn-id">' .  substr($featured->ina,0,100) . '</p>';
+								$data .= '<p class="syn-en">' .  substr($featured->eng,0,100) . '</p>';
 							}elseif($featured->eng == '' && $featured->ina != ''){
-								$data .= '<p class="syn-id">' .  substr($featured->eng,0,100) . '</p>';
+								$data .= '<p class="syn-id">' .  substr($featured->ina,0,100) . '</p>';
 							}
 						}
 						
