@@ -43,7 +43,7 @@
 						{{ endif }}
 					</div>
 					
-					<?php echo form_open('quiz/check' . $quiz->slug); ?>
+					<?php echo form_open('quiz/check/' . $quiz->slug); ?>
 					<ol id="quiz-content">
 						<?php 
 							$i=0;
@@ -61,6 +61,8 @@
 								</ol>
 							</li>
 						<?php } ?>
+						
+						<input type="hidden" name="total" value="<?php echo  count($soal); ?>"/>
 					</ol>
 					
 					<input type="submit" value="Kirim Jawaban" name="submit">
