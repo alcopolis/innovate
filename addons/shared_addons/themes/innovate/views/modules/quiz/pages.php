@@ -61,6 +61,8 @@
 								</ol>
 							</li>
 						<?php } ?>
+						
+						<input type="hidden" name="total" value="<?php echo  count($soal); ?>"/>
 					</ol>
 					
 					<input type="submit" value="Kirim Jawaban" name="submit">
