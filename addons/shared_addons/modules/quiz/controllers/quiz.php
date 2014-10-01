@@ -51,7 +51,7 @@ class Quiz extends Public_Controller
 	}
 	
 	
-	public function get_quiz_by($where=NULL, $fields=NULL, $single=NULL){
+	public function get_quiz_by($where=NULL, $fields=NULL, $single=FALSE){
 		if(isset($where)){
 			if(isset($where)){
 				$this->db->where($where);
@@ -91,10 +91,13 @@ class Quiz extends Public_Controller
 		}
 	}
 	
-	public function get_check($user_id, $quiz_id, $jawaban){
+	public function get_check($where, $fields, $single){
 		$this->db->where("user_id",$user_id);
 		$this->db->where("quiz_id",$quiz_id);
 		$this->db->where("answers",$jawaban);
+	}
+	
+	public function get_check_by($where=NULL, $fields=NULL, $single=FALSE){
 	}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------

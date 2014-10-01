@@ -53,7 +53,6 @@
 							<?php $soal = json_decode($quest->question_admin); $i++; ?>
 							<li class="data">
 								<p><?php echo $soal->question; ?></p>
-								
 								<ol>
 									<?php foreach($soal->choices as $key=>$c){ ?>
 										<li><input value="<?php echo $key; ?>" name="q-<?php echo $i; ?>" type="radio" /> <?php echo $c; ?></li>
@@ -62,7 +61,7 @@
 							</li>
 						<?php } ?>
 						
-						<input type="hidden" name="total" value="<?php echo  count($soal); ?>"/>
+						<input type="hidden" name="total" value="<?php echo  count($question); ?>"/>
 					</ol>
 					
 					<input type="submit" value="Kirim Jawaban" name="submit">
