@@ -89,6 +89,12 @@ class Quiz extends Public_Controller
 			return FALSE;
 		}
 	}
+	
+	public function get_check($user_id, $quiz_id, $jawaban){
+		$this->db->where("user_id",$user_id);
+		$this->db->where("quiz_id",$quiz_id);
+		$this->db->where("answers",$jawaban);
+	}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 	
@@ -101,14 +107,22 @@ class Quiz extends Public_Controller
 	
 	function pages($slug=''){
 		$data = $this->get_quiz_by(array('slug'=>$slug), '', TRUE);
-		$q = $this->get_quizQ_by(array('quiz_id'=>$data->id), '');
+		$q = $this->get_quizQ_by(array('quiz_id'=>$data->id), '', FALSE);
 		
-		//var_dump(json_encode($data));
+		//var_dump($slug);
 		$this->render('pages', array('quiz'=>$data, 'question'=>$q));
 	}
 	
 	function check($slug=''){
-		var_dump($this->input->post());
-		var_dump($this->all_userdata());	
+		//var_dump($this->input->post());
+		$this->session->all_userdata();
+		
+		
+		$array_jawaban = array(
+			1=>$this->input->post('q-1'),
+			2=>$this->input->post('q-2'),
+			3=>$this->input->post('q-3'),
+		);
+		json_encode($array_jawaban));	
 	}
 }

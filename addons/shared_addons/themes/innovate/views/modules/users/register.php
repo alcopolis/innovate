@@ -45,6 +45,5 @@
 		<?php echo form_submit('btnSubmit', lang('user:register_btn')) ?>
 	</li>
 	
-	asdfaskdfjaslfja;sdjf;lasjdf;lasj;asjf;lasjf;sadjkl
 </ul>
 <?php echo form_close() ?>
