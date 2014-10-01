@@ -91,11 +91,7 @@ class Quiz extends Public_Controller
 		}
 	}
 	
-	public function get_check($user_id, $quiz_id, $jawaban){
-		$this->db->where("user_id",$user_id);
-		$this->db->where("quiz_id",$quiz_id);
-		$this->db->where("answers",$jawaban);
-	}
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
 	
@@ -106,6 +102,7 @@ class Quiz extends Public_Controller
 		$this->render('index', array('quiz'=>$data));
 	}
 	
+	
 	function pages($slug=''){
 		$data = $this->get_quiz_by(array('slug'=>$slug), '', TRUE);
 		$q = $this->get_quizQ_by(array('quiz_id'=>$data->id), '', FALSE);
@@ -113,25 +110,55 @@ class Quiz extends Public_Controller
 		$this->render('pages', array('quiz'=>$data, 'question'=>$q));
 	}
 	
-	function check($slug=''){
-		var_dump($this->input->post('total'));
-		
-		//$this->session->all_userdata();
+	
+	function check($slug=''){		
 		$data = $this->get_quiz_by(array('slug'=>$slug), '',TRUE);
-		var_dump($data->id);
 		
-		//$this->get_quizQ_by(array('quiz_id'=>$data->id), '', FALSE);
+		$qid = $data->id; //Get quiz ID
+		$admin_ans = $this->get_quizQ_by(array('quiz_id'=>$qid)); //Get admin answer
+		$uid = $this->session->userdata('user_id'); //Get user ID
 		
 		
-		$user = $this->session->userdata('user_id');
-		var_dump($user);
-		die();
+		//Check if user already play the quiz
+		$c = $this->db->where(array('user_id'=>$uid, 'quiz_id'=>$qid))->get('default_inn_quiz_user_activity')->result();
 		
-		$array_jawaban = array(
-			1=>$this->input->post('q-1'),
-			2=>$this->input->post('q-2'),
-			3=>$this->input->post('q-3'),
-		);
-		json_encode($array_jawaban);	
+		if(count((array)$c) > 0){
+			$this->session->set_flashdata('quiz_msg', 'Anda sudah pernah memainkan kuis ini.');	
+		}else{
+			$totalans = intval($this->input->post('total'));
+			$ans = array();
+			for($i=0; $i < $totalans ; $i++){
+				$key = 'q-'. strval($i+1);	
+				$ans[] = $this->input->post($key); //Get user answers
+			}
+			
+			//Check answers
+			$point = 0;
+			$correct_ans = array();
+			for($j=0; $j < $totalans ; $j++){
+				if($admin_ans[$j]->answer_admin == $ans[$j]){
+					$point++;
+					$correct_ans[] = $j+1;
+				}
+			}
+
+			$data_insert = array(
+						'user_id' => $uid,
+						'quiz_id' => $qid,
+						'answers' => json_encode($correct_ans),
+						'point'	=> $point
+					);
+			
+			if($this->db->insert('default_inn_quiz_user_activity', $data_insert)){
+				$this->session->set_flashdata('quiz_msg', 'Success');
+			}else{
+				$this->session->set_flashdata('quiz_msg', 'Fail');
+			}
+		}
+		
+		
+		$this->session->keep_flashdata('quiz_msg');
+		redirect('quiz/pages/' . $slug);
+		//redirect('quiz');
 	}
 }
