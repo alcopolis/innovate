@@ -28,7 +28,7 @@ class Quiz extends Public_Controller
 	function render($view, $var){
 		$this->template
 		->title($this->module_details['name'])
-		//->append_js('module::main.js')
+		->append_js('module::main.js')
 		->append_css('module::style-front.css')
 		->set($var)
 		->build($view);
@@ -158,7 +158,7 @@ class Quiz extends Public_Controller
 		
 		
 		$this->session->keep_flashdata('quiz_msg');
-		redirect('quiz/pages/' . $slug);
-		//redirect('quiz');
+		//redirect('quiz/pages/' . $slug);
+		redirect('quiz');
 	}
 }

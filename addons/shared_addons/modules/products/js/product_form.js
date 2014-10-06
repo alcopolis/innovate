@@ -128,6 +128,12 @@ function delete_attch(obj){
 
 // ================================ Package Group Function ====================================== //
 
+
+
+function add_group(){
+	console.log('add new group');
+}
+
 function update_group(id){
 	var formData = new FormData($('#product-form')[0]);
 //	var name = $('[name="' + slug + '"]').val();

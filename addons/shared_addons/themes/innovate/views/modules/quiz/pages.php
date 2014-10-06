@@ -11,7 +11,7 @@
 	{{ endif }}
 	
 	<style type="text/css">
-		body{font-size:12px;background:url("{{ url:site }}files/large/<?php echo $quiz->theme; ?>") no-repeat left top; background-size:100% auto;}
+		body{font-size:12px;background:url("{{ url:site }}files/large/<?php echo $quiz->theme; ?>") no-repeat left top; background-size:auto auto;}
 	</style>
 </head>
 
@@ -23,7 +23,7 @@
 	</header>
 	
 	<div id="content" class="wrapper clearfix">
-		<div id="content-bg" style="position:absolute; width:100%; height:auto; background:#EFEFEF;"></div>
+		<div id="content-bg" style="position:absolute; width:100%; height:auto;"></div>
 		<div id="body-wrapper" class="clearfix">
 			<div class="container">
 				
@@ -35,9 +35,14 @@
 					<h1 id="title"><?php echo $quiz->name; ?></h1>
 					
 					
-					{{if !user:logged_in}}
+					{{if !user:logged_in }}
 						<div id="user-data">
+							<p>Silahkan login terlebih dahulu untuk mengikuti kuis ini</p>
 							{{ widgets:area slug="login" }}
+						</div>
+						<div id="popup" class="hide" >
+							<a id="close-popup" href="#" onclick="closePopup()">x</a>
+							<iframe src="register"></iframe>
 						</div>
 					{{ endif }}
 					
@@ -77,12 +82,14 @@
 					{{ endif }}
 				</section>
 				
-				<section id="rules" class="clearfix hide">
+				<section id="rules" class="clearfix">
 					Syarat &amp; Ketentuan Kuis:
 					<ol>
-						<li>Lorem ipsum</li>
-						<li>Lorem ipsum</li>
-						<li>Lorem ipsum</li>
+						<li>Kuis terbuka untuk umum</li>
+						<li>Pelanggan wajib mengisi semua data diri dan informasi yang dibutuhkan pada kolom yang tertera</li>
+						<li>Pemenang akan diumumkan melalui akun resmi twitter Innovate, @InnovateInd, paling lambat 7 hari setelah periode kuis berakhir</li>
+						<li>Peserta dapat mengikuti kuis lebih dari 1 kali, tetapi hanya dapat terpilih 1 kali sebagai pemenang</li>
+						<li>Keputusan juri tidak dapat diganggu gugat</li>
 					</ol>
 				</section>
 			</div>
@@ -92,6 +99,7 @@
 	<footer>
 		{{ theme:partial name="footer" }}
 	</footer>
+	
 </body>
 </html>
 

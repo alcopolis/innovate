@@ -11,9 +11,11 @@ class Module_Quiz extends Module {
 				'en' => 'Quiz'
 			),
 			'description' => array(
-				'en' => 'Quiz Tools'
+				'en' => 'Quiz Module'
 			),
-			'backend' => TRUE,
+			'frontend' => true,
+			'backend' => true,
+			'skip_xss' => true,
 			'menu' => 'content',
 			'shortcuts' => array(
 					array(
@@ -27,59 +29,31 @@ class Module_Quiz extends Module {
 
 	public function install()		
 	{
-		$this->install_tables(array(
-				'inn_quiz' => array(
-                        'id' => array('type' => 'INT',
-						'constraint' => 11,
-						'auto_increment' => TRUE, 
-						'primary' => TRUE),
-						'name' => array('type' => 'VARCHAR',
-						'constraint' => '50'),
-						'slug' => array('type' => 'VARCHAR',
-						'constraint' => '200'),
-						'start_date' => array('type' => 'DATE'),
-						'end_date' => array('type' => 'DATE'),
-						'description' => array('type' => 'VARCHAR',
-						'constraint' => '200'),
-						'theme' => array(
-								'type' => 'VARCHAR',
-								'constraint' => '100')
-				),
-				
-				'inn_quiz_user' => array(
-                        'id' => array('type' => 'INT',
-						'constraint' => 11,
-						'auto_increment' => TRUE,
-						'primary' => TRUE),
-						'name' => array('type' => 'VARCHAR',
-						'constraint' => '50'),
-						'email' => array('type' => 'VARCHAR',
-						'constraint' => '50'),
-						'mobile' => array('type' => 'INT',
-						'constraint' => '15'),
-						'status' => array('type' => 'VARCHAR',
-						'constraint' => '200'
-						),
-				),
-		));
+		$this->dbforge->drop_table('inn_quiz');
+// 		$this->dbforge->drop_table('inn_quiz_question');
+// 		$this->dbforge->drop_table('inn_quiz_user_activity');
 		
-		$question_table = array(
-                        'id' => array('type' => 'INT',
-						'constraint' => 11,
-						'auto_increment' => TRUE,
-						'primary' => TRUE),
-						'question_admin' => array(
-						'type' => 'TEXT'),
-						'answer_admin' => array(
-						'type' => 'TEXT'),
-						'answer_user' => array(
-						'type' => 'TEXT')
+// 		$this->install_tables(
+// 				array(
+// 					'inn_quiz_question' => array(),
+// 					'inn_quiz_user_activity' => array()
+// 				)	
+// 			);
+		
+		$quiz = array(
+					'id' => array('type'=>'INT', 'constraint'=>'11', 'auto_increament'=>TRUE),
+					'name' => array('type'=>'VARCHAR', 'constraint'=>'255'),
+					'slug' => array('type'=>'TEXT'),
+					'start_date' => array('type'=>'DATE'),
+					'end_date' => array('type'=>'DATE'),
+					'description' => array('type'=>'TEXT'),
+					'theme' => array('type'=>'VARCHAR', 'constraint'=>'255'),
 				);
-
-		$this->dbforge->add_field($question_table);
+		
+		$this->dbforge->add_field($quiz);
 		$this->dbforge->add_key('id', TRUE);
 		
-		if($this->dbforge->create_table('inn_quiz_question'))
+		if($this->dbforge->create_table('inn_quiz'))
 		{
 			return TRUE;
 		}

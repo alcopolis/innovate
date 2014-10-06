@@ -68,7 +68,7 @@
 													<div id="<?php echo $p->slug; ?>" class="pack-item left">
 														<h5 class="pack-name"><?php echo $p->name; ?></h5>
 														<section style="margin:10px; text-align: center; "><?php echo $p->body; ?></section>
-														<h6 class="pack-price"><?php echo 'Rp ' . number_format($p->price); ?></h6>
+														<h6 class="pack-price"><?php echo 'Rp ' . $p->price; ?></h6>
 													</div>
 												<?php } ?>
 											</div>
@@ -104,7 +104,7 @@
 										<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
 										<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
 										Hubungi Customer Care Kami</p>
-										<h3 style="padding:0;">[021] 3199 8600</h3>
+										<h3 style="padding:0;">[021] 5055 6182</h3>
 									</div>
 								</div>
 							<?php }else{ ?>
@@ -120,7 +120,7 @@
 										<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
 										<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
 										Hubungi Customer Care Kami</p>
-										<h3 style="padding:0;">[021] 3199 8600</h3>
+										<h3 style="padding:0;">[021] 5055 6182</h3>
 									</div>
 								</div>
 							<?php } ?>	

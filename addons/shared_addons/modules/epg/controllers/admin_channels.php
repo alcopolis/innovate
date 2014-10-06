@@ -68,7 +68,7 @@ class Admin_Channels extends Admin_Controller
 		$this->page_data->title = 'Edit Channel';
 		$this->page_data->action = 'edit';				if($this->form_validation->run()){
 			//Process form
-			$data = $this->alcopolis->array_from_post(array('name', 'num', 'cat', 'desc', 'is_active'), $this->input->post());
+			$data = $this->alcopolis->array_from_post(array('name', 'num', 'cat', 'desc', 'is_active', 'go_available'), $this->input->post());
 				
 			$data['slug'] = str_replace(' ', '-', strtolower($data['name']));
 				
