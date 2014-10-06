@@ -1,5 +1,6 @@
 #body-theme{background:#333;}
-	.clearfix:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;}
+	.clearfix:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;
+}
 	
 input{
 	border:1px solid #CCC;
@@ -57,7 +58,8 @@ h1#title{
 	width:30%;
 	text-align:left;
     text-shadow:0 -1px 1px #FFF;
-    line-height:1.25em;
+    line-height:1.5em;
+	text-align:justify;
     font-size:12px;
     color:#666;
 }
@@ -75,6 +77,13 @@ h1#title{
 
 .container  #quiz-content{
 	float:left;
+	margin:20px; 0;
+	padding:0 0 0 40px;		
+    border-left:1px solid #CCC;
+	width:50%;
+}
+
+.container  #quiz-content.login-required{
 	margin:0;
 	padding:0 0 0 40px;	
     border-left:1px solid #CCC;
@@ -85,8 +94,8 @@ h1#title{
 	padding:0;	
 }
 	
-.container  li.data{padding-bottom:20px !important}
-.container  li.data p{padding-bottom:0}	
+.container  li.data{padding-bottom:20px !important; width:100%;}
+.container  li.data p{padding-bottom:0;}	
 .container  li.data ol{
 	list-style:none;
 	padding:0;	
