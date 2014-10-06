@@ -46,40 +46,39 @@ class Module_Quiz extends Module {
 								'constraint' => '100')
 				),
 				
-				'inn_quiz_user' => array(
+				'inn_quiz_question' => array(
                         'id' => array('type' => 'INT',
 						'constraint' => 11,
 						'auto_increment' => TRUE,
 						'primary' => TRUE),
-						'name' => array('type' => 'VARCHAR',
-						'constraint' => '50'),
-						'email' => array('type' => 'VARCHAR',
-						'constraint' => '50'),
-						'mobile' => array('type' => 'INT',
-						'constraint' => '15'),
-						'status' => array('type' => 'VARCHAR',
-						'constraint' => '200'
-						),
+						'quiz_id' => array('type' => 'INT',
+						'constraint' => '11'),
+						'question_admin' => array('type' => 'TEXT'),
+						'answer_admin' => array('type' => 'TEXT')
 				),
 		));
 		
-		$question_table = array(
+		$useractivity_table = array(
                         'id' => array('type' => 'INT',
 						'constraint' => 11,
 						'auto_increment' => TRUE,
 						'primary' => TRUE),
-						'question_admin' => array(
+						'user_id' => array(
+						'type' => 'INT', 
+						'constraint' => 11),
+						'quiz_id' => array(
+						'type' => 'INT',
+						'constraint' => 11),
+						'answers' => array(
 						'type' => 'TEXT'),
-						'answer_admin' => array(
-						'type' => 'TEXT'),
-						'answer_user' => array(
-						'type' => 'TEXT')
+						'point' => 'INT',
+						'constraint' => 11)
 				);
 
-		$this->dbforge->add_field($question_table);
+		$this->dbforge->add_field($useractivity_table);
 		$this->dbforge->add_key('id', TRUE);
 		
-		if($this->dbforge->create_table('inn_quiz_question'))
+		if($this->dbforge->create_table('inn_quiz_user_activity'))
 		{
 			return TRUE;
 		}
