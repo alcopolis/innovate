@@ -20,7 +20,7 @@ class Admin extends Admin_Controller
 	{
 		parent::__construct();
 		
-		$this->load->model('quiz_user_m')
+	
 	}
 	
 	
