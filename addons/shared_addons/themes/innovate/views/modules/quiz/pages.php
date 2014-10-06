@@ -27,13 +27,9 @@
 		<div id="body-wrapper" class="clearfix">
 			<div class="container">
 				
-				<?php //var_dump($this->session->all_userdata()) ?>
-				<p>{{ session:flash name="quiz_msg" }}</p>
-				
 				
 				<section class="clearfix" id="quiz">
 					<h1 id="title"><?php echo $quiz->name; ?></h1>
-					
 					
 					{{if !user:logged_in }}
 						<div id="user-data">
@@ -52,7 +48,10 @@
 					{{ else }}
 						<ol id="quiz-content" class="login-required">
 					{{ endif }}
+
 					
+					<?php echo form_open('quiz/check/' . $quiz->slug); ?>
+					<ol id="quiz-content">
 						<?php 
 							$i=0;
 						?>
@@ -61,7 +60,6 @@
 							<?php $soal = json_decode($quest->question_admin); $i++; ?>
 							<li class="data">
 								<p><?php echo $soal->question; ?></p>
-								
 								<ol>
 									<?php foreach($soal->choices as $key=>$c){ ?>
 										<li><input value="<?php echo $key; ?>" name="q-<?php echo $i; ?>" type="radio" /> <?php echo $c; ?></li>
@@ -70,16 +68,11 @@
 							</li>
 						<?php } ?>
 						
-						<input type="hidden" name="total" value="<?php echo count((array)$question); ?>"/>
-						
-						{{if user:logged_in}}
-							<input type="submit" value="Kirim Jawaban" name="submit">
-						{{ endif }}
+						<input type="hidden" name="total" value="<?php echo  count($question); ?>"/>
 					</ol>
 					
-					{{if user:logged_in}}
-						<?php echo form_close(); ?>
-					{{ endif }}
+					<input type="submit" value="Kirim Jawaban" name="submit">
+					<?php echo form_close(); ?>
 				</section>
 				
 				<section id="rules" class="clearfix">

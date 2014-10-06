@@ -1,6 +1,5 @@
 #body-theme{background:#333;}
-	.clearfix:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;
-}
+	.clearfix:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;}
 	
 input{
 	border:1px solid #CCC;
@@ -76,11 +75,6 @@ h1#title{
 
 .container  #quiz-content{
 	float:left;
-	margin:20px; 0;
-	padding:0;	
-}
-
-.container  #quiz-content.login-required{
 	margin:0;
 	padding:0 0 0 40px;	
     border-left:1px solid #CCC;
