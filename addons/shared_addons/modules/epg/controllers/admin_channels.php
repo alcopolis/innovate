@@ -43,8 +43,7 @@ class Admin_Channels extends Admin_Controller
 	public function index()
 	{				
 		$pagination = create_pagination('admin/epg/channels/index', $this->epg_ch_m->count_channel(), 20,5);
-		$all_channels = $this->epg_ch_m->order_by('cat', 'ASC')->order_by('is_active','DESC')->limit($pagination['limit'], $pagination['offset'])->get_all_channel();
-		$this->render('admin/channels', array('pagination'=>$pagination, 'channels'=>$all_channels));
+		$all_channels = $this->epg_ch_m->order_by('cat', 'ASC')->order_by('is_active','DESC')->limit($pagination['limit'], $pagination['offset'])->get_all_channel();				$this->render('admin/channels', array('pagination'=>$pagination, 'channels'=>$all_channels));		
 	}
 		
 	public function create(){
@@ -68,7 +67,7 @@ class Admin_Channels extends Admin_Controller
 		$this->page_data->title = 'Edit Channel';
 		$this->page_data->action = 'edit';				if($this->form_validation->run()){
 			//Process form
-			$data = $this->alcopolis->array_from_post(array('name', 'num', 'cat', 'desc', 'is_active'), $this->input->post());
+			$data = $this->alcopolis->array_from_post(array('name', 'num', 'cat', 'desc', 'is_active', 'go_available'), $this->input->post());
 				
 			$data['slug'] = str_replace(' ', '-', strtolower($data['name']));
 				

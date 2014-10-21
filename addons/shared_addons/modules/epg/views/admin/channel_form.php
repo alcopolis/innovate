@@ -37,6 +37,13 @@
 									</div>							
 
 									<br/>
+									
+									<div class="input">
+										<?php echo form_checkbox('go_available', $ch->go_available, $ch->go_available == 1 ? TRUE : FALSE, 'style="min-width:0 !important"'); ?>&nbsp;&nbsp;<strong>Available on InnovateGO</strong>
+										<input type='hidden' value='<?php echo $ch->go_available; ?>' name="go_available" />
+									</div>							
+
+									<br/>
 
 									<label for="name">Channel Name <span>*</span></label>
 									<div class="input"><?php echo form_input('name', !empty($ch->name) ? $ch->name : '', 'maxlength="100"') ?></div>

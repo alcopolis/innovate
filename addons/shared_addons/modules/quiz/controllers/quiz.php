@@ -20,6 +20,7 @@ class Quiz extends Public_Controller
 		
 		// Set validation rules
 		$this->form_validation->set_rules($this->quiz_m->_rules);
+		
 	}
 	
 	
@@ -27,10 +28,11 @@ class Quiz extends Public_Controller
 	function render($view, $var){
 		$this->template
 		->title($this->module_details['name'])
-		//->append_js('module::main.js')
+		->append_js('module::main.js')
 		->append_css('module::style-front.css')
 		->set($var)
 		->build($view);
+		
 	}
 	
 //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -45,12 +47,11 @@ class Quiz extends Public_Controller
 		}else{
 			$method = 'result';
 		}
-	
 		return $this->db->get('inn_quiz')->$method();
 	}
 	
 	
-	public function get_quiz_by($where=NULL, $fields=NULL, $single=NULL){
+	public function get_quiz_by($where=NULL, $fields=NULL, $single=FALSE){
 		if(isset($where)){
 			if(isset($where)){
 				$this->db->where($where);
@@ -78,7 +79,7 @@ class Quiz extends Public_Controller
 	}
 	
 	
-	public function get_quizQ_by($where=NULL, $fields=NULL, $single=NULL){
+	public function get_quizQ_by($where=NULL, $fields=NULL, $single=FALSE){
 		if(isset($where)){
 			if(isset($where)){
 				$this->db->where($where);
@@ -90,10 +91,13 @@ class Quiz extends Public_Controller
 		}
 	}
 	
-	public function get_check($user_id, $quiz_id, $jawaban){
+	public function get_check($where, $fields, $single){
 		$this->db->where("user_id",$user_id);
 		$this->db->where("quiz_id",$quiz_id);
 		$this->db->where("answers",$jawaban);
+	}
+	
+	public function get_check_by($where=NULL, $fields=NULL, $single=FALSE){
 	}
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -108,21 +112,21 @@ class Quiz extends Public_Controller
 	function pages($slug=''){
 		$data = $this->get_quiz_by(array('slug'=>$slug), '', TRUE);
 		$q = $this->get_quizQ_by(array('quiz_id'=>$data->id), '', FALSE);
-		
 		//var_dump($slug);
 		$this->render('pages', array('quiz'=>$data, 'question'=>$q));
 	}
 	
 	function check($slug=''){
-		//var_dump($this->input->post());
-		$this->session->all_userdata();
+		//var_dump($this->input->post('total'));
 		
+		//$this->session->all_userdata();
+		$data = $this->get_quiz_by(array('slug'=>$slug), '',TRUE);		
 		
-		$array_jawaban = array(
-			1=>$this->input->post('q-1'),
-			2=>$this->input->post('q-2'),
-			3=>$this->input->post('q-3'),
-		);
-		json_encode($array_jawaban));	
+		$user = $this->session->userdata('user_id');
+		die();
+		
+		$this->session->keep_flashdata('quiz_msg');
+		//redirect('quiz/pages/' . $slug);
+		redirect('quiz');
 	}
 }

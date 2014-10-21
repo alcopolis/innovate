@@ -1,9 +1,19 @@
-<h2 class="page-title" id="page_title"><?php echo lang('user:register_header') ?></h2>
+<style type="text/css">
+	body, input{font-family:"Titillium Web",Helvetica Neue,Helvetica,Tahoma,sans-serif;}
+	input{border:1px solid #CCC; background:none; margin:5px auto 5px 20px; padding:5px;}
+	input[type="submit"]{background:#007DC3; cursor:pointer; color:#FFF;}
+	.page-title{margin:20px 0 0 20px; color:#007DC3; }
+</style>
 
+
+<h2 class="page-title" id="page_title">Register</h2>
+
+<?php /* 
 <p>
 	<span id="active_step"><?php echo lang('user:register_step1') ?></span> -&gt;
 	<span><?php echo lang('user:register_step2') ?></span>
 </p>
+*/ ?>
 
 <?php if ( ! empty($error_string)):?>
 <!-- Woops... -->
@@ -13,37 +23,29 @@
 <?php endif;?>
 
 <?php echo form_open('register', array('id' => 'register')) ?>
-<ul>
+	<div style="margin:20px 0;">
+		<input type="text" maxlength="50" placeholder="First Name" id="first_name" value="" name="first_name">
+		<input type="text" maxlength="50" placeholder="Last Name" id="last_name" value="" name="last_name">
+	</div>
+	
+	
 	
 	<?php if ( ! Settings::get('auto_username')): ?>
-	<li>
-		<label for="username"><?php echo lang('user:username') ?></label>
-		<input type="text" name="username" maxlength="100" value="<?php echo $_user->username ?>" />
-	</li>
+		<input type="text" name="username" placeholder="Username" maxlength="100" value="<?php echo $_user->username ?>" />
 	<?php endif ?>
 	
-	<li>
-		<label for="email"><?php echo lang('global:email') ?></label>
-		<input type="text" name="email" maxlength="100" value="<?php echo $_user->email ?>" />
+	<div>
+		<input type="text" name="email" placeholder="Email"  maxlength="100" value="<?php echo $_user->email ?>" />
 		<?php echo form_input('d0ntf1llth1s1n', ' ', 'class="default-form" style="display:none"') ?>
-	</li>
+	</div>
 	
-	<li>
-		<label for="password"><?php echo lang('global:password') ?></label>
-		<input type="password" name="password" maxlength="100" />
-	</li>
+	<div>
+		<input type="password" name="password" maxlength="100" placeholder="Password" />
+	</div>
 
-	<?php foreach($profile_fields as $field) { if($field['required'] and $field['field_slug'] != 'display_name') { ?>
-	<li>
-		<label for="<?php echo $field['field_slug'] ?>"><?php echo (lang($field['field_name'])) ? lang($field['field_name']) : $field['field_name'];  ?></label>
-		<div class="input"><?php echo $field['input'] ?></div>
-	</li>
-	<?php } } ?>
-
+ 
 	
-	<li>
-		<?php echo form_submit('btnSubmit', lang('user:register_btn')) ?>
-	</li>
 	
-</ul>
+	
+	<?php echo form_submit('btnSubmit', lang('user:register_btn'), 'class="button" style="float:left;"') ?>
 <?php echo form_close() ?>

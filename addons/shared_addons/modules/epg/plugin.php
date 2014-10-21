@@ -95,7 +95,7 @@ class Plugin_Epg extends Plugin
 						),
 				),
 				
-				'ch_lineup' => array(
+				'go_ch_lineup_list' => array(
 						'description' => array(// a single sentence to explain the purpose of this method
 								'en' => ''
 						),
@@ -108,6 +108,22 @@ class Plugin_Epg extends Plugin
 									'default' => 'Uncategorized',
 									'required' => false,
 							),
+						),
+				),
+				
+				'ch_lineup' => array(
+						'description' => array(// a single sentence to explain the purpose of this method
+								'en' => ''
+						),
+						'single' => true,// will it work as a single tag?
+						'double' => false,// how about as a double tag?
+						'attributes' => array(
+								'category' => array(
+										'type' => 'text',// Can be: slug, number, flag, text, array, any.
+										'flags' => '',
+										'default' => 'Uncategorized',
+										'required' => false,
+								),
 						),
 				),
 				
@@ -290,6 +306,7 @@ class Plugin_Epg extends Plugin
 // 	}
 	
 	
+	
 	function ch_lineup(){
 		$data = '<div class="accordion">';
 		
@@ -350,6 +367,34 @@ class Plugin_Epg extends Plugin
 	}
 	
 	
+	
+	function go_ch_lineup_list(){
+		// 		Channel Category
+		// 		0	Uncategorized
+		// 		1	National FTA
+		// 		2	International FTA
+		// 		3	Movies
+		// 		4	Entertainment
+		// 		5	Knowledge
+		// 		6	Life Style
+		// 		7	Sports
+		// 		8	Kids And Toddler
+		// 		9	News
+		
+		$data;
+		
+		if($this->attribute('category') == '' || $this->attribute('Uncategorized')){
+			$data = $this->epg_ch_m->get_categories();
+		}else{
+			$data = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), FALSE);
+		}
+		
+		foreach($data as $key=>$val){
+			$data[$key]->list = $this->epg_ch_m->get_channel_by(array('cat' => $data[$key]->id, 'is_active'=>1, 'go_available'=>1), '', FALSE);
+		}
+		
+		return $data;
+	}
 	
 	
 	
