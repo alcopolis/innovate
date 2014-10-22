@@ -4,4 +4,4 @@
 
 // back-end//$route['quiz/admin(/:any)?']				= 'admin$1';
 
-//$route['quiz/admin/groups(/:any)?']		= 'admin_groups$1';//$route['quiz/admin(/:any)']					= 'admin$1';$route['quiz/admin/edit(/:any)']					= 'admin/edit$1';$route['quiz/admin/useractivity']	= 'admin_useractivity';
+//$route['quiz/admin/groups(/:any)?']		= 'admin_groups$1';//$route['quiz/admin(/:any)']					= 'admin$1';$route['quiz/admin/edit(/:any)']			= 'admin/edit$1';$route['quiz/admin/useractivity']			= 'admin_useractivity';
