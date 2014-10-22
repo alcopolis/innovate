@@ -6,8 +6,6 @@
 
 	</section> -->
 
-	
-
 	<section class="item">
 
 		<div class="content">

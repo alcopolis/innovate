@@ -26,6 +26,7 @@ class Admin extends Admin_Controller
 		
 		$this->load->library('alcopolis');
 		
+
 		$this->quiz_data = new stdClass();
 	
 	}
