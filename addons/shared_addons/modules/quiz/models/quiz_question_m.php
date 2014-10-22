@@ -10,10 +10,15 @@
 class Quiz_Question_m extends MY_Model {
 	
 	public $_rules = array(
-				'category' => array(
-						'field' => 'category',
-						'label' => 'Title',
-						'rules' => 'required|trim|xss_clean'
+				'question_admin' => array(
+						'field' => 'question',
+						'label' => 'Question',
+						'rules' => 'required|xss_clean'
+				),
+				'answer_admin' => array(
+						'field' => 'answer',
+						'label' => 'Answer',
+						'rules' => 'required|xss_clean'
 				),
 			);
 	
@@ -26,22 +31,23 @@ class Quiz_Question_m extends MY_Model {
 		 * then MY_Model would find it automatically. Since
 		 * I named it "sample" then we just set the name here.
 		 */
-		$this->_table = 'inn_faq_category';
-		$this->load->model('faq_m');
+		$this->_table = 'inn_quiz_question';
+		$this->load->model('quiz_m');
 	}
 	
 	
 	public function add_new(){
 	
-		$cat = new stdClass();
+		$ques = new stdClass();
 	
-		$cat->id = NULL;
-		$cat->category = '';
+		$ques->id = NULL;
+		$ques->question_admin = '';
+		$ques->answer_admin = '';
 	
-		return $cat;
+		return $ques;
 	}
 	
-	public function get_category($fields=NULL, $single=FALSE){
+	public function get_question($fields=NULL, $single=FALSE){
 		if(isset($fields)){
 			$this->db->select($fields);
 		}
@@ -55,7 +61,7 @@ class Quiz_Question_m extends MY_Model {
 		return $this->db->get($this->_table)->$method();
 	}
 	
-	public function get_category_by($where=NULL, $fields=NULL, $single=FALSE){
+	public function get_question_by($where=NULL, $fields=NULL, $single=FALSE){
 		if(isset($where)){
 			if(isset($where)){
 				$this->db->where($where);
@@ -69,7 +75,7 @@ class Quiz_Question_m extends MY_Model {
 	
 	
 	//CRUD
-	public function insert_category($data){
+	public function insert_question($data){
 		if($this->db->insert($this->_table, $data)){
 			return TRUE;
 		}else{
@@ -77,21 +83,8 @@ class Quiz_Question_m extends MY_Model {
 		}
 	}
 	
-	public function update_category(){}
+	public function update_question(){}
 	
-	public function delete_category($slug){
-		$this->db->where('slug', $slug);
-		$cat_data = $this->db->get($this->_table)->row();
-
-		if($this->db->delete($this->_table, array('id' => $cat_data->id))){
-			if($this->db->delete('inn_faq', array('category' => $cat_data->id))){
-				return TRUE;
-			}else{
-				return FALSE;
-			}
-		}else{
-			return FALSE;
-		}
-		
+	public function delete_question($slug){	
 	}	
 }

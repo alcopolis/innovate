@@ -17,14 +17,39 @@ class Module_Quiz extends Module {
 			'backend' => true,
 			'skip_xss' => true,
 			'menu' => 'content',
-			'shortcuts' => array(
-					array(
-							'name' => 'quiz:group_create_title',
-							'uri' => 'admin/quiz/groups/create',
-							'class' => 'add',
+			
+			'sections' => array(
+					
+					'quiz' => array(
+					
+						'name' => 'Quiz',
+						
+						'uri' => 'admin/quiz',
+				
+							'shortcuts' => array(
+									
+									'create' => array(
+							
+										'name' => 'quiz:group_create_title',
+							
+										'uri' => 'admin/quiz/create',
+							
+										'class' => 'add'
+									)
+							)
 					),
-			),
+					
+					'useractivity' => array(
+					
+						'name' => 'User Activity',
+						
+						'uri' => 'admin/quiz/useractivity',
+						
+					),
+			)
+		
 		);
+	
 	}
 
 	public function install()		
