@@ -83,14 +83,12 @@ class Quiz_m extends MY_Model {
 		return $this->db->get($this->_table)->$method();
 	}
 	
+	
 	public function get_quiz_by($where, $fields, $single){
 		if(isset($where)){
-		
-				$this->db->where($where);
-		
+			$this->db->where($where);
 		}
 			
 		return $this->get_quiz($fields, $single);
-
 	}
 }
