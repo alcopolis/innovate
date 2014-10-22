@@ -1,22 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
-
  * Subscriber Module
-
  *
-
  * @author 		Adriant Rivano
-
  * @website		adriantrivano.com
-
  * @package 	PyroCMS
-
  * @subpackage 	Subscriber Module
-
  */
-
-
 
 class Admin_Useractivity extends Admin_Controller
 {
