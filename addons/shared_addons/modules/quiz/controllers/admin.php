@@ -50,6 +50,7 @@ class Admin extends Admin_Controller
 	public function edit($id){	
 		$page = new stdClass();
 		$page->action = 'edit';
+		
 		$quiz = $this->quiz_m->get_quiz_by(array('id'=>$id), '', true);
 		$useract = $this->quiz_user_activity_m->get_useractivity_by(array('quiz_id'=>$id));
 		
@@ -59,7 +60,7 @@ class Admin extends Admin_Controller
 			$user[] = $this->quiz_user_activity_m->get_username_by(array('id'=>$us->user_id));
 		}
 		
-		var_dump($user);
+		//var_dump($user);
 		
 		$this->render('admin/quiz_form', array('page'=>$page, 'quiz'=>$quiz, 'useract'=>$useract, 'user'=>$user));
 	}
