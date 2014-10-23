@@ -55,7 +55,7 @@
 
 	        						<!--<td><?php echo form_checkbox('action_to[]', $ac->id); ?></td>-->
 
-	        						<td><a href="admin/quiz/useractivity<?php echo $ac->id;?>"><?php echo $ac->username; ?></a></td>
+	        						<td><a href="admin/quiz/useractivity/info<?php echo $ac->id;?>"><?php echo $ac->username; ?></a></td>
 
 	        						<td class="align-center"><?php echo $ac->answers; ?></td>
                                     

@@ -91,4 +91,15 @@ class Quiz_m extends MY_Model {
 			
 		return $this->get_quiz($fields, $single);
 	}
+	
+	public function get_winner($id = NULL){
+		$this->db->select('a.username, a.email, b.point');
+		$this->db->from('default_users a');
+		$this->db->join('default_inn_quiz_user_activity b', 'a.id = b.user_id');
+		$this->db->join('default_inn_quiz c', 'c.id = b.quiz_id');
+		$this->db->where('c.id',$id);
+		$this->db->limit('5');
+		
+		return $this->db->get()->result();
+	}
 }
