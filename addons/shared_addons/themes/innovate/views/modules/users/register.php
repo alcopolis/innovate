@@ -22,13 +22,11 @@
 </div>
 <?php endif;?>
 
-<?php echo form_open('register', array('id' => 'register')) ?>
+<?php echo form_open('register', array('id' => 'register', 'redirect_to'=>$this->session->userdata('redirect_to'))) ?>	
 	<div style="margin:20px 0;">
 		<input type="text" maxlength="50" placeholder="First Name" id="first_name" value="" name="first_name">
 		<input type="text" maxlength="50" placeholder="Last Name" id="last_name" value="" name="last_name">
 	</div>
-	
-	
 	
 	<?php if ( ! Settings::get('auto_username')): ?>
 		<input type="text" name="username" placeholder="Username" maxlength="100" value="<?php echo $_user->username ?>" />
@@ -42,10 +40,6 @@
 	<div>
 		<input type="password" name="password" maxlength="100" placeholder="Password" />
 	</div>
-
- 
-	
-	
 	
 	<?php echo form_submit('btnSubmit', lang('user:register_btn'), 'class="button" style="float:left;"') ?>
 <?php echo form_close() ?>

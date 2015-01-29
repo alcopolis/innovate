@@ -40,7 +40,7 @@ body.articles #content{
 
 
 body.articles article{
-	width:22.5%;
+	width:22.5%; min-height:300px; max-height:300px;
 	margin:0 1.25%;
 }
 
@@ -54,4 +54,21 @@ body.articles article{
 
 #art-content .cover-container img{
 	width:100%;
+}
+
+
+/* -------- Pagination ----------- */
+.pagination{
+	border-top:1px solid:#CCC;
+}
+
+.pagination ul li{
+	display:inline;
+	padding:0 10px;
+	margin:0;
+	border-right:1px solid #CCC;
+}
+
+.pagination ul li:last-child{
+	border-right:none;
 }

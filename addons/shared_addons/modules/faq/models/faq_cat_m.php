@@ -131,9 +131,9 @@ class Faq_Cat_m extends MY_Model {
 	public function update_category($id, $data){
 		if($this->db->where('id', $id)->update($this->_table, $data)){
 			return TRUE;
-		}else{
-			return FALSE;
-		}	
+		}
+		
+		return FALSE;
 	}
 	
 	public function delete_category($slug){

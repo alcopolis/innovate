@@ -114,7 +114,7 @@ class Articles_m extends MY_Model {
 	public function get_recent(){
 		$data = new stdClass();
 		
-		$fields = 't0.id, t0.title, t0.slug as art_slug, t0.teaser, t0.body, t0.category, t0.keywords, t0.files, t0.js, t0.css, t0.created_on, t0.modified_on, t0.status,
+		$fields = 't0.id as art_id, t0.title, t0.slug as art_slug, t0.teaser, t0.body, t0.category, t0.keywords, t0.files, t0.js, t0.css, t0.created_on, t0.modified_on, t0.status,
 				   t1.id, t1.slug as cat_slug, t1.name';
 		$this->db->select($fields);
 		$this->db->from('default_inn_articles t0');

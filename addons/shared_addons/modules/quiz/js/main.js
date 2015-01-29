@@ -7,13 +7,22 @@ $(document).ready(function(){
 		$('#popup').addClass('hide');
 	});
 	
-	$('a#open-popup').click(function(e){
+/*	$('a#open-popup').click(function(e){
 		e.preventDefault();
 		$('#popup').removeClass('hide');
 	})
+	
+	$('form#register').submit(function(){
+		console.log('asdfasdfasdfasdfasd');
+	})*/
 });
 
 function openPopup(e){
 	e.preventDefault();
 	$('#popup').removeClass('hide');
+}
+
+function closePopup(e){
+	e.preventDefault();
+	$('#popup').addClass('hide');
 }

@@ -63,7 +63,9 @@ class Plugin_Quiz extends Plugin
 	
 	public function __construct()
 	{	
-		$this->load->model('quiz_user_activity_m');
+		$this->load->model('quiz_m');
+		$this->load->model('quiz_user_m');
+		$this->load->model('quiz_question_m');
 	}	
 	
 

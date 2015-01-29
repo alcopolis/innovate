@@ -1,4 +1,3 @@
-
 <div class="one_full">
 	<section class="title clearfix">
 		<h4 class="left"><?php echo $page->action == 'create' ? strtoupper($page->title) : strtoupper($page->title) . ' | ' . $art->title; ?></h4>
@@ -51,8 +50,8 @@
 				
 				<!-- Attachment tab -->
 				<?php if($page->action == 'edit'){ ?>
-					<div class="form_inputs" id="article-attachment">
-						<?php $this->load->view('partials/attachment_form', $art); ?>	
+					<div class="form_inputs" id="article-attachment">	
+						<?php $this->load->view('partials/attachment_form', $art); ?>
 					</div>
 				<?php } ?>
 					

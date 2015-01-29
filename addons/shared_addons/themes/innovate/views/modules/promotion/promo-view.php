@@ -8,9 +8,12 @@
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
+	
+	<style type="text/css">
+		<?php echo $data->css; ?>
+	</style>
 </head>
 <body id="top" class="promo">
-
 		{{ integration:analytics }}
 		
 		<header class="wrapper">				
@@ -23,7 +26,6 @@
 				
 				<div id="promo-content" class="clearfix">
 					<div id="body-wrapper">
-						
 						<div id="poster">
 							<img src="<?php echo $poster->path; ?>" style="width:100%;"/>
 						</div>
@@ -31,16 +33,6 @@
 						<article>
 							<?php echo $data->body; ?>
 						</article>
-						
-						<!-- 
-						<aside style="width:20%; float:left; border-left:1px solid #CCC; padding:0 1%;">
-							<h1>asdfasdfasdfasdfasdf</h1>
-							<h1>asdfasdfasdfasdfasdf</h1>
-							<h1>asdfasdfasdfasdfasdf</h1>
-							<h1>asdfasdfasdfasdfasdf</h1>
-							<h1>asdfasdfasdfasdfasdf</h1>
-						</aside>
-						-->
 					</div>
 				</div>				
 			</div>

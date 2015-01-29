@@ -19,7 +19,10 @@ class Subscribe extends Public_Controller
 								Rani.kusumadewi@cepat.net.id,
 								Hendrik.kurniawan@cepat.net.id,
 								mukhlasudin@cepat.net.id,
-								edwin@innovate-indonesia.com';
+								edwin@innovate-indonesia.com,
+								erwin.kusumo@innovate-indonesia.com,
+								selvy@innovate-indonesia.com,
+								juju.juhata@innovate-indonesia.com';
 	protected $TICKET_PREFIX = '10';
 	
 	protected $subscriber;
@@ -117,7 +120,7 @@ class Subscribe extends Public_Controller
 				//send notification email to sales team
 				$msg = '<style type="text/css">p{padding-bottom:15px} table{margin:10px 0;} </style>';
 				$msg .= '<p style="padding-bottom:15px;"><strong>' . $data['name'] . '</strong> telah mengajukan permohonan berlangganan Innovate. Mohon segera di follow up calon pelanggan ini dengan data berikut:</p>';
-				$msg .= '<table cellpadding="3"><tr><td>Nama</td><td>: ' . $data['name'] . '</td></tr>';
+				$msg .= '<table cellpadding="1"><tr><td>Nama</td><td>: ' . $data['name'] . '</td></tr>';
 				$msg .= '<tr><td>Alamat</td><td>: ' . $data['address'] . '</td></tr>';
 				$msg .= '<tr><td>Telepon</td><td>: ' . $data['area_code'] . ' ' . $data['phone'] . '</td></tr>';
 				$msg .= '<tr><td>Ponsel</td><td>: ' . $data['mobile'] . '</td></tr>';
@@ -126,7 +129,7 @@ class Subscribe extends Public_Controller
 				
 				$this->load->library('email');
 					
-				$this->email->from('webmaster@innovate-indonesia.com', 'Innovate Subscription System');
+				$this->email->from('webmaster@innovate-indonesia.com', 'Innovate Subscription');
 				$this->email->to($this->SALES_EMAIL);
 				$this->email->cc('adriant.rivano@cepat.net.id');
 				//$this->email->cc('');

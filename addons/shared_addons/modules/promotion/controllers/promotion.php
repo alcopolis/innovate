@@ -47,7 +47,7 @@ class Promotion extends Public_Controller {
 		$this->form_validation->set_rules($this->rules);
 		
 		// Get Category
-		$temp = $this->category_m->get_categories();
+		$temp = $this->category_m->get_category('', TRUE);
 		foreach($temp as $key=>$val){
 			$this->cat_data[$key] = $val->cat;
 		}

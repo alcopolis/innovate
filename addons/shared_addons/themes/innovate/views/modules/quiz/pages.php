@@ -11,7 +11,8 @@
 	{{ endif }}
 	
 	<style type="text/css">
-		body{font-size:12px;background:url("{{ url:site }}files/large/<?php echo $quiz->theme; ?>") no-repeat left top; background-size:auto auto;}
+		body{font-size:12px;background:url("{{ url:site }}files/large/<?php echo $quiz->theme; ?>") no-repeat center top; background-size:auto auto;}
+		#rules ol li, #rules ul li{font-size:12px;}
 	</style>
 </head>
 
@@ -24,20 +25,19 @@
 	
 	<div id="content" class="wrapper clearfix">
 		<div id="content-bg" style="position:absolute; width:100%; height:auto;"></div>
-		<div id="body-wrapper" class="clearfix">
+		<div id="body-wrapper" class="clearfix" style="padding:160px 0 40px 0;">
 			<div class="container">
 				
-				<?php //var_dump($this->session->all_userdata()) ?>
 				<p>{{ session:flash name="quiz_msg" }}</p>
 				
 				
 				<section class="clearfix" id="quiz">
 					<h1 id="title"><?php echo $quiz->name; ?></h1>
 					
-					
 					{{if !user:logged_in }}
+						<?php $this->session->set_userdata('redirect_to',current_url()); ?>
 						<div id="user-data">
-							<p>Silahkan login terlebih dahulu untuk mengikuti kuis ini dan menangkan tayangan <strong>Liga Inggris</strong> di <strong>InnovateGO</strong> GRATIS sampai akhir musim untuk 2 pemenang!</p>
+							<p>Silahkan login terlebih dahulu untuk mengikuti kuis ini. <?php echo $quiz->description; ?></p>
 							{{ widgets:area slug="login" }}
 						</div>
 						<div id="popup" class="hide" >
@@ -46,8 +46,8 @@
 						</div>
 					{{ else }}
 						<div id="user-data">
-							<p>Menangkan tayangan Liga Inggris di <strong>InnovateGO GRATIS</strong> sampai akhir musim untuk 2 pemenang!</p>
-							{{ widgets:area slug="login" }}
+							<p><?php echo $quiz->description; ?></p>
+							<a href="quiz/logout" class="button" style="padding:3px 10px; background:#F30; color:#FFF; text-shadow:none;">Log out</a>
 						</div>
 					{{ endif }}
 					
@@ -88,16 +88,9 @@
 					{{ endif }}
 				</section>
 				
-				<section id="rules" class="clearfix">
+				<section id="rules" class="clearfix" style="background:rgba(10,10,10,.9); border-radius: 0 0 5px 5px; padding:20px 15px; margin:15px auto 0 auto; color:#EFEFEF;">
 					Syarat &amp; Ketentuan Kuis:
-					<ol>
-						<li>Periode Kuis 2 - 16 Oktober 2014</li>
-						<li>Kuis terbuka untuk umum</li>
-						<li>Pelanggan wajib mengisi semua data diri dan informasi yang dibutuhkan pada kolom yang tertera</li>
-						<li>Pemenang akan diumumkan melalui akun resmi twitter Innovate, <strong>@InnovateInd</strong>, paling lambat 7 hari setelah periode kuis berakhir</li>
-						<li>Peserta dapat mengikuti kuis lebih dari 1 kali, tetapi hanya dapat terpilih 1 kali sebagai pemenang</li>
-						<li>Keputusan juri tidak dapat diganggu gugat</li>
-					</ol>
+					 <?php echo $quiz->toc; ?>
 				</section>
 			</div>
 		</div>

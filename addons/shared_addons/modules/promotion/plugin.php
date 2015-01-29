@@ -47,49 +47,9 @@ class Plugin_Promotion extends Plugin
 	public function __construct()
 	{	
 		$this->load->model('promotion_m');
+		$this->load->model('category_m');
 	}
 	
-	
-	
-	
-
-// 	function featured(){
-// 		$data = '';
-
-// 		$this->load->library('asset');
-// 		$this->asset->in_build();
-				
-// 		$now = date('Y-m-d', time());
-		
-// 		$data_filter = array(
-// 				'status' => 'published',
-// 				'featured' => '1',
-// 				'cat' => $this->attribute('category', 0),
-// 				'ended >' => $now,
-// 		);
-// 		$this->promotion_m->where($data_filter);
-// 		$raw = $this->promotion_m->order_by('id','DESC')->limit(5)->get_promo();
-	
-// 		foreach($raw as $featured){
-// 			$poster = json_decode($featured->poster, true);
-
-// 			$data .= '<div class="promo" style="background:#FFF url(' . $poster['path'] . ') no-repeat top center; cursor:pointer;">';
-// 			$data .= '<div style="width:960px; margin:0 auto; position:relative;">';
-// 			$data .= $featured->featured_copy;
-			
-// 			$data .= '</div></div>';
-// 		}
-		
-// 		$data .= '
-// 					<script type="text/javascript">
-					
-// 					</script>
-				
-// 				';
-		
-// 		return $data;
-// 	}
-
 	
 	
 	
@@ -109,11 +69,17 @@ class Plugin_Promotion extends Plugin
 		);
 		
 		
-		$this->promotion_m->where_in('id', array(16, 15, 14, 11, 9, 1)); //1, 4)); //, 3));	
-		//$this->promotion_m->where($data_filter);
-		//$this->promotion_m->or_where('ended', NULL);
+		if($this->attribute('cat') != NULL || $this->attribute('cat') != ''){
+			$cat = $this->category_m->get_category_by(array('cat' => $this->attribute('cat')), '', FALSE);
+			$data_filter['cat'] = $cat->id;
+			
+			$this->promotion_m->where($data_filter);
+		}else{
+			$this->promotion_m->where($data_filter);
+		}
+		
 	
-		$raw = $this->promotion_m->order_by('id', 'DESC')->limit(5)->get_promo();
+		$raw = $this->promotion_m->order_by('id', 'random')->limit(5)->get_promo();
 	
 		foreach($raw as $featured){
 			$poster = json_decode($featured->poster, true);

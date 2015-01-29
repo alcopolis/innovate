@@ -48,8 +48,8 @@ class Admin extends Admin_Controller
 	 * List all articles
 	 */
 	public function index()
-	{	
-		$limit = 10;
+	{			
+		$limit = 8;
 		
 		$pagination = create_pagination('admin/articles/index', $this->db->count_all('inn_articles'), $limit,4);
 		$arts = $this->articles_m->order_by('art_id','DESC')->limit($pagination['limit'], $pagination['offset'])->get_articles();
@@ -83,10 +83,10 @@ class Admin extends Admin_Controller
 			$this->form_data['slug'] = str_replace(' ', '-', $tmp);
 			
 			//Date modified
-			$d = new DateTime('now');
-			$date = $d->getTimestamp();
-			$this->form_data['created_on'] = $date;
-			$this->form_data['modified_on'] = $date;
+			//$d = date('Y-m-d H:i:s');
+			//$date = $d->getTimestamp();
+			//$this->form_data['created_on'] = $d;
+			//$this->form_data['modified_on'] = $d;
 			
 			//var_dump($this->form_data['category']);
 			
@@ -131,8 +131,8 @@ class Admin extends Admin_Controller
 			$this->form_data = $this->alcopolis->array_from_post(array('status', 'category', 'keywords', 'teaser', 'body', 'js', 'css'), $this->input->post());
 			
 			//Date modified
-			$d = new DateTime();
-			$this->form_data['modified_on'] = $d->getTimestamp();
+			//$d = new DateTime();
+			//$this->form_data['modified_on'] = $d->getTimestamp();
 			
 			
 			//update data
@@ -158,7 +158,7 @@ class Admin extends Admin_Controller
 		$var = array(
 				'page' => $this->page_data,
 				'art' => $art,
-				'files' => json_decode($art->files),
+//				'files' => json_decode($art->files),
 				'cats' => $cats,
 				'uri' => 'admin/articles/edit/' . $id,
 			);

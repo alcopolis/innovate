@@ -1,3 +1,24 @@
+<style type="text/css">
+	#recent-news{
+		width:720px; margin:40px auto 0 auto;
+		border-bottom:1px dotted #CCC;
+		padding-bottom:20px;
+	}
+	
+	#recent-news h2{color:#007DC3; margin-bottom:20px; padding:0; border-bottom:1px dotted #CCC; font-size:24px;}
+
+	#recent-news article{
+		float:left;
+		width:320px;
+		overflow:hidden;
+		margin:0 20px;
+	}
+	
+	#recent-news article img{width:100%}
+</style>
+
+
+
 <!-- Slideshow HTML -->
 <div id="mod-promo" class="orbit-slider">
 	{{ promotion:featured }}
@@ -7,16 +28,51 @@
 
 <div id="body-wrapper">
 	<div id="berlangganan">
+		<a href="http://myaccount.innovate-indonesia.com" target="_blank">InnovateGo Registration</a>
 		<a href="{{ url:site }}subscribe">Register Now</a>
 	</div>
 	
-<!-- 	<div style="width:853px; height:480px; margin:80px auto 40px auto; position:relative;"> -->
-<!-- 		<iframe style="position:absolute; z-index:0;" width="853" height="480" src="//www.youtube-nocookie.com/embed/jZoNdHk9PC0?version=3&hl=en_US&amp;rel=0" frameborder="0" allowfullscreen></iframe> -->
-<!-- 	</div> -->
+	<div style="width:800px; margin:80px auto 40px auto; position:relative;" class="clearfix">
+		<div id="notif" style="float:left; background:#DDDDDD; color:#333; padding:10px 10px 10px 140px; font-size:0.85em; line-height:1.35em; margin-bottom:10px;">
+			<h4 style="position:absolute; top:-10px; left:-10px; background:#007DC3; width:120px; text-align:center; padding:5px 5px 8px 5px; color:#FFF; box-shadow:0 1px 2px #999;">Promo</h4>
+			Langganan Innovate sekarang, <strong>GRATIS</strong> biaya instalasi. Khusus paket Fun, Super, Festive, Amazing, dan Xtreme dapatkan <strong>BONUS GRATIS</strong> ala carte Sports dan Upgrade paket 1 tingkat di atas paket pilihan selama 3 bulan. Selama periode promosi.
+		</div>
+		<a href="promotion/view/bein-sport-liga-inggris" style="float:left; margin-left:2px; display:none;"><img src="{{theme:image_path}}super-battle.jpg" title="Jadwal Super Battle"/></a>
+	</div>
+	
+	{{ epg:featured limit="11" category="Movies" }}
+
+	{{ epg:featured limit="11" category="Movie Series" }}
 	
 	
-	{{ epg:metadata }}
-	{{ epg:featured limit="3" }}
 	
+	<div id="recent-news">
+		<h2>Berita Terbaru</h2>
+		
+		<div id="news-container" class="clearfix">
+			<article class="left" id="branch-opening-innovate-semarang">
+				<div class="cover-container"><a href="articles/branch-opening-innovate-semarang"><img title="Branch Opening Innovate Semarang" src="http://innovate-indonesia.com/files/large/156f96c7048cd56"></a></div>								
+				<div class="art-property art-title"><h1><a href="articles/branch-opening-innovate-semarang">Branch Opening Innovate Semarang..</a></h1></div>
+				<div class="art-property art-teaser">PT.Innovate Mas Indonesia kembali melakukan peresmian salah satu kantor cabang Innovate yang kali ini terletak di kota Semarang.</div>
+				<div class="art-property art-content"></div>
+			</article>
+			
+			<article class="left" id="internet-sehat-dan-aman-innovate">
+				<div class="cover-container"><a href="articles/internet-sehat-dan-aman-innovate"><img title="Internet Sehat Dan Aman Innovate" src="http://innovate-indonesia.com/files/large/451784a025ff423"></a></div>
+				<div class="art-property art-title"><h1><a href="http://innovate-indonesia.com/articles/internet-sehat-dan-aman-innovate">Internet Sehat Dan Aman Innovate..</a></h1></div>
+				<div class="art-property art-teaser">Mulai tanggal 8 Desember 2014 dilakukan penyaringan konten pornografi dan sejenisnya yang dapat di akses melalui jaringan internet Innovate.</div>
+				<div class="art-property art-content"></div>
+			</article>
+		</div>
+	</div>
+
 	{{ theme:partial name="home_utility" }}
 </div>
+
+
+<div id="popup" class="hide" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; text-align:center; padding-top:100px; background:rgba(0,0,0,.925);">
+	<a href="promotion/view/bein-sport-liga-inggris"><img src="{{theme:image_path}}super-battle-pop2.png"/></a><br/>
+    <a class="pop-close" style="color:#FFF; cursor:pointer; font-size:14px; background:#333; padding:5px 15px; border-radius:5px;">Close</a>
+</div>
+
+

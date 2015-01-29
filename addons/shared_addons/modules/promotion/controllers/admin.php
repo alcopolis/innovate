@@ -47,7 +47,7 @@ class Admin extends Admin_Controller {
 		$this->form_validation->set_rules($this->rules);
 		
 		// Get Category
-		$temp = $this->category_m->get_categories();
+		$temp = $this->category_m->get_category('', TRUE);
 		foreach($temp as $key=>$val){
 			$this->cat_data[$key] = $val->cat;
 		}
@@ -75,7 +75,7 @@ class Admin extends Admin_Controller {
 		$this->update_promo_status();
 		
 		$this->promo_data = $this->promotion_m->get_promo();
-		$this->cat_data = $this->category_m->get_categories();
+		$this->cat_data = $this->category_m->get_category('', TRUE);
 		
 		$this->render('admin/index');
 

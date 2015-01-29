@@ -93,22 +93,19 @@ class Articles extends Public_Controller
 	
 	
 	public function index($slug = NULL){
-		
-		$limit = 5;
+		$limit = 8;
 		$paging = create_pagination('articles', $this->db->count_all('inn_articles'), $limit, 2);
 			
 		if(isset($slug) && $slug != 'category' && preg_match("/(\A[0-9]+?\z)/", $slug) == FALSE){
 			$this->articles = $this->articles_m->get_articles_by(array('slug'=>$slug), NULL, TRUE);
 			$cat = $this->articles_category_m->get_category_by(array('id' => $this->articles->category), NULL, TRUE);
 			//$this->page_data->section = '<a href="articles/category/' . $cat->slug . '">&laquo ' . $cat->name . '</a>';
-			$this->page_data->section = '<a href="articles/">&laquo Berita Terbaru</a>';
+			$this->page_data->section = '<a href="articles/">&laquo Recent News</a>';
 			
 			$this->template->append_css('module::full_article.css');
 			$this->render('article', $this->articles->title, array('art' => $this->articles, 'cat' => $cat));
 		}else{
-
-			$limit = 2;
-			$this->articles = $this->articles_m->order_by('created_on','DESC')->limit($paging['limit'], $paging['offset'])->get_recent();
+			$this->articles = $this->articles_m->order_by('art_id','DESC')->limit($paging['limit'], $paging['offset'])->get_recent();
 			$this->page_data->section = 'Berita Terbaru';
 						
 			$arts = array();

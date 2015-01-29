@@ -18,8 +18,21 @@ class Category_m extends MY_Model
 		$this->_table = 'inn_promotion_category';
 	}
 	
-	function get_categories(){
-		return $this->db->get($this->_table)->result();
+	function get_category($field = '', $return_all = FALSE){
+		if($field != ''){
+			$this->db->select($field);
+		}
+		
+		$method = 'result';
+		
+		$return_all ? $method = 'result' : $method = 'row';
+		
+		return $this->db->get($this->_table)->$method();
+	}
+	
+	function get_category_by($where = NULL, $field = '', $return_all = FALSE){
+		$this->db->where($where);
+		return $this->get_category($field, $return_all);
 	}
 
 }

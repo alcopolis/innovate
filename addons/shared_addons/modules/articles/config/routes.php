@@ -26,6 +26,6 @@ $route['articles/([a-z0-9?_-]+)?'] = 'articles/index/$1';
 //$route['articles/category/(:any)?'] = 'articles/category$1';
 
 // back-end
-$route['articles/admin/edit/(:num)?']		= 'admin/edit/$1';
+$route['articles/admin/edit/(:num)?']	= 'admin/edit/$1';
 $route['articles/admin/category']		= 'admin_category/index';
-$route['articles/admin/category/add']		= 'admin_category/add';
+$route['articles/admin/category/add']	= 'admin_category/add';

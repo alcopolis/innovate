@@ -9,7 +9,7 @@
 	color:#333;
 }
 
-.faq #body-wrapper, .faq-view #body-wrapper{margin:40px auto 40px auto;}
+.faq #body-wrapper, .faq-view #body-wrapper{margin:40px auto 40px auto; min-height:300px;}
 
 #faq-side{
 	position: relative; 
@@ -89,8 +89,8 @@ h3#page-title a:hover{color:#FFF;}
 
 .faq-q, .faq-a{
 	margin:0px 20px 0 10px; padding:5px 10px;
-	font-size:.85em;
-	color:#0964BD;	
+	font-size:1em;
+	color:#4B4C52;	
 		
 	padding-left:28px;
 	background-size:20px 20px;

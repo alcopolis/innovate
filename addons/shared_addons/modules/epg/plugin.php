@@ -95,7 +95,7 @@ class Plugin_Epg extends Plugin
 						),
 				),
 				
-				'go_ch_lineup_list' => array(
+				'ch_lineup' => array(
 						'description' => array(// a single sentence to explain the purpose of this method
 								'en' => ''
 						),
@@ -108,22 +108,6 @@ class Plugin_Epg extends Plugin
 									'default' => 'Uncategorized',
 									'required' => false,
 							),
-						),
-				),
-				
-				'ch_lineup' => array(
-						'description' => array(// a single sentence to explain the purpose of this method
-								'en' => ''
-						),
-						'single' => true,// will it work as a single tag?
-						'double' => false,// how about as a double tag?
-						'attributes' => array(
-								'category' => array(
-										'type' => 'text',// Can be: slug, number, flag, text, array, any.
-										'flags' => '',
-										'default' => 'Uncategorized',
-										'required' => false,
-								),
 						),
 				),
 				
@@ -152,33 +136,7 @@ class Plugin_Epg extends Plugin
 
 	function metadata(){
 		$meta = '<style type="text/css">
-						.mod-epg{
-							padding:0;
-							width:99%;
-							margin:-20px 0 0 0;
-						}
-						
-						.mod-epg.uncategorized{
-							margin:40px 0 !important;
-						}
-						
-						.mod-epg>h4{
-							font-size:18px;
-							font-weight:normal;
-							margin:20px 0 5px 10px;
-							width:160px;
-							color:#FFF;
-							text-shadow:0 -1px 1px rgba(51,51,51,.5);
-							background:#007DC3;
-							position: relative;
-							top:112px; left:-108px;
-							text-align:center;
-							
-							padding:3px 5px;
-							border-radius:5px 5px 0 0;
-						}
-						
-					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden; outline:1px solid #EEE;}
+					  .featured-show{float:left; background:#09F; position:relative; cursor:pointer; overflow:hidden;}
 					  .featured-show .poster{
 							width:100%; height:100%; outline:3px solid #FFF;
 							background-repeat:no-repeat;
@@ -186,29 +144,25 @@ class Plugin_Epg extends Plugin
 							background-position:center center;
 						}
 					  .featured-show .poster img{width:100%; height:auto;}
-		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(51,51,51,.9); left:0; width:100%; opacity:0;}
+		              .featured-show .info{font-family: "Arial", Helvetica, Tahoma, sans-serif; margin:0 auto; padding:0; display:block; position:absolute; background:rgba(0,120,180,.95); left:0; width:100%; opacity:0;}
 					  .featured-show .info h4 {font-size:14px; font-weight:600; line-height:14px; text-align:center; margin:15px 10px}
 				
-					  .featured-show .info p.subinfo{font-weight:normal; margin:5px 10px; background:#FFF; font-size:12px; color:#111; padding:10px; border-radius:0;}
+					  .featured-show .info p.subinfo{font-weight:normal; margin:5px 10px; background:#FFF; font-size:12px; color:#111; padding:10px; border-radius:5px;}
 					  .featured-show .info p.subinfo{text-align:center;}
 				      .main.featured-show p.subinfo {text-align:left;}
-				      .main.featured-show p.subinfo span {text-align:right; font-size:inherit;}
 					  
-				      .main.featured-show p.syn-id, .main.featured-show p.syn-en{padding:10px 0;} 
-				      
-					  .featured-show .info p, .main.featured-show hr {margin:5px 20px;}
+					  .featured-show .info p, .featured-show .info .sh-detail-link, .main.featured-show hr, .main.featured-show .sh-detail-link{margin:5px 20px;}
 				
 		              .featured-show .info p {font-size:12px; line-height:13px; width:auto; color:#FFF; padding:0px;}
 					  .featured-show .info a {text-shadow:none; color:#FFF; font-weight:800;}
 					  .featured-show .info a:hover {color:#9CF;}
-						
-					  .sh-detail-link {padding:5px 5px 5px 0; margin:10px !important;}
-					  .sh-detail-link a{font-size:12px !important; color:#FFF !important; font-weight:normal !important;} 
-					  .sh-detail-link a:hover{color:#9CF;}
-					  
+				
 					  .main{}
 					  .main.featured-show .info h4 {font-size:18px; margin:20px 10px; text-align:left;}
-					  .main.featured-show hr{border:1px solid #CCC;}
+					  .main.featured-show .sh-detail-link {font-size:14px; padding:5px 5px 5px 0;}
+					  .main.featured-show .sh-detail-link a{color:#FFF;font-weight:800;} 
+					  .main.featured-show .sh-detail-link a:hover {color:#9CF;}
+					  .main.featured-show hr{border-style:dashed; border-color:#CCC;}
 				  </style>
 	
 				  <script type="text/javascript">
@@ -258,81 +212,49 @@ class Plugin_Epg extends Plugin
 		return $meta;
 	}
 	
-// 	function ch_lineup(){
-// //		Channel Category
-// // 		0	Uncategorized
-// // 		1	National FTA
-// // 		2	International FTA
-// // 		3	Movies
-// // 		4	Entertainment
-// // 		5	Knowledge
-// // 		6	Life Style
-// // 		7	Sports
-// // 		8	Kids And Toddler
-// // 		9	News
-		
-		
-// 		if($this->attribute('category') == 'All Categories'){
-// 			$raw = $this->epg_ch_m->order_by('cat', 'ASC')->get_channel_by(array('is_active'=>'1'), '');
-// 		}else{
-// 			$cat = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), TRUE);
-// 			$raw = $this->epg_ch_m->get_channel_by(array('cat' => $cat->id, 'is_active'=>'1'), '');
-// 		}
-		
-		
-		
-// 		$data = '';
-		
-// 		foreach($raw as $ch){
-// 			if($ch->desc != ''){
-// 				$desc = $ch->desc;	
-// 			}else{
-// 				$desc = 'No Description';
-// 			}
-						
-// 			if($ch->logo != ''){
-// 				$logo = $ch->logo;
-// 			}else{
-// 				$logo = '/addons/shared_addons/themes/innovate/img/themes/default-icon.jpg';
-// 			}
-			
-// 			$ch_cat = $this->epg_ch_m->get_category_by(array('id' => $ch->cat), TRUE);
-// 			//var_dump($ch_cat);
-			
-// 			$data .= '<div title="' . $ch->name . '" style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%; text-indent:-9999px; background-color:#FFF;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $ch_cat->cat . '" data-logo="' . $logo . '" data-desc="' . $desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';	
-// 		}
-		
-// 		return $data;
-// 	}
-	
-	
-	
 	function ch_lineup(){
-		$data = '<div class="accordion">';
+//		Channel Category
+// 		0	Uncategorized
+// 		1	National FTA
+// 		2	International FTA
+// 		3	Movies
+// 		4	Entertainment
+// 		5	Knowledge
+// 		6	Life Style
+// 		7	Sports
+// 		8	Kids And Toddler
+// 		9	News
 		
-		$cats = $this->epg_ch_m->order_by('cat', 'ASC')->get_categories();
-		foreach($cats as $cat){
-			
-			$ch_data = $this->epg_ch_m->get_channel_by(array('is_active'=>'1', 'cat'=>$cat->id), '');
-			//var_dump($ch_data);
-			
-			if(count($ch_data) > 0){
-				$data .= '<h3 class="clear">' . $cat->cat . '</h3>';
-				$data .= '<div class="clearfix">';
-				foreach($ch_data as $ch){
-					if($ch->logo != ''){
-						$logo = $ch->logo;
-					}else{
-						$logo = '/addons/shared_addons/themes/innovate/img/themes/default-icon.jpg';
-					}
-					
-					$data .= '<div title="' . $ch->name . '" style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%; text-indent:-9999px; background-color:#FFF;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $cat->cat . '" data-logo="' . $logo . '" data-desc="' . $ch->desc . '" data-id="' . $ch->id . '">' . $ch->name . '</div>';
-				}
-				$data .= '</div>';
-			}
+		
+		if($this->attribute('category') == 'All Categories'){
+			$raw = $this->epg_ch_m->order_by('cat', 'ASC')->get_channel_by(array('is_active'=>'1'), '');
+		}else{
+			$cat = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), TRUE);
+			$raw = $this->epg_ch_m->get_channel_by(array('cat' => $cat->id, 'is_active'=>'1'), '');
 		}
 		
-		$data .= '</div>';
+		
+		
+		$data = '';
+		
+		foreach($raw as $ch){
+			if($ch->desc != ''){
+				$desc = $ch->desc;	
+			}else{
+				$desc = 'No Description';
+			}
+						
+			if($ch->logo != ''){
+				$logo = $ch->logo;
+			}else{
+				$logo = '{{theme:image_path}}/theme/default-icon.jpg';
+			}
+			
+			$ch_cat = $this->epg_ch_m->get_category_by(array('id' => $ch->cat), TRUE);
+			//var_dump($ch_cat);
+			
+			$data .= '<div style="background:url(' . $ch->logo . ') no-repeat center center; background-size: 100% 100%;" class="ch" data-name="' . $ch->name . '" data-num="' . $ch->num . '" data-cat="' . $ch_cat->cat . '" data-logo="' . $logo . '" data-desc="' . $desc . '" data-link="schedule/' . $ch->id . '">' . $ch->name . '</div>';	
+		}
 		
 		return $data;
 	}
@@ -367,34 +289,6 @@ class Plugin_Epg extends Plugin
 	}
 	
 	
-	
-	function go_ch_lineup_list(){
-		// 		Channel Category
-		// 		0	Uncategorized
-		// 		1	National FTA
-		// 		2	International FTA
-		// 		3	Movies
-		// 		4	Entertainment
-		// 		5	Knowledge
-		// 		6	Life Style
-		// 		7	Sports
-		// 		8	Kids And Toddler
-		// 		9	News
-		
-		$data;
-		
-		if($this->attribute('category') == '' || $this->attribute('Uncategorized')){
-			$data = $this->epg_ch_m->get_categories();
-		}else{
-			$data = $this->epg_ch_m->get_category_by(array('cat' => $this->attribute('category')), FALSE);
-		}
-		
-		foreach($data as $key=>$val){
-			$data[$key]->list = $this->epg_ch_m->get_channel_by(array('cat' => $data[$key]->id, 'is_active'=>1, 'go_available'=>1), '', FALSE);
-		}
-		
-		return $data;
-	}
 	
 	
 	
@@ -438,12 +332,7 @@ class Plugin_Epg extends Plugin
 		if(count($raw) >= intval($this->attribute('limit'))){
 			$mainswitch = false;
 			
-			if($this->attribute('category') == NULL){
-				$data = '<div class="mod-epg featured uncategorized clearfix">';
-			}else{
-				$data = '<div class="mod-epg featured clearfix"><h4 class="rotate">' . $this->attribute('category') . '</h4>';
-			}
-			
+			$data = '<div class="mod-epg featured clearfix"><h4 class="rotate">' . $this->attribute('category') . '</h4>';
 						
 			foreach($raw as $featured){
 				$ch = $this->epg_ch_m->get_channel($featured->channelid);
@@ -456,21 +345,9 @@ class Plugin_Epg extends Plugin
 						//$data .= $featured->trailer;
 						$data .= '<div class="info">';
 						$data .= '<h4><a href="epg/show/' .  $featured->showid . '">' . $featured->title . '</a></h4>';
-						//$data .= '<p class="subinfo left">' . $ch->name . ' | Ch. ' . $ch->num . '</p>';
-						$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . ' <span class="right">' . date('d M Y', strtotime($featured->tanggal)) . ' | ' . date('H:i a', strtotime($featured->jam)) . '</span></p>';
-						
-						if($featured->ina != '' && $featured->eng != ''){
-							$data .= '<p class="syn-id">' .  substr($featured->ina,0,100) . '</p>';
-							$data .= '<hr/>';
-							$data .= '<p class="syn-en">' .  substr($featured->eng,0,100) . '</p>';
-						}elseif($featured->ina == '' || $featured->eng == ''){
-							if($featured->ina == '' && $featured->eng != ''){
-								$data .= '<p class="syn-en">' .  substr($featured->eng,0,100) . '</p>';
-							}elseif($featured->eng == '' && $featured->ina != ''){
-								$data .= '<p class="syn-id">' .  substr($featured->ina,0,100) . '</p>';
-							}
-						}
-						
+						$data .= '<p class="subinfo">' . $ch->name . ' | Ch. ' . $ch->num . '</p>';
+						$data .= '<p class="syn-id">' .  $featured->ina . '</p><hr/>';
+						$data .= '<p class="syn-en">' .  $featured->eng . '</p>';
 						$data .= '<p class="sh-detail-link"><a href="epg/show/' .  $featured->showid . '">Detail Acara &raquo</a></p>';
 					$data .= '</div></div>';
 					
@@ -485,7 +362,7 @@ class Plugin_Epg extends Plugin
 						}else{
 							$data .=  '...' . '</a></h4>';
 						}
-	 					$data .= '<p class="subinfo">' . substr($ch->name, 0, 20) . '<br/>' . date('d M Y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
+	 					$data .= '<p class="subinfo">' . substr($ch->name, 0, 10) . ' | Ch. ' . $ch->num . '<br/><br/>' . date('d M y', strtotime($featured->tanggal)) . '<br/>' . date('H:i a', strtotime($featured->jam)) . '</p>';
 	 					$data .= '<p class="sh-detail-link" style="text-align:center;"><a href="epg/show/' .  $featured->showid . '">Detail Acara</a></p>';
 					$data .= '</div></div>';
 				}		

@@ -42,7 +42,7 @@
 								<div class="art-property art-content"><?php //echo $art['content']->body; ?></div>
 							</article>
 						<?php } ?>
-					
+				</div>	
 						<?php echo $pagination['links']; ?>
 					<?php }else{ ?>
 						<p>Tidak ada artikel untuk kategori ini.</p>

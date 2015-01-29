@@ -28,7 +28,7 @@
 						<a href="{{ url:site }}contact"><img src="{{ theme:image_path }}cs.png" style="width:80px;"/></a>
 						<p style="margin:0 0 -10px 0;">
 							<strong>Customer Care</strong><br/>
-							<span style="font-size:1.2em; font-weight:bold; color:#39C; line-height:1.5em">[ 021 ] 3199 8600</span>
+							<span style="font-size:1.2em; font-weight:bold; color:#39C; line-height:1.5em">[ 021 ] 5055 6182</span>
 						</p>
 					</div>
 				</div>

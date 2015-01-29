@@ -81,14 +81,14 @@ header{
 }
 
 /* Site Logo */
-header #logo{width:120px; height:38px; float:left; margin:20px 40px 20px 20px;}
+header #logo{width:120px; height:38px; float:left; margin:5px 0 5px 20px;}
 header #logo h1 {
-	width:120px; height:38px; 
+	width:160px; height:80px; 
 	background-image:url(../img/themes/innovate.png);
 	background-repeat: no-repeat;
-	background-size:100% 100%;
+	background-position:center center;
 }
-header #logo h1 a{display:block; text-indent:-9999px;}
+header #logo h1 a{display:block; text-indent:-9999px;height:69px}
 
 /* Nav */
 
@@ -99,7 +99,6 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 	position:relative;
 	list-style: none outside none
 	margin:0; padding:0;
-/* 	border-bottom:1px dotted #b3b3b3; */
 
 	-moz-transition: border-bottom .75s ease-out;
     -webkit-transition: border-bottom .75s ease-out;
@@ -205,12 +204,10 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 
 /* Breadcrumbs */
 #breadcrumbs{
-	background:#EFEFEF; 
-/* 	border-bottom:1px dotted #999;*/
+	background:rgba(0,125,195,.95); 
 	position:relative;
-	margin:0 auto; padding:10px 0;
-	padding-left:20px;	
-	color:#999;
+	margin:0 auto; padding:2px 0 2px 20px;
+	color:#EEE;
 }
 
 #breadcrumbs *{
@@ -219,8 +216,9 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 	font-weight:bold;
 }
 
+#breadcrumbs a{color:#61c1ff;}
 #breadcrumbs .current{
-	color:#39A;
+	color:#EEE;
 }
 
 
@@ -252,13 +250,33 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 	padding-top:0;
 }
 
+.mod-epg{
+	padding:0;
+	width:99%;
+	margin:-20px 0 0 0;
+}
 
+.mod-epg>h4{
+	font-size:18px;
+	font-weight:normal;
+	margin:20px 0 5px 10px;
+	width:160px;
+	color:#666;
+	text-shadow:0 -1px 1px rgba(255,255,255,.5);
+	background:#CCC;
+	position: relative;
+	top:112px; left:-108px;
+	text-align:center;
+	
+	padding:3px 5px;
+	border-radius:5px 5px 0 0;
+}
 
 
 /* Promo Slideshow */
 .orbit-slider{
 	width:100%;
-	height:400px;
+	height:460px;
 }
 
 .orbit-bullets {
@@ -308,8 +326,8 @@ header #logo h1 a{display:block; text-indent:-9999px;}
 
 #berlangganan a{
 	color:#FFF; 
-	margin-right:40px; padding:5px 10px 5px 10px; 
-	font-size:16px;
+	margin-right:5px; padding:5px 10px 5px 10px; 
+	font-size:14px;
 	background:#C00;
 	
 	border-radius:0 0 5px 5px;
@@ -426,9 +444,10 @@ footer{width:100%; background-color:#111; margin:0; padding:0; border-top:1px so
 .footer-menu ul li a{color:#999;}
 .footer-menu ul li a:hover{color:#FFF;}
 .footer-menu ul li{
-	margin:0 0 0 0; padding:5px 0;
+	margin:0 0 0 0 !important; padding:5px 0;
 	border-top:1px solid #222;
 	border-bottom:1px solid #000;
+	list-style:none !important;
 }
 .footer-menu ul li:first-child{border-top:none;}
 .footer-menu ul li:last-child{border-bottom:none;}
