@@ -243,7 +243,7 @@ header #logo h1 a{display:block; text-indent:-9999px;height:69px}
 }
 
 .home #body-wrapper{
-	width:90%;
+	width:100%;
 	position:relative; 
 	margin:0 auto 0 auto; 
 	z-index:9000;
@@ -508,7 +508,130 @@ ul#ticker li:last-child:after{margin:0 5px; content:"";}
 /* -------------------------------------- Home Section ------------------------------------- */
 
 section.home-section{
-	background:#CCC;
-	margin:5px 0;
-	min-height:300px;
+	width:100%;
+	margin:20px auto 40px auto;
 }
+
+.section-wrapper{
+	width:90%;	margin:0 auto
+}
+
+a.selengkapnya{
+	margin:15px 0; padding:5px 10px;
+	background:#196DC2;
+	border-radius:5px;
+	color:#FFF;
+	font-size:12px;
+}
+
+/* -------------------------------------- Hilite ------------------------------------- */
+
+ul#program-highlight{
+	width:90%;
+	margin:0 auto; padding:0;	
+}
+
+ul#program-highlight li{
+	margin:0 .3%; padding:0;
+	display:inline-block;
+	width:19.1%;	
+	list-style-type:none;
+	text-align:center;	
+}
+
+ul#program-highlight li img{
+	width:100%;
+}
+
+
+
+
+
+#product-highlight{
+	margin:60px 0; padding:0;
+	background:url("../img/hilite/ribbon.jpg") no-repeat center center;	
+}
+
+#product-highlight ul{
+	width:80%;
+	margin:0 auto; padding:0;
+}
+
+#product-highlight ul li{
+	margin:0 .3%; padding:0 .5% 20px .5%;
+	display:inline-block;
+	width:22.1%;	
+	list-style-type:none;
+	font-size:13px;
+	font-weight:600;
+	line-height:1.25em;
+	text-align:center;
+	color:#FFF;
+	text-shadow:1px 1px 1px #333;
+}
+
+#product-highlight ul li a{
+	display:block;
+	width:50%;
+	margin:15px auto 0 auto; padding:5px;
+	background:#FFF;
+	border-radius:5px;
+	color:#196DC2;
+	text-shadow:none;
+}
+
+
+
+/* -------------------------------------- News Twitter ------------------------------------- */
+
+#news-twitter #news{width:72.5%; padding-right:2.5%;}
+#news-twitter #twttr{width:25%;}
+
+#news-twitter #news h3{
+	padding:5px 0;
+	border-bottom:1px solid #EEE;
+	margin-bottom:10px;
+}
+
+#news-twitter #news h3 a{
+	font-size:18px;
+	font-weight:bold;
+}
+
+#news-twitter #news #main{
+	width:72.5%; padding-right:2.5%;
+}
+
+#news-twitter #news #main img{
+	float:left;
+	margin:0 10px 10px 0;
+	width:auto; height:300px;
+}
+
+
+#news-twitter #news #lists{
+	width:25%;
+}
+
+#news-twitter #news #lists li{
+	background:#EEE;
+	height:52px;
+	padding:10px 5%;
+	line-height:1.25em;
+}
+
+#news-twitter #news #lists li a{
+	color:#196DC2;font-weight:bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+

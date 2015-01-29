@@ -1,0 +1,6 @@
+[04-Dec-2013 16:08:53] PHP Fatal error:  Call to undefined function base_url() in /home/innovate/public_html/temp/email-ci/application/views/welcome_message.php on line 74
+[04-Dec-2013 16:10:59] PHP Fatal error:  Call to undefined function base_url() in /home/innovate/public_html/temp/email-ci/application/views/welcome_message.php on line 74
+[04-Dec-2013 16:11:23] PHP Fatal error:  Call to undefined function base_url() in /home/innovate/public_html/temp/email-ci/application/views/welcome_message.php on line 74
+[04-Dec-2013 16:11:51] PHP Fatal error:  Call to undefined function base_url() in /home/innovate/public_html/temp/email-ci/application/views/welcome_message.php on line 74
+[04-Dec-2013 16:12:03] PHP Fatal error:  Call to undefined function base_url() in /home/innovate/public_html/temp/email-ci/application/views/welcome_message.php on line 74
+[04-Dec-2013 16:12:48] PHP Fatal error:  Call to undefined function base_url() in /home/innovate/public_html/temp/email-ci/application/views/welcome_message.php on line 74
