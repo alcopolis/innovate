@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
 	
+	$('html').addClass('csstransforms3d');
+	
 	// ====================================== Main Menu Setting =======================================//
 		
 		$('ul#main-menu > li').mouseenter(function(){
@@ -64,11 +66,46 @@ $(document).ready(function() {
 		$(function(){
 	    	$("ul#ticker").liScroll({travelocity: 0.1});
         }); 
+		
+		
+		
+		// ====================================== Thumbnail Flip ======================================= //
+		
+		$(function () {
+			
+			w = $('.thumb').width();
+			$('.thumb').height(w);
+			
+			if ($('html').hasClass('csstransforms3d')) {	
+				$('.thumb').removeClass('scroll').addClass('flip');		
+				$('.thumb.flip').hover(
+					function () {
+						$(this).find('.thumb-wrapper').addClass('flipIt');
+					},
+					function () {
+						$(this).find('.thumb-wrapper').removeClass('flipIt');			
+					}
+				);
+			} else {
+				$('.thumb').hover(
+					function () {
+						$(this).find('.thumb-detail').stop().animate({bottom:0}, 500, 'easeOutCubic');
+					},
+					function () {
+						$(this).find('.thumb-detail').stop().animate({bottom: ($(this).height() * -1) }, 500, 'easeOutCubic');			
+					}
+				);
+			}
+		});
+		
 });
 
 
 $(window).resize(function(){
 	centerOrbitNav();
+	
+	w = $('.thumb').width();
+	$('.thumb').height(w);
 })
 
 
