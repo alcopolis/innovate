@@ -225,7 +225,7 @@ header #logo h1 a{display:block; text-indent:-9999px;height:69px}
 
 /* --------------------------------------------Content------------------------------------- */
 
-#content{margin-top:0; background:none}
+#content{margin-top:100px; background:none}
 .home #content{margin-top:100px; min-height:390px; background:#EFEFEF}
 
 #body-theme{
@@ -542,8 +542,9 @@ a.selengkapnya{
 	font-size:16px; font-weight:bold;
 }
 
-program-highlight span.syn{
-	font-size:12px !important; line-height:1.25em;
+#program-highlight span.syn{
+	font-size:12px !important; 
+	line-height:1.25em !important;
 }
 
 
@@ -651,6 +652,7 @@ program-highlight span.syn{
 			display:block;
 			width:100%;
 			height:100%;
+			box-shadow:0 1px 5px rgba(0,0,0,.4);	
 		}
 	
 		.thumb img {
@@ -667,7 +669,7 @@ program-highlight span.syn{
 			height:90%;
 			padding:5%;
 			position:absolute;			
-			background:url('../img/hilite/vertical_cloth.png');	
+			background:url('../img/hilite/thumb-backface.jpg');	
 			text-shadow:1px 0 1px #111;
 			line-height:1em;
 			color:#FFF;
@@ -710,11 +712,11 @@ program-highlight span.syn{
 	}
 	
 		.thumb.flip .thumb-wrapper {
-			-webkit-transition: -webkit-transform 1s;
-			   -moz-transition: -moz-transform 1s;
-			    -ms-transition: -moz-transform 1s;
-			     -o-transition: -moz-transform 1s;
-			        transition: -moz-transform 1s;
+			-webkit-transition: -webkit-transform .5s;
+			   -moz-transition: -moz-transform .5s;
+			    -ms-transition: -moz-transform .5s;
+			     -o-transition: -moz-transform .5s;
+			        transition: -moz-transform .5s;
 			-webkit-transform-style: preserve-3d;
 			   -moz-transform-style: preserve-3d;			
 			    -ms-transform-style: preserve-3d;			

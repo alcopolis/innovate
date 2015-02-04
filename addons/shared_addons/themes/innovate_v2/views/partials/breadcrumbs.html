@@ -1,14 +1,14 @@
-{{ if template:has_breadcrumbs && url:current != url:base}}
-	{{ if theme:options:show_breadcrumbs == 'yes' }}
-		<div id="breadcrumbs" class="clear">
-			<span class="home">{{ url:anchor title="Home"" }}</span>&nbsp;>&nbsp;
-			{{ template:breadcrumbs }}
-				{{ if uri }}
-					{{ url:anchor segments=uri title=name }}&nbsp;>&nbsp;
-				{{ else }}
-					<span class="current">{{ name }}</span>
-				{{ endif }}
-			{{ /template:breadcrumbs }}
-		</div>
-	{{ endif }}
-{{ endif }}
+{{ if template:has_breadcrumbs && url:current != url:base}}
+	{{ if theme:options:show_breadcrumbs == 'yes' }}
+		<div id="breadcrumbs" class="clear">
+			<span class="home">{{ url:anchor title="Home"" }}</span>&nbsp;>&nbsp;
+			{{ template:breadcrumbs }}
+				{{ if uri }}
+					{{ url:anchor segments=uri title=name }}&nbsp;>&nbsp;
+				{{ else }}
+					<span class="current">{{ name }}</span>
+				{{ endif }}
+			{{ /template:breadcrumbs }}
+		</div>
+	{{ endif }}
+{{ endif }}
