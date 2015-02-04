@@ -32,9 +32,15 @@ class Module_Epg extends Module {
 						'name' => 'Shows',
 						'uri' => 'admin/epg/shows',
 					),
-					'upload' => array(
-							'name' => 'Upload',
-							'uri' => 'admin/epg/upload',
+					'highlights' => array(
+							'name' => 'Program Highlights',
+							'uri' => 'admin/epg/highlights',
+					),											'upload' => array(
+					
+							'name' => 'Upload',
+					
+							'uri' => 'admin/epg/upload',
+					
 					),
 				)
 		);
