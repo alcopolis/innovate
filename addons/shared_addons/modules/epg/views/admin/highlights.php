@@ -4,42 +4,35 @@
 	</section>
 	
 	<section class="item">
-		<div class="content">
-			<?php echo $this->load->view('admin/partials/channel_filters') ?>
-			
-			<ul>
-				<li>Add channel</li>
-			</ul>
-
-	        <?php if(!empty($highlights)){ ?>
+		<div class="content">			
+			<?php if(!empty($highlights)){ ?>
 	        	<div id="channel-list">
 	        		<table>
 	        			<thead>
 	        				<th width="30"><?php echo form_checkbox(array('name' => 'action_to_all', 'class' => 'check-all'));?></th>
-							<th style="width:20%;">Name</th>
-							<th class="align-center" style="width:5%;">Number</th>
-							<th class="align-center" style="width:5%;">Status</th>
-							<th class="align-center" style="width:20%;">Category</th>
-							<th class="align-center" style="width:40%;">Description</th>
+							<th style="width:35%;">Title</th>
+							<th class="align-center" style="width:5%;">Channel</th>
+							<th class="align-center" style="width:40%;">Sinopsis</th>
+							<th class="align-center" style="width:5%;">Start</th>							<th class="align-center" style="width:5%;">End</th>
 							<th class="align-center" style="width:10%;">Action</th>
 	        			</thead>
 	        			<tfoot>
 							<tr>
-								<td colspan="6">
-									<div class="inner"><?php echo $pagination['links']; ?></div>
+								<td colspan="7">
+									<div class="inner"><?php //echo $pagination['links']; ?></div>
 								</td>
 							</tr>
 						</tfoot>						
 	        			<tbody>
 	        				<?php foreach($highlights as $hl) { ?>
 	        					<tr>
-	        						<td><?php echo form_checkbox('action_to[]', $ch->id); ?></td>
-	        						<td><a href="admin/epg/channels/edit/<?php echo $ch->id; ?>"><?php echo $ch->name; ?></a></td>
-	        						<td class="align-center"><?php echo $ch->num; ?></td>
-	        						<td class="align-center"><?php echo $ch->is_active == '0' ? 'Disabled' : 'Active'; ?></td>
-	        						<td class="align-center"><?php echo $ch->cat; ?></td>
-	        						<td><?php echo substr($ch->desc,0,150); ?></td>
-	        						<td class="align-center"><a href="admin/epg/channels/edit/<?php echo $ch->id; ?>">Edit</a></td>
+	        						<td><?php echo form_checkbox('action_to[]', $hl->id); ?></td>
+	        						<td><a href="admin/epg/highlights/edit/<?php echo $hl->id; ?>"><?php echo $hl->title; ?></a></td>
+	        						<td class="align-center"><?php echo $hl->name; ?></td>
+	        						<td><?php echo $hl->sinopsis; ?></td>
+	        						<td class="align-center"><?php echo $hl->start_date; ?></td>
+	        						<td class="align-center"><?php echo $hl->end_date; ?></td>
+	        						<td class="align-center"><a href="admin/epg/highlights/edit/<?php echo $hl->id; ?>">Edit</a></td>
 	        					</tr>
 	        				<?php } ?>	
 	        			</tbody>

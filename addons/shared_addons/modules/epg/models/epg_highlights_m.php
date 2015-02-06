@@ -75,4 +75,17 @@ class Epg_Highlights_m extends MY_Model {
 		
 		return $this->get_highlights($fields, $single);
 	}
+	
+	
+	public function get_all_highlights()
+	{
+		$this->db->select('t0.*');
+		$this->db->select('t1.name');
+		$this->db->from('default_inn_epg_highlights t0');
+		$this->db->join('default_inn_epg_ch_detail t1','t1.id = t0.ch_id','left');
+		
+// 		var_dump($this->db->get()->result());
+// 		die();
+		return $this->db->get()->result();
+	}
 }

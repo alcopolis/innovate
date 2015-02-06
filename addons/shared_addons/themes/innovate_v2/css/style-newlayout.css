@@ -642,7 +642,7 @@ a.selengkapnya{
 	.thumb {
 		display:block;
 		width:19%;
-		margin:0 .5%;
+		margin:10px .5%;
 		position:relative;
 		float:left;
 		cursor:pointer;
@@ -668,6 +668,7 @@ a.selengkapnya{
 			width:90%;
 			height:90%;
 			padding:5%;
+			overflow:auto;
 			position:absolute;			
 			background:url('../img/hilite/thumb-backface.jpg');	
 			text-shadow:1px 0 1px #111;
@@ -712,7 +713,7 @@ a.selengkapnya{
 	}
 	
 		.thumb.flip .thumb-wrapper {
-			-webkit-transition: -webkit-transform .5s;
+			-webkit-transition: -webkit-transform 1s;
 			   -moz-transition: -moz-transform .5s;
 			    -ms-transition: -moz-transform .5s;
 			     -o-transition: -moz-transform .5s;
