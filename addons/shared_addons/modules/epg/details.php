@@ -6,36 +6,35 @@ class Module_Epg extends Module {
 	public function info()
 	{
 		return array(
-				'name' => array(
-						'en' => 'EPG'
-				),
-				'description' => array(
-						'en' => 'EPG Tools'
-				),
+				'name' => array(
+						'en' => 'EPG'
+					),
+				'description' => array(
+						'en' => 'EPG Tools'
+					),
 				'frontend' => true,
 				'backend' => true,
 				'skip_xss' => true,
 				'menu' => 'content',
-				'sections' => array(
-					'channels' => array(
-						'name' => 'Channels',
-						'uri' => 'admin/epg/channels',
-						'shortcuts' => array(
-							array(
-								'name' => 'Add Channel',
-								'uri' => 'admin/epg/channels/create',
-								'class' => 'add',
-							),
+				'sections' => array(
+					'channels' => array(
+						'name' => 'Channels',
+						'uri' => 'admin/epg/channels',
+						'shortcuts' => array(
+							array(
+								'name' => 'Add Channel',
+								'uri' => 'admin/epg/channels/create',
+								'class' => 'add',
+							),
+						),
+					),
+					'shows' => array(
+						'name' => 'Shows',
+						'uri' => 'admin/epg/shows',
+					),											'upload' => array(
+							'name' => 'Upload',
+							'uri' => 'admin/epg/upload',
 						),
-					),
-					'shows' => array(
-						'name' => 'Shows',
-						'uri' => 'admin/epg/shows',
-					),
-					'upload' => array(
-							'name' => 'Upload',
-							'uri' => 'admin/epg/upload',
-					),
 				)
 		);
 	}
