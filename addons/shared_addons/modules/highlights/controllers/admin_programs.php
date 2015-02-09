@@ -7,11 +7,11 @@
  * @subpackage 	Subscriber Module
  */
 
-class Admin_Highlights extends Admin_Controller
+class Admin_Programs extends Admin_Controller
 {	protected $page_data;	
 	public function __construct()
 	{
-		parent::__construct();		$this->page_data = new stdClass();				$this->load->model('epg_highlights_m');		$this->load->model('epg_ch_m');
+		parent::__construct();		$this->page_data = new stdClass();				$this->load->model('epg/models/epg_highlights_m');		$this->load->model('epg/models/epg_ch_m');
 		//Library
 		$this->load->library('form_validation');
 		$this->load->library('upload');

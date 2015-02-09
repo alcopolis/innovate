@@ -29,5 +29,5 @@ $route['epg/schedule(/:any)?']		= 'epg/schedule$1';
 
 // back-end
 $route['epg/admin/channels(/:any)?']		= 'admin_channels$1';
-$route['epg/admin/shows(/:any)?']			= 'admin_shows$1';$route['epg/admin/highlights(/:any)?']			= 'admin_highlights$1';
+$route['epg/admin/shows(/:any)?']			= 'admin_shows$1';
 $route['epg/admin/upload(/:any)?']			= 'admin_upload$1';
