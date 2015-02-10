@@ -9,9 +9,9 @@
 		<div class="content">			
 			<?php 
 				if($page->action == 'create'){
-					echo form_open('admin/epg/highlights/create/' . $page->action);
+					echo form_open('admin/highlights/programs/' . $page->action);
 				}else if($page->action == 'edit'){
-					echo form_open('admin/epg/highlights/edit/' . $hl->id);
+					echo form_open('admin/highlights/programs/edit/' . $hl->id);
 				} 
 			?>
 			
@@ -22,7 +22,14 @@
 						<fieldset>
 							<ul>
 								<li class="clearfix">	
-									<img src="" style="width:350px; height:350px; float:left; margin:10px;"/>															
+									<label for="title">Poster <span>*</span></label>
+									<div class="input">
+										<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+										<br/>
+										<div id="msg-ajax"></div>
+										<img src="" style="width:350px; height:350px; float:left; margin:10px 20px 10px 0;"/>	
+									</div>														
+									
 									<label for="title">Title <span>*</span></label>									
 									<div class="input"><?php echo form_input('title', !empty($hl->title) ? $hl->title : '', 'maxlength="100"') ?></div>	
 									<br/>

@@ -7,7 +7,7 @@
  * @package 	PyroCMS
  * @subpackage 	Sample Module
  */
-class Epg_Highlights_m extends MY_Model {
+class Hl_Programs_m extends MY_Model {
 	
 	/** @var array The validation rules */
 	public $rules = array(
@@ -41,7 +41,7 @@ class Epg_Highlights_m extends MY_Model {
 	public function __construct()
 	{		
 		parent::__construct();
-		$this->_table = 'inn_epg_highlights';
+		$this->_table = 'inn_highlights_programs';
 	}
 	
 	
@@ -81,7 +81,7 @@ class Epg_Highlights_m extends MY_Model {
 	{
 		$this->db->select('t0.*');
 		$this->db->select('t1.name');
-		$this->db->from('default_inn_epg_highlights t0');
+		$this->db->from('default_inn_highlights_programs t0');
 		$this->db->join('default_inn_epg_ch_detail t1','t1.id = t0.ch_id','left');
 		
 // 		var_dump($this->db->get()->result());

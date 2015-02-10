@@ -27,12 +27,12 @@
 	        				<?php foreach($highlights as $hl) { ?>
 	        					<tr>
 	        						<td><?php echo form_checkbox('action_to[]', $hl->id); ?></td>
-	        						<td><a href="admin/epg/highlights/edit/<?php echo $hl->id; ?>"><?php echo $hl->title; ?></a></td>
+	        						<td><a href="admin/highlights/programs/edit/<?php echo $hl->id; ?>"><?php echo $hl->title; ?></a></td>
 	        						<td class="align-center"><?php echo $hl->name; ?></td>
 	        						<td><?php echo $hl->sinopsis; ?></td>
 	        						<td class="align-center"><?php echo $hl->start_date; ?></td>
 	        						<td class="align-center"><?php echo $hl->end_date; ?></td>
-	        						<td class="align-center"><a href="admin/epg/highlights/edit/<?php echo $hl->id; ?>">Edit</a></td>
+	        						<td class="align-center"><a href="admin/highlights/programs/edit/<?php echo $hl->id; ?>">Edit</a></td>
 	        					</tr>
 	        				<?php } ?>	
 	        			</tbody>
