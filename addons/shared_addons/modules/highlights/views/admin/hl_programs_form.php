@@ -22,7 +22,7 @@
 						<fieldset>
 							<ul>
 								<li class="clearfix">	
-									<label for="title">Poster <span>*</span></label>
+									<label for="poster">Poster <span>*</span></label>
 									<div class="input">
 										<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
 										<br/>
@@ -71,13 +71,10 @@
 						</fieldset>
 					</div>
 			<?php } ?>	
-			<div class="buttons">
-				<?php 
-						echo form_submit('submit', 'Save'); 
-						echo '<a href="admin/epg/channels" class="button" style="padding:5px 10px 4px 10px;">Cancel</a>';
-				?>
-			</div>
 			
+			<div class="buttons align-right padding-top">
+				<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel') )) ?>
+			</div>			
 			
 			<?php echo form_close() ?>
 		</div>

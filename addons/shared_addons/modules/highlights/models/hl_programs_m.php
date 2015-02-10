@@ -11,15 +11,10 @@ class Hl_Programs_m extends MY_Model {
 	
 	/** @var array The validation rules */
 	public $rules = array(
-			'name' => array(
-					'field' => 'name',
-					'label' => 'Channel Name',
+			'title' => array(
+					'field' => 'title',
+					'label' => 'Program TItle',
 					'rules' => 'trim|required|max_length[100]|xss_clean'
-			),
-			'num' => array(
-					'field' => 'num',
-					'label' => 'Channel Number',
-					'rules' => 'trim|required|max_length[3]|xss_clean'
 			),
 	);
 	
