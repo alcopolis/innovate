@@ -9,9 +9,9 @@
 		<div class="content">			
 			<?php 
 				if($page->action == 'create'){
-					echo form_open('admin/highlights/programs/' . $page->action);
+					echo form_open_multipart('admin/highlights/programs/' . $page->action);
 				}else if($page->action == 'edit'){
-					echo form_open('admin/highlights/programs/edit/' . $hl->id);
+					echo form_open_multipart('admin/highlights/programs/edit/' . $hl->id);
 				} 
 			?>
 			
@@ -24,19 +24,19 @@
 								<li class="clearfix">	
 									<label for="poster">Poster <span>*</span></label>
 									<div class="input">
-										<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>
+										<?php echo form_upload('poster','','id="poster" style="margin:5px 0;"'); ?>
 										<br/>
-										<div id="msg-ajax"></div>
-										<img src="" style="width:350px; height:350px; float:left; margin:10px 20px 10px 0;"/>	
+										
+										<img src="uploads/default/files/<?php echo $poster; ?>" style="width:350px; height:350px; float:left; margin:10px 20px 10px 0;"/>	
 									</div>														
 									
 									<label for="title">Title <span>*</span></label>									
 									<div class="input"><?php echo form_input('title', !empty($hl->title) ? $hl->title : '', 'maxlength="100"') ?></div>	
 									<br/>
 									
-									<label for="channel">Channel <span>*</span></label>
+									<label for="ch_id">Channel <span>*</span></label>
 									<div class="input small-side">
-										<?php echo form_dropdown('channel', $channels, $hl->ch_id) ?>
+										<?php echo form_dropdown('ch_id', $channels, $hl->ch_id) ?>
 									</div>
 									
 									<br/>

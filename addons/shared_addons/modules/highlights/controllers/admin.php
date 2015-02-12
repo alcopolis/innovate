@@ -16,6 +16,6 @@ class Admin extends Admin_Controller
 		// Load all the required classes
 	}
 	public function index()
-	{				echo 'hihglights index cntroller';
+	{				redirect('admin/highlights/programs');
 	}
 }
