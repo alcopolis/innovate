@@ -34,6 +34,10 @@
 									<div class="input"><?php echo form_input('title', !empty($hl->title) ? $hl->title : '', 'maxlength="100"') ?></div>	
 									<br/>
 									
+									<label for="show_time">Time &nbsp;<span style="font-size:11px; color:#999;">(cth: 1 Januari 2015 Pkl. 14:30)</span></label>									
+									<div class="input"><?php echo form_input('show_time', !empty($hl->show_time) ? $hl->show_time : '', 'maxlength="100"') ?></div>	
+									<br/>
+									
 									<label for="ch_id">Channel <span>*</span></label>
 									<div class="input small-side">
 										<?php echo form_dropdown('ch_id', $channels, $hl->ch_id) ?>

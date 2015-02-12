@@ -60,11 +60,6 @@ class Plugin_Highlights extends Plugin
 		$hilite_return = '';
 		$featured = $this->hl_programs_m->compile_highlights(array('status'=>'active'), $this->attribute('cat'));
 		
-		foreach($featured as $row){
-			$temp = date('d M Y \P\k\l\. h:i', strtotime($row->show_time));
-			$row->show_time = $temp;
-		}
-		
 		return $featured;
 	}
 }
