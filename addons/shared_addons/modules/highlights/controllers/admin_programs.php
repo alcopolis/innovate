@@ -29,12 +29,13 @@ class Admin_Programs extends Admin_Controller
 		//->append_css('module::style.css')		->set($var)
 		->build($view);
 	}		public function index(){		$result = $this->hl_programs_m->get_all_highlights();		$this->render(array('highlights'=>$result));	}		
-	public function create(){		if($this->form_validation->run()){			if($this->input->post('poster') != NULL){				$fileupload = $this->upload($id, $this->input->post('title'));			}
-				
-			$db_fields = array('ch_id', 'title', 'show_time', 'sinopsis', 'start_date', 'end_date');
-			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());
-				
-			$data['poster'] = $fileupload['data']['id'];
+	public function create(){		if($this->form_validation->run()){			$db_fields = array('ch_id', 'title', 'show_time', 'sinopsis', 'start_date', 'end_date');
+			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());						if($_FILES['poster']['name'] != ''){				$fileupload = $this->upload($id, $this->input->post('title'));				$data['poster'] = isset($fileupload) ? $fileupload['data']['id'] : 'default';			}else{				$this->db->where('name', 'default-poster.jpg');
+				$this->db->from('files');
+					
+				$r = $this->db->get()->row();
+				$data['poster'] = $r->id;			}
+								
 			$data['modify'] = date('U');
 			$data['slug'] = str_replace(' ', '-', trim(strtolower($data['title'])));
 				
@@ -55,20 +56,20 @@ class Admin_Programs extends Admin_Controller
 			$channels[$ch->id] = $ch->name;
 		}
 		
-		$poster = Files::get_file($result->poster);
+		$poster = $this->poster($result->poster);
 			
-		$this->render(array('hl'=>$result,'poster' => $poster['data']->filename, 'channels'=>$channels ,'page'=>$this->page_data), 'admin/hl_programs_form');	}	
-	public function edit($id = NULL){				if($this->form_validation->run()){						if($this->input->post('poster') != NULL){				$fileupload = $this->upload($id, $this->input->post('title'));			}						$db_fields = array('ch_id', 'title', 'show_time', 'sinopsis', 'start_date', 'end_date');
-			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());						$data['poster'] = $fileupload['data']['id'];			$data['modify'] = date('U');			$data['slug'] = str_replace(' ', '-', trim(strtolower($data['title'])));						if($this->hl_programs_m->update($id, $data)){				if($this->input->post('btnAction') == 'save_exit'){
+		$this->render(array('hl'=>$result,'poster' => $poster, 'channels'=>$channels ,'page'=>$this->page_data), 'admin/hl_programs_form');	}	
+	public function edit($id = NULL){				if($this->form_validation->run()){						$db_fields = array('ch_id', 'title', 'show_time', 'sinopsis', 'start_date', 'end_date');
+			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());						if($_FILES['poster']['name'] != ''){				$fileupload = $this->upload($id, $this->input->post('title'));				//print_r($fileupload); die();				$data['poster'] = $fileupload['data']['id'];				}						$data['modify'] = date('U');			$data['slug'] = str_replace(' ', '-', trim(strtolower($data['title'])));						if($this->hl_programs_m->update($id, $data)){				if($this->input->post('btnAction') == 'save_exit'){
 					redirect('admin/highlights/programs');
 				}			}		}				$this->page_data->title = 'Edit Highlights';
 		$this->page_data->action = 'edit';
 		$this->page_data->editor_type = 'markdown';				
-		$result = $this->hl_programs_m->get_highlights_by(array('id'=>$id));		$all_channel = $this->epg_ch_m->get_all_channel(array('is_active'=>1));				$channels = array();		foreach($all_channel as $ch){			$channels[$ch->id] = $ch->name;		}				$poster = Files::get_file($result[0]->poster);					$this->render(array('hl'=>$result[0],'poster' => $poster['data']->filename, 'channels'=>$channels ,'page'=>$this->page_data), 'admin/hl_programs_form');
+		$result = $this->hl_programs_m->get_highlights_by(array('id'=>$id));		$all_channel = $this->epg_ch_m->get_all_channel(array('is_active'=>1));				$channels = array();		foreach($all_channel as $ch){			$channels[$ch->id] = $ch->name;		}						$poster = $this->poster($result[0]->poster);				$this->render(array('hl'=>$result[0],'poster' => $poster, 'channels'=>$channels ,'page'=>$this->page_data), 'admin/hl_programs_form');
 	}			public function delete($id = NULL){
 		echo 'delete ' . $id;
-	}			// -------------------------------------------------------------------------------------------------------------------- //			private function upload($id = NULL, $name = 'Highlights'){		$folder = $this->folder_search('highlights', 'id');						if(!$folder['status']){			//create highlights folder			$create = Files::create_folder(1, 'highlights');		}				$imgid = $this->hl_programs_m->get_highlights_by(array('id'=>$id), 'poster', true);				if($imgid->poster != NULL || $imgid->poster != ''){			//Replace
-			$fileobj = Files::get_file($imgid->poster);			unlink('uploads/default/files/' . $fileobj['data']->filename);						$file = Files::upload($folder['data']->id, $name, 'poster', false, false, false, false, NULL, $fileobj['data']);		}else{			//Upload			$file = Files::upload($folder['data']->id, $name, 'poster');		}				return $file;	}	
+	}			// -------------------------------------------------------------------------------------------------------------------- //			private function upload($id = NULL, $name){		$folder = $this->folder_search('highlights', 'id');						if(!$folder['status']){			//create highlights folder			$create = Files::create_folder(1, 'highlights');		}				$imgid = $this->hl_programs_m->get_highlights_by(array('id'=>$id), 'poster', true);				//Get file data
+		$fileobj = Files::get_file($imgid->poster);				//Check if it is the default-poster		if($fileobj['data']->name == 'default-poster.jpg'){			//Upload			$file = Files::upload($folder['data']->id, $name, 'poster');		}else{			//replace			unlink('uploads/default/files/' . $fileobj['data']->filename);			$file = Files::upload($folder['data']->id, $name, 'poster', false, false, false, false, NULL, $fileobj['data']);		}		return $file;	}	
 	private function folder_search($terms = '', $returns=''){
 		$result  = array();				if($terms != ''){
 			$this->db->select($returns);
@@ -77,5 +78,5 @@ class Admin_Programs extends Admin_Controller
 			$result['data'] = $this->db->get('default_file_folders')->row();
 			$result['status'] = count((array)$result['data']) > 0 ? true : false;	
 			return $result;		}
-	}		private function file_search($terms = '', $returns=''){			}
+	}		private function poster($id = NULL){		$data = isset($id) ? Files::get_file($id) : NULL;		if(isset($data)){			return $data['data']->filename; 		}	}
 }

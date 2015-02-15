@@ -110,6 +110,8 @@ class Hl_Programs_m extends MY_Model {
 			}
 			
 			return $this->db->get()->result();
-		}		
+		}	
+
+		
 	}
 }
