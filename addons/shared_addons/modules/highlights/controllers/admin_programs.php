@@ -66,8 +66,7 @@ class Admin_Programs extends Admin_Controller
 		$this->page_data->action = 'edit';
 		$this->page_data->editor_type = 'markdown';				
 		$result = $this->hl_programs_m->get_highlights_by(array('id'=>$id));		$all_channel = $this->epg_ch_m->get_all_channel(array('is_active'=>1));				$channels = array();		foreach($all_channel as $ch){			$channels[$ch->id] = $ch->name;		}						$poster = $this->poster($result[0]->poster);				$this->render(array('hl'=>$result[0],'poster' => $poster, 'channels'=>$channels ,'page'=>$this->page_data), 'admin/hl_programs_form');
-	}			public function delete($id = NULL){
-		echo 'delete ' . $id;
+	}			public function delete($id = NULL){		if($this->hl_programs_m->hl_delete($id)){			redirect('admin/highlights/programs');		}
 	}			// -------------------------------------------------------------------------------------------------------------------- //			private function upload($id = NULL, $name){		$folder = $this->folder_search('highlights', 'id');						if(!$folder['status']){			//create highlights folder			$create = Files::create_folder(1, 'highlights');		}				$imgid = $this->hl_programs_m->get_highlights_by(array('id'=>$id), 'poster', true);				//Get file data
 		$fileobj = Files::get_file($imgid->poster);				//Check if it is the default-poster		if($fileobj['data']->name == 'default-poster.jpg'){			//Upload			$file = Files::upload($folder['data']->id, $name, 'poster');		}else{			//replace			unlink('uploads/default/files/' . $fileobj['data']->filename);			$file = Files::upload($folder['data']->id, $name, 'poster', false, false, false, false, NULL, $fileobj['data']);		}		return $file;	}	
 	private function folder_search($terms = '', $returns=''){

@@ -111,7 +111,23 @@ class Hl_Programs_m extends MY_Model {
 			
 			return $this->db->get()->result();
 		}	
-
+	}
+	
+	public function hl_delete($id = NULL){		
+		$return = array();
 		
+		if(isset($id)){
+			$files_id = $this->get_highlights_by(array('id'=>$id), 'poster', TRUE);
+			
+			//check if the file not default-poster.jpg
+			$file = Files::get_file($files_id->poster);
+			if($file['data']->name != 'default-poster.jpg'){
+				Files::delete_file($files_id->poster);
+			}
+			
+			return $this->db->delete($this->_table, array('id'=>$id));
+		}else{
+			return FALSE;
+		}
 	}
 }
