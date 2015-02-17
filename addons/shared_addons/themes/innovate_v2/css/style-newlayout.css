@@ -530,7 +530,16 @@ a.selengkapnya{
 
 #program-highlight{
 	width:90%;
-	margin:0 auto; padding:0;	
+	margin:20px auto; padding:0;	
+}
+
+#program-highlight .highlights-category{
+	background:#CCC;
+	position:relative;
+}
+
+#program-highlight .highlights-content{
+
 }
 
 #program-highlight span.info{
@@ -539,7 +548,16 @@ a.selengkapnya{
 }
 
 #program-highlight span.info.title{
-	font-size:16px; font-weight:bold;
+	font-size:16px; font-weight:bold; line-height:1.25em;
+}
+
+#program-highlight span.info.date{
+	background:#444;
+	color:#FFF;
+	padding:3px 5px;
+	margin-bottom:10px;
+	border-radius:3px;
+	font-size:12px;
 }
 
 #program-highlight span.syn{

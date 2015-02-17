@@ -28,9 +28,9 @@
 	        						<td><?php echo form_checkbox('action_to[]', $hl->id); ?></td>
 	        						<td><a href="admin/highlights/programs/edit/<?php echo $hl->id; ?>"><?php echo $hl->title; ?></a></td>
 	        						<td class="align-center"><?php echo $hl->name; ?></td>
-	        						<td><?php echo $hl->sinopsis; ?></td>	        						<td class="align-center"><?php echo $hl->status; ?></td>
-	        						<td class="align-center"><?php echo $hl->start_date; ?></td>
-	        						<td class="align-center"><?php echo $hl->end_date; ?></td>
+	        						<td><?php echo substr($hl->sinopsis, 0, 100) . '..'; ?></td>	        						<td class="align-center"><?php echo $hl->status; ?></td>
+	        						<td class="align-center"><?php echo date('d-m-y', strtotime($hl->start_date)); ?></td>
+	        						<td class="align-center"><?php echo date('d-m-y', strtotime($hl->end_date)); ?></td>
 	        						<td class="align-center"><a href="admin/highlights/programs/edit/<?php echo $hl->id; ?>">Edit</a> | <a href="admin/highlights/programs/delete/<?php echo $hl->id; ?>">Delete</a></td>
 	        					</tr>
 	        				<?php } ?>	

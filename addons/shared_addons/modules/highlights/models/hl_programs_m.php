@@ -98,7 +98,7 @@ class Hl_Programs_m extends MY_Model {
 		
 		if(isset($where)){			
 			$this->db->select('t0.*');
-			$this->db->select('t1.name, t1.logo');
+			$this->db->select('t1.name, t1.logo, t1.num');
 			$this->db->select('t2.path, t2.description');
 			$this->db->from('inn_highlights_programs t0');
 			$this->db->join('inn_epg_ch_detail t1', 't1.id = t0.ch_id','left');
@@ -108,6 +108,8 @@ class Hl_Programs_m extends MY_Model {
 			if(isset($cat)){
 				$this->db->where('t1.cat', $catID);
 			}
+			
+			$this->db->order_by('start_date', 'random')->limit(10);
 			
 			return $this->db->get()->result();
 		}	

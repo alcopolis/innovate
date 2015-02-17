@@ -28,7 +28,12 @@ class Admin_Programs extends Admin_Controller
 		//->append_js('module::main.js')
 		//->append_css('module::style.css')		->set($var)
 		->build($view);
-	}		public function index(){		$result = $this->hl_programs_m->get_all_highlights();		$this->render(array('highlights'=>$result));	}		
+	}		public function index(){		$now = date('U');		$result = $this->hl_programs_m->get_all_highlights();				foreach($result as $row){			//var_dump($row); die();						$start = strtotime($row->start_date);
+			$end = strtotime($row->end_date);						if($now > $start && $now < $end){
+				$this->hl_programs_m->update($row->id, array('status'=>'active'));
+			}elseif($now > $end){
+				$this->hl_programs_m->update($row->id, array('status'=>'inactive'));
+			}		}				$this->render(array('highlights'=>$result));	}		
 	public function create(){		if($this->form_validation->run()){			$db_fields = array('ch_id', 'title', 'show_time', 'sinopsis', 'start_date', 'end_date');
 			$data = $this->alcopolis->array_from_post($db_fields, $this->input->post());						if($_FILES['poster']['name'] != ''){				$fileupload = $this->upload($id, $this->input->post('title'));				$data['poster'] = isset($fileupload) ? $fileupload['data']['id'] : 'default';			}else{				$this->db->where('name', 'default-poster.jpg');
 				$this->db->from('files');

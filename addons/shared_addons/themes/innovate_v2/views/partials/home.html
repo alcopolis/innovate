@@ -30,23 +30,24 @@
 </ul>
 
 <div id="body-wrapper">
-	<section id="program-highlight" class="home-section clearfix">
-		<h3>Sports</h3>
-		{{ highlights:featured }}
-			<div class="thumb scroll">
-				<div class="thumb-wrapper">
-					<img src="{{ path }}">
-					<div class="thumb-detail">
-						<span class="info title">{{ title }}</span>
-						<span class="info date">{{ name }} {{ num }} - {{ show_time }}</span>
-						<span class="syn">{{ sinopsis }}</span>
+	<section id="program-highlight" class="home-section">		
+		<div class="highlights-content clearfix">
+			{{ highlights:featured }}
+				<div class="thumb scroll">
+					<div class="thumb-wrapper">
+						<img src="{{ path }}">
+						<div class="thumb-detail" title="{{ sinopsis }}">
+							<span class="info title">{{ title }}</span>
+							<span class="info channel">{{ name }} | Ch.{{ num }}</span>
+							<span class="info date">{{ show_time }}</span>
+							<span class="syn">{{ sinopsis_short }}</span>
+						</div>
 					</div>
 				</div>
-			</div>
-		{{ /highlights:featured }}
+			{{ /highlights:featured }}
+		</div>
 	</section>
-	
-	
+		
 	<section id="product-highlight" class="home-section">
 		<div class="section-wrapper clearfix">
 			<div id="quadlogo" class="left"><img src="{{theme:image_path}}hilite/quadplay.png"></div>

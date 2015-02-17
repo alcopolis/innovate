@@ -52,13 +52,23 @@ class Plugin_Highlights extends Plugin
 			
 			if($now > $start && $now < $end){
 				$this->hl_programs_m->update($row->id, array('status'=>'active'));
-			}else{
+			}elseif($now > $end){
 				$this->hl_programs_m->update($row->id, array('status'=>'inactive'));
 			}
 		}
 		
-		$hilite_return = '';
 		$featured = $this->hl_programs_m->compile_highlights(array('status'=>'active'), $this->attribute('cat'));
+		
+		
+		//Limit panjang text sinopsis
+		$syn_limit = 280;
+		foreach($featured as $f){
+			if(strlen($f->sinopsis) > $syn_limit){
+				$f->sinopsis_short = substr($f->sinopsis, 0, $syn_limit) . '..';
+			}else{
+				$f->sinopsis_short = substr($f->sinopsis, 0, $syn_limit);
+			}
+		}
 		
 		return $featured;
 	}
