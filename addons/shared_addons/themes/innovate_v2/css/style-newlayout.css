@@ -1,7 +1,6 @@
 @import 'theme.css';
 @import 'reset.css';
 @import 'typo.css';
-@import 'scrollbar.css';
 
 /* General */
 
@@ -554,10 +553,10 @@ a.selengkapnya{
 #program-highlight span.info.date{
 	background:#444;
 	color:#FFF;
-	padding:3px 5px;
+	padding:.75em;
 	margin-bottom:10px;
 	border-radius:3px;
-	font-size:12px;
+	font-size:16px;
 }
 
 #program-highlight span.syn{
@@ -688,7 +687,8 @@ a.selengkapnya{
 			padding:5%;
 			overflow:auto;
 			position:absolute;			
-			background:url('../img/hilite/thumb-backface.jpg');	
+			background:url('../img/hilite/thumb-backface.jpg') no-repeat center center;	
+			background-size:100% 100%;
 			text-shadow:1px 0 1px #111;
 			line-height:1em;
 			color:#FFF;
@@ -771,4 +771,40 @@ a.selengkapnya{
 
 
 
+		
+@media screen and (max-width: 1024px) {
+/* applies only if the screen is narrower than 480px */
+  
+	.orbit-wrapper{display:none;}
+		
+	#product-highlight #quadlogo{display:none;}
+	#product-highlight ul{width:100%; float:none;}	
+	#product-highlight ul li{width:23%; margin:0 .5%; padding:0;}
+		
+	.thumb {
+		display:block;
+		width:49%;
+		margin:10px .5%;
+		position:relative;
+		float:left;
+		cursor:pointer;
+	}
+		
+	#news-twitter {
+	    display:none;
+	}
+	
+	#news{
+		width:100% !important;
+		float:none !important;
+		padding:0;
+		font-size:2em;
+	}
+	
+	#news h3 a{font-size: 2em !important;}
+	
+	#twttr{
+		display:none;
+	}
+}
 
