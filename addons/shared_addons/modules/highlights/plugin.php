@@ -38,10 +38,16 @@ class Plugin_Highlights extends Plugin
 	{
 		$this->load->model('hl_programs_m');
 		$this->load->library('files/files');
+		$this->load->library('mobile_detect');
 	}
 	
 	
 	function featured(){
+		$detect = $this->mobile_detect;
+		$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+		//var_dump($deviceType); die();
+		
+		
 		//Cek inactive hl and activate if the date is due
 		$now = date('U');
 		
