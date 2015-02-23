@@ -1,7 +1,6 @@
 @import 'theme.css';
 @import 'reset.css';
 @import 'typo.css';
-@import 'scrollbar.css';
 
 /* General */
 
@@ -70,7 +69,7 @@ header{
 	background-color:rgba(255,255,255,0.95);
 /* 	box-shadow:1px 0 1px #999; */
 	position:fixed; top:0; left:0;
-	height:80px;
+	height:100px;
 	z-index:99999;
 	
 	-moz-transition: box-shadow .75s ease-out, background-color 1s ease-out;
@@ -91,8 +90,8 @@ header #logo h1 {
 header #logo h1 a{display:block; text-indent:-9999px;height:69px}
 
 /* Nav */
-
-#navigation{width:80%; margin-top:31px; float:right}
+#register{float:right; margin:10px 2.5%;}
+#navigation{width:80%; margin-top:0px; float:right;}
 #navigation #menu{margin:0; padding:0}
 
 #navigation #menu ul#main-menu{
@@ -124,7 +123,7 @@ header #logo h1 a{display:block; text-indent:-9999px;height:69px}
 	font-size:15px;
     float: none;
     line-height: 19px;
-    padding: 15px 10px;
+    padding: 10px 10px;
     text-decoration: none;
 /*  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4); */
 }
@@ -225,8 +224,8 @@ header #logo h1 a{display:block; text-indent:-9999px;height:69px}
 
 /* --------------------------------------------Content------------------------------------- */
 
-#content{margin-top:0; background:none}
-.home #content{margin-top:80px; min-height:390px; background:#EFEFEF}
+#content{margin-top:100px; background:none}
+.home #content{margin-top:100px; min-height:390px; background:#EFEFEF}
 
 #body-theme{
 	width:100%; 
@@ -243,11 +242,11 @@ header #logo h1 a{display:block; text-indent:-9999px;height:69px}
 }
 
 .home #body-wrapper{
-	width:90%;
+	width:100%;
 	position:relative; 
 	margin:0 auto 0 auto; 
 	z-index:9000;
-	padding-top:0;
+	padding-top:40px;
 }
 
 .mod-epg{
@@ -487,4 +486,360 @@ a#pinterest:hover{background-image:url(../img/pinterest-color.png)}
 /* footer #social{margin-right:20px; text-align:right;} */
 /* footer #copy{margin-right:20px; font-size:12px; color:#CCC; font-family: "Arial", Helvetica, Tahoma, sans-serif; font-size:10px} */
 
+
+
+
+
+/* -------------------------------------- News ticker ------------------------------------- */
+
+ul#ticker{
+	width:100%;
+	border:none;	
+}
+
+ul#ticker li{font-size:12px !important;}
+ul#ticker li:after{margin:0 5px; content:" ~ ";}
+ul#ticker li:last-child:after{margin:0 5px; content:"";}
+
+
+
+
+/* -------------------------------------- Home Section ------------------------------------- */
+
+section.home-section{
+	width:100%;
+	margin:20px auto 40px auto;
+}
+
+.section-wrapper{
+	width:90%;	margin:0 auto
+}
+
+a.selengkapnya{
+	margin:15px 0; padding:5px 10px;
+	background:#196DC2;
+	border-radius:5px;
+	color:#FFF;
+	font-size:12px;
+}
+
+.home-section a:hover{color:#3DC2E3 !important;}
+
+/* -------------------------------------- Hilite ------------------------------------- */
+
+#program-highlight{
+	width:90%;
+	margin:20px auto; padding:0;	
+}
+
+#program-highlight .highlights-category{
+	background:#CCC;
+	position:relative;
+}
+
+#program-highlight .highlights-content{
+
+}
+
+#program-highlight span.info{
+	display:block;
+	margin-bottom:10px;
+}
+
+#program-highlight span.info.title{
+	font-size:16px; font-weight:bold; line-height:1.25em;
+}
+
+#program-highlight span.info.date{
+	background:#444;
+	color:#FFF;
+	padding:.75em;
+	margin-bottom:10px;
+	border-radius:3px;
+	font-size:16px;
+}
+
+#program-highlight span.syn{
+	font-size:12px !important; 
+	line-height:1.25em !important;
+}
+
+
+#product-highlight{
+	margin:60px 0; padding:0;
+	background:url("../img/hilite/ribbon.jpg") no-repeat center center;	
+}
+
+#quadlogo{
+	width:20%; height:99%;
+	margin:.5% 0;
+}
+
+#product-highlight ul{
+	width:80%;
+	margin:0 auto; padding:0;
+}
+
+#product-highlight ul li{
+	margin:0 .3%; padding:0 .5% 20px .5%;
+	display:inline-block;
+	width:22.1%;	
+	list-style-type:none;
+	font-size:13px;
+	font-weight:600;
+	line-height:1.25em;
+	text-align:center;
+	color:#FFF;
+	text-shadow:1px 1px 1px #333;
+}
+
+#product-highlight ul li a{
+	display:block;
+	width:50%;
+	margin:15px auto 0 auto; padding:5px;
+	background:#FFF;
+	border-radius:5px;
+	color:#196DC2;
+	font-size:12px;
+	font-weight:normal;
+	text-shadow:none;
+}
+
+
+
+/* -------------------------------------- News Twitter ------------------------------------- */
+
+#news-twitter #news{width:72.5%; padding-right:2.5%;}
+#news-twitter #twttr{width:25%;}
+
+#news-twitter #news h3{
+	padding:5px 0;
+	border-bottom:1px solid #EEE;
+	margin-bottom:10px;
+}
+
+#news-twitter #news h3 a{
+	font-size:18px;
+	font-weight:bold;
+	color:#1C71C5;
+}
+
+#news-twitter #news #main{
+	width:72.5%; padding-right:2.5%;
+}
+
+#news-twitter #news #main img{
+	float:left;
+	margin:0 10px 10px 0;
+	width:auto; height:300px;
+}
+
+
+#news-twitter #news #lists{
+	width:25%;
+}
+
+#news-twitter #news #lists li{
+	background:#EEE;
+	height:52px;
+	padding:10px 5%;
+	line-height:1.25em;
+}
+
+#news-twitter #news #lists li a{
+	color:#196DC2;font-weight:bold;
+}
+
+
+
+
+/* -------------------------------------- Thumbnail Flip ------------------------------------- */
+
+
+	.thumb {
+		display:block;
+		width:19%;
+		margin:10px .5%;
+		position:relative;
+		float:left;
+		cursor:pointer;
+	}
+	
+		.thumb-wrapper {
+			display:block;
+			width:100%;
+			height:100%;
+			box-shadow:0 1px 5px rgba(0,0,0,.4);	
+		}
+	
+		.thumb img {
+			width:100%;
+			height:100%;
+			position:absolute;
+			display:block;			
+					
+		}
+		
+		.thumb .thumb-detail {
+			display:block;
+			width:90%;
+			height:90%;
+			padding:5%;
+			overflow:auto;
+			position:absolute;			
+			background:url('../img/hilite/thumb-backface.jpg') no-repeat center center;	
+			background-size:100% 100%;
+			text-shadow:1px 0 1px #111;
+			line-height:1em;
+			color:#FFF;
+		}
+		
+		.thumb .thumb-detail a {
+			display:block;
+			width:100%;
+			height:100%;
+			text-transform:uppercase;
+			font-weight:bold;	
+			color:#333;
+			text-decoration:none;		
+			font-family: 'Open Sans', sans-serif;
+			letter-spacing:-1px;
+			padding:10px;	
+		}		
+	
+	/*
+	* Without CSS3
+	*/
+	.thumb.scroll {
+		overflow: hidden;
+	}	
+	
+		.thumb.scroll .thumb-detail {
+			bottom:-280px;
+		}
+	
+	
+	/*
+	* CSS3 Flip
+	*/	
+	.thumb.flip {
+		-webkit-perspective:800px;		
+		   -moz-perspective:800px;
+		    -ms-perspective:800px;		   		
+		     -o-perspective:800px;
+  		        perspective:800px;
+	}
+	
+		.thumb.flip .thumb-wrapper {
+			-webkit-transition: -webkit-transform 1s;
+			   -moz-transition: -moz-transform .5s;
+			    -ms-transition: -moz-transform .5s;
+			     -o-transition: -moz-transform .5s;
+			        transition: -moz-transform .5s;
+			-webkit-transform-style: preserve-3d;
+			   -moz-transform-style: preserve-3d;			
+			    -ms-transform-style: preserve-3d;			
+			     -o-transform-style: preserve-3d;			
+					  transform-style: preserve-3d;			
+		}
+		
+		.thumb.flip .thumb-detail {
+			-webkit-transform: rotateY(-180deg);
+			   -moz-transform: rotateY(-180deg);
+			    -ms-transform: rotateY(-180deg);
+			     -o-transform: rotateY(-180deg);
+			        transform: rotateY(-180deg);			   			
+		}
+		
+		.thumb.flip img,
+		.thumb.flip .thumb-detail {
+			-webkit-backface-visibility: hidden;
+			   -moz-backface-visibility: hidden;
+			    -ms-backface-visibility: hidden;
+			     -o-backface-visibility: hidden;
+			        backface-visibility: hidden;
+		}
+		
+		.thumb.flip .flipIt {
+			-webkit-transform: rotateY(-180deg);
+			   -moz-transform: rotateY(-180deg);			
+			    -ms-transform: rotateY(-180deg);			
+			     -o-transform: rotateY(-180deg);			
+			        transform: rotateY(-180deg);			
+		}
+
+
+
+
+		
+@media screen and (max-width: 1024px) {
+/* applies only if the screen is narrower than 480px */
+	
+	header{height:50px;}
+	
+	header #logo {
+	    float: left;
+	    height: 40px;
+	    margin: 5px 0 5px 5px;
+	    width: 40px;
+	}
+
+	header #logo h1 {
+	    background-image: url("../img/themes/innovate-mobile.png");
+		background-size: 100% 100%;
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    height: 40px;
+	    width: 40px;
+	}
+	
+	#register{margin:10px .5%; float:right; text-align:right}
+	#register a{height:0;}
+	#register a img{width:45%;}
+		
+  	#navigation{display:none;}
+	
+	
+	
+	.home #content {
+	    background: none repeat scroll 0 0 #efefef;
+	    margin-top: 50px;
+	}
+	
+	.orbit-wrapper{display:none;}
+	
+	.tickercontainer {
+	    
+	}
+		
+	#product-highlight #quadlogo{display:none;}
+	#product-highlight ul{width:100%; float:none;}	
+	#product-highlight ul li{width:23%; margin:0 .5%; padding:0;}
+		
+	.thumb {
+		display:block;
+		width:49%;
+		margin:10px .5%;
+		position:relative;
+		float:left;
+		cursor:pointer;
+	}
+		
+	#news-twitter {
+	    display:none;
+	}
+	
+	#news{
+		width:100% !important;
+		float:none !important;
+		padding:0;
+		font-size:2em;
+	}
+	
+	#news h3 a{font-size: 2em !important;}
+	
+	#twttr{
+		display:none;
+	}
+}
 

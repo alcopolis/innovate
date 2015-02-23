@@ -34,19 +34,11 @@ class Plugin_Alcopolis extends Plugin
 //				),
 			),
 				
-			'connection' => array(
+			'device' => array(
 					'description' => array(// a single sentence to explain the purpose of this method
-							'en' => ''
+							'en' => 'Identify device type'
 					),
 					'single' => true,// will it work as a single tag?
-					'attributes' => array(
-						'uri' => array(
-									'type' => 'text',
-									'flags' => '',
-									'default' => '',
-									'required' => false,
-								),
-							),
 			),
 		);
 	
@@ -64,7 +56,7 @@ class Plugin_Alcopolis extends Plugin
 	
 	public function __construct()
 	{
-		$this->load->model('products/products_m');
+		//$this->load->model('products/products_m');
 	}
 	
 	function site_status()
@@ -80,9 +72,14 @@ class Plugin_Alcopolis extends Plugin
 		}
 	}
 	
-	function connection()
+	
+	function device()
 	{
+		$this->load->library('mobile_detect');
+		$detect = $this->mobile_detect;
+		$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
 		
+		return $deviceType;
 	}
 	
 }

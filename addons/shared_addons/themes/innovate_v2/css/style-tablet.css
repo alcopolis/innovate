@@ -774,8 +774,43 @@ a.selengkapnya{
 		
 @media screen and (max-width: 1024px) {
 /* applies only if the screen is narrower than 480px */
-  
+	
+	header{height:50px;}
+	
+	header #logo {
+	    float: left;
+	    height: 40px;
+	    margin: 5px 0 5px 5px;
+	    width: 40px;
+	}
+
+	header #logo h1 {
+	    background-image: url("../img/themes/innovate-mobile.png");
+		background-size: 100% 100%;
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    height: 40px;
+	    width: 40px;
+	}
+	
+	#register{margin:10px .5%; float:right; text-align:right}
+	#register a{height:0;}
+	#register a img{width:45%;}
+		
+  	#navigation{display:none;}
+	
+	
+	
+	.home #content {
+	    background: none repeat scroll 0 0 #efefef;
+	    margin-top: 50px;
+	}
+	
 	.orbit-wrapper{display:none;}
+	
+	.tickercontainer {
+	    
+	}
 		
 	#product-highlight #quadlogo{display:none;}
 	#product-highlight ul{width:100%; float:none;}	

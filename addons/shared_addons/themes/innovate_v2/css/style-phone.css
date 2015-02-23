@@ -1,0 +1,165 @@
+@import 'theme.css';
+@import 'reset.css';
+@import 'typo.css';
+
+/* General */
+
+.left{float:left !important;}
+.right{float:right !important;}
+.clear{clear:both;}
+.clearfix:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;}
+.list-inline li{display:inline; margin:0 10px}
+.hide{display:none}
+body{background:#FFF}
+.wrapper{width:100%; margin:0 auto;}
+footer{margin-top:40px;}
+
+
+		
+@media screen and (max-width: 480px) {
+/* applies only if the screen is narrower than 480px */
+	
+	header{
+		background-color:rgba(255,255,255,0.95);
+		position:fixed; top:0; left:0;
+		height:50px;
+		z-index:99999;
+		
+		-moz-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+	    -webkit-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+	    -ms-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+	    -o-transition: box-shadow .75s ease-out, background-color 1s ease-out;
+		transition: box-shadow .75s ease-out, background-color 1s ease-out;
+	}
+	
+	header #logo {
+	    float: left;
+	    height: 40px;
+	    margin: 5px 0 5px 5px;
+	    width: 40px;
+	}
+
+	header #logo h1 {
+	    background-image: url("../img/themes/innovate-mobile.png");
+		background-size: 100% 100%;
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    height: 40px;
+	    width: 40px;
+	}
+	
+	header #logo h1 a{display:block; text-indent:-9999px;height:40px}
+	
+	
+	
+	#register{margin:10px .5%; float:right; text-align:right}
+	#register a{height:0;}
+	#register a img{width:45%;}
+		
+  	#navigation{display:none;}
+	
+	
+	
+	.home #content {
+	    background: none repeat scroll 0 0 #efefef;
+	    margin-top: 50px;
+	}
+	
+	.orbit-wrapper{display:none;}
+	
+	.tickercontainer {
+	    
+	}
+		
+	#product-highlight {background: url("../img/hilite/ribbon.jpg") no-repeat center center #999; background-size:auto 100%; padding:0;}
+	#quadlogo{text-align:center; width:40%; position:relative; top:-20px; margin:0 auto;}
+	#quadlogo img{width:100%; height:auto;}
+	#product-highlight ul{width:100%; float:none; top:-40px; position:relative;}	
+	#product-highlight ul li{width:48%; margin:0 .5%; padding:0; text-align:center; display:inline-block}
+	#product-highlight ul li a{color:#FFF; text-shadow: 1px 1px 1px #333;}
+	#product-highlight ul li img{width:75%; height:auto; display:block; margin:0 auto;}
+		
+	.thumb {
+		display:block;
+		width:49%;
+		margin:10px .5%;
+		position:relative;
+		float:left;
+		cursor:pointer;
+	}
+		
+	#news-twitter {
+	    display:none;
+	}
+	
+	#news{
+		width:100% !important;
+		float:none !important;
+		padding:0;
+		font-size:2em;
+	}
+	
+	#news h3 a{font-size: 2em !important;}
+	
+	#twttr{
+		display:none;
+	}
+	
+	
+	
+	
+/* --------------------------------------------Footer------------------------------------- */
+
+	footer{width:100%; background-color:#111; margin:0; padding:0; border-top:1px solid #333;}
+	
+	#footer-theme{width:90%; margin:0 auto;}
+	
+	.footer-menu{
+		margin:20px 0;
+	}
+	
+	.footer-menu h4{
+		color:#29ABE1;
+		text-shadow:0 -1px 1px rgba(255,255,255,.25);
+		font-size:16px;
+		font-weight:normal;
+	}
+	
+	.footer-menu ul{font-size:12px;}
+	.footer-menu ul li a{color:#999;}
+	.footer-menu ul li a:hover{color:#FFF;}
+	.footer-menu ul li{
+		margin:0 0 0 0 !important; padding:0;
+		border-top:1px solid #222;
+		border-bottom:1px solid #000;
+		list-style:none !important;
+/* 		background:#FF0; */
+	}
+	.footer-menu ul li:first-child{border-top:none;}
+	.footer-menu ul li:last-child{border-bottom:none;}
+	
+	#social{
+		color:#999;
+	}
+	
+	a.social-links{
+		display:block;
+		float:left;
+		text-indent:-9999px;
+		background-repeat:no-repeat;
+		background-position: center center;
+		background-size: cover;
+		width:24px; height:24px;
+	}
+	
+	a#twitter{background-image:url(../img/twitter.png)}
+	a#twitter:hover{background-image:url(../img/twitter-color.png)}
+	a#fb{background-image:url(../img/fb.png)}
+	a#fb:hover{background-image:url(../img/fb-color.png)}
+	a#pinterest{background-image:url(../img/pinterest.png)}
+	a#pinterest:hover{background-image:url(../img/pinterest-color.png)}
+	
+	#sinarmas{margin-top:0; padding:0;}
+	#copy{font-size:11px; color:#CCC; margin-top:10px}
+}
+

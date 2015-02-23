@@ -25,56 +25,90 @@
 </div>
 <!-- Slideshow HTML -->
 
-<ul id="ticker">
-	<li>Saksikan puluhan saluran berkualitas lokal mancenegara di InnovateGO secara GRATIS</li>
-</ul>
+
 
 <div id="body-wrapper">
-	<section id="program-highlight" class="home-section">		
-		<div class="highlights-content clearfix">
-			{{ highlights:featured }}
-				<div class="thumb scroll">
-					<div class="thumb-wrapper">
-						<img src="{{ path }}">
-						<div class="thumb-detail" title="{{ sinopsis }}">
-							<span class="info title">{{ title }}</span>
-							<span class="info channel">{{ name }} | Ch.{{ num }}</span>
-							<span class="info date">{{ show_time }}</span>
-							<span class="syn">{{ sinopsis_short }}</span>
+
+	{{ if alcopolis:device == 'computer' }}
+		<ul id="ticker">
+			<li>Saksikan puluhan saluran berkualitas lokal mancenegara di InnovateGO secara GRATIS</li>
+		</ul>
+
+		<section id="program-highlight" class="home-section">		
+			<div class="highlights-content clearfix">
+				{{ highlights:featured }}
+					<div class="thumb scroll">
+						<div class="thumb-wrapper">
+							<img src="{{ path }}">
+							<div class="thumb-detail" title="{{ sinopsis }}">
+								<span class="info title">{{ title }}</span>
+								<span class="info channel">{{ name }} | Ch.{{ num }}</span>
+								<span class="info date">{{ show_time }}</span>
+								<span class="syn">{{ sinopsis_short }}</span>
+							</div>
 						</div>
 					</div>
-				</div>
-			{{ /highlights:featured }}
-		</div>
-	</section>
+				{{ /highlights:featured }}
+			</div>
+		</section>
 		
-	<section id="product-highlight" class="home-section">
-		<div class="section-wrapper clearfix">
-			<div id="quadlogo" class="left"><img src="{{theme:image_path}}hilite/quadplay.png"></div>
-			<ul class="right">
-				<li class="prd-list" title="Internet Super Cepat">
-					<img src="{{theme:image_path}}hilite/internet.png"><br/>
-					Bayangkan kenikmatan berselancar internet super cepat tanpa buffering, instan dan stabil.<br/><br/>
-					<a href="products/view/internet-super-cepat">Selengkapnya</a>
+		<section id="product-highlight" class="home-section">
+			<div class="section-wrapper clearfix">
+				<div id="quadlogo" class="left"><img src="{{theme:image_path}}hilite/quadplay.png"></div>
+				<ul class="right">
+					<li class="prd-list" title="Internet Super Cepat">
+						<img src="{{theme:image_path}}hilite/internet.png"><br/>
+						Bayangkan kenikmatan berselancar internet super cepat tanpa buffering, instan dan stabil.<br/><br/>
+						<a href="products/view/internet-super-cepat">Selengkapnya</a>
+					</li>
+					<li class="prd-list" title="TV Interaktif">
+						<img src="{{theme:image_path}}hilite/tv.png"><br/>
+						Cara menonton yang mengasyikan melalui TV Kabel Interaktif Innovate dengan SmartBox Innovate.<br/><br/>
+						<a href="products/view/interactive-tv">Selengkapnya</a>
+					</li>
+					<li class="prd-list" title="InnovateGO">
+						<img src="{{theme:image_path}}hilite/ott.png"><br/>
+						Nikmati acara TV favorit Anda, dimana saja kapan saja.<br/><br/><br/>
+						<a href="products/view/innovatego">Selengkapnya</a>
+					</li>
+					<li class="prd-list" title="Telepon">
+						<img src="{{theme:image_path}}hilite/phone.png"><br/>
+						Telepon rumah berkualitas suara jernih dengan kebebasan berbicara sepuasnya.<br/><br/>
+						<a href="products/view/telepon">Selengkapnya</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+	{{ else }}
+		<div id="mobile-promo" style="width:100%; background:#FFF; padding:20px 0;"><img style="width:100%; height:auto;" src="{{theme:image_path}}hilite/banner-mobile.jpg"></div>
+		<section id="product-highlight" class="home-section">
+			<div id="quadlogo"><img src="{{theme:image_path}}hilite/quadplay.png"></div>
+			<ul>
+				<li class="prd-list mobile" title="Internet Super Cepat">
+					<a href="products/view/internet-super-cepat">
+						<img src="{{theme:image_path}}hilite/internet.png">
+						Internet Super Cepat
+					</a>
 				</li>
-				<li class="prd-list" title="TV Interaktif">
-					<img src="{{theme:image_path}}hilite/tv.png"><br/>
-					Cara menonton yang mengasyikan melalui TV Kabel Interaktif Innovate dengan SmartBox Innovate.<br/><br/>
-					<a href="products/view/interactive-tv">Selengkapnya</a>
+				<li class="prd-list mobile" title="TV Interaktif">
+					<a href="products/view/interactive-tv"><img src="{{theme:image_path}}hilite/tv.png">
+					TV Interaktif</a>
 				</li>
-				<li class="prd-list" title="InnovateGO">
-					<img src="{{theme:image_path}}hilite/ott.png"><br/>
-					Nikmati acara TV favorit Anda, dimana saja kapan saja.<br/><br/><br/>
-					<a href="products/view/innovatego">Selengkapnya</a>
+				<li class="prd-list mobile" title="InnovateGO">
+					<a href="products/view/innovatego"><img src="{{theme:image_path}}hilite/ott.png">
+					InnovateGO</a>
 				</li>
-				<li class="prd-list" title="Telepon">
-					<img src="{{theme:image_path}}hilite/phone.png"><br/>
-					Telepon rumah berkualitas suara jernih dengan kebebasan berbicara sepuasnya.<br/><br/>
-					<a href="products/view/telepon">Selengkapnya</a>
+				<li class="prd-list mobile" title="Telepon">
+					<a href="products/view/telepon"><img src="{{theme:image_path}}hilite/phone.png">
+					Telepon</a>
 				</li>
 			</ul>
-		</div>
-	</section>
+		</section>
+	{{ endif }}
+	
+		
+	
+		
 	<section id="news-twitter" class="home-section">
 		<div class="section-wrapper clearfix">
 			<div id="news" class="left">

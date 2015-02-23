@@ -13,32 +13,38 @@
 <link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>    
 
 
-<base href="{{ url:base }}" />
-
 <!-- Begin stylesheets -->
-{{ asset:css file="jquery/jquery.orbit-inn.mod.css" }}
-{{ asset:css file="style-newlayout.css" }}
-{{ asset:css file="jquery/jquery-ui.css" }}
+	{{ asset:css file="plugins/orbitslider/jquery.orbit-inn.mod.css" }}
+	
+	{{ if alcopolis:device == 'computer' }}
+		{{ asset:css file="style.css" }}
+	{{ elseif alcopolis:device == 'tablet' }}
+		{{ asset:css file="style-phone.css" }}
+	{{ else }}
+		{{ asset:css file="style-phone.css" }}
+	{{ endif }}
+	
+	{{ asset:css file="jquery/jquery-ui.css" }}
 <!-- End stylesheets -->
 
 <!-- Use Html5Shiv in order to allow IE render HTML5 -->
 <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 <!-- Begin scripts -->
-{{ asset:js file="jquery/jquery.js" }}
-{{ asset:js file="jquery/jquery-ui.min.js" }}
-{{ asset:js file="jquery/jquery.easing.1.3.js" }}
-{{ asset:js file="jquery.orbit-inn.mod.js" }}
-
-<!-- SWF Object Plugin -->
-{{ asset:js file="jquery/jquery.swfobject.1-1-1.min.js" }}
-
-<!-- News Scroller -->
-	{{ if page:is_home }}
-		{{ asset:js file="plugins/newsticker/li-scroller/li-scroller.js" }}
-		{{ asset:css file="plugins/newsticker/li-scroller/li-scroller.css" }}
-	{{ endif }} 
-<!-- /News Scroller -->
+	{{ asset:js file="jquery/jquery.js" }}
+	{{ asset:js file="jquery/jquery-ui.min.js" }}
+	{{ asset:js file="jquery/jquery.easing.1.3.js" }}
+	{{ asset:js file="jquery.orbit-inn.mod.js" }}
+	
+	<!-- SWF Object Plugin -->
+	{{ asset:js file="jquery/jquery.swfobject.1-1-1.min.js" }}
+	
+	<!-- News Scroller -->
+		{{ if page:is_home }}
+			{{ asset:js file="plugins/newsticker/li-scroller/li-scroller.js" }}
+			{{ asset:css file="plugins/newsticker/li-scroller/li-scroller.css" }}
+		{{ endif }} 
+	<!-- /News Scroller -->
 <!-- End scripts -->
 
 
