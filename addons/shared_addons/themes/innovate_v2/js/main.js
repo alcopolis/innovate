@@ -32,6 +32,17 @@ $(document).ready(function() {
 			}
 		});
 		
+		
+		//Mobile nav function
+		if($('body.mobile').length > 0){
+			$('#navigation').hide();
+		}
+		
+		$('body.mobile #logo h1 a').live('click', function(e){
+			e.preventDefault();
+			$('#navigation').toggle();
+		});
+		
 	// ====================================== Orbit Slider ======================================= //
 		
 		$('.orbit-slider').orbit({
