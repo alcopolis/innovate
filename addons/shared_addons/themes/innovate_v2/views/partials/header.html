@@ -1,5 +1,5 @@
 	<div id="header-theme" class="theme clearfix">
-        <div id="logo">
+        <div id="logo" class="clearfix">
             <h1><a href="{{ url:site  }}" title="Home">{{ settings:site_name }}</a></h1>
         </div>
         
@@ -8,15 +8,25 @@
         	<a href="http://myaccount.innovate-indonesia.com"><img src="{{theme:image_path}}hilite/ott-reg.png" /></a>
         </div>
         
-        <div style="clear:both"></div>
         
-        <div id="navigation">
-            <nav id="menu" class="">
-                <ul id="main-menu" class="right">
-                   {{ navigation:links group="header" }} 
-                </ul>
-            </nav>	
-        </div>
+        {{ if alcopolis:device == 'computer' }}
+	        <div id="navigation">
+	            <nav id="menu" class="">
+	                <ul id="main-menu" class="default right">
+	                   {{ navigation:links group="header" }} 
+	                </ul>
+	            </nav>	
+	        </div>
+        {{ else }}
+        	 <div id="navigation">
+		          <nav id="menu">
+		              <ul id="main-menu" class="mobile">
+		                 {{ navigation:links group="header" }} 
+		                 {{ navigation:links group="footer" }} 
+		              </ul>
+		          </nav>	
+	    	</div>
+        {{ endif }}
     </div>
     
     {{ theme:partial name="breadcrumbs" }}

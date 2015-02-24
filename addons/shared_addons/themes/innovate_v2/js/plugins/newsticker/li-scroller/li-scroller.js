@@ -15,8 +15,9 @@
 
 jQuery.fn.liScroll = function(settings) {
 		settings = jQuery.extend({
-		travelocity: 0.07
-		}, settings);		
+			travelocity: 0.07
+		}, settings);
+		
 		return this.each(function(){
 				var $strip = jQuery(this);
 				$strip.addClass("newsticker")

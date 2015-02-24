@@ -6,18 +6,23 @@ $(document).ready(function() {
 	
 	// ====================================== Main Menu Setting =======================================//
 		
-		$('ul#main-menu > li').mouseenter(function(){
+		$('ul#main-menu.default > li').mouseenter(function(){
 			$(this).children('ul.dropdown').slideDown(400)
 		});
 		
-		$('ul#main-menu > li').mouseleave(function(){
+		$('ul#main-menu.default > li').mouseleave(function(){
 			$(this).children('ul.dropdown').slideUp(150)
 		});
 		
 		
-		$('ul#main-menu li.no-click > a').click(function(e){
+		$('ul#main-menu.default li.no-click > a').click(function(e){
 			e.preventDefault();
 		});
+		
+		
+		
+		$('ul#main-menu.mobile').height($( window ).height() - 40);
+		
 		
 		$(document).scroll(function(){
 			if($(this).scrollTop() > 60){

@@ -16,7 +16,7 @@ footer{margin-top:40px;}
 
 
 		
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 1366px) {
 /* applies only if the screen is narrower than 480px */
 	
 	header{
@@ -52,13 +52,23 @@ footer{margin-top:40px;}
 	
 	
 	
-	#register{margin:10px .5%; float:right; text-align:right}
+	#register{margin:10px .5% 0 .5%; float:right; text-align:right}
 	#register a{height:0;}
 	#register a img{width:45%;}
 		
-  	#navigation{display:none;}
-	
-	
+  	#navigation{background:rgba(10,10,10,.9); position:relative; left:0; top:0; clear:both; width:100%; height:100%;}
+	#main-menu.mobile{padding:0 1em;}
+	#main-menu.mobile li{
+		margin:0;
+		padding:1em 0;
+		border-top:1px solid #555;
+ 		border-bottom:1px solid #000  /*#031956*/; 
+	}
+	#main-menu.mobile li:first-child{border-top:none;}
+	#main-menu.mobile li:last-child{border-bottom:none;}
+	#main-menu.mobile li a{color:#FFF; font-size: 20px;}
+	#main-menu.mobile li a:hover{color:#BFE0FF;}
+	#main-menu.mobile li ul.dropdown{width:100%; background:#999; position:absolute; top:0; left:100%;}
 	
 	.home #content {
 	    background: none repeat scroll 0 0 #efefef;

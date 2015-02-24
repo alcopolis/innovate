@@ -77,7 +77,7 @@ class Plugin_Alcopolis extends Plugin
 	{
 		$this->load->library('mobile_detect');
 		$detect = $this->mobile_detect;
-		$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');
+		$deviceType = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'phone');
 		
 		return $deviceType;
 	}
