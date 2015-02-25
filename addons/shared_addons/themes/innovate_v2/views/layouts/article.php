@@ -7,7 +7,12 @@
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
 </head>
-<body id="top">
+
+{{ if alcopolis:device == 'computer' }}
+	<body id="top">
+{{ else }}
+	<body id="top" class="mobile">
+{{ endif }}
 	
 	{{ integration:analytics }}
 	

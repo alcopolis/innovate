@@ -21,7 +21,6 @@ $(document).ready(function() {
 		
 		
 		
-		$('ul#main-menu.mobile').height($( window ).height() - 40);
 		
 		
 		$(document).scroll(function(){
@@ -34,6 +33,8 @@ $(document).ready(function() {
 		
 		
 		//Mobile nav function
+		$('ul#main-menu.mobile').height($( window ).height() - 40);
+		
 		if($('body.mobile').length > 0){
 			$('#navigation').hide();
 		}
