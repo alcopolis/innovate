@@ -32,6 +32,8 @@ $(document).ready(function() {
 		});
 		
 		
+		
+		
 		//Mobile nav function
 		$('ul#main-menu.mobile').height($( window ).height() - 40);
 		
@@ -39,10 +41,39 @@ $(document).ready(function() {
 			$('#navigation').hide();
 		}
 		
-		$('body.mobile #logo h1 a').live('click', function(e){
+		$('body #logo h1 a').live('click', function(e){
 			e.preventDefault();
-			$('#navigation').toggle();
+			$('#navigation').slideToggle(0);
 		});
+		
+		
+		
+		$('ul#main-menu.mobile li.has_children > a').live('click', function(e){
+			e.preventDefault();
+			var current = $(this);
+			
+			current.children('ul.dropdown').slideToggle();
+			
+			if(current.hasClass('open')){
+				current.removeClass('open');
+			}else{
+				current.addClass('open');
+			}
+		});
+		
+		$('ul#main-menu.mobile li.has_children').live('click', function(){
+			var current = $(this);
+		
+			current.children('ul.dropdown').slideToggle();
+			
+			if(current.hasClass('open')){
+				current.removeClass('open');
+			}else{
+				current.addClass('open');
+			}
+		});
+		
+		
 		
 	// ====================================== Orbit Slider ======================================= //
 		
@@ -123,6 +154,8 @@ $(window).resize(function(){
 	
 	w = $('.thumb').width();
 	$('.thumb').height(w);
+	
+	$('ul#main-menu.mobile').height($( window ).height() - 40);
 })
 
 
