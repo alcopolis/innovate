@@ -31,4 +31,6 @@
         {{ endif }}
     </div>
     
-    {{ theme:partial name="breadcrumbs" }}
+    {{ if alcopolis:device == 'computer' }}
+    	{{ theme:partial name="breadcrumbs" }}
+    {{ endif }}

@@ -56,7 +56,11 @@ body.product .content-wrapper {
 
 #prod-info{font-size:16px; margin:0 0 20px 20px;}
 
-
+.pyro-image{
+	margin:0 20px 20px 20px;
+	width:300px;
+	float:left;
+}
 
 
 /*Packages Nav and container*/
@@ -260,3 +264,31 @@ table.package-list th, table.package-list td{
 #bundle.pack-container #container.bundle-default{background: #0BC4EE; border-radius:5px;}
 
 a.view-list-ch{font-size:11px; color:#FFF; background:#007DC3; margin-top:10px; padding:1px 5px; cursor:pointer; border-radius:5px;}
+
+
+
+
+
+
+/* Mobile CSS */
+
+@media screen and (max-width: 1920px) {
+
+body.mobile #prod-content #body-wrapper{max-width:95%; margin:80px auto 20px auto;}
+body.mobile #prod-content #body-wrapper #benefit{width:90%; margin:0 auto;}
+
+body.mobile #overview{margin-top:50px;}
+
+body.mobile #toc{background:none; }
+body.mobile #terms{float:none; width:100%; margin:0 0 40px 0;}
+body.mobile #cs-support{text-align:center; width:100%; margin:20px auto 20px auto;}
+
+body.mobile .pyro-image{float: none; width:100%; margin:0;}
+
+body.mobile .package #pack-nav{margin:0 20px;}
+body.mobile .package .pack-container {margin:20px;}
+body.mobile .package .pack-container .data{width:100%;}
+body.mobile .package .pack-container .data img{display:none;}
+body.mobile .package .pack-container .packs{width:100%; margin:0;}
+body.mobile .package .pack-container .packs .pack-item{max-width:100%; min-width:100%; margin:10px 0;}
+}
