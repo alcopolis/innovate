@@ -42,6 +42,7 @@ body.articles #content{
 body.articles article{
 	width:22.5%; min-height:300px; max-height:300px;
 	margin:0 1.25%;
+	float:left;
 }
 
 #art-content .cover-container{
@@ -71,4 +72,19 @@ body.articles article{
 
 .pagination ul li:last-child{
 	border-right:none;
+}
+
+
+
+/* Mobile CSS */
+
+@media screen and (max-width: 720px) {
+	body.mobile #content{margin:80px auto 40px auto;}
+	body.articles.mobile article{float:none; width:100%; min-height:auto; margin-bottom:20px;}
+	body.articles.mobile article:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;}
+	body.articles.mobile #art-content  article .cover-container{width:20%; height:80px ; margin-right:5%; float:left;}
+	body.articles.mobile .art-title, body.articles.mobile .art-teaser{margin:0 0 10px 0 !important;}
+	body.articles.mobile #art-content  article .art-teaser{width:100%;}
+	
+	body.full-article.mobile #art-content{width:90%; margin:0 auto;}
 }

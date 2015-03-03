@@ -142,3 +142,9 @@ a#close-popup{
 	padding:0 7px;
 	color:#FFF;
 }
+
+
+
+@media screen and (max-width: 1366px) {
+	body.mobile #body-wrapper{width:90%; margin:0 auto; padding-top:100px; min-height:300px;}
+}

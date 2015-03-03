@@ -10,7 +10,12 @@
 	{{ endif }}
 </head>
 
-<body id="top" class="epg">
+{{ if alcopolis:device == 'computer' }}
+<body id="top" class="quiz">
+{{ else }}
+<body id="top" class="quiz mobile">
+{{ endif }}
+
 	{{ integration:analytics }}
 
 	<header class="wrapper">
@@ -19,7 +24,7 @@
 	
 	<div id="content" class="wrapper clearfix">
 		<div id="content-bg" style="position:absolute; width:100%; height:auto; background:#EFEFEF;"></div>
-		<div id="body-wrapper" class="clearfix" style="padding-top:140px; min-height:300px;">
+		<div id="body-wrapper" class="clearfix">
 			<h1>Hot Quiz</h1>	
 			<?php if(count($quiz) > 0){ ?>
 				<?php foreach($quiz as $q){ ?>

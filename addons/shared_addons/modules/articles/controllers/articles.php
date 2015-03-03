@@ -95,12 +95,13 @@ class Articles extends Public_Controller
 	public function index($slug = NULL){
 		$limit = 8;
 		$paging = create_pagination('articles', $this->db->count_all('inn_articles'), $limit, 2);
-			
+		//var_dump($paging); die();
+		
 		if(isset($slug) && $slug != 'category' && preg_match("/(\A[0-9]+?\z)/", $slug) == FALSE){
 			$this->articles = $this->articles_m->get_articles_by(array('slug'=>$slug), NULL, TRUE);
 			$cat = $this->articles_category_m->get_category_by(array('id' => $this->articles->category), NULL, TRUE);
 			//$this->page_data->section = '<a href="articles/category/' . $cat->slug . '">&laquo ' . $cat->name . '</a>';
-			$this->page_data->section = '<a href="articles/">&laquo Recent News</a>';
+			$this->page_data->section = '<a href="./">&laquo Recent News</a>';
 			
 			$this->template->append_css('module::full_article.css');
 			$this->render('article', $this->articles->title, array('art' => $this->articles, 'cat' => $cat));

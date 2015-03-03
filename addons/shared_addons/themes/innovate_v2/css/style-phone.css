@@ -97,7 +97,7 @@ footer{margin-top:40px;}
 	#main-menu.mobile li.has_children > a:after{content:' >>';}
 	#main-menu.mobile li.has_children.current{background:rgba(255,255,255,.5); padding:1em 0 0 0;}
 	#main-menu.mobile li.has_children.current > ul li{border-bottom:1px dotted #1C71C5; border-top:none;}
-	#main-menu.mobile li a{color:#1C71C5; font-size: 1em; padding-left:.5em; text-shadow:0 1px 0 #FFF;}
+	#main-menu.mobile li a{color:#4B4C52; font-size: 1em; padding-left:.5em; text-shadow:0 1px 0 #FFF;}
 /* 	#main-menu.mobile li a:hover{color:#BFE0FF;} */
 	#main-menu.mobile li ul.dropdown{width:60%; position:relative; top:-2.5em; left:40%; display:none;}
 

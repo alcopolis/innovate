@@ -11,7 +11,11 @@
 	{{ endif }}	
 </head>
 
+{{ if alcopolis:device == 'computer' }}	
 <body id="top" class="articles">
+{{ else }}
+<body id="top" class="articles mobile">
+{{ endif }}
 
 		{{ integration:analytics }}
 		
@@ -30,9 +34,9 @@
 				<div id="art-body" class="clearfix">
 					<?php if($arts != NULL){ ?>
 						<?php foreach($arts as $art){ ?>
-							<article id="<?php echo $art['content']->art_slug?>" class="left">
+							<article id="<?php echo $art['content']->art_slug?>">
 								<?php if( $art['cover'] != NULL){ ?>
-									<div class="cover-container"><a href="articles/<?php echo $art['content']->art_slug; ?>"><img src="<?php echo $art['cover']['src']; ?>" title="<?php echo $art['content']->title; ?>" /></a></div>
+									<div class="cover-container"><a href="./<?php echo $art['content']->art_slug; ?>"><img src="<?php echo $art['cover']['src']; ?>" title="<?php echo $art['content']->title; ?>" /></a></div>
 								<?php } ?>
 									
 								<div class="art-property art-title"><h1><?php echo anchor('articles/' . $art['content']->art_slug, substr($art['content']->title,0,40).'..'); ?></h1></div>

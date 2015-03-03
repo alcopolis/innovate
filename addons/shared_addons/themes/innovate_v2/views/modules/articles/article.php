@@ -15,7 +15,11 @@
 	</style>
 </head>
 
+{{ if alcopolis:device == 'computer' }}	
 <body id="top" class="full-article">
+{{ else }}
+<body id="top" class="full-article mobile">
+{{ endif }}
 
 		{{ integration:analytics }}
 		
