@@ -1,6 +1,6 @@
 $(document).ready(function(){	
 	h = $('#body-wrapper .item').width() * 0.75;
-	$('#body-wrapper .item').height(h);
+	//$('#body-wrapper .item').height(h);
 	
 	$('a#close-popup').click(function(e){
 		e.preventDefault();

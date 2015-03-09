@@ -38,17 +38,17 @@ $(document).ready(function() {
 		$('ul#main-menu.mobile').height($( window ).height() - 40);
 		
 		if($('body.mobile').length > 0){
-			$('ul#main-menu.mobile li').removeClass('current').removeClass('single');
+			$('ul#main-menu.mobile li').removeClass('current');
 		}
 		
-		$('body #logo h1 a').live('click', function(e){
+		$('body #btn-menu a').live('click', function(e){
 			e.preventDefault();
 			$('#navigation').slideToggle(0);
 			
-			if($('#logo').hasClass('open')){
-				$('#logo').removeClass('open')
+			if($('#btn-menu').hasClass('open')){
+				$('#btn-menu').removeClass('open')
 			}else{
-				$('#logo').addClass('open')
+				$('#btn-menu').addClass('open')
 			}
 		});
 		

@@ -11,12 +11,18 @@
 	{{ endif }}
 	
 	<style type="text/css">
-		body{font-size:12px;background:url("{{ url:site }}files/large/<?php echo $quiz->theme; ?>") no-repeat center top; background-size:auto auto;}
+		body{background-image:url("{{ url:site }}files/large/<?php echo $quiz->theme; ?>");}
 		#rules ol li, #rules ul li{font-size:12px;}
 	</style>
 </head>
 
-<body id="top" class="epg">
+{{ if alcopolis:device == 'computer' }}
+	<body id="top" class="quiz">
+{{ else }}
+	<body id="top" class="quiz mobile">
+{{ endif }}
+
+
 	{{ integration:analytics }}
 
 	<header class="wrapper">
@@ -25,7 +31,7 @@
 	
 	<div id="content" class="wrapper clearfix">
 		<div id="content-bg" style="position:absolute; width:100%; height:auto;"></div>
-		<div id="body-wrapper" class="clearfix" style="padding:160px 0 40px 0;">
+		<div id="body-wrapper" class="clearfix" style="padding:0px 0 40px 0;">
 			<div class="container">
 				
 				<p>{{ session:flash name="quiz_msg" }}</p>

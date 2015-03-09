@@ -11,8 +11,6 @@
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
 	
-	{{ asset:js file="accounting.min.js" }}
-	
 	
 	<style>
 		<?php 

@@ -1,6 +1,15 @@
-#body-theme{background:#333;}
-	.clearfix:after{content: "."; display: block; height: 0; clear: both;  visibility: hidden;
+body{
+	background-repeat no-repeat;
+	background-position: center top; 
+	background-size:auto 100%;
 }
+
+#content{
+	margin: 120px auto 80px;
+}
+
+#body-wrapper{width:90%; margin:0 auto; padding-top:0; min-height:300px;}
+
 	
 input{
 	border:1px solid #CCC;
@@ -20,6 +29,21 @@ input[type="submit"]{
 	color:#FFF;
 	border:none;
 }
+
+#section-title{
+	border-bottom: 1px solid #ccc;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+	color:#444;
+}
+
+.item .prop{font-size:14px; color:#444; line-height:20px;}
+.item{position:relative; width:22.5%; background-size:100% auto; margin:0 1.25% 20px 1.25%; float:left;}
+.item a.poster{display:block; height:120px; width:100%; overflow:hidden;}
+.item a.poster img{width:100%; height:auto;}
+.item a.title{display:block; color:#007dc3; margin:10px 0; text-align:left; font-weight:bold;}
 
 .container{
 	width:920px;
@@ -146,5 +170,40 @@ a#close-popup{
 
 
 @media screen and (max-width: 1366px) {
-	body.mobile #body-wrapper{width:90%; margin:0 auto; padding-top:100px; min-height:300px;}
+	#content{margin: 80px auto 40px;}
+	
+	.item{position:relative; width:100%; margin:0 auto 20px auto;}
+	.item a.poster{display:block; height:120px; width:100%; overflow:hidden;}
+	.item a.poster img{width:100%; height:auto;}
+	.item a.title{display:block; color:#007dc3; margin:10px 0 0 0; text-align:left; font-weight:bold;}
+
+
+
+	.container{
+		width:100%;
+		margin:0 auto 40px auto;	
+		padding:0;
+		overflow:hidden;	
+		background:url("{{ url:site }}files/large/cd267d7a368f87124e9782ac8bdde9b1.jpg");
+	}
+	
+	.container section#quiz{	
+		width:95%;
+		padding:2.5%; 
+	}
+	
+	h1#title{font-size:1.5em;}
+	
+	.container #user-data {width:100%; float:none; margin:0 auto; border-bottom:1px dotted #999; padding:0 0 40px 0;}
+	.container  #quiz-content{
+		float:none;
+		padding:0;		
+	    border-left:none;
+		width:100%;
+	}
+	.container  #quiz-content.login-required{
+		margin:20px 0;
+		padding:0 0 0 20px;	
+	    border-left:none;
+	}
 }
