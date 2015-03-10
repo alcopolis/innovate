@@ -1,0 +1,135 @@
+<style type="text/css">
+	#recent-news{
+		width:720px; margin:40px auto 0 auto;
+		border-bottom:1px dotted #CCC;
+		padding-bottom:20px;
+	}
+	
+	#recent-news h2{color:#007DC3; margin-bottom:20px; padding:0; border-bottom:1px dotted #CCC; font-size:24px;}
+
+	#recent-news article{
+		float:left;
+		width:320px;
+		overflow:hidden;
+		margin:0 20px;
+	}
+	
+	#recent-news article img{width:100%}
+</style>
+
+
+
+<!-- Slideshow HTML -->
+<div id="mod-promo" class="orbit-slider">
+	{{ promotion:featured }}
+</div>
+<!-- Slideshow HTML -->
+
+{{ if alcopolis:device == 'computer' }}
+<ul id="ticker">
+	<li>Saksikan puluhan saluran berkualitas lokal mancenegara di InnovateGO secara GRATIS</li>
+</ul>
+{{ endif }}
+
+
+<div id="body-wrapper">
+	{{ if alcopolis:device == 'computer' }}
+		<section id="program-highlight" class="home-section">		
+			<div class="highlights-content clearfix">
+				{{ highlights:featured }}
+					<div class="thumb scroll">
+						<div class="thumb-wrapper">
+							<img src="{{ path }}">
+							<div class="thumb-detail" title="{{ sinopsis }}">
+								<span class="info title">{{ title }}</span>
+								<span class="info channel">{{ name }} | Ch.{{ num }}</span>
+								<span class="info date">{{ show_time }}</span>
+								<span class="syn">{{ sinopsis_short }}</span>
+							</div>
+						</div>
+					</div>
+				{{ /highlights:featured }}
+			</div>
+		</section>
+		
+		<section id="product-highlight" class="home-section">
+			<div class="section-wrapper clearfix">
+				<div id="quadlogo" class="left"><img src="{{theme:image_path}}hilite/quadplay.png"></div>
+				<ul class="right">
+					<li class="prd-list" title="Internet Super Cepat">
+						<img src="{{theme:image_path}}hilite/internet.png"><br/>
+						Bayangkan kenikmatan berselancar internet super cepat tanpa buffering, instan dan stabil.<br/><br/>
+						<a href="products/view/internet-super-cepat">Selengkapnya</a>
+					</li>
+					<li class="prd-list" title="TV Interaktif">
+						<img src="{{theme:image_path}}hilite/tv.png"><br/>
+						Cara menonton yang mengasyikan melalui TV Kabel Interaktif Innovate dengan SmartBox Innovate.<br/><br/>
+						<a href="products/view/interactive-tv">Selengkapnya</a>
+					</li>
+					<li class="prd-list" title="InnovateGO">
+						<img src="{{theme:image_path}}hilite/ott.png"><br/>
+						Nikmati acara TV favorit Anda, dimana saja kapan saja.<br/><br/><br/>
+						<a href="products/view/innovatego">Selengkapnya</a>
+					</li>
+					<li class="prd-list" title="Telepon">
+						<img src="{{theme:image_path}}hilite/phone.png"><br/>
+						Telepon rumah berkualitas suara jernih dengan kebebasan berbicara sepuasnya.<br/><br/>
+						<a href="products/view/telepon">Selengkapnya</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+	{{ else }}
+		<div id="mobile-promo" style="width:100%; background:#FFF; padding:20px 0;"><img style="width:100%; height:auto;" src="{{theme:image_path}}hilite/banner-mobile.jpg"></div>
+		<section id="product-highlight" class="home-section">
+			<div id="quadlogo"><img src="{{theme:image_path}}hilite/quadplay.png"></div>
+			<ul>
+				<li class="prd-list mobile" title="Internet Super Cepat">
+					<a href="products/view/internet-super-cepat">
+						<img src="{{theme:image_path}}hilite/internet.png">
+						Internet Super Cepat
+					</a>
+				</li>
+				<li class="prd-list mobile" title="TV Interaktif">
+					<a href="products/view/interactive-tv"><img src="{{theme:image_path}}hilite/tv.png">
+					TV Interaktif</a>
+				</li>
+				<li class="prd-list mobile" title="InnovateGO">
+					<a href="products/view/innovatego"><img src="{{theme:image_path}}hilite/ott.png">
+					InnovateGO</a>
+				</li>
+				<li class="prd-list mobile" title="Telepon">
+					<a href="products/view/telepon"><img src="{{theme:image_path}}hilite/phone.png">
+					Telepon</a>
+				</li>
+			</ul>
+		</section>
+	{{ endif }}
+	
+		
+	
+	{{ if alcopolis:device == 'computer' }}	
+	<section id="news-twitter" class="home-section">
+		<div class="section-wrapper clearfix">
+			<div id="news" class="left">
+				<h3><a href="#">Branch Opening Innovate Semarang</a></h3>
+				<article id="main" class="left">
+					<a href="articles/branch-opening-innovate-semarang"><img src="{{theme:image_path}}hilite/recent.jpg"></a>
+					<p>PT.Innovate Mas Indonesia kembali melakukan peresmian salah satu kantor cabang Innovate yang kali ini terletak di kota Semarang.</p>
+					<a class="selengkapnya left" href="articles/branch-opening-innovate-semarang">Selengkapnya &raquo;</a>
+				</article>
+				<ul id="lists" class="right">
+					<li><a href="articles/internet-sehat-dan-aman-innovate">Internet Sehat Dan Aman Innovate</a></li>
+					<li><a href="articles/branch-opening-innovate-surabaya">Branch Opening Innovate Surabaya</a></li>
+					<li><a href="articles/innovate-fun-science">Innovate Fun Science</a></li>
+					<li><a href="articles/innovate-berbagi">Innovate Berbagi</a></li>
+				</ul>
+			</div>
+			
+			<div id="twttr" class="right">
+				<a class="twitter-timeline"  href="https://twitter.com/innovateIND" data-widget-id="353063445400260612">Tweet oleh @innovateIND</a>
+            	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+		</div>
+	</section>
+	{{ endif }}

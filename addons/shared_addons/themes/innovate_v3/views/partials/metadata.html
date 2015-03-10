@@ -1,0 +1,84 @@
+<!-- Begin meta tags -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="distribution" content="global" />
+<meta name="keywords" content="internet, broadband, multimedia, fiber, supercepat, super, cepat, fast, indonesia, murah, tv kabel, unlimited, on demand, mobile tv, paket, hd, high definition, telephone, telepon, fastest, promo, fastest internet, fastest broadband, internet tv, ftth, fiber to the home, broadband tv, interactive tv, internet paling cepat, internet murah, first media, max3, biznet, mnc, playmedia" />
+<meta name="resource-type" content="document" />
+<meta name="language" content="{{ lang:code }}" />
+<meta property="twitter:account_id" content="4503599627828147" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{{ theme:favicon file="favicon.ico" sizes="16x16 32x32" }}
+
+
+<link href='http://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>    
+
+
+<!-- Begin stylesheets -->
+	{{ asset:css file="plugins/orbitslider/jquery.orbit-inn.mod.css" }}
+	
+	{{ if alcopolis:device == 'computer' }}
+		{{ asset:css file="style.css" }}
+	{{ elseif alcopolis:device == 'tablet' }}
+		{{ asset:css file="style-phone.css" }}
+	{{ else }}
+		{{ asset:css file="style-phone.css" }}
+	{{ endif }}
+	
+	{{ asset:css file="jquery/jquery-ui.css" }}
+<!-- End stylesheets -->
+
+<!-- Use Html5Shiv in order to allow IE render HTML5 -->
+<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<!-- Begin scripts -->
+	{{ asset:js file="jquery/jquery.js" }}
+	{{ asset:js file="jquery/jquery-ui.min.js" }}
+	{{ asset:js file="jquery/jquery.easing.1.3.js" }}
+	{{ asset:js file="jquery.orbit-inn.mod.js" }}
+	
+	<!-- SWF Object Plugin -->
+	{{ asset:js file="jquery/jquery.swfobject.1-1-1.min.js" }}
+	
+	<!-- News Scroller -->
+		{{ if page:is_home }}
+			{{ asset:js file="plugins/newsticker/li-scroller/li-scroller.js" }}
+			{{ asset:css file="plugins/newsticker/li-scroller/li-scroller.css" }}
+		{{ endif }} 
+	<!-- /News Scroller -->
+<!-- End scripts -->
+
+
+{{ asset:render }}
+
+{{ template:metadata }}
+
+<!-- Place CSS bug fixes for IE 7 in this comment -->
+<!--[if IE 7]>
+{{ theme:css file="ie.css" }}
+<![endif]-->
+
+<title>{{ settings:site_name }}&nbsp;&bull;&nbsp;{{ template:title }}</title>
+
+
+
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-48725582-1']);
+  _gaq.push(['_setDomainName', 'innovate-indonesia.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  
+	<!-- Start Certify Javascript -->
+		_atrk_opts = { atrk_acct:"sxe6k1a0Sn00wd", domain:"innovate-indonesia.com",dynamic: true};
+
+		(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+	<!-- End Certify Javascript -->  
+</script>
+
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=sxe6k1a0Sn00wd" style="display:none" height="1" width="1" alt="" /></noscript>

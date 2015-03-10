@@ -1,0 +1,42 @@
+	<div id="header-theme" class="theme clearfix">
+        {{ if alcopolis:device != 'computer' }}
+        	<div id="btn-menu" class="clearfix">
+        		<a href="#" title="Menu">{{ settings:site_name }}</a>
+        	</div>
+        {{ else }}
+	        <div id="logo" class="clearfix">
+	            <h1><a href="{{ url:site  }}" title="Home">{{ settings:site_name }}</a></h1>
+	        </div>
+	          
+	        <div id="register">
+	        	<a href="http://myaccount.innovate-indonesia.com"><img src="{{theme:image_path}}hilite/ott-reg.png" /></a>
+	        </div>
+	    {{ endif }}
+       
+        
+        
+        {{ if alcopolis:device == 'computer' }}
+	        <div id="navigation">
+	            <nav id="menu" class="">
+	                <ul id="main-menu" class="default right">
+	                   {{ navigation:links group="header" }} 
+	                </ul>
+	            </nav>	
+	        </div>
+        {{ else }}
+        	 <div id="navigation">
+		          <nav id="menu">
+		              <ul id="main-menu" class="mobile">
+		                 {{ navigation:links group="header" }} 
+		                 {{ navigation:links group="news-mobile" }}
+		                 {{ navigation:links group="register-mobile" }}
+		                 {{ navigation:links group="about-us-mobile" }}
+		              </ul>
+		          </nav>	
+	    	</div>
+        {{ endif }}
+    </div>
+    
+    {{ if alcopolis:device == 'computer' }}
+    	{{ theme:partial name="breadcrumbs" }}
+    {{ endif }}

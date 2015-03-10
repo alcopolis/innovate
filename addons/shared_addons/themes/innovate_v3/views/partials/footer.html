@@ -1,0 +1,60 @@
+{{ if alcopolis:device == 'computer' }}
+	<div id="footer-theme" class="theme">
+		<div class="footer-menu">
+			<h4>NEWS</h4>
+			<ul>
+				{{ navigation:links group="news" }}
+			</ul>
+		</div> 
+	    <div class="footer-menu">
+	        <h4>FAQ</h4>
+	        <ul>
+				{{ navigation:links group="faq" }}
+	        </ul>
+	    </div>
+	    <div class="footer-menu">
+	        <h4>ABOUT US</h4>
+	        <ul>
+				{{ navigation:links group="about-us" }}
+	        </ul>
+	    </div>
+	    <div class="footer-menu">
+	        
+	    </div>
+	    <div class="footer-menu right">
+	    	<div id="social" class="left" style="text-align:center;">
+	    		<h4>FOLLOW</h4>
+	    		<a class="social-links" id="twitter" href="https://twitter.com/intent/follow?&screen_name=innovateind" target="_blank">Twitter</a>
+	    		<a class="social-links" id="fb" href="https://www.facebook.com/pages/Innovate/370058633094270?fref=ts" target="_blank">Facebook</a>
+	<!--     		<a class="social-links" id="pinterest" href="http://www.pinterest.com/innovate-indonesia" target="_blank">Pinterest</a> -->
+				<a class="social-links" id="gplus" href="https://plus.google.com/111523201297022875756" rel="publisher" target="_blank">Google+</a>
+	    	</div>
+			<div id="sinarmas" class="right"><img src="{{ theme:image_path }}sinarmas-logo.png" style="width:130px" /></div>
+	    	<div class="clear"></div>
+	    	<div id="copy" class="right">Copyright <?php echo date('Y'); ?> Innovate Indonesia. All Rights Reserved</div>	
+	    </div>
+	    
+	    <div class="clear"></div>
+	</div>
+{{ else }}
+	<div id="footer-theme" class="theme">
+		<div id="social" class="left" style="text-align:center; margin-top:10px; margin-right:20px;">
+    		<h4>FOLLOW</h4>
+    		<a class="social-links" id="twitter" href="https://twitter.com/intent/follow?&screen_name=innovateind" target="_blank">Twitter</a>
+    		<a class="social-links" id="fb" href="https://www.facebook.com/pages/Innovate/370058633094270?fref=ts" target="_blank">Facebook</a>
+<!-- 			<a class="social-links" id="gplus" href="https://plus.google.com/111523201297022875756" rel="publisher" target="_blank">Google+</a> -->
+    	</div>
+    	<div id="sinarmas" class="left" style="margin-top:13px;"><img src="{{ theme:image_path }}sinarmas-logo.png" style="width:130px" /></div>
+		<div class="clear"></div>
+		<div id="copy" style="text-align:center; padding:10px 0;">Copyright <?php echo date('Y'); ?> Innovate Indonesia. All Rights Reserved</div>
+	</div>
+{{ endif}}
+
+
+<!-- Begin scripts -->	
+	{{ theme:js file="main.js" }}
+	
+	<!-- Module Metadata -->
+	{{ epg:metadata }} 
+	<!-- End Module Metadata -->
+<!-- End scripts -->

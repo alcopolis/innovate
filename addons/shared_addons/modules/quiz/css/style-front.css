@@ -18,7 +18,7 @@ input{
 
 input[type="text"]{
 	margin:5px 0;
-	min-width:80%;		
+	width:80%;		
 }
 
 input[type="submit"]{
@@ -95,7 +95,7 @@ h1#title{
 }
 
 .container  #user-data .login input[type="text"], .container  #user-data .login input[type="password"]{
-	width:200px;
+	width:200px !important;
 }
 
 
