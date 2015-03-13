@@ -24,7 +24,7 @@
 	<?php echo anchor('users/reset_pass', lang('user:reset_password_link'));?>
 	<?php if (Settings::get('enable_registration')): ?>
 	<?php //echo ' | '.anchor('register', lang('user:register_btn')); ?> | 
-	<a id="open-popup" href="register">Register</a>
+	<a id="open-popup" href="<?php echo base_url('users'); ?>/register">Register</a>
 	<?php endif; ?>
 </div>
 
