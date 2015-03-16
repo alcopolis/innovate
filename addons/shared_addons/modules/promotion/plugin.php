@@ -85,13 +85,15 @@ class Plugin_Promotion extends Plugin
 			$poster = json_decode($featured->poster, true);
 			
 			$data .= '<div class="promo" style="background:#FFF url(' . $poster['path'] . ') no-repeat top center; cursor:pointer;">';
-			$data .= '<div style="width:960px; margin:0 auto; position:relative;">';
+		
 			if($featured->featured_uri != NULL){
+				$data .= '<div style="width:960px; margin:0 auto; position:relative;">';
 				$data .= '<a href="' . $featured->featured_uri . '" style="display:block; position:relative; left:0; top:0; width:100%; height:400px;"></a>';
+				$data .= $featured->featured_copy;
+				$data .= '</div>';
 			}
-			$data .= $featured->featured_copy;
-				
-			$data .= '</div></div>';
+			
+			$data .= '</div>';
 		}
 	
 		$data .= '

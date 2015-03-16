@@ -144,7 +144,15 @@ footer{margin-top:40px;}
 	    margin-top: 50px;
 	}
 	
-	.orbit-wrapper{display:none;}
+	.orbit-wrapper{
+		display:none;
+		width:100%;
+		max-height:380px;
+		background:#FC0;
+	}
+	.orbit-slider {max-height: 380px;}
+	.orbit div{max-height:380px;}
+	
 	
 	.tickercontainer {
 	    

@@ -42,6 +42,7 @@ $(document).ready(function() {
 		}
 		
 		$('body #btn-menu a').live('click', function(e){
+			e.stopImmediatePropagation();
 			e.preventDefault();
 			$('#navigation').slideToggle(0);
 			

@@ -7,7 +7,12 @@
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
 </head>
-<body id="top">
+
+{{ if alcopolis:device == 'computer' }}
+	<body id="product" class="top" data-name="<?php echo $product->slug; ?>">
+{{ else }}
+	<body id="product" class="top mobile" data-name="<?php echo $product->slug; ?>">
+{{ endif }}
 	
 	{{ integration:analytics }}
 	
@@ -27,6 +32,14 @@
 	 	 <footer>
 	    	{{ theme:partial name="footer" }}
 	     </footer>  
+	     
+		<div id="popup" class="hide">
+			<div id="popup-wrapper">
+				<div id="popup-container">
+					<a class="close-btn" title="Close"></a>
+				</div>
+			</div>
+		</div>
 	 	
 	{{ else }}
 		
