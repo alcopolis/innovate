@@ -3,24 +3,38 @@
 body.product{color:#515154;}
 
 body.product .content-wrapper { 
-	width: 96%; 
+	width: 90%; 
 	margin: 80px auto 40px auto; 
 	text-align:left;
 }
 
-
-#overview #ov-content{
-	width:960px;
-	margin:0 auto;
-	position:relative;
+#body-theme{
+	background: #0f3499; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzBmMzQ5OSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyNzczYmMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top,  #0f3499 0%, #2773bc 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0f3499), color-stop(100%,#2773bc)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #0f3499 0%,#2773bc 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #0f3499 0%,#2773bc 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #0f3499 0%,#2773bc 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #0f3499 0%,#2773bc 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f3499', endColorstr='#2773bc',GradientType=0 ); /* IE6-8 */		
 }
+#body-wrapper{padding:40px 0; width:80%;}
+
+
 
 #overview{
 	margin-top:79px;
 	min-height:500px;
 	background-position:top center;
+	box-shadow:inset 0 -10px 10px rgba(0,0,0,0.25);
 }
-
+#overview #ov-content{
+	width:960px;
+	margin:0 auto;
+	position:relative;
+}
 #overview #ov-content #ov-text{
 	line-height:1.25em;
 	color:#007DC3;
@@ -29,32 +43,17 @@ body.product .content-wrapper {
 
 
 #prod-content{
-	background: #0a71d1; /* Old browsers */
-	background: -moz-linear-gradient(top,  #0a71d1 0%, #0ba0ed 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0a71d1), color-stop(100%,#0ba0ed)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #0a71d1 0%,#0ba0ed 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #0a71d1 0%,#0ba0ed 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #0a71d1 0%,#0ba0ed 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #0a71d1 0%,#0ba0ed 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a71d1', endColorstr='#0ba0ed',GradientType=0 ); /* IE6-9 */
-	
 /* 	background-color:#007DC3; */
 	
 	line-height:auto;
 /* 	text-shadow:0 -1px 2px #666; */
 	color:#FFF;
-	border-top:1px solid #2797ff;
-}
-
-#prod-content #body-wrapper{
-	position:relative;
-	max-width:1024px;
-	margin: 0px auto;
-/* 	padding:40px 0;	 */
+/* 	border-top:1px solid #2797ff; */
 }
 
 
-#prod-info{font-size:16px; margin:0 0 20px 20px;}
+
+#prod-info{font-size:16px; line-height:1.25em; margin:0 auto 20px auto; color:#FFF; width:90%}
 
 .pyro-image{
 	margin:0 20px 20px 20px;
@@ -201,7 +200,7 @@ div.pack-container .packs .pack-item .total{color:#125DBA}
 /* Package Info Table */
 .package{
 	position:relative;
-	
+	margin:0 auto;
 	width:100%;
 	min-height:300px;
 	background:#FFF;
@@ -240,7 +239,7 @@ table.package-list th, table.package-list td{
 	width:98%;
 }
 
-#cs-support{text-align:center; width:25%; margin:40px 20px 20px 20px;}
+#cs-support{text-align:center; width:25%; margin:40px auto 20px auto;}
 #cs-support *{color:#FFF;}
 #terms{margin:40px 20px 20px 20px; width:500px; color:#FFF; float:left;}
 #terms ul{margin-left:20px;}

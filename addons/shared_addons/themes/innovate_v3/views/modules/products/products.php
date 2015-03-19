@@ -1,20 +1,15 @@
-{{ if alcopolis:device == 'computer' }}
-	<div id="overview">
-		<div id="ov-content"><?php echo $product->overview; ?></div>	
-	</div>
-{{ endif }}
 
 
-<?php if($product->body != NULL){ ?>
+
+<?php if($product->body != ''){ ?>
 	<div id="prod-content" class="clearfix">
 		<?php if(isset($packages)){ ?>
 			<div id="prod-info" class="clearfix">
 				<?php echo $product->body; ?>
 			</div>
 		<?php }else{ ?>
-			<div id="prod-info" style="color:#0B5EBA; text-shadow:none; padding:40px 0;" class="package clearfix">
+			<div  style="color:#0B5EBA; text-shadow:none; padding:40px 0;" class="package clearfix">
 				<?php echo $product->body; ?>
-			</div>
 		<?php } ?>
 	</div>
 <?php } ?>
@@ -68,16 +63,18 @@
 			<h6>Syarat &amp; Ketentuan</h6>
 			<?php echo $product->terms; ?>	
 		</div>
-	<?php } ?>
-	
-	{{ if alcopolis:device == 'computer' }}
 		<div id="cs-support" class="right">
-	{{ else }}
-		<div id="cs-support">
-	{{ endif }}
 			<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
 			<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
 			Hubungi Customer Care Kami</p>
 			<h3 style="padding:0;">[021] 5055 6182</h3>
 		</div>
+	<?php }else{ ?>
+		<div id="cs-support">
+			<img alt="Customer care" src="{{theme:image_path}}cs.png" style="width:64px;"/>
+			<p style="margin:10px 0; padding:0;">Untuk Informasi Lebih Lanjut<br/>
+			Hubungi Customer Care Kami</p>
+			<h3 style="padding:0;">[021] 5055 6182</h3>
+		</div>
+	<?php } ?>
 </div>

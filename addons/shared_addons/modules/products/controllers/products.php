@@ -66,6 +66,4 @@ class Products extends Public_Controller
 			//Redirect to Missing Page
 		}
 	}
-	
-	
 }

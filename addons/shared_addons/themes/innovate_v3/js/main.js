@@ -5,6 +5,23 @@ $(document).ready(function() {
 	$('html').addClass('csstransforms3d');
 	
 	// ====================================== Main Menu Setting =======================================//
+	
+		var menu = $('ul#main-menu.default > li');
+		var win = $( window ).width();
+		
+		$.each(menu, function(){
+			var pos = $(this).offset();
+			var w = $(this).innerWidth();
+			var subW = $(this).children('ul.dropdown').innerWidth();
+			var subOffset = 0;
+			
+			if((pos.left + subW) > win){
+				subOffset = subW - w;
+				$(this).children('ul.dropdown').css('left', -subOffset);
+			}
+			
+			console.log(pos.left, w, subOffset);
+		});
 		
 		$('ul#main-menu.default > li').mouseenter(function(){
 			$(this).children('ul.dropdown').slideDown(400)

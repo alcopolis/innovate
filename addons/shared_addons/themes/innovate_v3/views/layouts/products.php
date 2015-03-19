@@ -3,9 +3,17 @@
 <head>
 	{{ if alcopolis:site_status }}
 		{{ theme:partial name="metadata" }}
+		{{ products:css value="<?php echo $product->slug; ?>" }}
 	{{ else }}
 		{{ theme:partial name="maintenance" }}
 	{{ endif }}
+	
+	<style>
+		<?php 
+			$bg_image = Files::get_file($poster['id']);
+		?>
+		#overview{background-image:url(<?php echo $bg_image['data']->path ; ?>);}
+	</style>
 </head>
 
 {{ if alcopolis:device == 'computer' }}
@@ -23,9 +31,17 @@
 	 	
 	 	 <div id="content" class="wrapper">
 	 	 	<div id="body-theme" class="clearfix">
-		 	 	<div id="body-wrapper">
-					{{ template:body }}
-				</div>
+		 	 	{{ if alcopolis:device == 'computer' }}
+					<div id="overview">
+						<div id="ov-content"><?php echo $product->overview; ?></div>	
+					</div>
+				{{ endif }}
+				
+				<?php if($product->body != ''){ ?>
+			 	 	<div id="body-wrapper">
+						{{ template:body }}
+					</div>
+				<?php } ?>
 			</div>
 	 	 </div>
 	 	 
