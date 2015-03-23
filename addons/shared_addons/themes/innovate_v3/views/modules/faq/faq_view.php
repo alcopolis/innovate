@@ -19,12 +19,12 @@
 		<div id="content" class="wrapper">
 			<div id="body-wrapper" class="clearfix">
 
-				<h3 id="page-title"><a href="faq">FAQ's</a> &raquo; <span style="font-size:.85em;"><a href="faq/category/<?php echo $curr_group->slug?>"><?php echo $curr_group->category?></a></span></h3>
+				<h3 id="page-title"><a href="<?php echo base_url(); ?>faq">FAQ's</a> &raquo; <span style="font-size:.85em;"><a href="<?php echo base_url(); ?>faq/category/<?php echo $curr_group->slug?>"><?php echo $curr_group->category?></a></span></h3>
 				
 				<div id="faq-side"  class="left">
 					<ul class="topics">
 						<?php foreach ($all_faqs as $faq){ ?>
-							<li><a href="faq/view/<?php echo $faq->slug; ?>"><?php echo ucwords($faq->title); ?></a></li>								
+							<li><a href="<?php echo base_url(); ?>faq/view/<?php echo $faq->slug; ?>"><?php echo ucwords($faq->title); ?></a></li>								
 						<?php } ?>
 					</ul>
 				</div>

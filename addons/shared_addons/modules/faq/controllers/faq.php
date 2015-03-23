@@ -38,7 +38,7 @@ class Faq extends Public_Controller
 	
 	
 	public function index(){
-		$limit = 3;
+		$limit = 5;
 		
 		$faq_cat = $this->faq_cat_m->order_by('id', 'DESC')->get_category(NULL, FALSE);
 		$this->faq_data = $this->faq_m->order_by('count', 'DESC')->limit($limit)->get_faq(NULL, FALSE);
@@ -52,22 +52,26 @@ class Faq extends Public_Controller
 		
 		if($group != NULL){
 			$curr_group = $this->faq_cat_m->get_category_by(array('slug'=>$group), NULL, TRUE);
-			$grp_child = $this->faq_cat_m->get_category_by(array('parent_id'=>$curr_group->id), NULL, FALSE);
 			
-			
-			if(count($grp_child) > 0){
-				//Show sub group
+			if(isset($curr_group)){
+				$grp_child = $this->faq_cat_m->get_category_by(array('parent_id'=>$curr_group->id), NULL, FALSE);
 				
-				foreach($grp_child as $id=>$child){
-					$childs->$id = $child;
-					$childs->$id->sub_faqs = $this->faq_m->select('title,slug')->get_faq_by(array('category'=>$child->id), NULL, FALSE);
+				if(count($grp_child) > 0){
+					//Show sub group
+					
+					foreach($grp_child as $id=>$child){
+						$childs->$id = $child;
+						$childs->$id->sub_faqs = $this->faq_m->select('title,slug')->get_faq_by(array('category'=>$child->id), NULL, FALSE);
+					}
+					
+					$this->render('faq_sub', array('faqs' => $childs, 'curr_group'=>$curr_group));
+				}else{
+					//Show faqs
+					$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$curr_group->id), NULL, FALSE);
+					$this->render('faq', array('faqs' => $this->faq_data, 'curr_group'=>$curr_group));
 				}
-				
-				$this->render('faq_sub', array('faqs' => $childs, 'curr_group'=>$curr_group));
 			}else{
-				//Show faqs
-				$this->faq_data = $this->faq_m->order_by('id', 'ASC')->get_faq_by(array('category'=>$curr_group->id), NULL, FALSE);
-				$this->render('faq', array('faqs' => $this->faq_data, 'curr_group'=>$curr_group));
+				var_dump($curr_group); die();
 			}
 		}else{
 			redirect('faq');
@@ -111,10 +115,10 @@ class Faq extends Public_Controller
 			$c = $this->db->query('SELECT * from default_inn_faq_category where parent_id="' . $h->id . '"');
 				
 			if(($c->num_rows()) > 0){
-				$hasil .= '<li class="has-children"><a href="faq/category/' . $h->slug . '">' .$h->category . '</a>';
+				$hasil .= '<li class="has-children"><a href="' . base_url() . 'faq/category/' . $h->slug . '">' .$h->category . '</a>';
 				$hasil = $this->menu($h->id,$hasil);
 			}else{
-				$hasil .= '<li><a href="faq/category/' . $h->slug . '">' . $h->category . '</a></li>';
+				$hasil .= '<li><a href="' . base_url() . 'faq/category/' . $h->slug . '">' . $h->category . '</a></li>';
 			}
 				
 			$hasil .= '</li>';

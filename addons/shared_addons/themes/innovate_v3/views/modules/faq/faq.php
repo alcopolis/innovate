@@ -19,7 +19,7 @@
 		<div id="content" class="wrapper">
 			<div id="body-wrapper" class="clearfix">
 				
-				<h3 id="page-title"><a href="faq">Frequently Asked Questions</a></h3>
+				<h3 id="page-title"><a href="<?php echo base_url(); ?>faq">Frequently Asked Questions</a></h3>
 								
 				<div id="faq-side"  class="left">
 					<?php echo $cat_tree; ?>
@@ -38,12 +38,12 @@
 					<?php if($faqs != NULL){ ?>
 						<?php foreach ($faqs as $faq){ ?>
 							<div class="faq-item">
-								<div class="faq-subject"><a href="faq/view/<?php echo $faq->slug; ?>"><?php echo $faq->title; ?></a></div>
+								<div class="faq-subject"><a href="<?php echo base_url(); ?>faq/view/<?php echo $faq->slug; ?>"><?php echo $faq->title; ?></a></div>
 								<div class="faq-content">
 									<div class="faq-q"><?php echo $faq->question; ?></div>
 									<div class="faq-a">
 										<?php echo substr(strip_tags ($faq->answer), 0, 200) . '...'; ?><br/><br/>
-										<span class="more"><a href="faq/view/<?php echo $faq->slug;?>">Baca Selengkapnya &raquo;</a></span>
+										<span class="more"><a href="<?php echo base_url(); ?>faq/view/<?php echo $faq->slug;?>">Baca Selengkapnya &raquo;</a></span>
 									</div>
 								</div>
 							</div>

@@ -19,7 +19,7 @@
 		<div id="content" class="wrapper">
 			<div id="body-wrapper" class="clearfix">
 				
-				<h3 id="page-title"><a href="faq">Frequently Asked Questions</a></h3>
+				<h3 id="page-title"><a href="<?php echo base_url(); ?>faq">Frequently Asked Questions</a></h3>
 								
 				<div id="faq-side" class="left">
 					<?php echo $cat_tree; ?>
@@ -33,7 +33,7 @@
 								<h3>&raquo; <?php echo $faq->category; ?></h3>
 								<ul>
 									<?php foreach ($faq->sub_faqs as $sub){ ?>
-										<li><a href="faq/view/<?php echo $sub->slug; ?>"><?php echo $sub->title; ?></a></li>
+										<li><a href="<?php echo base_url(); ?>faq/view/<?php echo $sub->slug; ?>"><?php echo $sub->title; ?></a></li>
 									<?php } ?>
 								</ul>
 							</div>

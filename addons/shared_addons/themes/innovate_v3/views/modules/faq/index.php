@@ -41,10 +41,10 @@
 					<?php if($faqs != NULL){ ?>
 						<?php foreach ($faqs as $faq){ ?>
 							<div class="faq-item">
-								<div class="faq-subject"><a href="faq/view/<?php echo $faq->slug; ?>"><?php echo $faq->title; ?></a></div>
+								<div class="faq-subject"><a href="<?php echo base_url(); ?>faq/view/<?php echo $faq->slug; ?>"><?php echo $faq->title; ?></a></div>
 								<div class="faq-content">
 									<div class="faq-q"><?php echo $faq->question; ?></div>
-									<div class="faq-a"><?php echo substr(strip_tags ($faq->answer), 0, 200) . '... <a href="faq/view/' . $faq->slug . '">read &raquo</a>'; ?></div>
+									<div class="faq-a"><?php echo substr(strip_tags ($faq->answer), 0, 200) . '... <a href="' . base_url() . 'faq/view/' . $faq->slug . '">read &raquo</a>'; ?></div>
 								</div>
 							</div>
 						<?php } ?>
