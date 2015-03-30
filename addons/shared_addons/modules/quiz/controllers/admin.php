@@ -54,16 +54,20 @@ class Admin extends Admin_Controller
 		$quiz = $this->quiz_m->get_quiz_by(array('id'=>$id), '', true);
 		$useract = $this->quiz_user_activity_m->get_useractivity_by(array('quiz_id'=>$id));
 		
-		$user = $this->quiz_m->order_by('point', 'DESC')->get_winner($id);
+		$user = $this->quiz_m->order_by('point', 'DESC')->limit(20)->get_winner($id);
 		
 		$this->render('admin/quiz_form', array('page'=>$page, 'quiz'=>$quiz, 'useract'=>$useract, 'user'=>$user));
 	}
 	
 	
-/*	function create(){
+	function create(){
+		$page = new stdClass();
+		$page->action = 'create';
 		
-	
-	} */
+		$quiz = $this->quiz_m->add_new();
+		$user = NULL;
+		$this->render('admin/quiz_form', array('page'=>$page, 'quiz'=>$quiz, 'user'=>$user));
+	}
 	
 	
 /*	function edit($id){

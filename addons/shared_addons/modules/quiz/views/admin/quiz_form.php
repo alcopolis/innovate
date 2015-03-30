@@ -1,7 +1,7 @@
+<?php //var_dump($quiz); ?>
+
 <div class="one_full">
-
 	<section class="item">
-
 		<div class="content">	          
 		
 	        <div class="tabs">
@@ -11,12 +11,54 @@
 						<li><a href="#quiz-user"><span>User</span></a></li>
 					<?php } ?>	
 					<li><a href="#quiz-css"><span>CSS</span></a></li>
-					<li><a href="#quiz-js"><span>Script</span></a></li>
 				</ul>
 
 				<div class="form_inputs" id="quiz-content">
-					<?php //echo form_hidden('form_data', array('id'=>$prod->id, 'slug'=>$prod->slug , 'poster_id'=>$poster['id'])); ?>
-
+					<fieldset>
+						<ul>
+							<li>
+								<label for="name">Name</label><br>
+								<div class="input">
+									<?php echo form_input('name', set_value('name', htmlspecialchars_decode($quiz->name))) ?>
+								</div>
+							</li>
+							<li>
+								<label for="start_date">Start</label><br>
+								<div class="input">
+									<?php echo form_input('start_date', set_value('start_date', $quiz->start_date), 'class="datepicker" maxlength="20"'); ?>
+								</div>
+							
+								<label for="end_date">End</label><br>
+								<div class="input">
+									<?php echo form_input('end_date', set_value('end_date', $quiz->end_date), 'class="datepicker" maxlength="20"'); ?>
+								</div>
+							</li>
+							<li>
+								<label for="theme">Poster</label><br>
+								<div class="input">
+									<?php echo form_upload('theme','','id="theme" style="margin:5px 0;"'); ?> &nbsp; <?php echo '<a onclick="process();" class="button" style="padding:5px 10px 4px 10px;">Upload</a>'; ?>	
+								</div>
+								
+								<div id="img-poster" style="width:100%; margin-top:10px;">
+									<?php if($quiz->theme != NULL){ ?>
+										<img style="width:480px; height:auto; border:1px solid #CCC; padding:5px;" src="uploads/default/files/<?php echo $quiz->theme?>"/>
+									<?php } ?>
+								</div>
+							</li>
+							<li>
+								<label for="description">Description</label><br>
+								<div class="input">
+									<?php echo form_textarea(array('id' => 'description', 'name' => 'description', 'value' => $quiz->description, 'rows' => 10)) ?>
+								</div>
+							</li>
+							<li>
+								<label for="toc">Terms Condition</label><br>
+								<div class="input">
+									<?php echo form_textarea(array('id' => 'toc', 'name' => 'toc', 'value' => $quiz->toc, 'rows' => 10)) ?>
+								</div>
+							</li>
+						</ul>
+					</fieldset>
 				</div>
 
 
@@ -26,61 +68,33 @@
 						<?php if(!empty($user)){ ?>
 
 							<div id="channel-list">
-
 								<table>
-
 									<thead>
-
 										<th class="align-center" style="width:20%;">Username</th>
-
 										<th class="align-center" style="width:5%;">Email</th>
-                            
 										<th class="align-center" style="width:5%;">Point</th>
-
 									</thead>
 
-	        			
-
 									<tfoot>
-
 										<tr>
-
 											<!-- <td colspan="8">
-
 											<div class="inner"><?php echo $pagination['links']; ?></div>
-
 											</td> -->
-
 										</tr>
-
 									</tfoot>
 
-						
-
 									<tbody>
-
 										<?php foreach($user as $us) { ?>
-
-										<tr>
-
-											<td class="align-center"><?php echo $us->username; ?></a></td>
-
-											<td class="align-center"><?php echo $us->email; ?></td>
-                                    
-											<td class="align-center"><?php echo $us->point; ?></td>
-
-										</tr>
-
+											<tr>
+												<td class="align-center"><?php echo $us->username; ?></a></td>
+												<td class="align-center"><?php echo $us->email; ?></td>
+												<td class="align-center"><?php echo $us->point; ?></td>
+											</tr>
 										<?php } ?>	
-
 									</tbody>
-
 								</table>
-
 							</div>
-
 						<?php } ?>	
-
 					</div>
 				<?php } ?>	
 
@@ -92,29 +106,19 @@
 							<li class="editor">
 								<label for="body">Custom CSS</label><br>
 								<div class="edit-content">
-									<?php //echo form_textarea(array('id' => 'css', 'name' => 'css', 'value' => set_value('css', $prod->css), 'rows' => 30, 'class' => 'markdown')) ?>
-								</div>
-							</li>
-						</ul>
-					</fieldset>
-				</div>
-
-			
-				<!-- JS tab -->
-				<div class="form_inputs" id="quiz-js">
-					<fieldset>
-						<ul>						
-							<li class="editor">
-								<label for="body">Custom Javascript</label><br>
-								<div class="edit-content">
-									<?php //echo form_textarea(array('id' => 'js', 'name' => 'js', 'value' => set_value('js', $prod->js), 'rows' => 30, 'class' => 'markdown')) ?>
+									<?php echo form_textarea(array('id' => 'css', 'name' => 'css', 'value' => set_value('css', $quiz->css), 'rows' => 30, 'class' => 'markdown')) ?>
 								</div>
 							</li>
 						</ul>
 					</fieldset>
 				</div>
 			</div>
+			
+			<div class="buttons align-right padding-top">
+				<?php $this->load->view('admin/partials/buttons', array('buttons' => array('save', 'save_exit', 'cancel') )) ?>
+			</div>
+			
+			<?php echo form_close(); ?>
 		</div>
 	</section>
-
 </div>

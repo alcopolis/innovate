@@ -9,7 +9,7 @@
  */
 class Quiz_m extends MY_Model {
 	
-	/*public $_rules = array(
+	public $_rules = array(
 				'name' => array(
 						'field' => 'name',
 						'label' => 'Name',
@@ -35,12 +35,17 @@ class Quiz_m extends MY_Model {
 						'label' => 'Description',
 						'rules' => 'required|xss_clean'
 				),
+				'toc' => array(
+						'field' => 'toc',
+						'label' => 'Terms Condition',
+						'rules' => 'xss_clean'
+				),
 				'theme' => array(
 						'field' => 'theme',
 						'label' => 'Theme',
-						'rules' => 'required|xss_clean'
+						'rules' => 'xss_clean'
 				),
-			);*/
+			);
 	
 	public function __construct()
 	{		
@@ -54,20 +59,22 @@ class Quiz_m extends MY_Model {
 		$this->_table = 'default_inn_quiz';
 	}
 	
-	/*public function add_new(){
+	public function add_new(){
 		
-		$tema = new stdClass();
+		$quiz = new stdClass();
 		
-		$tema->id = NULL;
-		$tema->name = '';
-		$tema->slug = '';
-		$tema->start_date ='';
-		$tema->end_date = '';
-		$tema->description = '';
-		$tema->theme = '';
+//		$quiz->id = NULL;
+		$quiz->name = '';
+		$quiz->slug = '';
+		$quiz->start_date ='';
+		$quiz->end_date = '';
+		$quiz->description = '';
+		$quiz->toc = '';
+		$quiz->theme = '';
+		$quiz->css = '';
 
-		return $tema;
-	}*/
+		return $quiz;
+	}
 	
 	public function get_quiz($fields=NULL, $single=FALSE){
 		if(isset($fields)){

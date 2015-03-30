@@ -71,7 +71,8 @@ class Faq extends Public_Controller
 					$this->render('faq', array('faqs' => $this->faq_data, 'curr_group'=>$curr_group));
 				}
 			}else{
-				var_dump($curr_group); die();
+				//var_dump($curr_group); die();
+				redirect('faq');
 			}
 		}else{
 			redirect('faq');
