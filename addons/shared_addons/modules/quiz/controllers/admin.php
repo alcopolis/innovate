@@ -23,6 +23,7 @@ class Admin extends Admin_Controller
 		parent::__construct();
 
 		$this->load->model('quiz_m');
+		$this->load->model('quiz_question_m');
 		$this->load->model('quiz_user_activity_m');
 		
 		$this->load->library('alcopolis');
@@ -36,6 +37,8 @@ class Admin extends Admin_Controller
 	
 	function render($view, $var = NULL){
 		$this->template
+		->append_js('module::quiz-admin.js')
+		->append_css('module::style-admin.css')
 		->set($var)
 		->build($view);
 	}
@@ -52,11 +55,12 @@ class Admin extends Admin_Controller
 		$page->action = 'edit';
 		
 		$quiz = $this->quiz_m->get_quiz_by(array('id'=>$id), '', true);
-		$useract = $this->quiz_user_activity_m->get_useractivity_by(array('quiz_id'=>$id));
+		$quest = $this->quiz_question_m->get_question_by(array('quiz_id'=>$id), '');
+		//$useract = $this->quiz_user_activity_m->get_useractivity_by(array('quiz_id'=>$id));
 		
 		$user = $this->quiz_m->order_by('point', 'DESC')->limit(20)->get_winner($id);
 		
-		$this->render('admin/quiz_form', array('page'=>$page, 'quiz'=>$quiz, 'useract'=>$useract, 'user'=>$user));
+		$this->render('admin/quiz_form', array('page'=>$page, 'quiz'=>$quiz, 'quest'=>$quest, 'user'=>$user));
 	}
 	
 	

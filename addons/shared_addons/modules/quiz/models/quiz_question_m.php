@@ -67,7 +67,7 @@ class Quiz_Question_m extends MY_Model {
 				$this->db->where($where);
 			}
 			
-			return $this->get_category($fields, $single);
+			return $this->get_question($fields, $single);
 		}else{
 			return FALSE;
 		}

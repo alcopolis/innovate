@@ -1,4 +1,4 @@
-<?php //var_dump($quiz); ?>
+<?php //var_dump($quest); ?>
 
 <div class="one_full">
 	<section class="item">
@@ -6,14 +6,15 @@
 		
 	        <div class="tabs">
 				<ul class="tab-menu">
-					<li><a href="#quiz-content"><span>Content</span></a></li>
+					<li><a href="#quiz-info"><span>Info</span></a></li>
+					<li><a href="#quiz-qa"><span>Quiz</span></a></li>
 					<?php if($page->action == 'edit'){ ?>
 						<li><a href="#quiz-user"><span>User</span></a></li>
 					<?php } ?>	
 					<li><a href="#quiz-css"><span>CSS</span></a></li>
 				</ul>
 
-				<div class="form_inputs" id="quiz-content">
+				<div class="form_inputs" id="quiz-info">
 					<fieldset>
 						<ul>
 							<li>
@@ -61,7 +62,53 @@
 					</fieldset>
 				</div>
 
-
+				<div class="form_inputs" id="quiz-qa">
+					<script type="text/javascript">
+						
+					</script>
+					
+					<fieldset>
+						<a href="#">Add Questions</a>
+						<ol>
+							<?php 
+								$counter = 1; 
+								foreach($quest as $q){ 
+							?>
+								<li>
+									<?php 
+										$qa = json_decode($q->question_admin);
+										//echo $qa->question;
+										$radio_name = 'q-'.$counter;
+										
+										echo form_input($radio_name . '-q', htmlspecialchars_decode($qa->question), 'class="editable" style="width:90%;"');
+										
+										
+										echo '<ul  id="' . $radio_name . '" class="choices">';
+										foreach($qa->choices as $k=>$val){	
+											echo '<li>';
+											$data = array(
+														'name'=>$radio_name, 
+														'id'=>$radio_name, 
+														'value'=>$k, 
+														'checked'=> $k==$q->answer_admin? TRUE:FALSE
+													);
+											echo form_radio($data);
+											echo  $val;
+											echo '</li>';	
+										}
+										echo '</ul>';
+									?>	
+									
+									<span class="crud-tools"><a href="quiz/edit_q">Edit</a><a href="quiz/delete_q">Delete</a></span>
+								</li>
+							<?php 
+									$counter++;
+								} 
+							?>
+						</ol>
+					</fieldset>
+				</div>
+				
 				<?php if($page->action == 'edit'){ ?>
 					<!-- User Tab -->
 					<div class="form_inputs" id="quiz-user">
