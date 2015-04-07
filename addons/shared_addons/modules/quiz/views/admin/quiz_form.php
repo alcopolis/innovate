@@ -7,8 +7,8 @@
 	        <div class="tabs">
 				<ul class="tab-menu">
 					<li><a href="#quiz-info"><span>Info</span></a></li>
-					<li><a href="#quiz-qa"><span>Quiz</span></a></li>
 					<?php if($page->action == 'edit'){ ?>
+						<li><a href="#quiz-qa"><span>Quiz</span></a></li>
 						<li><a href="#quiz-user"><span>User</span></a></li>
 					<?php } ?>	
 					<li><a href="#quiz-css"><span>CSS</span></a></li>
@@ -61,55 +61,59 @@
 						</ul>
 					</fieldset>
 				</div>
-
-				<div class="form_inputs" id="quiz-qa">
-					<script type="text/javascript">
-						
-					</script>
-					
-					<fieldset>
-						<a href="#">Add Questions</a>
-						<ol>
-							<?php 
-								$counter = 1; 
-								foreach($quest as $q){ 
-							?>
-								<li>
-									<?php 
-										$qa = json_decode($q->question_admin);
-										//echo $qa->question;
-										$radio_name = 'q-'.$counter;
-										
-										echo form_input($radio_name . '-q', htmlspecialchars_decode($qa->question), 'class="editable" style="width:90%;"');
-										
-										
-										echo '<ul  id="' . $radio_name . '" class="choices">';
-										foreach($qa->choices as $k=>$val){	
-											echo '<li>';
-											$data = array(
-														'name'=>$radio_name, 
-														'id'=>$radio_name, 
-														'value'=>$k, 
-														'checked'=> $k==$q->answer_admin? TRUE:FALSE
-													);
-											echo form_radio($data);
-											echo  $val;
-											echo '</li>';	
-										}
-										echo '</ul>';
-									?>	
-									
-									<span class="crud-tools"><a href="quiz/edit_q">Edit</a><a href="quiz/delete_q">Delete</a></span>
-								</li>
-							<?php 
-									$counter++;
-								} 
-							?>
-						</ol>
-					</fieldset>
-				</div>
+				
 				
 				<?php if($page->action == 'edit'){ ?>
+					<?php echo form_open('', 'name="qa-form" id="qa-form"'); ?>
+						<div class="form_inputs" id="quiz-qa">					
+							<fieldset>
+								<a id="add-new-q" class="no-click" href="#">Add Questions</a>
+								<ol id="q-collection">
+									<?php 
+										$counter = 1; 
+										foreach($quest as $q){ 
+									?>
+										<li>
+											<?php 
+												$qa = json_decode($q->question_admin);
+												//echo $qa->question;
+												$radio_name = 'q-'.$counter;
+												
+												echo form_input($radio_name, htmlspecialchars_decode($qa->question), 'class="editable" style="width:75%;"');
+												
+												echo '<span class="crud-tools"><a id="add-new-c" class="no-click" href="#">Add Choices</a> | <a class="del" href="#">Delete</a></span>';
+												echo '<ul  id="' . $radio_name . '" class="choices">';
+												
+												$choices_counter = 1;
+												foreach($qa->choices as $k=>$val){	
+													echo '<li>';
+													$data = array(
+																'name'=>$radio_name . '-c', 
+																'id'=>$radio_name . '-c', 
+																'value'=>$k, 
+																'checked'=> $k==$q->answer_admin? TRUE:FALSE
+															);
+													echo form_radio($data);
+													//echo  '<label>' . $val . '</label>';
+													echo form_input('q-' . $counter . '-c-' . $choices_counter , htmlspecialchars_decode($val), 'class="editable" style="width:60%;"');
+													echo '<span class="crud-tools"><a class="del" href="#">Delete</a></span>';	
+													
+													$choices_counter++;
+												}
+												echo '</ul>';
+											?>	
+											
+											
+										</li>
+									<?php 
+											$counter++;
+										} 
+									?>
+								</ol>
+							</fieldset>
+						</div>
+					<?php echo form_close(); ?>
+				
 					<!-- User Tab -->
 					<div class="form_inputs" id="quiz-user">
 						<?php if(!empty($user)){ ?>
