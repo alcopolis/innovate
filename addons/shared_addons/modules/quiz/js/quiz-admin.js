@@ -36,7 +36,7 @@ $(function(){
 		var nextHtml = '';
 		
 		nextHtml += '<li>';
-		nextHtml += '<input id="' + qID + '" type="radio" value="' + aCollection[cAmount] + '" name="' + qID + '">';
+		nextHtml += '<input id="' + qID + '-c" type="radio" value="' + aCollection[cAmount] + '" name="' + qID + '-c">';
 		nextHtml += '<input class="editable" type="text" style="width:60%;" value="" name="'+ qID + '-c-' + nextCounter +'">';
 		nextHtml += '<span class="crud-tools"><a class="del" href="#">Delete</a></span></li>';
 		

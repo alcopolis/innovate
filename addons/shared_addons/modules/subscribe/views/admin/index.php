@@ -26,7 +26,6 @@
 							<th class="align-center" style="width:5%;">Phone</th>
 							<th class="align-center" style="width:5%;">Mobile</th>
 							<th class="align-center" style="width:12.5%;">Email</th>
-							<th style="width:12.5%;">Package</th>
 							<th class="align-center" style="width:10%;">Entry Date</th>
 							<th class="align-center" style="width:10%;">Status</th>
 						</tr>
@@ -42,12 +41,11 @@
 						<?php foreach( $subscribes as $subscribe ): ?>
 						<tr>
 							<?php /*<td><?php echo form_checkbox('action_to[]', $subscribe->id); ?></td> */ ?>
-							<td><?php echo $subscribe->name; ?></td>
+							<td><?php echo $subscribe->first_name . ' ' . $subscribe->last_name; ?></td>
 							<td><?php echo $subscribe->address; ?></td>
 							<td class="align-center"><?php echo '(' . $subscribe->area_code . ') ' . $subscribe->phone; ?></td>
 							<td class="align-center"><?php echo $subscribe->mobile; ?></td>
 							<td class="align-center"><?php echo $subscribe->email; ?></td>
-							<td><?php echo $subscribe->packages; ?></td>
 							<td class="align-center">
 								<?php
 									$d = strtotime($subscribe->date);

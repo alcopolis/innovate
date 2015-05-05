@@ -409,7 +409,8 @@ table#packages-detail .amount{font-weight:bold; font-size:18px}
 
 
 body.subscribe{
-	background-image:url(../img/subscribe.jpg);
+	background-color:#FFF;
+	background-image:none;
 	background-repeat:no-repeat;
 	background-position: bottom center;
 }

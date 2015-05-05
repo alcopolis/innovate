@@ -38,7 +38,7 @@
     				Innovate berhak secara sepihak menolak permohonan calon pelanggan.</p>
 				</div>
 				
-				<?php echo form_open('subscribe', 'id="subscriber-form" class="crud"'); ?>
+				
 					<div id="form-container" class="left">
 						<h1>Pendaftaran Layanan Innovate</h1>
 						<div id="subscribe-form" class="form-input clearfix">
@@ -82,14 +82,6 @@
 									<div class="input"><?php echo form_input('mobile', set_value('mobile', $subscriber->mobile), 'class="width-15"'); ?><?php echo form_error('mobile'); ?> <small>ex: 0812345676</small></div>
 								</li>
 								
-                                <li class="<?php echo alternator('', 'even'); ?>">
-                                	<div class="input" style="margin:20px 0 0 0; padding:20px 0; border-top:1px solid #CCC;">
-                                    	<p>Pilih paket layanan yang Anda inginkan.</p>
-                                    	{{subscribe:select_pack product-slug="duo-play" packages-group="duo-play|ala-carte" }}
-                                        <div id="pack-msg"></div>
-                                    </div>
-                                </li>
-                                
 								<li class="<?php echo alternator('', 'even'); ?>">
 									<div class="input" style="margin:30px 20px 20px 0;"><?php echo form_submit('subscribe', 'Daftar'); ?></div>
 								</li>

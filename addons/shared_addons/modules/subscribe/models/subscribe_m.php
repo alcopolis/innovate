@@ -10,34 +10,44 @@
 class Subscribe_m extends MY_Model {
 	
 	public $_rules = array(
-				'name' => array(
-						'field' => 'name',
-						'label' => 'name',
-						'rules' => 'trim|required|is_unique[default_inn_subscribe.name]|xss_clean',
+				'first_name' => array(
+						'field' => 'first_name',
+						'label' => 'Nama Depan',
+						'rules' => 'trim|required|xss_clean',
+				),
+				'last_name' => array(
+						'field' => 'last_name',
+						'label' => 'Nama Belakang',
+						'rules' => 'trim|required|xss_clean',
 				),
 				'email' => array(
 						'field' => 'email',
-						'label' => 'email',
+						'label' => 'Email',
 						'rules' => 'trim|required|valid_email|is_unique[default_inn_subscribe.email]|xss_clean',
 				),
 				'address' => array(
 						'field' => 'address',
-						'label' => 'address',
+						'label' => 'Alamat',
 						'rules' => 'required|min_length[10]|xss_clean',
+				),
+				'city' => array(
+						'field' => 'city',
+						'label' => 'Kota',
+						'rules' => 'trim|required|xss_clean',
 				),
 				'area_code' => array(
 						'field' => 'area_code',
-						'label' => 'area code',
+						'label' => 'Kode Area',
 						'rules' => 'trim|required|numeric|xss_clean',
 				),
 				'phone' => array(
 						'field' => 'phone',
-						'label' => 'phone',
+						'label' => 'Telepon',
 						'rules' => 'trim|required|numeric|xss_clean',
 				),
 				'mobile' => array(
 						'field' => 'mobile',
-						'label' => 'mobile',
+						'label' => 'Mobile Phone',
 						'rules' => 'trim|required|numeric|xss_clean',
 				),
 			);
@@ -58,8 +68,10 @@ class Subscribe_m extends MY_Model {
 	public function get_new(){
 		$subscriber =  new stdClass();
 		
-		$subscriber->name = '';
+		$subscriber->first_name = '';
+		$subscriber->last_name = '';
 		$subscriber->address = '';
+		$subscriber->city = '';
 		$subscriber->area_code = '';
 		$subscriber->phone = '';
 		$subscriber->mobile = '';

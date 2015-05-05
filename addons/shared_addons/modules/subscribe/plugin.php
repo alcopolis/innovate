@@ -48,8 +48,8 @@ class Plugin_Subscribe extends Plugin
 	
 	public function __construct()
 	{	
-		$this->load->model('products_m');
-		$this->load->model('packages_m');
+		$this->load->model('products/products_m');
+		$this->load->model('products/packages_m');
 	}
 	
 	
